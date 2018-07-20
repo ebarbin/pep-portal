@@ -1,0 +1,10 @@
+{
+    "/portal-seven-web/*":{
+      "target": "http://localhost:8080/portal-seven-web",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": {"^/portal-seven-web" : ""},
+      "borrar": ".put('portal-seven-web/api/rest/hotel-offer/search/other-rooms/'"
+    }
+}
