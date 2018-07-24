@@ -1,4 +1,52 @@
-<button class="btn btn-primary" (click)="onTest()">
-  Test!!!
-</button>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-primary" type="button" (click)="onGetAll()">
+            GetAll!
+        </button>
+    </div>
+  </div>
+<hr>
+  <div class="row" *ngIf="person">
+      <div class="col-xs-12">
+          <h3>Selected:</h3>
+      </div>
 
+      <div class="col-xs-12">
+          id: {{person.name}}
+      </div>
+      <div class="col-xs-12">
+          name: {{person.id}}
+      </div>
+      <div class="col-xs-12">
+          <button class="btn btn-danger" type="button" (click)="onDelete()">Delete</button>
+      </div>
+  </div>
+
+  <hr>
+
+  <div class="row" *ngFor="let p of persons; let i = index">
+      <div class="col-xs-2">
+          {{p.name}}
+      </div>
+
+    <div class="col-xs-2">
+      <button class="btn btn-success"  type="button" (click)="onGetId(p.id)"> GetId: {{ p.id }}</button>
+    </div>
+
+
+  </div>
+
+
+  <hr>
+  <div class="row">
+    <div class="col-xs-10">
+      <input class="form-control" type="text" #inputName>
+    </div>
+    <div class="col-xs-2">
+        <button class="btn btn-primary" type="button" (click)="onPost(inputName.value)">Post Name</button>
+        <button class="btn btn-primary" type="button" *ngIf="person" (click)="onPut(inputName.value)">Put Name</button>
+    </div>
+  </div>
+
+</div>

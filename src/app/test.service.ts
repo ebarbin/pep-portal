@@ -8,9 +8,23 @@ export class TestService {
 
   constructor(private httpClient: HttpClient) { }
 
-  test() {
-    this.httpClient.get('pep-api/person').subscribe((response: any) => {
-      console.log(response);
-    });
+  getAll() {
+    return this.httpClient.get('pep-api/person');
+  }
+
+  getById(id: number) {
+    return this.httpClient.get('pep-api/person/' + id);
+  }
+
+  post(value: string) {
+    return this.httpClient.post('pep-api/person', value);
+  }
+
+  delete(id: number) {
+    return this.httpClient.delete('pep-api/person/' + id);
+  }
+
+  put(id: number, name: string) {
+    return this.httpClient.put('pep-api/person/' + id, name);
   }
 }
