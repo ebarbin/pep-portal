@@ -1,5 +1,7 @@
 import { TestService } from './test.service';
 import { Component } from '@angular/core';
+import { HttpErrorResponse, HttpResponse } from '../../node_modules/@angular/common/http';
+import { ResponseModel } from './response.model';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +17,10 @@ export class AppComponent {
   constructor(private testService: TestService) {}
 
   onGetAll() {
-    this.testService.getAll().subscribe((value: any[]) => {
-      this.persons = value;
+    this.testService.getAll().subscribe((value: ResponseModel) => {
+      this.persons = value.body;
+    }, (errorResponse: HttpErrorResponse) => {
+      console.log(errorResponse.error);
     });
   }
 
