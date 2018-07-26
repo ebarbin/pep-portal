@@ -1,7 +1,6 @@
+import { Person } from './person.model';
 import { TestService } from './test.service';
 import { Component } from '@angular/core';
-import { HttpErrorResponse, HttpResponse } from '../../node_modules/@angular/common/http';
-import { ResponseModel } from './response.model';
 
 @Component({
   selector: 'app-root',
@@ -17,34 +16,42 @@ export class AppComponent {
   constructor(private testService: TestService) {}
 
   onGetAll() {
-    this.testService.getAll().subscribe((value: ResponseModel) => {
-      this.persons = value.body;
-    }, (errorResponse: HttpErrorResponse) => {
-      console.log(errorResponse.error);
+    this.testService.getAll().subscribe((persons: Person[]) => {
+      this.persons = persons;
+    }, (error: any) => {
+      console.log(error);
     });
   }
 
   onGetId(id: number) {
-    this.testService.getById(id).subscribe((value: any) => {
-      this.person = value;
+    this.testService.getById(id).subscribe((person: Person) => {
+      this.person = person;
+    }, (error: any) => {
+      console.log(error);
     });
   }
 
   onPost(value: string) {
-    this.testService.post(value).subscribe((val) => {
+    this.testService.post(value).subscribe((val: any) => {
       console.log(val);
+    }, (error: any) => {
+      console.log(error);
     });
   }
 
   onPut(value: string) {
-    this.testService.put(this.person.id, value).subscribe((val) => {
+    this.testService.put(this.person.id, value).subscribe((val: any) => {
       console.log(val);
+    }, (error: any) => {
+      console.log(error);
     });
   }
 
   onDelete() {
-    this.testService.delete(this.person.id).subscribe((val) => {
+    this.testService.delete(this.person.id).subscribe((val: any) => {
       console.log(val);
+    }, (error: any) => {
+      console.log(error);
     });
   }
 }
