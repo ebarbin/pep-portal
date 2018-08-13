@@ -1,5 +1,4 @@
-import { Person } from './person.model';
-import { Response} from './response.model';
+import { CustomResponse} from './shared/custom-response.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
@@ -15,8 +14,8 @@ export class TestService {
   getAll() {
     return this.httpClient.get('pep-api/person')
       .pipe(
-        map((response: Response) => {
-          return <Person[]> response.body;
+        map((response: CustomResponse) => {
+          return <[any]> response.body;
         }),
         catchError((errorResponse: HttpErrorResponse) => {
           return throwError(errorResponse.error);
@@ -28,7 +27,7 @@ export class TestService {
     return this.httpClient.get('pep-api/person/' + id)
       .pipe(
         map((response: Response) => {
-          return <Person> response.body;
+          return <any> response.body;
         }),
         catchError((errorResponse: HttpErrorResponse) => {
           return throwError(errorResponse.error);

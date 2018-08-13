@@ -4,14 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod  --aot --deploy-url /portal-seven-web --base-href /portal-seven-web",
+    "build": "ng build --prod  --aot --deploy-url /pep-portal --base-href /pep-portal",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.0.3",
+    "@angular/animations": "^6.1.2",
+    "@angular/cdk": "^6.4.4",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
     "@angular/core": "^6.0.3",
@@ -23,6 +24,7 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
     "hoek": "^5.0.3",
+    "ngx-toastr": "^8.10.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
