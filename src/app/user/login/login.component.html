@@ -1,28 +1,22 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div class="form-group">
-          <label for="email">Email</label>
+
+    <div class="text-center">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="form-signin">
+          <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+          <h1 class="h3 mb-3 font-weight-normal">Ingrese por favor</h1>
           <input
             type="email"
             id="email"
             name="username"
             class="form-control"
             placeholder="Ingrese su correo electrónico" ngModel required email>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
           <input type="password"
             id="password"
             name="password"
             class="form-control"
-            placeholder="Ingrese su correo electrónico" ngModel required>
-        </div>
-        <p>¿Aun no tenes usuario? Registrate <a routerLinkActive="active" routerLink="/user/register">aquí</a>.</p>
+            placeholder="Ingrese su contraseña" ngModel required>
+        <p>¿Aún no tenes usuario? Registrate <a routerLinkActive="active" routerLink="/user/register">aquí</a>.</p>
         <p>¿Bloqueaste el usuario? Podes desbloquearlo entrando <a routerLinkActive="active" routerLink="/user/request-unlock">aquí</a>.</p>
         <button class="pull-right btn btn-primary btn-lg btn-block active" type="submit" [disabled]="!f.valid"> Login</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
       </form>
     </div>
-  </div>
-</div>

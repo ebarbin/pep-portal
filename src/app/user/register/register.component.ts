@@ -14,9 +14,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService, private toastService: ToastrService) { }
 
-  student;
-  teacher;
-
   ngOnInit() {}
 
   onSubmit(form: NgForm) {
@@ -29,4 +26,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  showMessage() {
+    this.toastService.info('El rol seleccionado será validado por el sistema.', 'Información');
+  }
 }

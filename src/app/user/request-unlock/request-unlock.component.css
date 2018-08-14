@@ -1,3 +1,7 @@
+radio.ng-invalid.ng-touched, select.ng-invalid.ng-touched, input.ng-invalid.ng-touched {
+  border-color:lightcoral;
+}
+
 .left-button {
   border-radius: 5px 0px 0px 5px;
 }

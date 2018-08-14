@@ -1,12 +1,12 @@
 <div class="container">
+    <h1 class="h3 mb-3 font-weight-normal text-center">Desbloquear Usuario</h1>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="username" name="username" ngModel class="form-control" placeholder="Ingrese email">
+            <input type="email" id="username" name="username" ngModel class="form-control" placeholder="Ingrese su correo electrónico" email required>
           </div>
-          <button class="two-buttons left-button btn btn-success btn-lg" type="submit">Aceptar</button>
+          <button class="two-buttons left-button btn btn-success btn-lg" [disabled]="!f.valid" type="submit">Aceptar</button>
           <button class="two-buttons right-button btn btn-danger btn-lg" type="button" routerLink="/user/login">Cancelar</button>
         </form>
     </div>
