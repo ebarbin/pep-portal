@@ -35,6 +35,7 @@ export class UserService {
           return response.body;
         }),
         catchError((errorResponse: HttpErrorResponse) => {
+          this.toastService.error(errorResponse.error.body , 'Error');
           return throwError(errorResponse.error);
         })
       );

@@ -1,23 +1,28 @@
 <div class="container">
   <div class="row">
-      <div class="col-xs-offset-2 col-xs-8">
-      <div class="row">
-        <div class="col-xs-10">
-          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-            <div class="form-group">
-              <label for="email">Username</label>
-              <input type="email" id="username" name="username" ngModel class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" ngModel class="form-control">
-            </div>
-            <p>¿Aun no tenes usuario? Registrate <a routerLinkActive="active" routerLink="/user/register">aquí</a>.</p>
-            <p>¿Bloqueaste el usuario? Podes desbloquearlo entrando <a routerLinkActive="active" routerLink="/user/request-unlock">aquí</a>.</p>
-            <button class="btn btn-primary" type="submit">Login</button>
-          </form>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="username"
+            class="form-control"
+            placeholder="Ingrese su correo electrónico" ngModel required email>
         </div>
-      </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Ingrese su correo electrónico" ngModel required>
+        </div>
+        <p>¿Aun no tenes usuario? Registrate <a routerLinkActive="active" routerLink="/user/register">aquí</a>.</p>
+        <p>¿Bloqueaste el usuario? Podes desbloquearlo entrando <a routerLinkActive="active" routerLink="/user/request-unlock">aquí</a>.</p>
+        <button class="pull-right btn btn-primary btn-lg btn-block active" type="submit" [disabled]="!f.valid"> Login</button>
+      </form>
     </div>
   </div>
 </div>

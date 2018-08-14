@@ -1,0 +1,7 @@
+.help-block {
+  color:lightcoral;
+}
+
+input.ng-invalid.ng-touched {
+  border-color:lightcoral;
+}

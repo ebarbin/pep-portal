@@ -1,22 +1,24 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a routerLink="/" class="navbar-brand">Plataforma Educativa para Programar (pep)</a>
-      </div>
-       <div class="navbar-default">
-        <ul class="nav navbar-nav">
-          <!--<li routerLinkActive="active"><a routerLink="/recipes">Recipes</a></li>
-          <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li> -->
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <!--<li routerLinkActive="active"><a routerLink="/signup">Register</a></li>-->
-            <li class="dropdown" appDropdown>
-              <a class="dropdown-toggle" role="button"><span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a style="cursor: pointer;" (click)="logout()">Logout</a></li>
-              </ul>
-            </li>
-        </ul>
-       </div>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">Plataforma Educativa para Programar (pep)</a>
+
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+    data-toggle="collapse" data-target="#navbarSupportedContent"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" style="float:right; cursor: pointer;" ngbDropdownToggle role="button"></a>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Logout</a>
+        </div>
+      </li>
+    </ul>
+
+</nav>

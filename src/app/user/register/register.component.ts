@@ -14,10 +14,15 @@ export class RegisterComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService, private toastService: ToastrService) { }
 
+  student;
+  teacher;
+
   ngOnInit() {}
 
   onSubmit(form: NgForm) {
     const user: User = form.value;
+    user.roles = [form.value.role];
+
     this.userService.register(user).subscribe((res: any) => {
       this.toastService.success('Verifica tu correo electrónico para activar tu cuenta.', 'Operación exitosa');
       this.router.navigate(['user/login']);
