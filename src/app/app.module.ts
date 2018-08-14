@@ -14,7 +14,6 @@ import { LoginComponent } from './user/login/login.component';
 import { ActivateUserComponent } from './user/activate/activate-user.component';
 import { HomeComponent } from './shared/home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { DropdownDirective } from './shared/dropdown.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -26,7 +25,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ActivateUserComponent,
     HomeComponent,
     HeaderComponent,
-    DropdownDirective,
     RequestUnlockComponent
   ],
   imports: [
