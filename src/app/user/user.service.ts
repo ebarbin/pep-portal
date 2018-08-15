@@ -2,10 +2,8 @@ import { CustomResponse } from '../shared/custom-response.model';
 import { User } from './user.model';
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import {  map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({

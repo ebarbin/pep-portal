@@ -1,3 +1,4 @@
+import { HttpHeaderInterceptor } from './shared/http-header.interceptor';
 import { HttpErrorInterceptor } from './shared/http-error.interceptor';
 import { HttpSpinnerInterceptor } from './shared/http-spinner.interceptor';
 import { RequestUnlockComponent } from './user/request-unlock/request-unlock.component';
@@ -34,7 +35,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     AppRoutingModule,
     ToastrModule.forRoot({
-        timeOut: 2000,
+        timeOut: 3000,
         positionClass: 'toast-top-center',
         preventDuplicates: true
       }),
@@ -44,6 +45,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
