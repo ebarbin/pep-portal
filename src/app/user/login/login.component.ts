@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     const user: User = form.value;
     this.userService.login(user).subscribe((u: User) => {
-      localStorage.setItem('user', JSON.stringify(u));
       this.router.navigate(['home']);
     });
   }

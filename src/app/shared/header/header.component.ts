@@ -1,3 +1,4 @@
+import { UserService } from './../../user/user.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
@@ -12,14 +13,18 @@ import { User } from '../../user/user.model';
 export class HeaderComponent implements OnInit {
 
   isCollapsed: boolean;
-  constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService) { }
+  constructor(private httpClient: HttpClient, private userService: UserService,
+     private router: Router, private toastService: ToastrService) { }
 
-  ngOnInit() {}
+  username: string;
+
+  ngOnInit() {
+    const user: User = this.userService.getStorageUser();
+    this.username = user.username;
+  }
 
   logout() {
-    const user: User = JSON.parse(localStorage.getItem('user'));
-    return this.httpClient.get('pep-api/user/logout/' + user.username).subscribe( () => {
-      localStorage.removeItem('user');
+    this.userService.logout().subscribe( () => {
       this.toastService.success('Has deslogueado.', 'Operación exitosa');
       this.router.navigate(['user/login']);
     });

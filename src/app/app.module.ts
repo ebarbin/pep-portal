@@ -1,3 +1,5 @@
+import { AccountComponent } from './user/account/account.component';
+
 import { HttpHeaderInterceptor } from './shared/http-header.interceptor';
 import { HttpErrorInterceptor } from './shared/http-error.interceptor';
 import { HttpSpinnerInterceptor } from './shared/http-spinner.interceptor';
@@ -27,7 +29,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ActivateUserComponent,
     HomeComponent,
     HeaderComponent,
-    RequestUnlockComponent
+    RequestUnlockComponent,
+    AccountComponent
   ],
   imports: [
     BrowserAnimationsModule,

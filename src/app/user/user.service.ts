@@ -13,11 +13,36 @@ export class UserService {
 
   constructor(private toastService: ToastrService, private httpClient: HttpClient) {}
 
+  getStorageUser() {
+    return <User> JSON.parse(localStorage.getItem('user'));
+  }
+
+  deleteUserFromStorage() {
+    localStorage.removeItem('user');
+  }
+
+  storageUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
   login(user: User) {
     return this.httpClient.post('pep-api/user/login', user)
       .pipe(
         map((response: CustomResponse) => {
-          return <User> response.body;
+          const u = <User> response.body;
+          this.storageUser(u);
+          return u;
+        })
+      );
+  }
+
+  update(user: User) {
+    return this.httpClient.post('pep-api/user', user)
+      .pipe(
+        map((response: CustomResponse) => {
+          const u = <User> response.body;
+          this.storageUser(u);
+          return u;
         })
       );
   }
@@ -47,6 +72,17 @@ export class UserService {
           return response.body;
         })
       );
+  }
+
+  logout() {
+    const user: User = this.getStorageUser();
+    return this.httpClient.get('pep-api/user/logout/' + user.username)
+    .pipe(
+      map((response: CustomResponse) => {
+        this.deleteUserFromStorage();
+        return response.body;
+      })
+    );
   }
 
 }

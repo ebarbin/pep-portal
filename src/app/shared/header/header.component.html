@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" routerLink="/"><fa name="code"></fa> PEP</a>
+    <a class="navbar-brand" routerLinkActive="active" routerLink="/"><fa name="code"></fa> PEP</a>
 
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
@@ -7,30 +7,39 @@
 
     <div class="collapse navbar-collapse" [class.show]="isCollapsed">
       <ul class="navbar-nav mr-auto">
-       <!-- <li class="nav-item active">
-          <a class="nav-link" href="#">Cursos <span class="sr-only">(current)</span></a>
-        </li>-->
         <li class="nav-item dropdown" ngbDropdown>
-            <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">Cursos</a>
+            <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cursos</a>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Crear Curso</a>
-              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Modificar Curso</a>
-              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Buscar Curso</a>
+              <a class="dropdown-item cursor-pointer" (click)="logout()">Crear Curso</a>
+              <a class="dropdown-item cursor-pointer" (click)="logout()">Modificar Curso</a>
+              <a class="dropdown-item cursor-pointer" (click)="logout()">Ver Cursos</a>
             </div>
         </li>
         <li class="nav-item dropdown" ngbDropdown>
-            <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">Ejercicios</a>
+            <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Ejercicios</a>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Crear Ejercicio</a>
-              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Modificar Ejercicio</a>
-              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Buscar Ejercicio</a>
+              <a class="dropdown-item cursor-pointer" (click)="logout()">Crear Ejercicio</a>
+              <a class="dropdown-item cursor-pointer" (click)="logout()">Modificar Ejercicio</a>
+              <a class="dropdown-item cursor-pointer" (click)="logout()">Ver Ejercicios</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown" ngbDropdown>
+            <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Consultas</a>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <a class="dropdown-item cursor-pointer" (click)="logout()">Ver Consultas</a>
             </div>
         </li>
       </ul>
       <div class="my-2 my-lg-2">
           <ul class="navbar-nav nav">
-              <li class="nav-item active">
-                  <a class="nav-link" style="cursor: pointer;" (click)="logout()"><fa name="sign-out"></fa></a>
+              <li class="nav-item dropdown" ngbDropdown>
+                  <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">
+                    <img class="rounded-circle" height="30" src="/assets/images/perfil.jpg"/>
+                    {{username}}</a>
+                  <div class="dropdown-menu" ngbDropdownMenu>
+                    <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>
+                    <a class="dropdown-item cursor-pointer" (click)="logout()"><fa name="sign-out"></fa> Salir</a>
+                  </div>
               </li>
             </ul>
         </div>

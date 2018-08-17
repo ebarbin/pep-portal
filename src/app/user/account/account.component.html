@@ -1,0 +1,32 @@
+<div class="container">
+    <h1 class="h3 mb-3 font-weight-normal text-center">Cuenta</h1>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="form-group">
+              <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Ingrese su nombre" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="surename" name="surename" ngModel class="form-control" placeholder="Ingrese su apellido" required>
+            </div>
+            <div class="form-group">
+              <select name="documentType" ngModel class="custom-select" disabled required>
+                <option value="">Ingrese su tipo de documento</option>
+                <option value="DNI">DNI</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <input type="text" id="documentNumber" name="documentNumber" ngModel class="form-control"
+              readonly placeholder="Ingrese su nro. de documento" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="username" name="username" ngModel class="form-control" readonly placeholder="Ingrese su correo electrónico" required>
+            </div>
+          <button class="four-buttons left-button btn btn-success btn-lg" type="submit" [disabled]="!f.valid">Aceptar</button>
+          <button class="four-buttons center-button btn btn-info btn-lg" type="button" routerLink="../">Cambiar Contraseña</button>
+          <button class="four-buttons center-button btn btn-warning btn-lg" type="button" routerLink="../">Cancelar</button>
+          <button class="four-buttons right-button btn btn-danger btn-lg" type="button" routerLink="../">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>

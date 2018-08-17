@@ -1,3 +1,5 @@
+import { AccountComponent } from './user/account/account.component';
+
 import { RequestUnlockComponent } from './user/request-unlock/request-unlock.component';
 import { AuthGuard } from './shared/auth.guard';
 import { HomeComponent } from './shared/home/home.component';
@@ -10,11 +12,14 @@ import { RegisterComponent } from './user/register/register.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent/*, canActivate: [AuthGuard]*/ },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+    { path: 'account', component: AccountComponent}
+  ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },
   { path: 'user/request-unlock', component: RequestUnlockComponent },
-  { path: 'user/activate/:username/:token', component: ActivateUserComponent , canActivate: [ActiveUserGuard]}
+  { path: 'user/activate/:username/:token', component: ActivateUserComponent , canActivate: [ActiveUserGuard]},
+
 ];
 
 @NgModule({
