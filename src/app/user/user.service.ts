@@ -1,3 +1,4 @@
+import { ChangePassword } from './change-password.model';
 import { CustomResponse } from '../shared/custom-response.model';
 import { User } from './user.model';
 import { Injectable } from '@angular/core';
@@ -26,7 +27,7 @@ export class UserService {
   }
 
   login(user: User) {
-    return this.httpClient.post('pep-api/user/login', user)
+    return this.httpClient.put('pep-api/user/login', user)
       .pipe(
         map((response: CustomResponse) => {
           const u = <User> response.body;
@@ -37,12 +38,22 @@ export class UserService {
   }
 
   update(user: User) {
-    return this.httpClient.post('pep-api/user', user)
+    return this.httpClient.put('pep-api/user', user)
       .pipe(
         map((response: CustomResponse) => {
           const u = <User> response.body;
           this.storageUser(u);
           return u;
+        })
+      );
+  }
+
+  changePassword(changePassword: ChangePassword) {
+    changePassword.username = this.getStorageUser().username;
+    return this.httpClient.put('pep-api/user/change-password', changePassword)
+      .pipe(
+        map((response: CustomResponse) => {
+          return response.body;
         })
       );
   }

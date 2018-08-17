@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { AccountComponent } from './user/account/account.component';
 
 import { RequestUnlockComponent } from './user/request-unlock/request-unlock.component';
@@ -9,11 +10,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
+import { ProfileImageComponent } from './user/profile-image/profile-image.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-    { path: 'account', component: AccountComponent}
+    { path: 'account', component: AccountComponent},
+    { path: 'change-password', component: ChangePasswordComponent},
+    { path: 'profile-image', component: ProfileImageComponent},
   ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

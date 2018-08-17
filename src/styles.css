@@ -2,3 +2,35 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+radio.ng-invalid.ng-touched, select.ng-invalid.ng-touched, input.ng-invalid.ng-touched {
+  border-color:lightcoral;
+}
+
+.help-block {
+  color:lightcoral;
+}
+
+.two-buttons {
+  width: 50%;
+}
+
+.three-buttons {
+  width: 33.33%;
+}
+
+.four-buttons {
+  width: 50%;
+}
+
+.left-button {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.center-button {
+  border-radius: 0px 0px 0px 0px;
+}
+
+.right-button {
+  border-radius: 0px 5px 5px 0px;
+}

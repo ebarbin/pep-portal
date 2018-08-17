@@ -20,6 +20,8 @@ import { HeaderComponent } from './shared/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
+import { ProfileImageComponent } from './user/profile-image/profile-image.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     HomeComponent,
     HeaderComponent,
     RequestUnlockComponent,
-    AccountComponent
+    AccountComponent,
+    ChangePasswordComponent,
+    ProfileImageComponent
   ],
   imports: [
     BrowserAnimationsModule,
