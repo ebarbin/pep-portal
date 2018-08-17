@@ -1,23 +1,109 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="/">Plataforma Educativa para Programar (pep)</a>
+<nav class="navbar navbar-expand-lg navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/"><fa name="code"></fa> PEP</a>
 
-  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-    data-toggle="collapse" data-target="#navbarSupportedContent"
-    [attr.aria-expanded]="!isCollapsed"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" style="float:right; cursor: pointer;" ngbDropdownToggle role="button"></a>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Logout</a>
+    <div class="collapse navbar-collapse" [class.show]="isCollapsed">
+      <ul class="navbar-nav mr-auto">
+       <!-- <li class="nav-item active">
+          <a class="nav-link" href="#">Cursos <span class="sr-only">(current)</span></a>
+        </li>-->
+        <li class="nav-item dropdown" ngbDropdown>
+            <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">Cursos</a>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Crear Curso</a>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Modificar Curso</a>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Buscar Curso</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown" ngbDropdown>
+            <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">Ejercicios</a>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Crear Ejercicio</a>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Modificar Ejercicio</a>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Buscar Ejercicio</a>
+            </div>
+        </li>
+      </ul>
+      <div class="my-2 my-lg-2">
+          <ul class="navbar-nav nav">
+              <li class="nav-item active">
+                  <a class="nav-link" style="cursor: pointer;" (click)="logout()"><fa name="sign-out"></fa></a>
+              </li>
+            </ul>
         </div>
-      </li>
-    </ul>
+    </div>
+  </nav>
 
-</nav>
+
+<!--
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <div class="container d-flex flex-column flex-md-row justify-content-between">
+          <a class="navbar-brand" routerLink="/"><fa name="code"></fa> PEP</a>
+
+
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+      data-toggle="collapse" data-target="#navbarSupportedContent"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="navbar-nav nav">
+        <li class="nav-item">
+          <a class="nav-link">Cursos</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+
+
+    <ul class="navbar-nav nav">
+        <li class="nav-item">
+          <a class="nav-link">Cursos</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+
+
+    <ul class="navbar-nav nav">
+        <li class="nav-item">
+          <a class="nav-link">Cursos</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+
+
+      <ul class="navbar-nav nav">
+        <li class="nav-item">
+          <a class="nav-link">Cursos</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav nav">
+          <li class="nav-item dropdown" ngbDropdown>
+            <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button"></a>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Logout</a>
+            </div>
+          </li>
+      </ul>
+    </div>
+  </nav>
+
+-->

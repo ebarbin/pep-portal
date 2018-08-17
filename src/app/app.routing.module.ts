@@ -10,7 +10,7 @@ import { RegisterComponent } from './user/register/register.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent/*, canActivate: [AuthGuard]*/ },
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },
   { path: 'user/request-unlock', component: RequestUnlockComponent },

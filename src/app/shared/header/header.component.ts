@@ -11,6 +11,7 @@ import { User } from '../../user/user.model';
 })
 export class HeaderComponent implements OnInit {
 
+  isCollapsed: boolean;
   constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService) { }
 
   ngOnInit() {}

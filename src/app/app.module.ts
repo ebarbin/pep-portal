@@ -17,6 +17,7 @@ import { HomeComponent } from './shared/home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         preventDuplicates: true
       }),
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularFontAwesomeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},
