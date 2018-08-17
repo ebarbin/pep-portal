@@ -37,6 +37,21 @@ export class UserService {
       );
   }
 
+  updateProfileImage(file: File) {
+    const user: User = this.getStorageUser();
+    const formdata: FormData = new FormData();
+
+    formdata.append('file', file);
+    return this.httpClient.put('pep-api/user/' + user.username + '/profile-image', formdata)
+      .pipe(
+        map((response: CustomResponse) => {
+          const u = <User> response.body;
+          this.storageUser(u);
+          return u;
+        })
+      );
+  }
+
   update(user: User) {
     return this.httpClient.put('pep-api/user', user)
       .pipe(
@@ -49,8 +64,8 @@ export class UserService {
   }
 
   changePassword(changePassword: ChangePassword) {
-    changePassword.username = this.getStorageUser().username;
-    return this.httpClient.put('pep-api/user/change-password', changePassword)
+    const username = this.getStorageUser().username;
+    return this.httpClient.put('pep-api/user/' + username + '/change-password', changePassword)
       .pipe(
         map((response: CustomResponse) => {
           return response.body;

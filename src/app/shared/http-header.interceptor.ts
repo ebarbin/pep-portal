@@ -13,7 +13,7 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
       const strUser = localStorage.getItem('user');
-      if (strUser) {
+      if (strUser && strUser !== 'null') {
         const user: User = JSON.parse(strUser);
         req = req.clone({
           responseType: 'json',
