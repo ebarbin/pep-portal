@@ -17,10 +17,16 @@ export class HeaderComponent implements OnInit {
      private router: Router, private toastService: ToastrService) { }
 
   username: string;
+  imageId: string;
 
   ngOnInit() {
     const user: User = this.userService.getStorageUser();
     this.username = user.username;
+    this.imageId = user.imageId;
+
+    this.userService.imageUpdated.subscribe((imageId: string) => {
+      this.imageId = imageId;
+    });
   }
 
   logout() {

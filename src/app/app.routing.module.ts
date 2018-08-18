@@ -14,7 +14,7 @@ import { ProfileImageComponent } from './user/profile-image/profile-image.compon
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
     { path: 'account', component: AccountComponent},
     { path: 'change-password', component: ChangePasswordComponent},
     { path: 'profile-image', component: ProfileImageComponent},
@@ -23,7 +23,6 @@ const appRoutes: Routes = [
   { path: 'user/register', component: RegisterComponent },
   { path: 'user/request-unlock', component: RequestUnlockComponent },
   { path: 'user/activate/:username/:token', component: ActivateUserComponent , canActivate: [ActiveUserGuard]},
-
 ];
 
 @NgModule({

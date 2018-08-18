@@ -34,7 +34,7 @@
           <ul class="navbar-nav nav">
               <li class="nav-item dropdown" ngbDropdown>
                   <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">
-                    <img class="rounded-circle" height="30" src="/assets/images/perfil.jpg"/>
+                    <img class="rounded-circle" height="30" [src]="'/pep-api/file/' + imageId"/>
                     {{username}}</a>
                   <div class="dropdown-menu" ngbDropdownMenu>
                     <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>

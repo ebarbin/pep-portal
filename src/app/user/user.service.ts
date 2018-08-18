@@ -6,15 +6,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '../../../node_modules/@angular/router';
+import { Subject } from '../../../node_modules/rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private toastService: ToastrService, private httpClient: HttpClient) {}
+  imageUpdated = new Subject();
+
+  constructor(private router: Router, private toastService: ToastrService, private httpClient: HttpClient) {}
 
   getStorageUser() {
+    const user: User = <User> JSON.parse(localStorage.getItem('user'));
     return <User> JSON.parse(localStorage.getItem('user'));
   }
 
@@ -37,12 +42,12 @@ export class UserService {
       );
   }
 
-  updateProfileImage(file: File) {
+  storeProfileImage(file: File) {
     const user: User = this.getStorageUser();
     const formdata: FormData = new FormData();
 
     formdata.append('file', file);
-    return this.httpClient.put('pep-api/user/' + user.username + '/profile-image', formdata)
+    return this.httpClient.put('pep-api/user/' + user.username + '/store-profile-image', formdata)
       .pipe(
         map((response: CustomResponse) => {
           const u = <User> response.body;
