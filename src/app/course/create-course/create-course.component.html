@@ -12,6 +12,15 @@
                   </div>
             </div>
             <div class="form-group">
+                <tag-input ngModel name="problems" required #tagInput
+                  placeholder="Ejercicios"
+                  secondaryPlaceholder="Buscar Ejercicios"
+                  onlyFromAutocomplete="true">
+                  <tag-input-dropdown identifyBy="id" displayBy="name" [autocompleteItems]="allProblems">
+                  </tag-input-dropdown>
+                </tag-input>
+            </div>
+            <div class="form-group">
                 <angular-editor placeholder="Ingresar Descripción" ngModel name="description" [config]="editorConfig"></angular-editor>
             </div>
           <button

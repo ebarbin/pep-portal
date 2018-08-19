@@ -23,9 +23,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { ProfileImageComponent } from './user/profile-image/profile-image.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
-import { CourseNavigatorComponent } from './course-navigator/course-navigator.component';
+import { CourseNavigatorComponent } from './course/course-navigator/course-navigator.component';
 import { CreateCourseComponent } from './course/create-course/create-course.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     NgxSpinnerModule,
     AngularFontAwesomeModule,
     MonacoEditorModule.forRoot(),
-    AngularEditorModule
+    AngularEditorModule,
+    TagInputModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

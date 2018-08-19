@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '../../../node_modules/@angular/router';
 import { Subject } from '../../../node_modules/rxjs';
 
 @Injectable({
@@ -16,7 +14,7 @@ export class UserService {
 
   imageUpdated = new Subject();
 
-  constructor(private router: Router, private toastService: ToastrService, private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   getStorageUser() {
     const user: User = <User> JSON.parse(localStorage.getItem('user'));
