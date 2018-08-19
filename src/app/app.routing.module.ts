@@ -1,3 +1,4 @@
+import { WorkspaceComponent } from './workspace/workspace.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { AccountComponent } from './user/account/account.component';
 
@@ -11,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { ProfileImageComponent } from './user/profile-image/profile-image.component';
+import { CreateCourseComponent } from './course/create-course/create-course.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -18,6 +20,8 @@ const appRoutes: Routes = [
     { path: 'account', component: AccountComponent},
     { path: 'change-password', component: ChangePasswordComponent},
     { path: 'profile-image', component: ProfileImageComponent},
+    { path: 'workspace', component: WorkspaceComponent },
+    { path: 'create-course', component: CreateCourseComponent },
   ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

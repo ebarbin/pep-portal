@@ -7,26 +7,29 @@
 
     <div class="collapse navbar-collapse" [class.show]="isCollapsed">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+                <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/workspace">Area de Trabajo</a>
+        </li>
         <li class="nav-item dropdown" ngbDropdown>
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cursos</a>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item cursor-pointer" (click)="logout()">Crear Curso</a>
-              <a class="dropdown-item cursor-pointer" (click)="logout()">Modificar Curso</a>
-              <a class="dropdown-item cursor-pointer" (click)="logout()">Ver Cursos</a>
+              <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/create-course">Crear Curso</a>
+              <a class="dropdown-item cursor-pointer">Modificar Curso</a>
+              <a class="dropdown-item cursor-pointer">Ver Cursos</a>
             </div>
         </li>
         <li class="nav-item dropdown" ngbDropdown>
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Ejercicios</a>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item cursor-pointer" (click)="logout()">Crear Ejercicio</a>
-              <a class="dropdown-item cursor-pointer" (click)="logout()">Modificar Ejercicio</a>
-              <a class="dropdown-item cursor-pointer" (click)="logout()">Ver Ejercicios</a>
+              <a class="dropdown-item cursor-pointer">Crear Ejercicio</a>
+              <a class="dropdown-item cursor-pointer">Modificar Ejercicio</a>
+              <a class="dropdown-item cursor-pointer">Ver Ejercicios</a>
             </div>
         </li>
         <li class="nav-item dropdown" ngbDropdown>
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Consultas</a>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item cursor-pointer" (click)="logout()">Ver Consultas</a>
+              <a class="dropdown-item cursor-pointer">Ver Consultas</a>
             </div>
         </li>
       </ul>
@@ -40,6 +43,7 @@
                     <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>
                     <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/change-password">Cambio de Contraseña</a>
                     <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/profile-image">Imagen de Perfil</a>
+                    <div role="separator" class="dropdown-divider"></div>
                     <a class="dropdown-item cursor-pointer" (click)="logout()"><fa name="sign-out"></fa> Salir</a>
                   </div>
               </li>

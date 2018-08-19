@@ -1,5 +1,5 @@
 import { AccountComponent } from './user/account/account.component';
-
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { HttpHeaderInterceptor } from './shared/http-header.interceptor';
 import { HttpErrorInterceptor } from './shared/http-error.interceptor';
 import { HttpSpinnerInterceptor } from './shared/http-spinner.interceptor';
@@ -22,6 +22,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { ProfileImageComponent } from './user/profile-image/profile-image.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
+import { CourseNavigatorComponent } from './course-navigator/course-navigator.component';
+import { CreateCourseComponent } from './course/create-course/create-course.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { ProfileImageComponent } from './user/profile-image/profile-image.compon
     RequestUnlockComponent,
     AccountComponent,
     ChangePasswordComponent,
-    ProfileImageComponent
+    ProfileImageComponent,
+    WorkspaceComponent,
+    CourseNavigatorComponent,
+    CreateCourseComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -49,7 +56,9 @@ import { ProfileImageComponent } from './user/profile-image/profile-image.compon
       }),
     NgbModule,
     NgxSpinnerModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    MonacoEditorModule.forRoot(),
+    AngularEditorModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

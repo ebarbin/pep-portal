@@ -2,21 +2,35 @@ import { User } from './../user.model';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './../user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '../../../../node_modules/@angular/router';
+import { Subscription } from '../../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-profile-image',
   templateUrl: './profile-image.component.html',
   styleUrls: ['./profile-image.component.css']
 })
-export class ProfileImageComponent implements OnInit {
+export class ProfileImageComponent implements OnInit, OnDestroy {
 
   selectedFile = null;
+  imageId: string;
+  subs: Subscription;
 
   constructor(private userService: UserService, private router: Router, private toastService: ToastrService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const user: User = this.userService.getStorageUser();
+    this.imageId = user.imageId;
+
+    this.subs = this.userService.imageUpdated.subscribe((imageId: string) => {
+      this.imageId = imageId;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
