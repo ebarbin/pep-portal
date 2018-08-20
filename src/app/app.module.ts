@@ -31,6 +31,7 @@ import { MyCoursesComponent } from './course/my-courses/my-courses.component';
 import { OptionRoleValidationDirective } from './shared/option-role-validation.directive';
 import { ConfirmationDialogComponent } from './shared/dialog/confirmation-dialog/confirmation-dialog.component';
 import { CourseCodeValidationComponent } from './shared/dialog/course-code-validation/course-code-validation.component';
+import { CourseSelectComponent } from './shared/course-select/course-select.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CourseCodeValidationComponent } from './shared/dialog/course-code-valid
     MyCoursesComponent,
     OptionRoleValidationDirective,
     ConfirmationDialogComponent,
-    CourseCodeValidationComponent
+    CourseCodeValidationComponent,
+    CourseSelectComponent
   ],
   imports: [
     BrowserAnimationsModule,

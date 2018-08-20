@@ -35,13 +35,13 @@
                       </a>
                   </td>
                   <td [appOptionRoleValidation]="'ROLE_STUDENT'">
-                    <a class="cursor-pointer" *ngIf="!isStudentEnrolled(course)"
+                    <a class="cursor-pointer"
                       [routerLink]="'/home/course/list'"
                       placement="top" ngbTooltip="Realizar Inscripción"
                       (click)="enroll(course)">
                       <fa name="check-circle" size="2x"></fa>
                     </a>
-                    <a class="cursor-pointer" *ngIf="isStudentEnrolled(course)"
+                    <a class="cursor-pointer"
                       [routerLink]="'/home/course/list'"
                       placement="top" ngbTooltip="Quitar Inscripción"
                       (click)="removeEnroll(course)">

@@ -17,11 +17,11 @@ export class AccountComponent implements OnInit {
 
   @ViewChild('f') accountForm: NgForm;
 
-  roles = [];
+  role;
 
   ngOnInit() {
     const user: User = this.userService.getStorageUser();
-    this.roles = user.roles;
+    this.role = user.role;
 
     setTimeout(() => {
       this.accountForm.form.patchValue({name: user.name});

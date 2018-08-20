@@ -29,16 +29,19 @@ export class MyCoursesComponent implements OnInit {
 
   removeCourse(course: Course) {
     this.courseService.deleteById(course.id).subscribe((courses: [Course]) => {
+      // TODO Agregar confirm..
+      this.toastService.success('Curso eliminado.', 'Operación exitosa');
       this.courses = courses;
     });
   }
 
   isStudentEnrolled(course: Course) {
     const user: User = this.userService.getStorageUser();
-    const s: Student = course.students.find((st: Student) => {
+
+  /*  const s: Student = course.students.find((st: Student) => {
       return st.user.id === user.id;
-    });
-    return s ? true : false;
+    });*/
+    return true; //s ? true : false;
   }
 
   enroll(course: Course) {

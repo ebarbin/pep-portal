@@ -5,7 +5,7 @@ import { CustomResponse } from '../shared/custom-response.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  map, filter } from 'rxjs/operators';
-import {  of } from 'rxjs';
+import {  of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,8 @@ import {  of } from 'rxjs';
 export class CourseService {
 
   constructor(private userService: UserService, private httpClient: HttpClient) { }
+
+  studenEnrolledCoursesChange = new Subject();
 
   createCourse(course: Course) {
     return this.httpClient.post('pep-api/course', course)
@@ -44,14 +46,14 @@ export class CourseService {
   findAll() {
     const user: User = this.userService.getStorageUser();
 
-    if (user.roles.includes('ROLE_STUDENT')) {
+    if (user.role === 'ROLE_STUDENT') {
       return this.httpClient.get('pep-api/course/forStudent')
       .pipe(
         map((response: CustomResponse) => {
           return <[Course]> response.body;
         })
       );
-    } else if (user.roles.includes('ROLE_TEACHER')) {
+    } else if (user.role === 'ROLE_TEACHER') {
       return this.httpClient.get('pep-api/course/forTeacher')
       .pipe(
         map((response: CustomResponse) => {
@@ -61,6 +63,15 @@ export class CourseService {
     } else {
       return of([]);
     }
+  }
+
+  findEnrolledCourses() {
+    return this.httpClient.get('pep-api/course/enrolled')
+      .pipe(
+        map((response: CustomResponse) => {
+          return <[Course]> response.body;
+        })
+      );
   }
 
   deleteById(courseId: string) {
@@ -76,6 +87,7 @@ export class CourseService {
     return this.httpClient.get('pep-api/course/' + courseId + '/enroll')
     .pipe(
       map((response: CustomResponse) => {
+        this.studenEnrolledCoursesChange.next();
         return <[Course]> response.body;
       })
     );
@@ -85,6 +97,7 @@ export class CourseService {
     return this.httpClient.get('pep-api/course/' + courseId + '/remove-enroll')
     .pipe(
       map((response: CustomResponse) => {
+        this.studenEnrolledCoursesChange.next();
         return <[Course]> response.body;
       })
     );

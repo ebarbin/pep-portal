@@ -1,3 +1,5 @@
+import { CourseService } from './../../course/course.service';
+import { Course } from './../../course/course.model';
 import { UserService } from './../../user/user.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -14,20 +16,18 @@ import { Subscription } from '../../../../node_modules/rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private httpClient: HttpClient, private userService: UserService,
-     private router: Router, private toastService: ToastrService) { }
+    private courseService: CourseService, private router: Router, private toastService: ToastrService) { }
 
   isCollapsed: boolean;
-  username: string;
-  imageId: string;
+  user: User;
+
   subs: Subscription;
 
   ngOnInit() {
-    const user: User = this.userService.getStorageUser();
-    this.username = user.username;
-    this.imageId = user.imageId;
+    this.user = this.userService.getStorageUser();
 
     this.subs = this.userService.imageUpdated.subscribe((imageId: string) => {
-      this.imageId = imageId;
+      this.user.imageId = imageId;
     });
   }
 

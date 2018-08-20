@@ -15,6 +15,6 @@ export class OptionRoleValidationDirective implements OnInit {
 
   ngOnInit() {
     const user: User = this.userService.getStorageUser();
-    this.value = !user.roles.includes(this.appOptionRoleValidation);
+    this.value = user.role !== this.appOptionRoleValidation;
   }
 }
