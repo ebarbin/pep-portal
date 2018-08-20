@@ -2,8 +2,8 @@
     <h1 class="h3 mb-3 font-weight-normal text-center">Mis Cursos</h1>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <table class="table">
-              <thead>
+          <table class="table table-striped">
+              <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Nombre</th>
@@ -20,16 +20,13 @@
                   <td> {{ course.teacher.user.name  + ' ' + course.teacher.user.surename}} </td>
                   <td *ngIf="user.role === 'ROLE_TEACHER'">
                       <a class="cursor-pointer"
-                        [routerLink]="'/home/edit-course/' + course.id"
-                        placement="top"
-                        ngbTooltip="Editar Curso">
+                        [routerLink]="'/home/edit-course/' + course.id">
                         <fa name="edit" size="2x"></fa>
                       </a>
                   </td>
                   <td *ngIf="user.role === 'ROLE_TEACHER'">
                       <a class="cursor-pointer"
                         [routerLink]="'/home/course/list'"
-                        placement="top" ngbTooltip="Eliminar Curso"
                         (click)="removeCourse(course)">
                         <fa name="trash" size="2x"></fa>
                       </a>
@@ -37,13 +34,11 @@
                   <td *ngIf="user.role === 'ROLE_STUDENT'">
                     <a class="cursor-pointer" *ngIf="!isStudentEnrolled(course)"
                       [routerLink]="'/home/course/list'"
-                      placement="top" ngbTooltip="Realizar Inscripción"
                       (click)="enroll(course)">
                       <fa name="check-circle" size="2x"></fa>
                     </a>
                     <a class="cursor-pointer" *ngIf="isStudentEnrolled(course)"
                       [routerLink]="'/home/course/list'"
-                      placement="top" ngbTooltip="Quitar Inscripción"
                       (click)="removeEnroll(course)">
                       <fa name="times-circle" size="2x"></fa>
                     </a>

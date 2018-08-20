@@ -47,26 +47,30 @@ export class MyCoursesComponent implements OnInit {
   }
 
   removeCourse(course: Course) {
-    this.courseService.deleteById(course.id).subscribe((courses: [Course]) => {
-      // TODO Agregar confirm..
-      this.toastService.success('Curso eliminado.', 'Operación exitosa');
-      this.courses = courses;
-    });
+
+    this.confirmationDialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    .then((result: boolean) => {
+      if (result) {
+        this.courseService.deleteById(course.id).subscribe((courses: [Course]) => {
+          this.toastService.success('Curso eliminado.', 'Operación exitosa');
+          this.courses = courses;
+        });
+      } else {
+      }
+    })
+    .catch(() => {});
   }
 
   isStudentEnrolled(course: Course) {
+    // workaround
     if (!this.student) {
       return false;
     }
-    if (this.student.courses.length > 0) {
-      const found = this.student.courses.find((c: Course) => {
-        return c.id === course.id;
-      });
-      console.log(found);
-      return found ? true : false;
-    } else {
-      return false;
-    }
+
+    const found = this.student.courses.find((c: Course) => {
+      return c.id === course.id;
+    });
+    return found ? true : false;
   }
 
   enroll(course: Course) {
@@ -81,8 +85,7 @@ export class MyCoursesComponent implements OnInit {
         this.toastService.warning('El código ingresado no corresponde con el curso.', 'Atención');
       }
     })
-    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-
+    .catch(() => {});
   }
 
   removeEnroll(course: Course) {
