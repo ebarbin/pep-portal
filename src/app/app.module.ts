@@ -27,6 +27,7 @@ import { CourseNavigatorComponent } from './course/course-navigator/course-navig
 import { CreateCourseComponent } from './course/create-course/create-course.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TagInputModule } from 'ngx-chips';
+import { MyCoursesComponent } from './course/my-courses/my-courses.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TagInputModule } from 'ngx-chips';
     ProfileImageComponent,
     WorkspaceComponent,
     CourseNavigatorComponent,
-    CreateCourseComponent
+    CreateCourseComponent,
+    MyCoursesComponent
   ],
   imports: [
     BrowserAnimationsModule,

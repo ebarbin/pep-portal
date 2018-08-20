@@ -20,4 +20,31 @@ export class CourseService {
         })
       );
   }
+
+  findById(courseId: string) {
+    return this.httpClient.get('pep-api/course/' + courseId)
+      .pipe(
+        map((response: CustomResponse) => {
+          return <Course> response.body;
+        })
+      );
+  }
+
+  findAllForTeacher() {
+    return this.httpClient.get('pep-api/course/teacher')
+      .pipe(
+        map((response: CustomResponse) => {
+          return <[Course]> response.body;
+        })
+      );
+  }
+
+  deleteById(courseId: string) {
+    return this.httpClient.delete('pep-api/course/' + courseId)
+    .pipe(
+      map((response: CustomResponse) => {
+        return <[Course]> response.body;
+      })
+    );
+  }
 }

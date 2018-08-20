@@ -13,6 +13,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { ProfileImageComponent } from './user/profile-image/profile-image.component';
 import { CreateCourseComponent } from './course/create-course/create-course.component';
+import { MyCoursesComponent } from './course/my-courses/my-courses.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -21,7 +22,10 @@ const appRoutes: Routes = [
     { path: 'change-password', component: ChangePasswordComponent},
     { path: 'profile-image', component: ProfileImageComponent},
     { path: 'workspace', component: WorkspaceComponent },
-    { path: 'create-course', component: CreateCourseComponent },
+    { path: 'course/list', component: MyCoursesComponent },
+    { path: 'edit-course/:courseId', component: CreateCourseComponent },
+    { path: 'new-course', component: CreateCourseComponent },
+
   ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

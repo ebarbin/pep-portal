@@ -1,0 +1,32 @@
+<div class="container">
+    <h1 class="h3 mb-3 font-weight-normal text-center">Mis Cursos</h1>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Cantidad de Ejercicios</th>
+                  <th scope="col">Alumnos Inscriptos</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of courses; let i = index">
+                  <th scope="row">{{ i }}</th>
+                  <td> {{ course.name }}</td>
+                  <td> {{ course.problems.length }} </td>
+                  <td></td>
+                  <td>
+                      <a routerLinkActive="active" [routerLink]="'/home/edit-course/' + course.id" class="cursor-pointer" placement="top" ngbTooltip="Editar Curso"><fa name="edit" size="2x"></fa></a>
+                  </td>
+                  <td>
+                      <a class="cursor-pointer" placement="top" ngbTooltip="Eliminar Curso" (click)="removeCourse(course)"><fa name="trash" size="2x"></fa></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
