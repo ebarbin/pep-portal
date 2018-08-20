@@ -61,19 +61,16 @@ export class CreateCourseComponent implements OnInit {
     const course: Course = <Course> form.value;
     if (this.editMode) {
       course.id = this.courseId;
-    }
-
-    this.courseService.createCourse(course).subscribe(() => {
-
-      if (this.editMode) {
+      this.courseService.editeCourse(course).subscribe(() => {
         this.toastService.success('Curso editado.', 'Operación exitosa');
         this.router.navigate(['home/course/list']);
-      } else {
+      });
+    } else {
+      this.courseService.createCourse(course).subscribe(() => {
         this.toastService.success('Curso creado.', 'Operación exitosa');
         this.router.navigate(['home']);
-      }
-
-    });
+      });
+    }
   }
 
   cancel() {

@@ -7,22 +7,46 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">Cantidad de Ejercicios</th>
-                  <th scope="col">Alumnos Inscriptos</th>
-                  <th scope="col"></th>
+                  <th scope="col">Docente</th>
+                  <th [appOptionRoleValidation]="'ROLE_TEACHER'" scope="col"></th>
+                  <th [appOptionRoleValidation]="'ROLE_TEACHER'" scope="col"></th>
+                  <th [appOptionRoleValidation]="'ROLE_STUDENT'" scope="col"></th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let course of courses; let i = index">
                   <th scope="row">{{ i }}</th>
                   <td> {{ course.name }}</td>
-                  <td> {{ course.problems.length }} </td>
-                  <td></td>
-                  <td>
-                      <a routerLinkActive="active" [routerLink]="'/home/edit-course/' + course.id" class="cursor-pointer" placement="top" ngbTooltip="Editar Curso"><fa name="edit" size="2x"></fa></a>
+                  <td> {{ course.teacher.user.name  + ' ' + course.teacher.user.surename}} </td>
+                  <td [appOptionRoleValidation]="'ROLE_TEACHER'">
+                      <a class="cursor-pointer"
+                        [routerLink]="'/home/edit-course/' + course.id"
+                        placement="top"
+                        ngbTooltip="Editar Curso">
+                        <fa name="edit" size="2x"></fa>
+                      </a>
                   </td>
-                  <td>
-                      <a class="cursor-pointer" placement="top" ngbTooltip="Eliminar Curso" (click)="removeCourse(course)"><fa name="trash" size="2x"></fa></a>
+                  <td [appOptionRoleValidation]="'ROLE_TEACHER'">
+                      <a class="cursor-pointer"
+                        [routerLink]="'/home/course/list'"
+                        placement="top" ngbTooltip="Eliminar Curso"
+                        (click)="removeCourse(course)">
+                        <fa name="trash" size="2x"></fa>
+                      </a>
+                  </td>
+                  <td [appOptionRoleValidation]="'ROLE_STUDENT'">
+                    <a class="cursor-pointer" *ngIf="!isStudentEnrolled(course)"
+                      [routerLink]="'/home/course/list'"
+                      placement="top" ngbTooltip="Realizar Inscripción"
+                      (click)="enroll(course)">
+                      <fa name="check-circle" size="2x"></fa>
+                    </a>
+                    <a class="cursor-pointer" *ngIf="isStudentEnrolled(course)"
+                      [routerLink]="'/home/course/list'"
+                      placement="top" ngbTooltip="Quitar Inscripción"
+                      (click)="removeEnroll(course)">
+                      <fa name="times-circle" size="2x"></fa>
+                    </a>
                   </td>
                 </tr>
               </tbody>

@@ -34,3 +34,7 @@ radio.ng-invalid.ng-touched, select.ng-invalid.ng-touched, input.ng-invalid.ng-t
 .right-button {
   border-radius: 0px 5px 5px 0px;
 }
+
+.hide-role-option {
+  display: none;
+}

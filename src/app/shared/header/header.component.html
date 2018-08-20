@@ -13,11 +13,16 @@
         <li class="nav-item dropdown" ngbDropdown>
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cursos</a>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/new-course">Crear Curso</a>
+              <a class="dropdown-item cursor-pointer"
+                [appOptionRoleValidation]="'ROLE_TEACHER'"
+                routerLinkActive="active"
+                routerLink="/home/new-course">
+                Crear Curso
+              </a>
               <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/course/list">Mis Cursos</a>
             </div>
         </li>
-        <li class="nav-item dropdown" ngbDropdown>
+        <li class="nav-item dropdown" ngbDropdown [appOptionRoleValidation]="'ROLE_TEACHER'">
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Ejercicios</a>
             <div class="dropdown-menu" ngbDropdownMenu>
               <a class="dropdown-item cursor-pointer">Crear Ejercicio</a>

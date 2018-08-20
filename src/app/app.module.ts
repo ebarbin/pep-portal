@@ -28,6 +28,7 @@ import { CreateCourseComponent } from './course/create-course/create-course.comp
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TagInputModule } from 'ngx-chips';
 import { MyCoursesComponent } from './course/my-courses/my-courses.component';
+import { OptionRoleValidationDirective } from './shared/option-role-validation.directive';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MyCoursesComponent } from './course/my-courses/my-courses.component';
     WorkspaceComponent,
     CourseNavigatorComponent,
     CreateCourseComponent,
-    MyCoursesComponent
+    MyCoursesComponent,
+    OptionRoleValidationDirective
   ],
   imports: [
     BrowserAnimationsModule,
