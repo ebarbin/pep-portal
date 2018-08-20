@@ -1,3 +1,4 @@
+import { StudentService } from './../../shared/student.service';
 import { ConfirmationDialogService } from '../../shared/dialog/confirmation-dialog.service';
 import { Student } from './../../shared/student.model';
 import { User } from './../../user/user.model';
@@ -14,7 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MyCoursesComponent implements OnInit {
 
-  constructor(private confirmationDialogService: ConfirmationDialogService,
+  student: Student;
+  user: User;
+
+  constructor(private studentService: StudentService,
+    private confirmationDialogService: ConfirmationDialogService,
     private toastService: ToastrService,
     private userService: UserService,
     private courseService: CourseService) { }
@@ -22,9 +27,23 @@ export class MyCoursesComponent implements OnInit {
   courses: [Course];
 
   ngOnInit() {
+
+    this.user = this.userService.getStorageUser();
+
     this.courseService.findAll().subscribe((courses: [Course]) => {
       this.courses = courses;
     });
+
+    this.studentService.getStudent().subscribe((student: Student) => {
+      this.student = student;
+    });
+
+    this.courseService.studenEnrolledCoursesChange.subscribe(() => {
+      this.studentService.getStudent().subscribe((student: Student) => {
+        this.student = student;
+      });
+    });
+
   }
 
   removeCourse(course: Course) {
@@ -36,12 +55,18 @@ export class MyCoursesComponent implements OnInit {
   }
 
   isStudentEnrolled(course: Course) {
-    const user: User = this.userService.getStorageUser();
-
-  /*  const s: Student = course.students.find((st: Student) => {
-      return st.user.id === user.id;
-    });*/
-    return true; //s ? true : false;
+    if (!this.student) {
+      return false;
+    }
+    if (this.student.courses.length > 0) {
+      const found = this.student.courses.find((c: Course) => {
+        return c.id === course.id;
+      });
+      console.log(found);
+      return found ? true : false;
+    } else {
+      return false;
+    }
   }
 
   enroll(course: Course) {

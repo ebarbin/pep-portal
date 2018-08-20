@@ -8,9 +8,9 @@
                   <th scope="col">#</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Docente</th>
-                  <th [appOptionRoleValidation]="'ROLE_TEACHER'" scope="col"></th>
-                  <th [appOptionRoleValidation]="'ROLE_TEACHER'" scope="col"></th>
-                  <th [appOptionRoleValidation]="'ROLE_STUDENT'" scope="col"></th>
+                  <th *ngIf="user.role === 'ROLE_TEACHER'" scope="col"></th>
+                  <th *ngIf="user.role === 'ROLE_TEACHER'" scope="col"></th>
+                  <th *ngIf="user.role === 'ROLE_STUDENT'" scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -18,7 +18,7 @@
                   <th scope="row">{{ i }}</th>
                   <td> {{ course.name }}</td>
                   <td> {{ course.teacher.user.name  + ' ' + course.teacher.user.surename}} </td>
-                  <td [appOptionRoleValidation]="'ROLE_TEACHER'">
+                  <td *ngIf="user.role === 'ROLE_TEACHER'">
                       <a class="cursor-pointer"
                         [routerLink]="'/home/edit-course/' + course.id"
                         placement="top"
@@ -26,7 +26,7 @@
                         <fa name="edit" size="2x"></fa>
                       </a>
                   </td>
-                  <td [appOptionRoleValidation]="'ROLE_TEACHER'">
+                  <td *ngIf="user.role === 'ROLE_TEACHER'">
                       <a class="cursor-pointer"
                         [routerLink]="'/home/course/list'"
                         placement="top" ngbTooltip="Eliminar Curso"
@@ -34,14 +34,14 @@
                         <fa name="trash" size="2x"></fa>
                       </a>
                   </td>
-                  <td [appOptionRoleValidation]="'ROLE_STUDENT'">
-                    <a class="cursor-pointer"
+                  <td *ngIf="user.role === 'ROLE_STUDENT'">
+                    <a class="cursor-pointer" *ngIf="!isStudentEnrolled(course)"
                       [routerLink]="'/home/course/list'"
                       placement="top" ngbTooltip="Realizar Inscripción"
                       (click)="enroll(course)">
                       <fa name="check-circle" size="2x"></fa>
                     </a>
-                    <a class="cursor-pointer"
+                    <a class="cursor-pointer" *ngIf="isStudentEnrolled(course)"
                       [routerLink]="'/home/course/list'"
                       placement="top" ngbTooltip="Quitar Inscripción"
                       (click)="removeEnroll(course)">
