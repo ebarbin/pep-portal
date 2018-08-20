@@ -1,3 +1,4 @@
+import { ConfirmationDialogService } from '../../shared/dialog/confirmation-dialog.service';
 import { Student } from './../../shared/student.model';
 import { User } from './../../user/user.model';
 import { UserService } from './../../user/user.service';
@@ -13,7 +14,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MyCoursesComponent implements OnInit {
 
-  constructor(private toastService: ToastrService, private userService: UserService,
+  constructor(private confirmationDialogService: ConfirmationDialogService,
+    private toastService: ToastrService,
+    private userService: UserService,
     private courseService: CourseService) { }
 
   courses: [Course];
@@ -39,10 +42,19 @@ export class MyCoursesComponent implements OnInit {
   }
 
   enroll(course: Course) {
-    this.courseService.enroll(course.id).subscribe((courses: [Course]) => {
-      this.toastService.success('Inscripción realizada.', 'Operación exitosa');
-      this.courses = courses;
-    });
+    this.confirmationDialogService.courseCodeValidation(course)
+    .then((result: boolean) => {
+      if (result) {
+        this.courseService.enroll(course.id).subscribe((courses: [Course]) => {
+          this.toastService.success('Inscripción realizada.', 'Operación exitosa');
+          this.courses = courses;
+        });
+      } else {
+        this.toastService.warning('El código ingresado no corresponde con el curso.', 'Atención');
+      }
+    })
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
   }
 
   removeEnroll(course: Course) {

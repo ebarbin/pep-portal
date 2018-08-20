@@ -29,6 +29,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TagInputModule } from 'ngx-chips';
 import { MyCoursesComponent } from './course/my-courses/my-courses.component';
 import { OptionRoleValidationDirective } from './shared/option-role-validation.directive';
+import { ConfirmationDialogComponent } from './shared/dialog/confirmation-dialog/confirmation-dialog.component';
+import { CourseCodeValidationComponent } from './shared/dialog/course-code-validation/course-code-validation.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { OptionRoleValidationDirective } from './shared/option-role-validation.d
     CourseNavigatorComponent,
     CreateCourseComponent,
     MyCoursesComponent,
-    OptionRoleValidationDirective
+    OptionRoleValidationDirective,
+    ConfirmationDialogComponent,
+    CourseCodeValidationComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -71,6 +75,7 @@ import { OptionRoleValidationDirective } from './shared/option-role-validation.d
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true},
   ],
+  entryComponents: [ ConfirmationDialogComponent, CourseCodeValidationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

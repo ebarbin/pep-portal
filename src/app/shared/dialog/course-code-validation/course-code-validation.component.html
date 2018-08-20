@@ -1,0 +1,15 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="modal-header">
+    <h4 class="modal-title">Validación</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input type="text" ngModel name="code" required class="form-control" placeholder="Ingrese el código del curso">
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Aceptar</button>
+    <button type="button" class="btn btn-danger" (click)="decline()">Cancelar</button>
+  </div>
+</form>
