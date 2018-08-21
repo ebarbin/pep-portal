@@ -65,4 +65,13 @@ export class ProblemService {
         })
       );
   }
+
+  updateProblemSolution(problem: Problem) {
+    return this.httpClient.put('pep-api/problem/update-solution/' + problem.id, problem)
+      .pipe(
+        map((response: CustomResponse) => {
+          return response.body;
+        })
+      );
+  }
 }

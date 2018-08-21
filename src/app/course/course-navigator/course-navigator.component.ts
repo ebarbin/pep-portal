@@ -15,15 +15,11 @@ export class CourseNavigatorComponent implements OnInit, OnDestroy {
   student: Student;
   subs: Subscription;
 
-  @Output() problemSelection = new EventEmitter<Problem>();
-
   constructor(private studentService: StudentService) { }
 
   selectProblem(problem: Problem) {
     this.selectedProblem = problem;
-    this.studentService.updateSelectedProblem(problem).subscribe((student: Student) => {
-      this.problemSelection.emit(problem);
-    });
+    this.studentService.updateSelectedProblem(problem).subscribe();
   }
 
   ngOnInit() {

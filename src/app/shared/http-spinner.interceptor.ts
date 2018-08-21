@@ -12,7 +12,10 @@ export class HttpSpinnerInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-      this.spinnerService.show();
+
+      if (!req.url.includes('update-solution')) {
+        this.spinnerService.show();
+      }
 
       return next.handle(req)
       .pipe(finalize(() => {
