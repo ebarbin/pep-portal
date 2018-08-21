@@ -1,0 +1,21 @@
+<div class="container">
+    <h1 class="h3 mb-3 font-weight-normal text-center">Mis Ejercicios</h1>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Docente</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let problem of problems">
+                  <td> {{ problem.name }}</td>
+                  <td> {{ problem.teacher.user.name  + ' ' + problem.teacher.user.surename}} </td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </div>

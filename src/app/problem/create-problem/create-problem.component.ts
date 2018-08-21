@@ -1,0 +1,70 @@
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ProblemService } from './../problem.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Problem } from '../problem.model';
+import { ToastrService } from 'ngx-toastr';
+
+@Component({
+  selector: 'app-create-problem',
+  templateUrl: './create-problem.component.html',
+  styleUrls: ['./create-problem.component.css']
+})
+export class CreateProblemComponent implements OnInit {
+
+  @ViewChild('f') editForm: NgForm;
+  title: string;
+  problemId: string;
+  editMode = false;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '12rem',
+    minHeight: '4rem',
+    placeholder: 'Ingrese una Explicación',
+    translate: 'no',
+  };
+
+  constructor(private toastService: ToastrService, private router: Router,
+    private problemService: ProblemService, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.problemId = this.route.snapshot.params['problemId'];
+
+    if (!this.problemId) {
+      this.title = 'Crear Ejercicio';
+    } else {
+      this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
+        this.editForm.form.patchValue(problem);
+      });
+      this.editMode = true;
+      this.title = 'Editar Ejercicio';
+    }
+  }
+
+  onSubmit(form: NgForm) {
+    const problem: Problem = <Problem> form.value;
+    if (this.editMode) {
+      problem.id = this.problemId;
+      this.problemService.editeProblem(problem).subscribe(() => {
+        this.toastService.success('Curso editado.', 'Operación exitosa');
+        this.router.navigate(['home/problem/list']);
+      });
+    } else {
+      this.problemService.createProblem(problem).subscribe(() => {
+        this.toastService.success('Curso creado.', 'Operación exitosa');
+        this.router.navigate(['home']);
+      });
+    }
+  }
+
+  cancel() {
+    if (this.editMode) {
+      this.router.navigate(['home/problem/list']);
+    } else {
+      this.router.navigate(['home']);
+    }
+  }
+}

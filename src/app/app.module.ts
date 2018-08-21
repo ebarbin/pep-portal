@@ -1,3 +1,5 @@
+import { RolePipe } from './shared/role.pipe';
+import { ProfileImagePipe } from './shared/profile-image.pipe';
 import { AccountComponent } from './user/account/account.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { HttpHeaderInterceptor } from './shared/http-header.interceptor';
@@ -32,6 +34,8 @@ import { OptionRoleValidationDirective } from './shared/option-role-validation.d
 import { ConfirmationDialogComponent } from './shared/dialog/confirmation-dialog/confirmation-dialog.component';
 import { CourseCodeValidationComponent } from './shared/dialog/course-code-validation/course-code-validation.component';
 import { CourseSelectComponent } from './shared/course-select/course-select.component';
+import { CreateProblemComponent } from './problem/create-problem/create-problem.component';
+import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,11 @@ import { CourseSelectComponent } from './shared/course-select/course-select.comp
     OptionRoleValidationDirective,
     ConfirmationDialogComponent,
     CourseCodeValidationComponent,
-    CourseSelectComponent
+    CourseSelectComponent,
+    ProfileImagePipe,
+    RolePipe,
+    CreateProblemComponent,
+    MyProblemsComponent
   ],
   imports: [
     BrowserAnimationsModule,

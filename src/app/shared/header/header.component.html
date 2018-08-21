@@ -25,8 +25,12 @@
         <li class="nav-item dropdown" ngbDropdown *ngIf="user.role === 'ROLE_TEACHER'">
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Ejercicios</a>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item cursor-pointer">Crear Ejercicio</a>
-              <a class="dropdown-item cursor-pointer">Ver Ejercicios</a>
+              <a class="dropdown-item cursor-pointer"
+                routerLinkActive="active"
+                routerLink="/home/new-problem">Crear Ejercicio</a>
+              <a class="dropdown-item cursor-pointer"
+                routerLinkActive="active"
+                routerLink="/home/problem/list">Ver Ejercicios</a>
             </div>
         </li>
         <li class="nav-item dropdown" ngbDropdown>
@@ -43,7 +47,7 @@
           <ul class="navbar-nav nav">
               <li class="nav-item dropdown" ngbDropdown>
                   <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">
-                    <img class="rounded-circle" height="30" [src]="'/pep-api/file/' + user.imageId"/>
+                    <img class="rounded-circle" height="30" [src]="user.imageId | profileImage "/>
                     {{ user.username }}</a>
                   <div class="dropdown-menu" ngbDropdownMenu>
                     <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>

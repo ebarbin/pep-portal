@@ -3,7 +3,7 @@
   cursor: pointer;
 }
 
-radio.ng-invalid.ng-touched, select.ng-invalid.ng-touched, input.ng-invalid.ng-touched {
+angular-editor.ng-invalid.ng-touched, radio.ng-invalid.ng-touched, select.ng-invalid.ng-touched, input.ng-invalid.ng-touched {
   border-color:lightcoral;
 }
 

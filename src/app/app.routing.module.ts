@@ -1,3 +1,5 @@
+import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
+import { CreateProblemComponent } from './problem/create-problem/create-problem.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { AccountComponent } from './user/account/account.component';
@@ -25,7 +27,9 @@ const appRoutes: Routes = [
     { path: 'course/list', component: MyCoursesComponent },
     { path: 'edit-course/:courseId', component: CreateCourseComponent },
     { path: 'new-course', component: CreateCourseComponent },
-
+    { path: 'problem/list', component: MyProblemsComponent },
+    { path: 'new-problem', component: CreateProblemComponent },
+    { path: 'edit-problem/:problemId', component: CreateProblemComponent },
   ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

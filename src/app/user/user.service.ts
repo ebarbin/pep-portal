@@ -17,7 +17,6 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   getStorageUser() {
-    const user: User = <User> JSON.parse(localStorage.getItem('user'));
     return <User> JSON.parse(localStorage.getItem('user'));
   }
 

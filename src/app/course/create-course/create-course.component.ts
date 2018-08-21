@@ -21,12 +21,11 @@ export class CreateCourseComponent implements OnInit {
 
   editorConfig: AngularEditorConfig = {
     editable: true,
-    spellcheck: true,
+    spellcheck: false,
     height: '12rem',
     minHeight: '4rem',
-    placeholder: 'Ingrese una descripción',
+    placeholder: 'Ingrese una Descripción',
     translate: 'no',
-    uploadUrl: 'v1/images'
   };
 
   @ViewChild('f') editForm: NgForm;
