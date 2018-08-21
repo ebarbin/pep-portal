@@ -1,6 +1,6 @@
-<div class="progress-list-flex">
-    <a *ngFor="let problem of problems"
+<div class="progress-list-flex" *ngIf="student">
+    <a *ngFor="let problem of student.selectedCourse.problems"
       class="progress-list-item text-center cursor-pointer active"
       (click)="selectProblem(problem)"
-      [ngClass]="{'success': (selected && selected === problem.id) }" placement="top" [ngbTooltip]="problem.name"></a>
+      [ngClass]="{'success': (selectedProblem && selectedProblem.id === problem.id) }" placement="top" [ngbTooltip]="problem.name"></a>
 </div>

@@ -4,7 +4,7 @@ import { Course } from './course.model';
 import { CustomResponse } from '../shared/custom-response.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {  map, filter } from 'rxjs/operators';
+import {  map } from 'rxjs/operators';
 import {  of, Subject } from 'rxjs';
 
 @Injectable({

@@ -35,9 +35,8 @@ export class CourseSelectComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCourseSelection($event) {
-    this.studentService.updateCourseSelection(this.courseSelected).subscribe((student: Student) => {
-    });
+  onCourseSelection() {
+    this.studentService.updateSelectedCourse(this.courseSelected).subscribe((student: Student) => {});
   }
 
   ngOnDestroy() {
