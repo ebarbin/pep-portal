@@ -1,3 +1,5 @@
+import { StudentService } from './../shared/student.service';
+import { Student } from './../shared/student.model';
 import { UserService } from './../user/user.service';
 import { User } from './../user/user.model';
 import { Course } from './course.model';
@@ -12,9 +14,7 @@ import {  of, Subject } from 'rxjs';
 })
 export class CourseService {
 
-  constructor(private userService: UserService, private httpClient: HttpClient) { }
-
-  studenEnrolledCoursesChange = new Subject();
+  constructor(private userService: UserService, private studentService: StudentService, private httpClient: HttpClient) { }
 
   createCourse(course: Course) {
     return this.httpClient.post('pep-api/course', course)
@@ -78,8 +78,8 @@ export class CourseService {
     return this.httpClient.get('pep-api/course/' + courseId + '/enroll')
     .pipe(
       map((response: CustomResponse) => {
-        this.studenEnrolledCoursesChange.next();
-        return <[Course]> response.body;
+        this.studentService.studentChanged.next(<Student> response.body.student);
+        return <[Course]> response.body.courses;
       })
     );
   }
@@ -88,8 +88,8 @@ export class CourseService {
     return this.httpClient.get('pep-api/course/' + courseId + '/remove-enroll')
     .pipe(
       map((response: CustomResponse) => {
-        this.studenEnrolledCoursesChange.next();
-        return <[Course]> response.body;
+        this.studentService.studentChanged.next(<Student> response.body.student);
+        return <[Course]> response.body.courses;
       })
     );
   }

@@ -38,16 +38,13 @@ export class MyCoursesComponent implements OnInit {
       this.student = student;
     });
 
-    this.courseService.studenEnrolledCoursesChange.subscribe(() => {
-      this.studentService.getStudent().subscribe((student: Student) => {
-        this.student = student;
-      });
+    this.studentService.studentChanged.subscribe((student: Student) => {
+      this.student = student;
     });
 
   }
 
   removeCourse(course: Course) {
-
     this.confirmationDialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
@@ -89,9 +86,17 @@ export class MyCoursesComponent implements OnInit {
   }
 
   removeEnroll(course: Course) {
-    this.courseService.removeEnroll(course.id).subscribe((courses: [Course]) => {
-      this.toastService.success('Inscripción eliminada.', 'Operación exitosa');
-      this.courses = courses;
-    });
+
+    this.confirmationDialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    .then((result: boolean) => {
+      if (result) {
+        this.courseService.removeEnroll(course.id).subscribe((courses: [Course]) => {
+          this.toastService.success('Inscripción eliminada.', 'Operación exitosa');
+          this.courses = courses;
+        });
+      } else {
+      }
+    })
+    .catch(() => {});
   }
 }

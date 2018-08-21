@@ -1,7 +1,7 @@
 import { Problem } from './../../problem/problem.model';
 import { Student } from './../../shared/student.model';
 import { StudentService } from './../../shared/student.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,28 +15,26 @@ export class CourseNavigatorComponent implements OnInit, OnDestroy {
   student: Student;
   subs: Subscription;
 
-  problems = [
-    {id: 1, name: '1. Ejercicio'},
-    {id: 2, name: '2. Ejercicio'},
-    {id: 3, name: '3. Ejercicio'},
-    {id: 4, name: '4. Ejercicio'},
-    {id: 5, name: '5. Ejercicio'}
-  ];
+  @Output() problemSelection = new EventEmitter<Problem>();
 
   constructor(private studentService: StudentService) { }
 
   selectProblem(problem: Problem) {
     this.selectedProblem = problem;
-    this.studentService.updateSelectedProblem(problem).subscribe((student: Student) => {});
+    this.studentService.updateSelectedProblem(problem).subscribe((student: Student) => {
+      this.problemSelection.emit(problem);
+    });
   }
 
   ngOnInit() {
     this.studentService.getStudent().subscribe((student: Student) => {
       this.student = student;
+      this.selectedProblem = this.student.selectedProblem;
     });
 
-    this.subs = this.studentService.courseSelectionChanged.subscribe((student: Student) => {
+    this.subs = this.studentService.studentChanged.subscribe((student: Student) => {
       this.student = student;
+      this.selectedProblem = this.student.selectedProblem;
     });
   }
 

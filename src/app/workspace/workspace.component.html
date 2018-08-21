@@ -1,7 +1,7 @@
 <div class="container">
 
     <h1 class="h3 mb-3 font-weight-normal text-center">Area de Trabajo</h1>
-    <app-course-navigator></app-course-navigator>
+    <app-course-navigator  (problemSelection)="onSelectedProblem($event)"></app-course-navigator>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             <div class="row">
@@ -18,7 +18,7 @@
                   <div class="">
                       <ngx-monaco-editor (keyup)="anda()"
                       [options]="editorOptions"
-                      [(ngModel)]="code">
+                      [(ngModel)]="solution">
                     </ngx-monaco-editor>
                   </div>
               </div>

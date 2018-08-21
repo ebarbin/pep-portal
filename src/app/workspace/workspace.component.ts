@@ -1,3 +1,4 @@
+import { Problem } from './../problem/problem.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkspaceComponent implements OnInit {
 
-  content: string;
   editorOptions = {theme: 'vs-dark', language: 'javascript'};
-  code = 'function x() {\nconsole.log("Hello world!");\n}';
+  solution;
 
   constructor() { }
 
@@ -17,6 +17,10 @@ export class WorkspaceComponent implements OnInit {
   }
 
   anda() {
+    console.log(this.solution)
+  }
 
+  onSelectedProblem(problem: Problem) {
+    console.log(problem);
   }
 }

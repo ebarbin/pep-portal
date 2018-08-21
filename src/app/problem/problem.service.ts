@@ -21,6 +21,15 @@ export class ProblemService {
       );
   }
 
+  deleteById(problemId: string) {
+    return this.httpClient.delete('pep-api/problem/' + problemId)
+    .pipe(
+      map((response: CustomResponse) => {
+        return <[Problem]> response.body;
+      })
+    );
+  }
+
   findByNameLike(text: string) {
     return this.httpClient.get('pep-api/problem/like?nameSearch=' + text)
       .pipe(

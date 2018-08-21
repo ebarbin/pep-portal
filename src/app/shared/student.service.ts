@@ -5,14 +5,14 @@ import { CustomResponse } from '../shared/custom-response.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
-import {  of, Subject } from 'rxjs';
+import {  Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
 
-  courseSelectionChanged = new Subject();
+  studentChanged = new Subject();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -39,7 +39,7 @@ export class StudentService {
     .pipe(
       map((response: CustomResponse) => {
         const student: Student = <Student> response.body;
-        this.courseSelectionChanged.next(student);
+        this.studentChanged.next(student);
         return student;
       })
     );
@@ -50,7 +50,7 @@ export class StudentService {
     .pipe(
       map((response: CustomResponse) => {
         const student: Student = <Student> response.body;
-        this.courseSelectionChanged.next(student);
+        this.studentChanged.next(student);
         return student;
       })
     );

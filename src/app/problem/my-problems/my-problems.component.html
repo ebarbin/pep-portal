@@ -7,12 +7,27 @@
                 <tr>
                   <th scope="col">Nombre</th>
                   <th scope="col">Docente</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let problem of problems">
                   <td> {{ problem.name }}</td>
                   <td> {{ problem.teacher.user.name  + ' ' + problem.teacher.user.surename}} </td>
+                  <td>
+                    <a class="cursor-pointer"
+                      [routerLink]="'/home/edit-problem/' + problem.id">
+                      <fa name="edit" size="2x"></fa>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="cursor-pointer"
+                      [routerLink]="'/home/problem/list'"
+                      (click)="removeProblem(problem)">
+                      <fa name="trash" size="2x"></fa>
+                    </a>
+                  </td>
                 </tr>
               </tbody>
             </table>

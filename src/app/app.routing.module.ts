@@ -1,3 +1,4 @@
+import { WorkspaceGuard } from './shared/workspace.guard';
 import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
 import { CreateProblemComponent } from './problem/create-problem/create-problem.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
@@ -23,7 +24,7 @@ const appRoutes: Routes = [
     { path: 'account', component: AccountComponent},
     { path: 'change-password', component: ChangePasswordComponent},
     { path: 'profile-image', component: ProfileImageComponent},
-    { path: 'workspace', component: WorkspaceComponent },
+    { path: 'workspace', component: WorkspaceComponent, canActivate: [WorkspaceGuard]},
     { path: 'course/list', component: MyCoursesComponent },
     { path: 'edit-course/:courseId', component: CreateCourseComponent },
     { path: 'new-course', component: CreateCourseComponent },

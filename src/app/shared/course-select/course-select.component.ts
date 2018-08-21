@@ -2,7 +2,7 @@ import { Student } from './../student.model';
 import { StudentService } from './../student.service';
 import { Course } from './../../course/course.model';
 import { CourseService } from './../../course/course.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,24 +19,22 @@ export class CourseSelectComponent implements OnInit, OnDestroy {
   constructor(private studentService: StudentService, private courseService: CourseService) { }
 
   ngOnInit() {
-    this.updateStudentCourses();
 
-    this.subs = this.courseService.studenEnrolledCoursesChange.subscribe(() => {
-      this.updateStudentCourses();
+    this.studentService.getStudent().subscribe((student: Student) => {
+      this.student = student;
+    });
+
+    this.subs = this.studentService.studentChanged.subscribe((student: Student) => {
+      this.student = student;
     });
   }
 
-  private updateStudentCourses() {
-    this.studentService.getStudent().subscribe((student: Student) => {
-      this.student = student;
-      if (student.courses.length > 0) {
-        this.courseSelected = student.courses[0];
-      }
-    });
+  compareFn(c1: any, c2:any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
   onCourseSelection() {
-    this.studentService.updateSelectedCourse(this.courseSelected).subscribe((student: Student) => {});
+    this.studentService.updateSelectedCourse(this.student.selectedCourse).subscribe((student: Student) => {});
   }
 
   ngOnDestroy() {

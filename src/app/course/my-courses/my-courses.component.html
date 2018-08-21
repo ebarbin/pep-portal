@@ -17,17 +17,17 @@
                   <td> {{ course.name }}</td>
                   <td> {{ course.teacher.user.name  + ' ' + course.teacher.user.surename}} </td>
                   <td *ngIf="user.role === 'ROLE_TEACHER'">
-                      <a class="cursor-pointer"
-                        [routerLink]="'/home/edit-course/' + course.id">
-                        <fa name="edit" size="2x"></fa>
-                      </a>
+                    <a class="cursor-pointer"
+                      [routerLink]="'/home/edit-course/' + course.id">
+                      <fa name="edit" size="2x"></fa>
+                    </a>
                   </td>
                   <td *ngIf="user.role === 'ROLE_TEACHER'">
-                      <a class="cursor-pointer"
-                        [routerLink]="'/home/course/list'"
-                        (click)="removeCourse(course)">
-                        <fa name="trash" size="2x"></fa>
-                      </a>
+                    <a class="cursor-pointer"
+                      [routerLink]="'/home/course/list'"
+                      (click)="removeCourse(course)">
+                      <fa name="trash" size="2x"></fa>
+                    </a>
                   </td>
                   <td *ngIf="user.role === 'ROLE_STUDENT'">
                     <a class="cursor-pointer" *ngIf="!isStudentEnrolled(course)"

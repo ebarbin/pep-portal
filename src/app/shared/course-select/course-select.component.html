@@ -1,4 +1,8 @@
-<select [(ngModel)]="courseSelected" class="custom-select"
-  *ngIf="student && student.courses.length > 0" (change)="onCourseSelection();">
-    <option [ngValue]="course" *ngFor="let course of student.courses">{{course.name}}</option>
-</select>
+<div *ngIf="student && student.courses.length > 0">
+    <span style="color: white;">Curso Seleccionado: </span>
+    <select [(ngModel)]="student.selectedCourse" class="custom-select" [compareWith]="compareFn"
+       (change)="onCourseSelection();">
+        <option [ngValue]="course" *ngFor="let course of student.courses">{{course.name}}</option>
+    </select>
+</div>
+
