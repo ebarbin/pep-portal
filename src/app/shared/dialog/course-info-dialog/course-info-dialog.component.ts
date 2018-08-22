@@ -1,5 +1,5 @@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Course } from './../../../course/course.model';
+import { Course } from '../../../course/course.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
