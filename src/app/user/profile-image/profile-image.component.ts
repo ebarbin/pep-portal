@@ -20,7 +20,7 @@ export class ProfileImageComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService, private router: Router, private toastService: ToastrService) { }
 
   ngOnInit() {
-    const user: User = this.userService.getStorageUser();
+    const user: User = this.userService.getStoredUser();
     this.imageId = user.imageId;
 
     this.subs = this.userService.imageUpdated.subscribe((imageId: string) => {

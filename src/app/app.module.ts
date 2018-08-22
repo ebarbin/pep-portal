@@ -40,6 +40,7 @@ import { MyProblemsComponent } from './problem/my-problems/my-problems.component
 import { CourseDescriptionComponent } from './workspace/course-description/course-description.component';
 import { ProblemExplanationComponent } from './workspace/problem-explanation/problem-explanation.component';
 import { ProblemInfoDialogComponent } from './shared/dialog/problem-info-dialog/problem-info-dialog.component';
+import { StartComponent } from './shared/home/start/start.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ProblemInfoDialogComponent } from './shared/dialog/problem-info-dialog/
     CourseDescriptionComponent,
     ProblemExplanationComponent,
     CourseInfoDialogComponent,
-    ProblemInfoDialogComponent
+    ProblemInfoDialogComponent,
+    StartComponent
   ],
   imports: [
     BrowserAnimationsModule,

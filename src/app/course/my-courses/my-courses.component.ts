@@ -28,7 +28,7 @@ export class MyCoursesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.user = this.userService.getStorageUser();
+    this.user = this.userService.getStoredUser();
 
     this.courseService.findAll().subscribe((courses: [Course]) => {
       this.courses = courses;

@@ -44,7 +44,7 @@ export class CourseService {
   }
 
   findAll() {
-    const user: User = this.userService.getStorageUser();
+    const user: User = this.userService.getStoredUser();
 
     if (user.role === 'ROLE_STUDENT') {
       return this.httpClient.get('pep-api/course/forStudent')

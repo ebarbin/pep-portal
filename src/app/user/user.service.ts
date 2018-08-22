@@ -20,19 +20,15 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getStorageUser() {
+  getStoredUser() {
     return <User> JSON.parse(localStorage.getItem('user'));
-  }
-
-  getStorageTeacher() {
-    return <Teacher> JSON.parse(localStorage.getItem('teacher'));
   }
 
   clearStorage() {
     localStorage.clear();
   }
 
-  storageUser(user: User) {
+  storeUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
@@ -41,14 +37,14 @@ export class UserService {
       .pipe(
         map((response: CustomResponse) => {
           const u = <User> response.body.user;
-          this.storageUser(u);
+          this.storeUser(u);
           return response;
         })
       );
   }
 
   storeProfileImage(file: File) {
-    const user: User = this.getStorageUser();
+    const user: User = this.getStoredUser();
     const formdata: FormData = new FormData();
 
     formdata.append('file', file);
@@ -56,7 +52,7 @@ export class UserService {
       .pipe(
         map((response: CustomResponse) => {
           const u = <User> response.body;
-          this.storageUser(u);
+          this.storeUser(u);
           return u;
         })
       );
@@ -67,14 +63,14 @@ export class UserService {
       .pipe(
         map((response: CustomResponse) => {
           const u = <User> response.body;
-          this.storageUser(u);
+          this.storeUser(u);
           return u;
         })
       );
   }
 
   changePassword(changePassword: ChangePassword) {
-    const username = this.getStorageUser().username;
+    const username = this.getStoredUser().username;
     return this.httpClient.put('pep-api/user/' + username + '/change-password', changePassword)
       .pipe(
         map((response: CustomResponse) => {
@@ -111,7 +107,7 @@ export class UserService {
   }
 
   logout() {
-    const user: User = this.getStorageUser();
+    const user: User = this.getStoredUser();
     return this.httpClient.get('pep-api/user/logout/' + user.username)
     .pipe(
       map((response: CustomResponse) => {

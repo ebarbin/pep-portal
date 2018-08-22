@@ -1,3 +1,5 @@
+import { Teacher } from './../../shared/teacher.model';
+import { TeacherService } from './../../shared/teacher.service';
 import { StudentService } from './../../shared/student.service';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
@@ -15,7 +17,7 @@ import { Student } from '../../shared/student.model';
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private studentService: StudentService,
-    private userService: UserService) { }
+    private userService: UserService, private teacherService: TeacherService) { }
 
   ngOnInit() {}
 
@@ -25,7 +27,10 @@ export class LoginComponent implements OnInit {
       if (response.body.student) {
         this.studentService.storeStudent(<Student> response.body.student);
       }
-      this.router.navigate(['home']);
+      if (response.body.teacher) {
+        this.teacherService.storeTeacher(<Teacher> response.body.teacher);
+      }
+      this.router.navigate(['home/start']);
     });
   }
 

@@ -1,4 +1,3 @@
-import { UserService } from './../user/user.service';
 import { Problem } from './../problem/problem.model';
 import { Course } from './../course/course.model';
 import { Student } from './student.model';
@@ -15,7 +14,7 @@ export class StudentService {
 
   studentChanged = new Subject();
 
-  constructor(private userService: UserService, private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   storeStudent(student: Student) {
     localStorage.setItem('student', JSON.stringify(student));
@@ -37,8 +36,7 @@ export class StudentService {
     return this.httpClient.get('pep-api/student')
       .pipe(
         map((response: CustomResponse) => {
-          const student: Student = <Student> response.body;
-          return student;
+          return <Student> response.body;
         })
       );
   }

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subs: Subscription;
 
   ngOnInit() {
-    this.user = this.userService.getStorageUser();
+    this.user = this.userService.getStoredUser();
 
     this.subs = this.userService.imageUpdated.subscribe((imageId: string) => {
       this.user.imageId = imageId;

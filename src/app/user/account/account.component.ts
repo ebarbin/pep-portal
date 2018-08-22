@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
   role;
 
   ngOnInit() {
-    const user: User = this.userService.getStorageUser();
+    const user: User = this.userService.getStoredUser();
     this.role = user.role;
 
     setTimeout(() => {

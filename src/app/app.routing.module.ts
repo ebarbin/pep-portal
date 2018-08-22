@@ -1,3 +1,4 @@
+import { StartComponent } from './shared/home/start/start.component';
 import { WorkspaceGuard } from './shared/workspace.guard';
 import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
 import { CreateProblemComponent } from './problem/create-problem/create-problem.component';
@@ -19,8 +20,9 @@ import { CreateCourseComponent } from './course/create-course/create-course.comp
 import { MyCoursesComponent } from './course/my-courses/my-courses.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home/start', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
+    { path: 'start', component: StartComponent},
     { path: 'account', component: AccountComponent},
     { path: 'change-password', component: ChangePasswordComponent},
     { path: 'profile-image', component: ProfileImageComponent},
