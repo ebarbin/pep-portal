@@ -1,7 +1,7 @@
+import { UserService } from './../../user/user.service';
 import { Student } from './../student.model';
 import { StudentService } from './../student.service';
 import { Course } from './../../course/course.model';
-import { CourseService } from './../../course/course.service';
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -16,11 +16,10 @@ export class CourseSelectComponent implements OnInit, OnDestroy {
   subs: Subscription;
   student: Student;
 
-  constructor(private studentService: StudentService, private courseService: CourseService) { }
+  constructor(private userService: UserService, private studentService: StudentService) { }
 
   ngOnInit() {
-
-    this.studentService.getStudent().subscribe((student: Student) => {
+    this.studentService.getStoredStudent().subscribe((student: Student) => {
       this.student = student;
     });
 

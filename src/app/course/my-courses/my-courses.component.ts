@@ -34,7 +34,7 @@ export class MyCoursesComponent implements OnInit {
       this.courses = courses;
     });
 
-    this.studentService.getStudent().subscribe((student: Student) => {
+    this.studentService.getStoredStudent().subscribe((student: Student) => {
       this.student = student;
     });
 

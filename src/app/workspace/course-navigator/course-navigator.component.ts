@@ -1,7 +1,7 @@
 import { Problem } from './../../problem/problem.model';
 import { Student } from './../../shared/student.model';
 import { StudentService } from './../../shared/student.service';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -23,9 +23,9 @@ export class CourseNavigatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.studentService.getStudent().subscribe((student: Student) => {
+    this.studentService.getStoredStudent().subscribe((student: Student) => {
       this.student = student;
-      this.selectedProblem = this.student.selectedProblem;
+      this.selectedProblem = student.selectedProblem;
     });
 
     this.subs = this.studentService.studentChanged.subscribe((student: Student) => {

@@ -1,7 +1,9 @@
+import { Student } from './../shared/student.model';
+import { StudentService } from './../shared/student.service';
 import { CustomResponse } from '../shared/custom-response.model';
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
 import { Problem } from './problem.model';
 
@@ -10,7 +12,7 @@ import { Problem } from './problem.model';
 })
 export class ProblemService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private studentService: StudentService, private httpClient: HttpClient) { }
 
   findAll() {
     return this.httpClient.get('pep-api/problem')
@@ -70,7 +72,9 @@ export class ProblemService {
     return this.httpClient.put('pep-api/problem/update-solution/' + problem.id, problem)
       .pipe(
         map((response: CustomResponse) => {
-          return response.body;
+          const student: Student = <Student> response.body;
+          this.studentService.storeStudent(student);
+          return student;
         })
       );
   }

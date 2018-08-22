@@ -1,3 +1,5 @@
+import { Student } from './../shared/student.model';
+import { Teacher } from './../shared/teacher.model';
 import { ChangePassword } from './change-password.model';
 import { CustomResponse } from '../shared/custom-response.model';
 import { User } from './user.model';
@@ -6,6 +8,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
 import { Subject } from '../../../node_modules/rxjs';
+
+import {  Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +24,12 @@ export class UserService {
     return <User> JSON.parse(localStorage.getItem('user'));
   }
 
-  deleteUserFromStorage() {
-    localStorage.removeItem('user');
+  getStorageTeacher() {
+    return <Teacher> JSON.parse(localStorage.getItem('teacher'));
+  }
+
+  clearStorage() {
+    localStorage.clear();
   }
 
   storageUser(user: User) {
@@ -32,9 +40,9 @@ export class UserService {
     return this.httpClient.put('pep-api/user/login', user)
       .pipe(
         map((response: CustomResponse) => {
-          const u = <User> response.body;
+          const u = <User> response.body.user;
           this.storageUser(u);
-          return u;
+          return response.body;
         })
       );
   }
@@ -107,7 +115,7 @@ export class UserService {
     return this.httpClient.get('pep-api/user/logout/' + user.username)
     .pipe(
       map((response: CustomResponse) => {
-        this.deleteUserFromStorage();
+        this.clearStorage();
         return response.body;
       })
     );

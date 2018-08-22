@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { Subject, Subscription } from 'rxjs';
 import { Student } from './../shared/student.model';
 import { StudentService } from './../shared/student.service';
@@ -17,14 +18,13 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   student: Student;
   subs: Subscription;
 
-  showCourseDescription = true;
-
   constructor(private studentService: StudentService, private problemService: ProblemService) { }
 
   ngOnInit() {
-    this.studentService.getStudent().subscribe((student: Student) => {
+
+    this.studentService.getStoredStudent().subscribe((student: Student) => {
       this.student = student;
-      this.solution = student.selectedProblem ? student.selectedProblem.solution : '';
+      this.solution = student.selectedProblem ? this.student.selectedProblem.solution : '';
     });
 
     this.subs = this.studentService.studentChanged.subscribe((student: Student) => {
