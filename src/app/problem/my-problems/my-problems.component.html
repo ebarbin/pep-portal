@@ -15,11 +15,15 @@
                 <td> {{ problem.name }}</td>
                 <td> {{ problem.teacher.user.name  + ' ' + problem.teacher.user.surename}} </td>
                 <td>
-                  <button type="button" class="two-buttons left-button btn btn-success"
+                  <button type="button" class="three-buttons left-button btn btn-info"
+                    (click)="see(problem)">
+                    Ver
+                  </button>
+                  <button type="button" class="three-buttons center-button btn btn-success"
                     [routerLink]="'/home/edit-problem/' + problem.id">
                     Editar
                   </button>
-                  <button type="button" class="two-buttons right-button btn btn-danger"
+                  <button type="button" class="three-buttons right-button btn btn-danger"
                     (click)="removeProblem(problem)">
                     Eliminar
                   </button>

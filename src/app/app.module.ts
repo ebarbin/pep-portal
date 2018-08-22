@@ -1,3 +1,4 @@
+import { CourseInfoDialogComponent } from './shared/dialog/course-info-dialog/course-info-dialog.component';
 import { RolePipe } from './shared/role.pipe';
 import { ProfileImagePipe } from './shared/profile-image.pipe';
 import { AccountComponent } from './user/account/account.component';
@@ -38,6 +39,7 @@ import { CreateProblemComponent } from './problem/create-problem/create-problem.
 import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
 import { CourseDescriptionComponent } from './workspace/course-description/course-description.component';
 import { ProblemExplanationComponent } from './workspace/problem-explanation/problem-explanation.component';
+import { ProblemInfoDialogComponent } from './shared/dialog/problem-info-dialog/problem-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { ProblemExplanationComponent } from './workspace/problem-explanation/pro
     CreateProblemComponent,
     MyProblemsComponent,
     CourseDescriptionComponent,
-    ProblemExplanationComponent
+    ProblemExplanationComponent,
+    CourseInfoDialogComponent,
+    ProblemInfoDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -89,7 +93,12 @@ import { ProblemExplanationComponent } from './workspace/problem-explanation/pro
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true},
   ],
-  entryComponents: [ ConfirmationDialogComponent, CourseCodeValidationComponent],
+  entryComponents: [
+    ConfirmationDialogComponent,
+    CourseCodeValidationComponent,
+    CourseInfoDialogComponent,
+    ProblemInfoDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

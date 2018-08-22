@@ -1,5 +1,5 @@
+import { DialogService } from './../../shared/dialog/dialog.service';
 import { StudentService } from './../../shared/student.service';
-import { ConfirmationDialogService } from '../../shared/dialog/confirmation-dialog.service';
 import { Student } from './../../shared/student.model';
 import { User } from './../../user/user.model';
 import { UserService } from './../../user/user.service';
@@ -19,7 +19,7 @@ export class MyCoursesComponent implements OnInit {
   user: User;
 
   constructor(private studentService: StudentService,
-    private confirmationDialogService: ConfirmationDialogService,
+    private dialogService: DialogService,
     private toastService: ToastrService,
     private userService: UserService,
     private courseService: CourseService) { }
@@ -45,7 +45,7 @@ export class MyCoursesComponent implements OnInit {
   }
 
   removeCourse(course: Course) {
-    this.confirmationDialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
         this.courseService.deleteById(course.id).subscribe((courses: [Course]) => {
@@ -71,7 +71,7 @@ export class MyCoursesComponent implements OnInit {
   }
 
   enroll(course: Course) {
-    this.confirmationDialogService.courseCodeValidation(course)
+    this.dialogService.courseCodeValidation(course)
     .then((result: boolean) => {
       if (result) {
         this.courseService.enroll(course.id).subscribe((courses: [Course]) => {
@@ -87,7 +87,7 @@ export class MyCoursesComponent implements OnInit {
 
   removeEnroll(course: Course) {
 
-    this.confirmationDialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
         this.courseService.removeEnroll(course.id).subscribe((courses: [Course]) => {
@@ -98,5 +98,9 @@ export class MyCoursesComponent implements OnInit {
       }
     })
     .catch(() => {});
+  }
+
+  see(course: Course) {
+    this.dialogService.courseInfo(course, 'lg');
   }
 }

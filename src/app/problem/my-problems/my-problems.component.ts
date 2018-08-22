@@ -1,4 +1,4 @@
-import { ConfirmationDialogService } from './../../shared/dialog/confirmation-dialog.service';
+import { DialogService } from './../../shared/dialog/dialog.service';
 import { Problem } from './../problem.model';
 import { ProblemService } from './../problem.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +14,7 @@ export class MyProblemsComponent implements OnInit {
   problems: [Problem]
 
   constructor(private problemService: ProblemService, private toastService: ToastrService,
-    private confirmationDialogService: ConfirmationDialogService) { }
+    private dialogService: DialogService) { }
 
   ngOnInit() {
     this.problemService.findAll().subscribe((problems: [Problem]) => {
@@ -23,7 +23,7 @@ export class MyProblemsComponent implements OnInit {
   }
 
   removeProblem(problem: Problem) {
-    this.confirmationDialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
         this.problemService.deleteById(problem.id).subscribe((problems: [Problem]) => {
@@ -36,4 +36,7 @@ export class MyProblemsComponent implements OnInit {
     .catch(() => {});
   }
 
+  see(problem: Problem) {
+    this.dialogService.problemInfo(problem, 'lg');
+  }
 }

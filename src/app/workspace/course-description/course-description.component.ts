@@ -10,7 +10,7 @@ export class CourseDescriptionComponent implements OnInit {
 
   constructor() { }
 
-  showCourseDescription = true;
+  showCourseDescription = false;
 
   @Input() course: Course;
 

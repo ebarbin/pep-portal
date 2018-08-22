@@ -42,7 +42,7 @@ export class UserService {
         map((response: CustomResponse) => {
           const u = <User> response.body.user;
           this.storageUser(u);
-          return response.body;
+          return response;
         })
       );
   }

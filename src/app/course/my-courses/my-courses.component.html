@@ -15,22 +15,29 @@
                   <td> {{ course.name }}</td>
                   <td> {{ course.teacher.user.name  + ' ' + course.teacher.user.surename}} </td>
                   <td *ngIf="user.role === 'ROLE_TEACHER'">
-                    <button type="button" class="two-buttons left-button btn btn-success"
+                    <button type="button" class="three-buttons left-button btn btn-primary"
+                      (click)="see(course)">
+                      Ver
+                    </button>
+                    <button type="button" class="three-buttons center-button btn btn-success"
                      [routerLink]="'/home/edit-course/' + course.id">
                         Editar
                     </button>
-                    <button type="button" class="two-buttons right-button btn btn-danger"
+                    <button type="button" class="three-buttons right-button btn btn-danger"
                       (click)="removeCourse(course)">
                         Eliminar
                     </button>
                   </td>
                   <td class="pull-right" *ngIf="user.role === 'ROLE_STUDENT'">
-                    <button type="button" style="width:60%" class="two-buttons left-button btn btn-success"
+                    <button type="button" style="width:25%" class="three-buttons left-button btn btn-primary"
+                      (click)="see(course)">
+                      Ver
+                    </button>
+                    <button type="button" style="width:45%" class="three-buttons center-button btn btn-success"
                       [disabled]="isStudentEnrolled(course)" (click)="enroll(course)">
                         Inscripción
                     </button>
-
-                    <button type="button" style="width:40%" class="two-buttons right-button btn btn-danger"
+                    <button type="button" style="width:30%" class="three-buttons right-button btn btn-danger"
                       [disabled]="!isStudentEnrolled(course)" (click)="removeEnroll(course)">
                         Quitar
                     </button>
