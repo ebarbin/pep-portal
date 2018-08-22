@@ -38,3 +38,7 @@ angular-editor.ng-invalid.ng-touched, radio.ng-invalid.ng-touched, select.ng-inv
 .hide-role-option {
   display: none;
 }
+
+.nav-link.active[_ngcontent-c3], .nav-link[_ngcontent-c3]:active{
+  border-radius: 8px;
+}

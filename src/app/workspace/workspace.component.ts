@@ -17,6 +17,8 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   student: Student;
   subs: Subscription;
 
+  showCourseDescription = true;
+
   constructor(private studentService: StudentService, private problemService: ProblemService) { }
 
   ngOnInit() {

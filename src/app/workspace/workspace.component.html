@@ -1,33 +1,46 @@
 <div class="container">
+  <br>
 
-    <h1 class="h3 mb-3 font-weight-normal text-center">Area de Trabajo</h1>
-    <app-course-navigator></app-course-navigator>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <app-course-description
+    *ngIf="student && student.selectedCourse"
+    [course]="student.selectedCourse">
+  </app-course-description>
 
-            <div class="row">
-              <div style="background-color: aqua;" class="card col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <div class="card-body">EXPLICACION EJERCICIOS</div>
-              </div>
-              <div style="background-color: bisque;" class="card col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <div class="card-body">ALGUNA FUNCIONALIDAD?</div>
-              </div>
-            </div>
+  <br>
 
-            <div class="row">
-              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <ngx-monaco-editor (keyup)="update()"
-                    [options]="editorOptions"
-                    [(ngModel)]="solution">
-                  </ngx-monaco-editor>
-              </div>
-              <div class="card col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <div class="card-body">RESULTADOS</div>
-              </div>
-            </div>
-            <div class="row">
-                <div style="background-color: beige;" class="card col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class="card-body">RESULTADOS</div></div>
-            </div>
-        </div>
+  <app-course-navigator></app-course-navigator>
 
+  <app-problem-explanation
+    *ngIf="student && student.selectedProblem"
+    [problem]="student.selectedProblem">
+  </app-problem-explanation>
 
+  <br>
+
+  <div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <div class="card">
+        <ngx-monaco-editor (keyup)="update()"
+          [options]="editorOptions"
+          [(ngModel)]="solution">
+        </ngx-monaco-editor>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <div class="card">
+        <div class="card-body">RESULTADOS</div>
+      </div>
+    </div>
   </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="card-body">RESULTADOS</div>
+      </div>
+    </div>
+  </div>
+
+</div>

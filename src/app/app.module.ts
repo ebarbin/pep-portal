@@ -36,6 +36,8 @@ import { CourseCodeValidationComponent } from './shared/dialog/course-code-valid
 import { CourseSelectComponent } from './shared/course-select/course-select.component';
 import { CreateProblemComponent } from './problem/create-problem/create-problem.component';
 import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
+import { CourseDescriptionComponent } from './workspace/course-description/course-description.component';
+import { ProblemExplanationComponent } from './workspace/problem-explanation/problem-explanation.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { MyProblemsComponent } from './problem/my-problems/my-problems.component
     ProfileImagePipe,
     RolePipe,
     CreateProblemComponent,
-    MyProblemsComponent
+    MyProblemsComponent,
+    CourseDescriptionComponent,
+    ProblemExplanationComponent
   ],
   imports: [
     BrowserAnimationsModule,

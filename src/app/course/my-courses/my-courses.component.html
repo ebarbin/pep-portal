@@ -7,9 +7,7 @@
                 <tr>
                   <th scope="col">Nombre</th>
                   <th scope="col">Docente</th>
-                  <th *ngIf="user.role === 'ROLE_TEACHER'" scope="col"></th>
-                  <th *ngIf="user.role === 'ROLE_TEACHER'" scope="col"></th>
-                  <th *ngIf="user.role === 'ROLE_STUDENT'" scope="col"></th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -17,29 +15,25 @@
                   <td> {{ course.name }}</td>
                   <td> {{ course.teacher.user.name  + ' ' + course.teacher.user.surename}} </td>
                   <td *ngIf="user.role === 'ROLE_TEACHER'">
-                    <a class="cursor-pointer"
-                      [routerLink]="'/home/edit-course/' + course.id">
-                      <fa name="edit" size="2x"></fa>
-                    </a>
-                  </td>
-                  <td *ngIf="user.role === 'ROLE_TEACHER'">
-                    <a class="cursor-pointer"
-                      [routerLink]="'/home/course/list'"
+                    <button type="button" class="two-buttons left-button btn btn-success"
+                     [routerLink]="'/home/edit-course/' + course.id">
+                        Editar
+                    </button>
+                    <button type="button" class="two-buttons right-button btn btn-danger"
                       (click)="removeCourse(course)">
-                      <fa name="trash" size="2x"></fa>
-                    </a>
+                        Eliminar
+                    </button>
                   </td>
-                  <td *ngIf="user.role === 'ROLE_STUDENT'">
-                    <a class="cursor-pointer" *ngIf="!isStudentEnrolled(course)"
-                      [routerLink]="'/home/course/list'"
-                      (click)="enroll(course)">
-                      <fa name="check-circle" size="2x"></fa>
-                    </a>
-                    <a class="cursor-pointer" *ngIf="isStudentEnrolled(course)"
-                      [routerLink]="'/home/course/list'"
-                      (click)="removeEnroll(course)">
-                      <fa name="times-circle" size="2x"></fa>
-                    </a>
+                  <td class="pull-right" *ngIf="user.role === 'ROLE_STUDENT'">
+                    <button type="button" style="width:60%" class="two-buttons left-button btn btn-success"
+                      [disabled]="isStudentEnrolled(course)" (click)="enroll(course)">
+                        Inscripción
+                    </button>
+
+                    <button type="button" style="width:40%" class="two-buttons right-button btn btn-danger"
+                      [disabled]="!isStudentEnrolled(course)" (click)="removeEnroll(course)">
+                        Quitar
+                    </button>
                   </td>
                 </tr>
               </tbody>

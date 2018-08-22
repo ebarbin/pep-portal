@@ -7,8 +7,8 @@
 
     <div class="collapse navbar-collapse" [class.show]="isCollapsed">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-                <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/workspace">Area de Trabajo</a>
+        <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
+          <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/workspace">Area de Trabajo</a>
         </li>
         <li class="nav-item dropdown" ngbDropdown>
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cursos</a>
