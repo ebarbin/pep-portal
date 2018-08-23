@@ -36,7 +36,7 @@ export class AccountComponent implements OnInit {
     const user: User = form.value;
     this.userService.update(user).subscribe( () => {
       this.toastService.success('Cuenta Actualizada.', 'Operación exitosa');
-      this.router.navigate(['home']);
+      this.router.navigate(['/home/start']);
   });
 
   }

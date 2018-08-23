@@ -39,6 +39,6 @@ angular-editor.ng-invalid.ng-touched, radio.ng-invalid.ng-touched, select.ng-inv
   display: none;
 }
 
-.nav-link.active[_ngcontent-c3], .nav-link[_ngcontent-c3]:active{
-  border-radius: 8px;
+.navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {
+  border-radius: 6px
 }

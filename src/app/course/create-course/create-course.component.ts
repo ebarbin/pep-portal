@@ -62,21 +62,21 @@ export class CreateCourseComponent implements OnInit {
       course.id = this.courseId;
       this.courseService.editeCourse(course).subscribe(() => {
         this.toastService.success('Curso editado.', 'Operación exitosa');
-        this.router.navigate(['home/course/list']);
+        this.router.navigate(['/home/course/list']);
       });
     } else {
       this.courseService.createCourse(course).subscribe(() => {
         this.toastService.success('Curso creado.', 'Operación exitosa');
-        this.router.navigate(['home']);
+        this.router.navigate(['/home/start']);
       });
     }
   }
 
   cancel() {
     if (this.editMode) {
-      this.router.navigate(['home/course/list']);
+      this.router.navigate(['/home/course/list']);
     } else {
-      this.router.navigate(['home']);
+      this.router.navigate(['/home/start']);
     }
   }
 

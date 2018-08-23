@@ -22,7 +22,7 @@ export class ChangePasswordComponent implements OnInit {
     const changePassword: ChangePassword = form.value;
     this.userService.changePassword(changePassword).subscribe( () => {
       this.toastService.success('Contraseña Actualizada.', 'Operación exitosa');
-      this.router.navigate(['home']);
+      this.router.navigate(['/home/start']);
     });
   }
 }

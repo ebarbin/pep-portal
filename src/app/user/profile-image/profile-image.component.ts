@@ -40,7 +40,7 @@ export class ProfileImageComponent implements OnInit, OnDestroy {
     this.userService.storeProfileImage(this.selectedFile).subscribe((user: User) => {
       this.userService.imageUpdated.next(user.imageId);
       this.toastService.success('Imagen Actualizada.', 'Operación exitosa');
-      this.router.navigate(['home']);
+      this.router.navigate(['/home/start']);
     });
   }
 }

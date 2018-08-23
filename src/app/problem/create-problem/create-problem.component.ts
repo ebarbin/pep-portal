@@ -50,21 +50,21 @@ export class CreateProblemComponent implements OnInit {
       problem.id = this.problemId;
       this.problemService.editeProblem(problem).subscribe(() => {
         this.toastService.success('Curso editado.', 'Operación exitosa');
-        this.router.navigate(['home/problem/list']);
+        this.router.navigate(['/home/problem/list']);
       });
     } else {
       this.problemService.createProblem(problem).subscribe(() => {
         this.toastService.success('Curso creado.', 'Operación exitosa');
-        this.router.navigate(['home']);
+        this.router.navigate(['/home/start']);
       });
     }
   }
 
   cancel() {
     if (this.editMode) {
-      this.router.navigate(['home/problem/list']);
+      this.router.navigate(['/home/problem/list']);
     } else {
-      this.router.navigate(['home']);
+      this.router.navigate(['/home/start']);
     }
   }
 }
