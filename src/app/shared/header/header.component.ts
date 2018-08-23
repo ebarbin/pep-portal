@@ -1,7 +1,6 @@
 import { CourseService } from './../../course/course.service';
 import { Course } from './../../course/course.model';
 import { UserService } from './../../user/user.service';
-import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
@@ -21,6 +20,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: User;
 
   subs: Subscription;
+
+  chatWasSended = false;
+
+  sendChatMesssage() {
+    this.chatWasSended = true;
+  }
+
+  openChatMesssage() {
+    this.chatWasSended = false;
+  }
 
   ngOnInit() {
     this.user = this.userService.getStoredUser();

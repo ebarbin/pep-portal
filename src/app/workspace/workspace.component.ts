@@ -1,9 +1,7 @@
-import { UserService } from './../user/user.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Student } from '../shared/models/student.model';
 import { StudentService } from '../shared/services/student.service';
 import { ProblemService } from './../problem/problem.service';
-import { Problem } from './../problem/problem.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({

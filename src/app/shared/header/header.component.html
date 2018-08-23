@@ -50,7 +50,7 @@
           </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link cursor-pointer" role="button">
+            <a class="nav-link cursor-pointer" role="button" [popover]="chatContent" (click)="openChatMesssage()">
                 <fa routerLinkActive="active" style="color: white;" name="comment"></fa>
             </a>
         </li>
@@ -64,3 +64,16 @@
         </div>
     </div>
   </nav>
+  <popover-content #chatContent placement="bottom" [animation]="true"
+    [ngClass]="{ 'popover chat-hide': chatWasSended }"
+    [closeOnClickOutside]="true">
+    <div class="modal-header">
+      <h4 class="modal-title">Has una consulta</h4>
+    </div>
+    <div class="modal-body">
+      <textarea class="form-control" style="width:100%;" rows="4"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button type="button" style="width: 100%;" class="btn btn-success" (click)="sendChatMesssage()">Enviar</button>
+    </div>
+  </popover-content>

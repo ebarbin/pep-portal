@@ -42,3 +42,16 @@ angular-editor.ng-invalid.ng-touched, radio.ng-invalid.ng-touched, select.ng-inv
 .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {
   border-radius: 6px
 }
+
+.popover-content {
+  width: 500px !important;
+}
+
+.popover {
+  display: table !important;
+}
+
+.chat-hide {
+  top: -10000px;
+  left: -10000px;
+}

@@ -1,7 +1,7 @@
 import { HttpHeaderInterceptor } from './http-header.interceptor';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from '../app.routing.module';
 import { HomeComponent } from './home/home.component';
 import { CourseSelectComponent } from './course-select/course-select.component';
@@ -16,6 +16,7 @@ import { ConfirmationDialogComponent } from './dialog/confirmation-dialog/confir
 import { TagInputModule } from 'ngx-chips';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { PopoverModule } from 'ngx-popover';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -39,9 +40,11 @@ import { StartComponent } from './start/start.component';
     AngularFontAwesomeModule,
     MonacoEditorModule.forRoot(),
     AngularEditorModule,
-    TagInputModule
+    TagInputModule,
+    PopoverModule
   ],
   exports: [
+    HttpClientModule,
     AppRoutingModule,
     NgbModule,
     NgxSpinnerModule,
