@@ -1,8 +1,8 @@
-import { CustomResponse } from './custom-response.model';
+import { CustomResponse } from '../custom-response.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Teacher } from './teacher.model';
+import { Teacher } from '../models/teacher.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({

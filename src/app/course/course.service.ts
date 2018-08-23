@@ -1,5 +1,5 @@
-import { StudentService } from './../shared/student.service';
-import { Student } from './../shared/student.model';
+import { StudentService } from '../shared/services/student.service';
+import { Student } from '../shared/models/student.model';
 import { UserService } from './../user/user.service';
 import { User } from './../user/user.model';
 import { Course } from './course.model';

@@ -3,14 +3,11 @@ import { Course } from './../course.model';
 import { CourseService } from './../course.service';
 import { Problem } from './../../problem/problem.model';
 import { ProblemService } from './../../problem/problem.service';
-import { UserService } from './../../user/user.service';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-create-course',

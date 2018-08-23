@@ -1,13 +1,13 @@
-import { Teacher } from './../../shared/teacher.model';
-import { TeacherService } from './../../shared/teacher.service';
-import { StudentService } from './../../shared/student.service';
+import { Teacher } from '../../shared/models/teacher.model';
+import { TeacherService } from '../../shared/services/teacher.service';
+import { StudentService } from '../../shared/services/student.service';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomResponse } from '../../shared/custom-response.model';
-import { Student } from '../../shared/student.model';
+import { Student } from '../../shared/models/student.model';
 
 @Component({
   selector: 'app-login',

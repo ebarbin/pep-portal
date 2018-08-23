@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MyProblemsComponent implements OnInit {
 
-  problems: [Problem]
+  problems: [Problem];
 
   constructor(private problemService: ProblemService, private toastService: ToastrService,
     private dialogService: DialogService) { }

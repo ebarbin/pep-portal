@@ -1,9 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
-import { Student } from './student.model';
-import { User } from './../user/user.model';
-import { UserService } from './../user/user.service';
-import { StudentService } from './student.service';
-import { Observable, of } from 'rxjs';
+import { Student } from '../shared/models/student.model';
+import { StudentService } from '../shared/services/student.service';
+import { Observable } from 'rxjs';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';

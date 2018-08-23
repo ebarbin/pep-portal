@@ -1,8 +1,7 @@
-import { UserService } from './../../../user/user.service';
-import { Teacher } from './../../teacher.model';
-import { TeacherService } from './../../teacher.service';
+import { UserService } from './../../user/user.service';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../user/user.model';
+import { User } from '../../user/user.model';
+
 
 @Component({
   selector: 'app-start',

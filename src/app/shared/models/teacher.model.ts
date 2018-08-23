@@ -1,4 +1,4 @@
-import { User } from '../user/user.model';
+import { User } from '../../user/user.model';
 
 export class Teacher {
   constructor(public id: string, public instituteId: string, public user: User,

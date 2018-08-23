@@ -1,6 +1,6 @@
 import { Problem } from './../../problem/problem.model';
-import { Student } from './../../shared/student.model';
-import { StudentService } from './../../shared/student.service';
+import { Student } from '../../shared/models/student.model';
+import { StudentService } from '../../shared/services/student.service';
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 

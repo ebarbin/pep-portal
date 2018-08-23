@@ -1,7 +1,7 @@
-import { Problem } from './../problem/problem.model';
-import { Course } from './../course/course.model';
-import { Student } from './student.model';
-import { CustomResponse } from '../shared/custom-response.model';
+import { Problem } from '../../problem/problem.model';
+import { Course } from '../../course/course.model';
+import { Student } from '../models/student.model';
+import { CustomResponse } from '../custom-response.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';

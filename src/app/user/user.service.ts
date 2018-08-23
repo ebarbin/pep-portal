@@ -1,5 +1,5 @@
-import { Student } from './../shared/student.model';
-import { Teacher } from './../shared/teacher.model';
+import { Student } from '../shared/models/student.model';
+import { Teacher } from '../shared/models/teacher.model';
 import { ChangePassword } from './change-password.model';
 import { CustomResponse } from '../shared/custom-response.model';
 import { User } from './user.model';

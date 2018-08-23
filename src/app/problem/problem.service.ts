@@ -1,5 +1,5 @@
-import { Student } from './../shared/student.model';
-import { StudentService } from './../shared/student.service';
+import { Student } from '../shared/models/student.model';
+import { StudentService } from '../shared/services/student.service';
 import { CustomResponse } from '../shared/custom-response.model';
 import { Injectable } from '@angular/core';
 

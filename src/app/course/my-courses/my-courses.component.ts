@@ -1,6 +1,6 @@
 import { DialogService } from './../../shared/dialog/dialog.service';
-import { StudentService } from './../../shared/student.service';
-import { Student } from './../../shared/student.model';
+import { StudentService } from '../../shared/services/student.service';
+import { Student } from '../../shared/models/student.model';
 import { User } from './../../user/user.model';
 import { UserService } from './../../user/user.service';
 import { Course } from './../course.model';

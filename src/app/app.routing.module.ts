@@ -1,5 +1,5 @@
-import { StartComponent } from './shared/home/start/start.component';
-import { WorkspaceGuard } from './shared/workspace.guard';
+import { StartComponent } from './shared/start/start.component';
+import { WorkspaceGuard } from './workspace/workspace.guard';
 import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
 import { CreateProblemComponent } from './problem/create-problem/create-problem.component';
 import { WorkspaceComponent } from './workspace/workspace.component';

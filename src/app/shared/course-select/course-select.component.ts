@@ -1,8 +1,8 @@
+import { StudentService } from '../services/student.service';
+import { Student } from '../../shared/models/student.model';
 import { UserService } from './../../user/user.service';
-import { Student } from './../student.model';
-import { StudentService } from './../student.service';
 import { Course } from './../../course/course.model';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -28,7 +28,7 @@ export class CourseSelectComponent implements OnInit, OnDestroy {
     });
   }
 
-  compareFn(c1: any, c2:any): boolean {
+  compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 

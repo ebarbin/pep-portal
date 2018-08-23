@@ -2,7 +2,6 @@ import { User } from './../user.model';
 import { UserService } from './../user.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { timeout } from '../../../../node_modules/@types/q';
 import { Router } from '../../../../node_modules/@angular/router';
 import { ToastrService } from '../../../../node_modules/ngx-toastr';
 
