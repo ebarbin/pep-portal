@@ -39,94 +39,23 @@
               <a class="dropdown-item cursor-pointer">Ver Consultas</a>
             </div>
         </li>
+        <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cuenta PEP</a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>
+            <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/change-password">Cambio de Contraseña</a>
+            <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/profile-image">Imagen de Perfil</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item cursor-pointer" (click)="logout()"><fa name="sign-out"></fa> Salir</a>
+          </div>
+        </li>
       </ul>
-      <div class="form-inline">
-          <app-course-select *ngIf="user.role === 'ROLE_STUDENT'"></app-course-select>
-          <ul class="navbar-nav nav">
-              <li class="nav-item dropdown" ngbDropdown>
-                  <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button">
-                    <img class="rounded-circle" height="30" [src]="user.imageId | profileImage "/>
-                    {{ user.username }}</a>
-                  <div class="dropdown-menu" ngbDropdownMenu>
-                    <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>
-                    <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/change-password">Cambio de Contraseña</a>
-                    <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/profile-image">Imagen de Perfil</a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item cursor-pointer" (click)="logout()"><fa name="sign-out"></fa> Salir</a>
-                  </div>
-              </li>
-            </ul>
+      <div class="col-md-3">
+        <app-course-select *ngIf="user.role === 'ROLE_STUDENT'"></app-course-select>
+      </div>
+      <div class="cursor-pointer" routerLinkActive="active" routerLink="/home/account">
+          <img class="rounded-circle" height="30" [src]="user.imageId | profileImage"
+          placement="left" [ngbTooltip]="user.username"/>
         </div>
     </div>
   </nav>
-
-
-<!--
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-      <div class="container d-flex flex-column flex-md-row justify-content-between">
-          <a class="navbar-brand" routerLink="/"><fa name="code"></fa> PEP</a>
-
-
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-      data-toggle="collapse" data-target="#navbarSupportedContent"
-      [attr.aria-expanded]="!isCollapsed"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <ul class="navbar-nav nav">
-        <li class="nav-item">
-          <a class="nav-link">Cursos</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-
-
-    <ul class="navbar-nav nav">
-        <li class="nav-item">
-          <a class="nav-link">Cursos</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-
-
-    <ul class="navbar-nav nav">
-        <li class="nav-item">
-          <a class="nav-link">Cursos</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-
-
-      <ul class="navbar-nav nav">
-        <li class="nav-item">
-          <a class="nav-link">Cursos</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-
-      <ul class="navbar-nav nav">
-          <li class="nav-item dropdown" ngbDropdown>
-            <a class="nav-link dropdown-toggle" style="cursor: pointer;" ngbDropdownToggle role="button"></a>
-            <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Logout</a>
-            </div>
-          </li>
-      </ul>
-    </div>
-  </nav>
-
--->
