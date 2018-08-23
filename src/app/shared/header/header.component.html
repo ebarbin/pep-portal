@@ -49,8 +49,13 @@
             <a class="dropdown-item cursor-pointer" (click)="logout()"><fa name="sign-out"></fa> Salir</a>
           </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link cursor-pointer" role="button">
+                <fa routerLinkActive="active" style="color: white;" name="comment"></fa>
+            </a>
+        </li>
       </ul>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <app-course-select *ngIf="user.role === 'ROLE_STUDENT'"></app-course-select>
       </div>
       <div class="cursor-pointer" routerLinkActive="active" routerLink="/home/account">

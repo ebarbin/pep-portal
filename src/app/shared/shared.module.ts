@@ -1,4 +1,3 @@
-import { OptionRoleValidationDirective } from './option-role-validation.directive';
 import { HttpHeaderInterceptor } from './http-header.interceptor';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
@@ -40,7 +39,7 @@ import { StartComponent } from './start/start.component';
     AngularFontAwesomeModule,
     MonacoEditorModule.forRoot(),
     AngularEditorModule,
-    TagInputModule,
+    TagInputModule
   ],
   exports: [
     AppRoutingModule,
