@@ -1,4 +1,7 @@
-import { Observable, from } from 'rxjs';
+import { TeacherResponse } from './../../consultation/models/teacher-response.model';
+import { SendResponseDialogComponent } from './send-response-dialog/send-response-dialog.component';
+import { SeeConsultationDialogComponent } from './see-consultation-dialog/see-consultation-dialog.component';
+import { SeeResponseDialogComponent } from './see-response-dialog/see-response-dialog.component';
 import { Student } from './../models/student.model';
 import { ProblemInfoDialogComponent } from './problem-info-dialog/problem-info-dialog.component';
 import { CourseInfoDialogComponent } from './course-info-dialog/course-info-dialog.component';
@@ -10,6 +13,7 @@ import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Problem } from '../../problem/problem.model';
 import { ConsultationDialogComponent } from './consultation-dialog/consultation-dialog.component';
+import { Consultation } from '../../consultation/models/consultation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,11 +55,30 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public consultation(student: Student, title: string, placeholder: string, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+  public consultation(student: Student, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(ConsultationDialogComponent, { size: dialogSize });
     modalRef.componentInstance.student = student;
-    modalRef.componentInstance.title = title;
-    modalRef.componentInstance.placeholder = placeholder;
+
+    return modalRef.result;
+  }
+
+  public seeResponse(teacherResponse: TeacherResponse, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(SeeResponseDialogComponent, { size: dialogSize });
+    modalRef.componentInstance.response = teacherResponse.response;
+
+    return modalRef.result;
+  }
+
+  public seeConsultation(consultation: String, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(SeeConsultationDialogComponent, { size: dialogSize });
+    modalRef.componentInstance.consultation = consultation;
+
+    return modalRef.result;
+  }
+
+  public sendResponse(consultation: Consultation, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(SendResponseDialogComponent, { size: dialogSize });
+    modalRef.componentInstance.consultation = consultation;
 
     return modalRef.result;
   }

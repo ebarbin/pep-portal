@@ -25,6 +25,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StartComponent } from './start/start.component';
 import { ConsultationDialogComponent } from './dialog/consultation-dialog/consultation-dialog.component';
+import { SeeResponseDialogComponent } from './dialog/see-response-dialog/see-response-dialog.component';
+import { SeeConsultationDialogComponent } from './dialog/see-consultation-dialog/see-consultation-dialog.component';
+import { SendResponseDialogComponent } from './dialog/send-response-dialog/send-response-dialog.component';
 
 @NgModule({
   imports: [
@@ -75,14 +78,19 @@ import { ConsultationDialogComponent } from './dialog/consultation-dialog/consul
     ProblemInfoDialogComponent,
     ProfileImagePipe,
     RolePipe,
-    ConsultationDialogComponent
+    ConsultationDialogComponent,
+    SeeConsultationDialogComponent,
+    SendResponseDialogComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
     CourseCodeValidationComponent,
     CourseInfoDialogComponent,
     ProblemInfoDialogComponent,
-    ConsultationDialogComponent
+    ConsultationDialogComponent,
+    SeeResponseDialogComponent,
+    SeeConsultationDialogComponent,
+    SendResponseDialogComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

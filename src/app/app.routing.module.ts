@@ -1,3 +1,5 @@
+import { TeacherConsultationsComponent } from './consultation/teacher-consultations/teacher-consultations.component';
+import { StudentConsultationsComponent } from './consultation/student-consultations/student-consultations.component';
 import { StartComponent } from './shared/start/start.component';
 import { WorkspaceGuard } from './workspace/workspace.guard';
 import { MyProblemsComponent } from './problem/my-problems/my-problems.component';
@@ -33,6 +35,8 @@ const appRoutes: Routes = [
     { path: 'problem/list', component: MyProblemsComponent },
     { path: 'new-problem', component: CreateProblemComponent },
     { path: 'edit-problem/:problemId', component: CreateProblemComponent },
+    { path: 'student-consultations', component: StudentConsultationsComponent },
+    { path: 'teacher-consultations', component: TeacherConsultationsComponent }
   ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

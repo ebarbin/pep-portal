@@ -1,3 +1,4 @@
+import { ConsultationModule } from './consultation/consultation.module';
 import { WorkspaceModule } from './workspace/workspace.module';
 import { ProblemModule } from './problem/problem.module';
 import { UserModule } from './user/user.module';
@@ -11,7 +12,7 @@ import { CourseModule } from './course/course.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -21,7 +22,8 @@ import { CourseModule } from './course/course.module';
     UserModule,
     CourseModule,
     ProblemModule,
-    WorkspaceModule
+    WorkspaceModule,
+    ConsultationModule
   ],
   bootstrap: [AppComponent]
 })

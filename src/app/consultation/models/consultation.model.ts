@@ -1,5 +1,5 @@
 import { TeacherResponse } from './teacher-response.model';
-import { Student } from './../shared/models/student.model';
+import { Student } from '../../shared/models/student.model';
 
 export class Consultation {
   constructor(public id: string, public consultation: string, public student: Student,

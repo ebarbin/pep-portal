@@ -12,8 +12,9 @@ export class HttpSpinnerInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-
-      if (!req.url.includes('update-solution')) {
+      if (!req.url.includes('update-solution') &&
+        !req.url.includes('consultation/unreaded/student') &&
+        !req.url.includes('consultation/unreaded/teacher')) {
         this.spinnerService.show();
       }
 

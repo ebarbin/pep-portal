@@ -1,0 +1,36 @@
+<div class="container">
+    <h1 class="h3 mb-3 font-weight-normal text-center">Mis Consultas</h1>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Fecha Consulta</th>
+                <th scope="col">Alumno</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Ejercicio</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let consultation of consultations">
+                <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                <td> {{ consultation.student.user.name + ' ' +consultation.student.user.surename}}</td>
+                <td> {{ consultation.student.selectedCourse.name}}</td>
+                <td> {{ consultation.student.selectedProblem.name}}</td>
+                <td>
+                  <button type="button" style="width:44%;" class="btn left-button btn-info" (click)="seeConsultation(consultation)">
+                    Ver Consulta
+                  </button>
+                  <button type="button" style="width:44%;" class="btn right-button btn-success"
+                    (click)="sendResponse(consultation)">
+                    Responder
+                  </button>
+                  <fa style="margin-left: 5px; color: red;" *ngIf="!consultation.wasReaded" name="exclamation-circle"></fa>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>

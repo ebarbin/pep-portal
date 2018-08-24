@@ -1,5 +1,5 @@
-import { CourseService } from './../../course/course.service';
-import { Course } from './../../course/course.model';
+import { interval } from 'rxjs';
+import { ConsultationService } from './../../consultation/consultation.service';
 import { UserService } from './../../user/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -14,23 +14,64 @@ import { Subscription } from '../../../../node_modules/rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor(private userService: UserService, private router: Router, private toastService: ToastrService) { }
+  constructor(private consultationService: ConsultationService, private userService: UserService, private router: Router,
+    private toastService: ToastrService) { }
 
   isCollapsed: boolean;
   user: User;
 
-  subs: Subscription;
+  unreadValue: number;
+
+  subsImageUpdated: Subscription;
+  subsUnreadedStudent: Subscription;
+  subsUnreadedTeacher: Subscription;
+  subsInterval: Subscription;
 
   ngOnInit() {
     this.user = this.userService.getStoredUser();
 
-    this.subs = this.userService.imageUpdated.subscribe((imageId: string) => {
+    if (this.user.role === 'ROLE_STUDENT') {
+      this.subsInterval = interval(20000).subscribe(x => {
+        this.consultationService.getStudentUnreadResponses().subscribe((value: number) => {
+          this.unreadValue = value;
+        });
+      });
+      this.consultationService.getStudentUnreadResponses().subscribe((value: number) => {
+        this.unreadValue = value;
+      });
+    } else {
+      this.subsInterval = interval(20000).subscribe(x => {
+        this.consultationService.getTeacherUnreadConsultations().subscribe((value: number) => {
+          this.unreadValue = value;
+        });
+      });
+      this.consultationService.getTeacherUnreadConsultations().subscribe((value: number) => {
+        this.unreadValue = value;
+      });
+    }
+
+    this.subsUnreadedStudent = this.consultationService.consultationsChanges.subscribe((value: number) => {
+      this.unreadValue = value;
+    });
+
+    this.subsImageUpdated = this.userService.imageUpdated.subscribe((imageId: string) => {
       this.user.imageId = imageId;
     });
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.subsImageUpdated.unsubscribe();
+
+    if (this.subsUnreadedStudent) {
+      this.subsUnreadedStudent.unsubscribe();
+    }
+
+    if (this.subsUnreadedTeacher) {
+      this.subsUnreadedTeacher.unsubscribe();
+    }
+    if (this.subsInterval) {
+      this.subsInterval.unsubscribe();
+    }
   }
 
   logout() {
@@ -39,4 +80,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.router.navigate(['/user/login']);
     });
   }
+
 }

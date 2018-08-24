@@ -1,4 +1,4 @@
-import { Consultation } from './../../../consultation/consultation.model';
+import { Consultation } from '../../../consultation/models/consultation.model';
 import { ConsultationService } from './../../../consultation/consultation.service';
 import { Student } from '../../models/student.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,8 +13,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ConsultationDialogComponent implements OnInit {
 
   @Input() student: Student;
-  @Input() title: string;
-  @Input() placeholder: string;
 
   constructor(private consultationService: ConsultationService, private activeModal: NgbActiveModal) { }
 

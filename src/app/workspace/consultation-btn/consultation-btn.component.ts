@@ -17,7 +17,7 @@ export class ConsultationBtnComponent implements OnInit {
   ngOnInit() {}
 
   onChatButtonClick() {
-    this.dialogService.consultation(this.student, 'Consulta al docente', 'Escriba una consulta', 'lg')
+    this.dialogService.consultation(this.student, 'lg')
     .then((result: boolean) => {
       this.toastrService.success('Ya se ha enviado la consulta al docente.', 'Operación exitosa');
     });

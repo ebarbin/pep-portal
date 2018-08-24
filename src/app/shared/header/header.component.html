@@ -10,7 +10,12 @@
         <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
           <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/workspace">Area de Trabajo</a>
         </li>
-        <li class="nav-item dropdown" ngbDropdown>
+
+        <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
+            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/course/list">Mis Cursos</a>
+        </li>
+
+        <li class="nav-item dropdown" ngbDropdown *ngIf="user.role === 'ROLE_TEACHER'">
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cursos</a>
             <div class="dropdown-menu" ngbDropdownMenu>
               <a class="dropdown-item cursor-pointer"
@@ -33,29 +38,32 @@
                 routerLink="/home/problem/list">Ver Ejercicios</a>
             </div>
         </li>
-        <li class="nav-item dropdown" ngbDropdown>
-            <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Consultas <span class="badge badge-success">4</span></a>
-            <div class="dropdown-menu" ngbDropdownMenu>
-              <a class="dropdown-item cursor-pointer">Ver Consultas</a>
-            </div>
+        <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
+            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/student-consultations">Mis Consultas
+              <span *ngIf="unreadValue || unreadValue > 0"
+                class="badge badge-danger">{{unreadValue}}</span></a>
         </li>
-        <li class="nav-item dropdown" ngbDropdown>
-          <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cuenta PEP</a>
-          <div class="dropdown-menu" ngbDropdownMenu>
-            <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>
-            <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/change-password">Cambio de Contraseña</a>
-            <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/profile-image">Imagen de Perfil</a>
-            <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item cursor-pointer" (click)="logout()"><fa name="sign-out"></fa> Salir</a>
-          </div>
+        <li class="nav-item" *ngIf="user.role === 'ROLE_TEACHER'">
+            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/teacher-consultations">Mis Consultas
+              <span *ngIf="unreadValue || unreadValue > 0"
+                class="badge badge-danger">{{unreadValue}}</span></a>
         </li>
       </ul>
-      <div class="col-md-4">
-        <app-course-select *ngIf="user.role === 'ROLE_STUDENT'"></app-course-select>
+      <app-course-select *ngIf="user.role === 'ROLE_STUDENT'"></app-course-select>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown" ngbDropdown>
+            <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">
+                {{' ' + user.username + ' | '}}
+                <img class="rounded-circle" height="30" [src]="user.imageId | profileImage"/>
+            </a>
+            <div class="dropdown-menu" ngbDropdownMenu style="left: -120px !important;">
+              <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/account">Cuenta</a>
+              <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/change-password">Cambio de Contraseña</a>
+              <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/profile-image">Imagen de Perfil</a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item cursor-pointer" (click)="logout()"><fa name="sign-out"></fa> Salir</a>
+            </div>
+        </li>
+      </ul>
       </div>
-      <div class="cursor-pointer" routerLinkActive="active" routerLink="/home/account">
-          <img class="rounded-circle" height="30" [src]="user.imageId | profileImage"
-          placement="left" [ngbTooltip]="user.username"/>
-        </div>
-    </div>
   </nav>

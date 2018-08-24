@@ -1,12 +1,12 @@
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="modal-header">
-      <h4 class="modal-title"> Consulta al docente </h4>
+      <h4 class="modal-title"> Respuesta al alumno </h4>
       <button type="button" class="close" aria-label="Close" (click)="dismiss()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-        <textarea class="form-control" ngModel name="consultation" style="width:100%;" rows="4"placeholder="Escriba una consulta">
+        <textarea class="form-control" ngModel name="response" style="width:100%;" rows="4"placeholder="Escriba una respuesta">
         </textarea>
     </div>
     <div class="modal-footer">
