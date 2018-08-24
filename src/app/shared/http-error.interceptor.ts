@@ -16,7 +16,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       return next.handle(req)
       .pipe(
         catchError(err => {
-          if (err.error.body) {
+          if (err.error && err.error.body) {
             this.toastService.error(err.error.body , 'Error');
           } else {
             if (err.status === 504 || err.status === 404) {
@@ -29,7 +29,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               this.router.navigate(['/user/login']);
             } else {
               console.log(err);
-              this.toastService.error('Error', 'Error');
+              this.toastService.error(err.message, 'Error');
             }
           }
           return of(err);

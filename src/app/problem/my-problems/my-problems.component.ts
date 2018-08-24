@@ -30,10 +30,8 @@ export class MyProblemsComponent implements OnInit {
           this.toastService.success('Ejercicio eliminado.', 'Operación exitosa');
           this.problems = problems;
         });
-      } else {
       }
-    })
-    .catch(() => {});
+    });
   }
 
   see(problem: Problem) {

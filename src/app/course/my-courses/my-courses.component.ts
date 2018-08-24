@@ -52,10 +52,8 @@ export class MyCoursesComponent implements OnInit {
           this.toastService.success('Curso eliminado.', 'Operación exitosa');
           this.courses = courses;
         });
-      } else {
       }
-    })
-    .catch(() => {});
+    });
   }
 
   isStudentEnrolled(course: Course) {
@@ -81,8 +79,7 @@ export class MyCoursesComponent implements OnInit {
       } else {
         this.toastService.warning('El código ingresado no corresponde con el curso.', 'Atención');
       }
-    })
-    .catch(() => {});
+    });
   }
 
   removeEnroll(course: Course) {
@@ -96,8 +93,7 @@ export class MyCoursesComponent implements OnInit {
         });
       } else {
       }
-    })
-    .catch(() => {});
+    });
   }
 
   see(course: Course) {

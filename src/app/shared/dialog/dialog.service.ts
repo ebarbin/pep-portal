@@ -1,3 +1,5 @@
+import { Observable, from } from 'rxjs';
+import { Student } from './../models/student.model';
 import { ProblemInfoDialogComponent } from './problem-info-dialog/problem-info-dialog.component';
 import { CourseInfoDialogComponent } from './course-info-dialog/course-info-dialog.component';
 import { CourseCodeValidationComponent } from './course-code-validation/course-code-validation.component';
@@ -7,6 +9,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Problem } from '../../problem/problem.model';
+import { ConsultationDialogComponent } from './consultation-dialog/consultation-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,24 +26,37 @@ export class DialogService {
     modalRef.componentInstance.message = message;
     modalRef.componentInstance.btnOkText = btnOkText;
     modalRef.componentInstance.btnCancelText = btnCancelText;
+
     return modalRef.result;
   }
 
   public courseInfo(course: Course, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(CourseInfoDialogComponent, { size: dialogSize });
     modalRef.componentInstance.course = course;
+
     return modalRef.result;
   }
 
   public problemInfo(problem: Problem, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(ProblemInfoDialogComponent, { size: dialogSize });
     modalRef.componentInstance.problem = problem;
+
     return modalRef.result;
   }
 
   public courseCodeValidation(course: Course, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(CourseCodeValidationComponent, { size: dialogSize });
     modalRef.componentInstance.course = course;
+
+    return modalRef.result;
+  }
+
+  public consultation(student: Student, title: string, placeholder: string, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(ConsultationDialogComponent, { size: dialogSize });
+    modalRef.componentInstance.student = student;
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.placeholder = placeholder;
+
     return modalRef.result;
   }
 }

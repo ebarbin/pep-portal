@@ -1,17 +1,12 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header cursor-pointer" (click)="showCourseDescription = !showCourseDescription">
           <div class="pull-left">
             Curso: {{course.name}}
           </div>
           <div class="pull-right">
-            <fa name="minus-square" class="cursor-pointer"
-              [ngStyle]="{ 'display': showCourseDescription ? 'block' : 'none' }"
-              (click)="showCourseDescription = !showCourseDescription"></fa>
-            <fa name="plus-square" class="cursor-pointer"
-              [ngStyle]="{ 'display': !showCourseDescription ? 'block' : 'none' }"
-              (click)="showCourseDescription = !showCourseDescription"></fa>
+              <fa [name]="showCourseDescription ? 'minus-square' : 'plus-square'" ></fa>
           </div>
         </div>
         <div class="card-body"

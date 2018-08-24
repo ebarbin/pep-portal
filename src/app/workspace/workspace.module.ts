@@ -5,6 +5,7 @@ import { CourseDescriptionComponent } from './course-description/course-descript
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ConsultationBtnComponent } from './consultation-btn/consultation-btn.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { CommonModule } from '@angular/common';
     CourseDescriptionComponent,
     CourseNavigatorComponent,
     WorkspaceComponent,
-    ProblemExplanationComponent
+    ProblemExplanationComponent,
+    ConsultationBtnComponent
   ],
   exports: [
     CourseDescriptionComponent,

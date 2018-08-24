@@ -24,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StartComponent } from './start/start.component';
+import { ConsultationDialogComponent } from './dialog/consultation-dialog/consultation-dialog.component';
 
 @NgModule({
   imports: [
@@ -73,13 +74,15 @@ import { StartComponent } from './start/start.component';
     CourseInfoDialogComponent,
     ProblemInfoDialogComponent,
     ProfileImagePipe,
-    RolePipe
+    RolePipe,
+    ConsultationDialogComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent,
     CourseCodeValidationComponent,
     CourseInfoDialogComponent,
-    ProblemInfoDialogComponent
+    ProblemInfoDialogComponent,
+    ConsultationDialogComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

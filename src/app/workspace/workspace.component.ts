@@ -41,4 +41,5 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
       this.problemService.updateProblemSolution(this.student.selectedProblem).subscribe();
     }
   }
+
 }

@@ -21,16 +21,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   subs: Subscription;
 
-  chatWasSended = false;
-
-  sendChatMesssage() {
-    this.chatWasSended = true;
-  }
-
-  openChatMesssage() {
-    this.chatWasSended = false;
-  }
-
   ngOnInit() {
     this.user = this.userService.getStoredUser();
 
