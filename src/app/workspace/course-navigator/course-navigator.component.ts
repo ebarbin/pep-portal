@@ -1,8 +1,8 @@
-import { Problem } from './../../problem/problem.model';
-import { Student } from '../../shared/models/student.model';
+import { WorkspaceService } from './../workspace.service';
+import { Workspace } from './../models/workspace.model';
 import { StudentService } from '../../shared/services/student.service';
-import { Component, OnInit, OnDestroy} from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
+import { WorkspaceProblem } from '../models/workspace-problem.model';
 
 @Component({
   selector: 'app-course-navigator',
@@ -11,31 +11,34 @@ import { Subscription } from 'rxjs';
 })
 export class CourseNavigatorComponent implements OnInit, OnDestroy {
 
-  selectedProblem;
-  student: Student;
-  subs: Subscription;
+  @Input() workspace: Workspace;
+  @Output()problemSelected = new EventEmitter<WorkspaceProblem>();
 
-  constructor(private studentService: StudentService) { }
+  constructor(private workspaceService: WorkspaceService, private studentService: StudentService) { }
 
-  selectProblem(problem: Problem) {
-    this.selectedProblem = problem;
-    this.studentService.updateSelectedProblem(problem).subscribe();
+  selectProblem(workspaceProblem: WorkspaceProblem) {
+
+    this.workspaceService.activeOtherProblem(this.workspace, workspaceProblem).subscribe(() => {
+      const lastActive = this.workspace.problems.filter((wp: WorkspaceProblem) => {
+        return wp.active;
+      })[0];
+      lastActive.active = false;
+
+      const nextActive = this.workspace.problems.find((wp: WorkspaceProblem) => {
+        return wp.problem.id === workspaceProblem.problem.id;
+      });
+      nextActive.active = true;
+
+      this.problemSelected.emit(nextActive);
+    });
   }
 
   ngOnInit() {
-    this.studentService.getStoredStudent().subscribe((student: Student) => {
-      this.student = student;
-      this.selectedProblem = student.selectedProblem;
-    });
 
-    this.subs = this.studentService.studentChanged.subscribe((student: Student) => {
-      this.student = student;
-      this.selectedProblem = this.student.selectedProblem;
-    });
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    //this.subs.unsubscribe()
   }
 
 }

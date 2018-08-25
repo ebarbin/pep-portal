@@ -1,8 +1,11 @@
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { WorkspaceProblem } from './models/workspace-problem.model';
+import { WorkspaceService } from './workspace.service';
 import { Subscription } from 'rxjs';
 import { Student } from '../shared/models/student.model';
-import { StudentService } from '../shared/services/student.service';
-import { ProblemService } from './../problem/problem.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Workspace } from './models/workspace.model';
 
 @Component({
   selector: 'app-workspace',
@@ -16,30 +19,41 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   student: Student;
   subs: Subscription;
 
-  constructor(private studentService: StudentService, private problemService: ProblemService) { }
+  workspace;
+  activeProblem: WorkspaceProblem;
+
+  constructor(private router: Router, private toastrService: ToastrService, private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
-
-    this.studentService.getStoredStudent().subscribe((student: Student) => {
-      this.student = student;
-      this.solution = student.selectedProblem ? this.student.selectedProblem.solution : '';
+    this.workspaceService.getActiveWorkspace().subscribe((workspace: Workspace) => {
+      this.workspace = workspace;
+      this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
+        return p.active;
+      });
     });
 
-    this.subs = this.studentService.studentChanged.subscribe((student: Student) => {
-      this.student = student;
-      this.solution = student.selectedProblem ? student.selectedProblem.solution : '';
+    this.workspaceService.workspaceSelectionChanged.subscribe((workspace: Workspace) => {
+      if (!workspace) {
+        this.toastrService.warning('Debe anotarse al menos a un curso para poder ingresar al area de trabajo. ', 'Atención');
+        this.router.navigate(['home/start']);
+      }
+      this.workspace = workspace;
+      this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
+        return p.active;
+      });
     });
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    // this.subs.unsubscribe();
   }
 
-  update() {
-    if (this.student && this.student.selectedProblem) {
-      this.student.selectedProblem.solution = this.solution;
-      this.problemService.updateProblemSolution(this.student.selectedProblem).subscribe();
-    }
+  onProblemSelection(worskpaceProblem: WorkspaceProblem) {
+    this.activeProblem = worskpaceProblem;
+  }
+
+  updateSolution() {
+      this.workspaceService.updateSolution(this.workspace, this.activeProblem).subscribe();
   }
 
 }

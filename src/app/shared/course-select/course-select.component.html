@@ -1,4 +1,4 @@
-<div class="form-inline" *ngIf="inscriptions.length > 0">
+<div class="form-inline">
     <span style="color: white;">Curso Seleccionado <fa name="arrow-right"></fa></span>
     <select [(ngModel)]="courseSelected" class="custom-select" [compareWith]="compareFn"
        (change)="onCourseSelection();">
