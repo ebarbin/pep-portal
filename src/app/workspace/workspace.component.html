@@ -1,8 +1,6 @@
 <div class="container">
   <br>
-
   <app-course-description *ngIf="workspace" [course]="workspace.course"></app-course-description>
-
   <br>
 
   <app-course-navigator *ngIf="workspace" [workspace]="workspace" (problemSelected)="onProblemSelection($event)"></app-course-navigator>
@@ -11,7 +9,7 @@
 
   <div class="row" style="margin-top:-15px;">
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <app-consultation-btn [student]="student"></app-consultation-btn>
+        <app-consultation-btn [workspace]="workspace" [workspaceProblem]="activeProblem"></app-consultation-btn>
         <ngx-monaco-editor (keyup)="updateSolution()" *ngIf="activeProblem"
           [options]="editorOptions"
           [(ngModel)]="activeProblem.solution">

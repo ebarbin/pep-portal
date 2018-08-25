@@ -15,9 +15,9 @@
             <tbody>
               <tr *ngFor="let consultation of consultations">
                 <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-                <td> {{ consultation.student.selectedCourse.teacher.user.name + ' ' +consultation.student.selectedCourse.teacher.user.surename}}</td>
-                <td> {{ consultation.student.selectedCourse.name}}</td>
-                <td> {{ consultation.student.selectedProblem.name}}</td>
+                <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
+                <td> {{ consultation.course.name}}</td>
+                <td> {{ consultation.problem.name}}</td>
                 <td>
                   <button type="button" style="width:40%;" class="btn left-button btn-info" (click)="seeConsultation(consultation)">
                         Consulta

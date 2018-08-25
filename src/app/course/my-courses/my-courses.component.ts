@@ -41,27 +41,16 @@ export class MyCoursesComponent implements OnInit {
     this.inscriptionService.getInscriptions().subscribe((inscriptions: [Inscription]) => {
       this.inscriptions = inscriptions;
     });
-
-    this.studentService.getStoredStudent().subscribe((student: Student) => {
-      this.student = student;
-    });
-
-    this.studentService.studentChanged.subscribe((student: Student) => {
-      this.student = student;
-    });
-
   }
 
   removeCourse(course: Course) {
     this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
-
         this.courseService.deleteById(course.id).subscribe((courses: [Course]) => {
           this.toastService.success('Curso eliminado.', 'Operación exitosa');
           this.courses = courses;
         });
-
       }
     });
   }

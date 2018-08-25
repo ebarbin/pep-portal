@@ -15,8 +15,7 @@ import { Workspace } from './models/workspace.model';
 export class WorkspaceComponent implements OnInit, OnDestroy {
 
   editorOptions = {theme: 'vs-dark', language: 'javascript'};
-  solution = '';
-  student: Student;
+
   subs: Subscription;
 
   workspace;
@@ -32,7 +31,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.workspaceService.workspaceSelectionChanged.subscribe((workspace: Workspace) => {
+    this.subs = this.workspaceService.workspaceSelectionChanged.subscribe((workspace: Workspace) => {
       if (!workspace) {
         this.toastrService.warning('Debe anotarse al menos a un curso para poder ingresar al area de trabajo. ', 'Atención');
         this.router.navigate(['home/start']);
@@ -45,7 +44,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.subs.unsubscribe();
+    this.subs.unsubscribe();
   }
 
   onProblemSelection(worskpaceProblem: WorkspaceProblem) {

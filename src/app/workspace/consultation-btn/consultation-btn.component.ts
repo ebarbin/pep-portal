@@ -1,7 +1,8 @@
+import { WorkspaceProblem } from './../models/workspace-problem.model';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../shared/dialog/dialog.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { Student } from '../../shared/models/student.model';
+import { Workspace } from '../models/workspace.model';
 
 @Component({
   selector: 'app-consultation-btn',
@@ -12,12 +13,13 @@ export class ConsultationBtnComponent implements OnInit {
 
   constructor(private dialogService: DialogService, private toastrService: ToastrService) { }
 
-  @Input() student: Student;
+  @Input() workspace: Workspace;
+  @Input() workspaceProblem: WorkspaceProblem;
 
   ngOnInit() {}
 
   onChatButtonClick() {
-    this.dialogService.consultation(this.student, 'lg')
+    this.dialogService.consultation(this.workspace, this.workspaceProblem, 'lg')
     .then((result: boolean) => {
       this.toastrService.success('Ya se ha enviado la consulta al docente.', 'Operación exitosa');
     });

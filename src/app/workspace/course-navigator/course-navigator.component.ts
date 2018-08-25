@@ -9,7 +9,7 @@ import { WorkspaceProblem } from '../models/workspace-problem.model';
   templateUrl: './course-navigator.component.html',
   styleUrls: ['./course-navigator.component.css']
 })
-export class CourseNavigatorComponent implements OnInit, OnDestroy {
+export class CourseNavigatorComponent {
 
   @Input() workspace: Workspace;
   @Output()problemSelected = new EventEmitter<WorkspaceProblem>();
@@ -31,14 +31,6 @@ export class CourseNavigatorComponent implements OnInit, OnDestroy {
 
       this.problemSelected.emit(nextActive);
     });
-  }
-
-  ngOnInit() {
-
-  }
-
-  ngOnDestroy() {
-    //this.subs.unsubscribe()
   }
 
 }

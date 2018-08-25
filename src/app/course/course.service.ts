@@ -72,27 +72,4 @@ export class CourseService {
       })
     );
   }
-
-  enroll(courseId: string) {
-    return this.httpClient.get('pep-api/course/' + courseId + '/enroll')
-    .pipe(
-      map((response: CustomResponse) => {
-        this.studentService.storeStudent(<Student> response.body.student);
-        this.studentService.studentChanged.next(<Student> response.body.student);
-        return <[Course]> response.body.courses;
-      })
-    );
-  }
-
-  removeEnroll(courseId: string) {
-    return this.httpClient.get('pep-api/course/' + courseId + '/remove-enroll')
-    .pipe(
-      map((response: CustomResponse) => {
-        this.studentService.storeStudent(<Student> response.body.student);
-        this.studentService.studentChanged.next(<Student> response.body.student);
-        return <[Course]> response.body.courses;
-      })
-    );
-  }
-
 }
