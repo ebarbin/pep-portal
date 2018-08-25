@@ -1,3 +1,4 @@
+import { Inscription } from './../inscription.model';
 import { DialogService } from './../../shared/dialog/dialog.service';
 import { StudentService } from '../../shared/services/student.service';
 import { Student } from '../../shared/models/student.model';
@@ -7,6 +8,7 @@ import { Course } from './../course.model';
 import { CourseService } from './../course.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { InscriptionService } from '../inscription.service';
 
 @Component({
   selector: 'app-my-courses',
@@ -22,16 +24,22 @@ export class MyCoursesComponent implements OnInit {
     private dialogService: DialogService,
     private toastService: ToastrService,
     private userService: UserService,
-    private courseService: CourseService) { }
+    private courseService: CourseService,
+    private inscriptionService: InscriptionService) { }
 
-  courses: [Course];
+  courses = [];
+  inscriptions = [];
 
   ngOnInit() {
 
     this.user = this.userService.getStoredUser();
 
-    this.courseService.findAll().subscribe((courses: [Course]) => {
+    this.courseService.findAll(this.user).subscribe((courses: [Course]) => {
       this.courses = courses;
+    });
+
+    this.inscriptionService.getInscriptions().subscribe((inscriptions: [Inscription]) => {
+      this.inscriptions = inscriptions;
     });
 
     this.studentService.getStoredStudent().subscribe((student: Student) => {
@@ -48,22 +56,19 @@ export class MyCoursesComponent implements OnInit {
     this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
+
         this.courseService.deleteById(course.id).subscribe((courses: [Course]) => {
           this.toastService.success('Curso eliminado.', 'Operación exitosa');
           this.courses = courses;
         });
+
       }
     });
   }
 
   isStudentEnrolled(course: Course) {
-    // workaround
-    if (!this.student) {
-      return false;
-    }
-
-    const found = this.student.courses.find((c: Course) => {
-      return c.id === course.id;
+    const found = this.inscriptions.find((i: Inscription) => {
+      return i.course.id === course.id;
     });
     return found ? true : false;
   }
@@ -72,14 +77,14 @@ export class MyCoursesComponent implements OnInit {
     this.dialogService.courseCodeValidation(course)
     .then((result: boolean) => {
       if (result) {
-        this.courseService.enroll(course.id).subscribe((courses: [Course]) => {
+        this.inscriptionService.createInscription(course, this.student).subscribe((i: Inscription) => {
           this.toastService.success('Inscripción realizada.', 'Operación exitosa');
-          this.courses = courses;
+          this.inscriptions.push(i);
         });
       } else {
         this.toastService.warning('El código ingresado no corresponde con el curso.', 'Atención');
       }
-    });
+    }).catch(() => {});
   }
 
   removeEnroll(course: Course) {
@@ -87,13 +92,19 @@ export class MyCoursesComponent implements OnInit {
     this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
-        this.courseService.removeEnroll(course.id).subscribe((courses: [Course]) => {
-          this.toastService.success('Inscripción eliminada.', 'Operación exitosa');
-          this.courses = courses;
+
+        const found = this.inscriptions.find((i: Inscription) => {
+          return i.course.id === course.id;
         });
-      } else {
+
+        this.inscriptionService.deleteInscription(found.id).subscribe(() => {
+          this.toastService.success('Curso eliminado.', 'Operación exitosa');
+          this.inscriptions = this.inscriptions.filter((i: Inscription) => {
+            return i.id !== found.id;
+          });
+        });
       }
-    });
+    }).catch(() => {});
   }
 
   see(course: Course) {

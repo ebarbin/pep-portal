@@ -14,7 +14,7 @@ import {  of, Subject } from 'rxjs';
 })
 export class CourseService {
 
-  constructor(private userService: UserService, private studentService: StudentService, private httpClient: HttpClient) { }
+  constructor(private studentService: StudentService, private httpClient: HttpClient) { }
 
   createCourse(course: Course) {
     return this.httpClient.post('pep-api/course', course)
@@ -43,8 +43,7 @@ export class CourseService {
       );
   }
 
-  findAll() {
-    const user: User = this.userService.getStoredUser();
+  findAll(user: User) {
 
     if (user.role === 'ROLE_STUDENT') {
       return this.httpClient.get('pep-api/course/forStudent')
