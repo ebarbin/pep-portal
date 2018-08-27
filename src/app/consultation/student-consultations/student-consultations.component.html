@@ -19,12 +19,16 @@
                 <td> {{ consultation.course.name}}</td>
                 <td> {{ consultation.problem.name}}</td>
                 <td>
-                  <button type="button" style="width:40%;" class="btn left-button btn-info" (click)="seeConsultation(consultation)">
-                        Consulta
-                      </button>
-                  <button type="button" style="width:44%;" class="btn right-button btn-success" (click)="seeResponse(consultation)"
+                  <button type="button" class="btn left-button btn-info" (click)="seeConsultation(consultation)">
+                    Consulta
+                  </button>
+                  <button type="button" class="btn center-button btn-danger" (click)="removeConsultation(consultation)"
+                    [disabled]="!consultation.teacherResponse || !consultation.teacherResponse.wasReaded">
+                    Eliminar
+                    </button>
+                  <button type="button" class="btn right-button btn-success" (click)="seeResponse(consultation)"
                     [disabled]="!consultation.teacherResponse">
-                      Respuesta
+                    Respuesta
                   </button>
                   <fa style="margin-left: 5px; color: red;"
                     *ngIf="consultation.teacherResponse && !consultation.teacherResponse.wasReaded"

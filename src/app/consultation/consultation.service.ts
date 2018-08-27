@@ -24,6 +24,15 @@ export class ConsultationService {
       );
   }
 
+  removeById(consultationId: string) {
+    return this.httpClient.delete('pep-api/consultation/' + consultationId)
+      .pipe(
+        map((response: CustomResponse) => {
+          return response.body;
+        })
+    );
+  }
+
   getStudentConsultations() {
     return this.httpClient.get('pep-api/consultation/student')
       .pipe(

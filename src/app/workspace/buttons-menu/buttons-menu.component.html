@@ -5,6 +5,6 @@
 </button>
 <button style="position: relative; top: 78px; left: -85px;" class="btn btn-primary"
   placement="top" ngbTooltip="Ver Primitivas"
-  (click)="onChatButtonClick()">
+  (click)="onChatButtonClick()" [disabled]="!workspaceProblem.problem.primitives || workspaceProblem.problem.primitives.length === 0">
   <fa name="codepen"></fa>
 </button>
