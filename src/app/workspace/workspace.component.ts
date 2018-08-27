@@ -14,7 +14,7 @@ import { Workspace } from './models/workspace.model';
 })
 export class WorkspaceComponent implements OnInit, OnDestroy {
 
-  editorOptions = {theme: 'vs-dark', language: 'javascript'};
+  editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};
 
   subs: Subscription;
 

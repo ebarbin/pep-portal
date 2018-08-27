@@ -1,0 +1,34 @@
+<div class="container">
+  <h1 class="h3 mb-3 font-weight-normal text-center">{{title}}</h1>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <div class="row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Ingrese el nombre" required>
+            </div>
+          </div>
+          <div class="row">
+              <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <angular-editor placeholder="Ingresar Descripción" ngModel name="description" [config]="editorConfig" required></angular-editor>
+              </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <ngx-monaco-editor
+                [options]="editorOptions"
+                required
+                name="code"
+                ngModel>
+              </ngx-monaco-editor>
+            </div>
+          </div>
+        <button
+          class="two-buttons left-button btn btn-success btn-lg"
+          type="submit" [disabled]="!f.valid">Aceptar</button>
+        <button class="two-buttons right-button btn btn-danger btn-lg"
+          type="button" (click)="cancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,5 @@
+import { CreatePrimitiveComponent } from './primitive/create-primitive/create-primitive.component';
+import { MyPrimitivesComponent } from './primitive/my-primitives/my-primitives.component';
 import { TeacherConsultationsComponent } from './consultation/teacher-consultations/teacher-consultations.component';
 import { StudentConsultationsComponent } from './consultation/student-consultations/student-consultations.component';
 import { StartComponent } from './shared/start/start.component';
@@ -36,7 +38,10 @@ const appRoutes: Routes = [
     { path: 'new-problem', component: CreateProblemComponent },
     { path: 'edit-problem/:problemId', component: CreateProblemComponent },
     { path: 'student-consultations', component: StudentConsultationsComponent },
-    { path: 'teacher-consultations', component: TeacherConsultationsComponent }
+    { path: 'teacher-consultations', component: TeacherConsultationsComponent },
+    { path: 'primitive/list', component: MyPrimitivesComponent},
+    { path: 'new-primitive', component: CreatePrimitiveComponent },
+    { path: 'edit-primitive/:primitiveId', component: CreatePrimitiveComponent },
   ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

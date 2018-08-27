@@ -43,9 +43,11 @@ export class MyCoursesComponent implements OnInit {
     this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
-        this.courseService.deleteById(course.id).subscribe((courses: [Course]) => {
+        this.courseService.deleteById(course.id).subscribe(() => {
           this.toastService.success('Curso eliminado.', 'Operación exitosa');
-          this.courses = courses;
+          this.courses = this.courses.filter((c: Course) => {
+            return c.id !== course.id;
+          });
         });
       }
     });

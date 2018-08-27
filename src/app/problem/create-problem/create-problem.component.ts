@@ -1,3 +1,6 @@
+import { PrimitiveService } from './../../primitive/primitive.service';
+import { Primitive } from './../../primitive/primitive.model';
+import { Observable } from 'rxjs';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ProblemService } from './../problem.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,7 +31,7 @@ export class CreateProblemComponent implements OnInit {
   };
 
   constructor(private toastService: ToastrService, private router: Router,
-    private problemService: ProblemService, private route: ActivatedRoute) { }
+    private problemService: ProblemService, private primitiveService: PrimitiveService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.problemId = this.route.snapshot.params['problemId'];
@@ -66,5 +69,9 @@ export class CreateProblemComponent implements OnInit {
     } else {
       this.router.navigate(['/home/start']);
     }
+  }
+
+  public requestAutocompleteItems = (text: string): Observable<[Primitive]> => {
+    return this.primitiveService.findByNameLike(text);
   }
 }

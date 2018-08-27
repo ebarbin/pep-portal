@@ -1,3 +1,5 @@
+import { PrimitiveInfoComponent } from './primitive-info/primitive-info.component';
+import { Primitive } from './../../primitive/primitive.model';
 import { WorkspaceProblem } from './../../workspace/models/workspace-problem.model';
 import { TeacherResponse } from './../../consultation/models/teacher-response.model';
 import { SendResponseDialogComponent } from './send-response-dialog/send-response-dialog.component';
@@ -81,6 +83,13 @@ export class DialogService {
   public sendResponse(consultation: Consultation, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(SendResponseDialogComponent, { size: dialogSize });
     modalRef.componentInstance.consultation = consultation;
+
+    return modalRef.result;
+  }
+
+  public primitiveInfo(primitive: Primitive, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(PrimitiveInfoComponent, { size: dialogSize });
+    modalRef.componentInstance.primitive = primitive;
 
     return modalRef.result;
   }

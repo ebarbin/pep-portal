@@ -15,22 +15,11 @@ export class WorkspaceService {
   workspaceSelectionChanged = new Subject<Workspace>();
   constructor(private httpClient: HttpClient) { }
 
-  // activeWorkspace: Workspace;
-
-  /*getStoreActiveWorkspace(): Observable<Workspace> {
-    if (!this.activeWorkspace) {
-      return of(this.activeWorkspace);
-    } else {
-      return this.getActiveWorkspace();
-    }
-  }*/
-
   getActiveWorkspace() {
     return this.httpClient.get('pep-api/workspace/active')
     .pipe(
       map((response: CustomResponse) => {
         const workspace = <Workspace> response.body;
-        // this.activeWorkspace = workspace;
         return workspace;
       })
     );

@@ -10,11 +10,9 @@
         <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
           <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/workspace">Area de Trabajo</a>
         </li>
-
         <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
             <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/course/list">Mis Cursos</a>
         </li>
-
         <li class="nav-item dropdown" ngbDropdown *ngIf="user.role === 'ROLE_TEACHER'">
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cursos</a>
             <div class="dropdown-menu" ngbDropdownMenu>
@@ -38,6 +36,17 @@
                 routerLink="/home/problem/list">Ver Ejercicios</a>
             </div>
         </li>
+        <li class="nav-item dropdown" ngbDropdown *ngIf="user.role === 'ROLE_TEACHER'">
+          <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Primitivas</a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item cursor-pointer"
+              routerLinkActive="active"
+              routerLink="/home/new-primitive">Crear Primitiva</a>
+            <a class="dropdown-item cursor-pointer"
+              routerLinkActive="active"
+              routerLink="/home/primitive/list">Ver Primitivas</a>
+          </div>
+      </li>
         <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
             <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/student-consultations">Mis Consultas
               <span *ngIf="unreadValue || unreadValue > 0"

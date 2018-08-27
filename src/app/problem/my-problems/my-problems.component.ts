@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MyProblemsComponent implements OnInit {
 
-  problems: [Problem];
+  problems = [];
 
   constructor(private problemService: ProblemService, private toastService: ToastrService,
     private dialogService: DialogService) { }
@@ -28,6 +28,11 @@ export class MyProblemsComponent implements OnInit {
       if (result) {
         this.problemService.deleteById(problem.id).subscribe((problems: [Problem]) => {
           this.toastService.success('Ejercicio eliminado.', 'Operación exitosa');
+
+          this.problems = this.problems.filter((p: Problem) => {
+            return p.id !== problem.id;
+          });
+
           this.problems = problems;
         });
       }

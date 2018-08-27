@@ -3,15 +3,21 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-
-            <div class="form-group">
-                <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Ingrese el Título" required>
-            </div>
-
+          <div class="form-group">
+              <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Ingrese el Título" required>
+          </div>
+          <div class="form-group">
+              <tag-input ngModel name="primitives"
+                placeholder="Primitivas"
+                secondaryPlaceholder="Buscar Primitivas"
+                onlyFromAutocomplete="true" [identifyBy]="'id'" [displayBy]="'name'">
+                <tag-input-dropdown [identifyBy]="'id'" [displayBy]="'name'" [autocompleteObservable]="requestAutocompleteItems">
+                </tag-input-dropdown>
+              </tag-input>
+          </div>
           <div class="form-group">
               <angular-editor placeholder="Ingrese la Explicación" ngModel name="explanation" [config]="editorConfig" required></angular-editor>
           </div>
-
         <button
           class="two-buttons left-button btn btn-success btn-lg"
           type="submit" [disabled]="!f.valid">Aceptar</button>

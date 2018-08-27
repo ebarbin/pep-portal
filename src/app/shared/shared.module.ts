@@ -28,6 +28,7 @@ import { ConsultationDialogComponent } from './dialog/consultation-dialog/consul
 import { SeeResponseDialogComponent } from './dialog/see-response-dialog/see-response-dialog.component';
 import { SeeConsultationDialogComponent } from './dialog/see-consultation-dialog/see-consultation-dialog.component';
 import { SendResponseDialogComponent } from './dialog/send-response-dialog/send-response-dialog.component';
+import { PrimitiveInfoComponent } from './dialog/primitive-info/primitive-info.component';
 
 @NgModule({
   imports: [
@@ -81,6 +82,7 @@ import { SendResponseDialogComponent } from './dialog/send-response-dialog/send-
     ConsultationDialogComponent,
     SeeConsultationDialogComponent,
     SendResponseDialogComponent,
+    PrimitiveInfoComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -90,7 +92,8 @@ import { SendResponseDialogComponent } from './dialog/send-response-dialog/send-
     ConsultationDialogComponent,
     SeeResponseDialogComponent,
     SeeConsultationDialogComponent,
-    SendResponseDialogComponent
+    SendResponseDialogComponent,
+    PrimitiveInfoComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

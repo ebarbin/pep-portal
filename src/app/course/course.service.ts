@@ -25,7 +25,7 @@ export class CourseService {
       );
   }
 
-  editeCourse(course: Course) {
+  updateCourse(course: Course) {
     return this.httpClient.put('pep-api/course/' + course.id, course)
       .pipe(
         map((response: CustomResponse) => {
@@ -68,7 +68,7 @@ export class CourseService {
     return this.httpClient.delete('pep-api/course/' + courseId)
     .pipe(
       map((response: CustomResponse) => {
-        return <[Course]> response.body;
+        return response.body;
       })
     );
   }

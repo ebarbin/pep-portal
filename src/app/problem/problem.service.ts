@@ -27,7 +27,7 @@ export class ProblemService {
     return this.httpClient.delete('pep-api/problem/' + problemId)
     .pipe(
       map((response: CustomResponse) => {
-        return <[Problem]> response.body;
+        return response.body;
       })
     );
   }
