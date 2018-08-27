@@ -32,7 +32,7 @@ export class TeacherConsultationsComponent implements OnInit {
         }
       })
       .catch(() => {
-        if (!consultation) {
+        if (!consultation.wasReaded) {
           this.consultationService.markAsReadConsultation(consultation).subscribe(() => {
             consultation.wasReaded = true;
           });

@@ -23,7 +23,7 @@
                     Ver Consulta
                   </button>
                   <button type="button" style="width:44%;" class="btn right-button btn-success"
-                    (click)="sendResponse(consultation)">
+                    (click)="sendResponse(consultation)" [disabled]="!consultation.wasReaded">
                     Responder
                   </button>
                   <fa style="margin-left: 5px; color: red;" *ngIf="!consultation.wasReaded" name="exclamation-circle"></fa>

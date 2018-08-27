@@ -1,3 +1,4 @@
+import { ButtonsMenuComponent } from './buttons-menu/buttons-menu-btn.component';
 import { ProblemExplanationComponent } from './problem-explanation/problem-explanation.component';
 import { WorkspaceComponent } from './workspace.component';
 import { CourseNavigatorComponent } from './course-navigator/course-navigator.component';
@@ -5,7 +6,6 @@ import { CourseDescriptionComponent } from './course-description/course-descript
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConsultationBtnComponent } from './consultation-btn/consultation-btn.component';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { ConsultationBtnComponent } from './consultation-btn/consultation-btn.co
     CourseNavigatorComponent,
     WorkspaceComponent,
     ProblemExplanationComponent,
-    ConsultationBtnComponent
+    ButtonsMenuComponent
   ],
   exports: [
     CourseDescriptionComponent,

@@ -9,7 +9,7 @@
 
   <div class="row" style="margin-top:-15px;">
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <app-consultation-btn [workspace]="workspace" [workspaceProblem]="activeProblem"></app-consultation-btn>
+        <app-buttons-menu [workspace]="workspace" [workspaceProblem]="activeProblem"></app-buttons-menu>
         <ngx-monaco-editor (keyup)="updateSolution()" *ngIf="activeProblem"
           [options]="editorOptions"
           [(ngModel)]="activeProblem.solution">

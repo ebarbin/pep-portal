@@ -1,15 +1,15 @@
-import { WorkspaceProblem } from './../models/workspace-problem.model';
+import { WorkspaceProblem } from '../models/workspace-problem.model';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../shared/dialog/dialog.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Workspace } from '../models/workspace.model';
 
 @Component({
-  selector: 'app-consultation-btn',
-  templateUrl: './consultation-btn.component.html',
-  styleUrls: ['./consultation-btn.component.css']
+  selector: 'app-buttons-menu',
+  templateUrl: './buttons-menu.component.html',
+  styleUrls: ['./buttons-menu.component.css']
 })
-export class ConsultationBtnComponent implements OnInit {
+export class ButtonsMenuComponent implements OnInit {
 
   constructor(private dialogService: DialogService, private toastrService: ToastrService) { }
 
