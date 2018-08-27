@@ -26,14 +26,12 @@ export class MyProblemsComponent implements OnInit {
     this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
     .then((result: boolean) => {
       if (result) {
-        this.problemService.deleteById(problem.id).subscribe((problems: [Problem]) => {
+        this.problemService.deleteById(problem.id).subscribe(() => {
           this.toastService.success('Ejercicio eliminado.', 'Operación exitosa');
-
           this.problems = this.problems.filter((p: Problem) => {
             return p.id !== problem.id;
           });
 
-          this.problems = problems;
         });
       }
     });

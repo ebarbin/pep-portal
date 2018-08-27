@@ -49,6 +49,11 @@ export class CreateProblemComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const problem: Problem = <Problem> form.value;
+
+    if (form.value.primitives === '') {
+      delete problem.primitives;
+    }
+
     if (this.editMode) {
       problem.id = this.problemId;
       this.problemService.editeProblem(problem).subscribe(() => {
