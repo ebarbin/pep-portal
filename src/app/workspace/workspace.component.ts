@@ -35,11 +35,12 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
       if (!workspace) {
         this.toastrService.warning('Debe anotarse al menos a un curso para poder ingresar al area de trabajo. ', 'Atención');
         this.router.navigate(['home/start']);
+      } else {
+        this.workspace = workspace;
+        this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
+          return p.active;
+        });
       }
-      this.workspace = workspace;
-      this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
-        return p.active;
-      });
     });
   }
 

@@ -17,8 +17,8 @@ export class InscriptionService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createInscription(course: Course, student: Student) {
-    return this.httpClient.post('pep-api/inscription', {student: student, course: course})
+  createInscription(course: Course) {
+    return this.httpClient.post('pep-api/inscription', {course: course})
     .pipe(
       map((response: CustomResponse) => {
         const inscription = <Inscription> response.body;

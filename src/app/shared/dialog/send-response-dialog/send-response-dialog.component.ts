@@ -25,7 +25,7 @@ export class SendResponseDialogComponent implements OnInit {
     const response = <string> form.value.response;
     this.consultation.teacherResponse = {wasReaded: false, response: response};
 
-    this.consultationService.sendConsultation(this.consultation).subscribe(() => {
+    this.consultationService.sendResponse(this.consultation).subscribe(() => {
       this.activeModal.close(true);
     });
   }

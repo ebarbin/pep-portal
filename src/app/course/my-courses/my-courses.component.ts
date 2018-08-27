@@ -1,7 +1,5 @@
 import { Inscription } from './../inscription.model';
 import { DialogService } from './../../shared/dialog/dialog.service';
-import { StudentService } from '../../shared/services/student.service';
-import { Student } from '../../shared/models/student.model';
 import { User } from './../../user/user.model';
 import { UserService } from './../../user/user.service';
 import { Course } from './../course.model';
@@ -17,11 +15,9 @@ import { InscriptionService } from '../inscription.service';
 })
 export class MyCoursesComponent implements OnInit {
 
-  student: Student;
   user: User;
 
-  constructor(private studentService: StudentService,
-    private dialogService: DialogService,
+  constructor(private dialogService: DialogService,
     private toastService: ToastrService,
     private userService: UserService,
     private courseService: CourseService,
@@ -66,7 +62,7 @@ export class MyCoursesComponent implements OnInit {
     this.dialogService.courseCodeValidation(course)
     .then((result: boolean) => {
       if (result) {
-        this.inscriptionService.createInscription(course, this.student).subscribe((i: Inscription) => {
+        this.inscriptionService.createInscription(course).subscribe((i: Inscription) => {
           this.toastService.success('Inscripción realizada.', 'Operación exitosa');
           this.inscriptions.push(i);
         });

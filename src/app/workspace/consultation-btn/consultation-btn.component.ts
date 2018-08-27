@@ -22,6 +22,6 @@ export class ConsultationBtnComponent implements OnInit {
     this.dialogService.consultation(this.workspace, this.workspaceProblem, 'lg')
     .then((result: boolean) => {
       this.toastrService.success('Ya se ha enviado la consulta al docente.', 'Operación exitosa');
-    });
+    }).catch(() => {});
   }
 }

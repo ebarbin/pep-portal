@@ -37,15 +37,4 @@ export class StudentService {
         })
       );
   }
-
-  updateSelectedProblem(problem: Problem){
-    return this.httpClient.put('pep-api/student/selected-problem', problem)
-    .pipe(
-      map((response: CustomResponse) => {
-        const student: Student = <Student> response.body;
-        this.storeStudent(student);
-        return student;
-      })
-    );
-  }
 }

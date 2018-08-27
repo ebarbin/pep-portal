@@ -14,7 +14,7 @@ import {  of, Subject } from 'rxjs';
 })
 export class CourseService {
 
-  constructor(private studentService: StudentService, private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   createCourse(course: Course) {
     return this.httpClient.post('pep-api/course', course)
