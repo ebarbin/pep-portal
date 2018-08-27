@@ -1,4 +1,4 @@
-import { ButtonsMenuComponent } from './buttons-menu/buttons-menu-btn.component';
+import { ButtonsMenuComponent } from './buttons-menu/buttons-menu.component';
 import { ProblemExplanationComponent } from './problem-explanation/problem-explanation.component';
 import { WorkspaceComponent } from './workspace.component';
 import { CourseNavigatorComponent } from './course-navigator/course-navigator.component';
