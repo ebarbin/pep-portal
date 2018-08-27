@@ -1,3 +1,4 @@
+import { SeePrimitivesComponent } from './see-primitives/see-primitives.component';
 import { PrimitiveInfoComponent } from './primitive-info/primitive-info.component';
 import { Primitive } from './../../primitive/primitive.model';
 import { WorkspaceProblem } from './../../workspace/models/workspace-problem.model';
@@ -90,6 +91,13 @@ export class DialogService {
   public primitiveInfo(primitive: Primitive, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(PrimitiveInfoComponent, { size: dialogSize });
     modalRef.componentInstance.primitive = primitive;
+
+    return modalRef.result;
+  }
+
+  public seePrimitives(workspaceProblem: WorkspaceProblem, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(SeePrimitivesComponent, { size: dialogSize });
+    modalRef.componentInstance.workspaceProblem = workspaceProblem;
 
     return modalRef.result;
   }

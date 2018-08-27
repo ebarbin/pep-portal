@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h4 class="modal-title">Primitivas Disponibles</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+      <ngb-accordion [closeOthers]="true" activeIds="static-1">
+          <ngb-panel [title]="primitive.name" *ngFor="let primitive of workspaceProblem.problem.primitives">
+            <ng-template ngbPanelContent>
+                {{primitive.description}}
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+  </div>
+  <div class="modal-footer">
+    <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>
+  </div>

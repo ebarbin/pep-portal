@@ -24,4 +24,10 @@ export class ButtonsMenuComponent implements OnInit {
       this.toastrService.success('Ya se ha enviado la consulta al docente.', 'Operación exitosa');
     }).catch(() => {});
   }
+
+  onPrimitivesButtonClick() {
+    this.dialogService.seePrimitives(this.workspaceProblem, 'lg')
+    .then(() => {})
+    .catch(() => {});
+  }
 }

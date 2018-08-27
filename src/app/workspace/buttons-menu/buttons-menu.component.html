@@ -1,10 +1,9 @@
 <button style="position: relative; top: 38px; left: -43px;" class="btn btn-success"
-  placement="top" ngbTooltip="Enviar Consulta"
-  (click)="onChatButtonClick()">
+  placement="top" ngbTooltip="Enviar Consulta" (click)="onChatButtonClick()">
     <fa name="paper-plane"></fa>
 </button>
-<button style="position: relative; top: 78px; left: -85px;" class="btn btn-primary"
+<button style="position: relative; top: 78px; left: -85px;" class="btn btn-primary" *ngIf="workspaceProblem"
   placement="top" ngbTooltip="Ver Primitivas"
-  (click)="onChatButtonClick()" [disabled]="!workspaceProblem.problem.primitives || workspaceProblem.problem.primitives.length === 0">
+  (click)="onPrimitivesButtonClick()" [disabled]="!workspaceProblem.problem.primitives || workspaceProblem.problem.primitives.length === 0">
   <fa name="codepen"></fa>
 </button>

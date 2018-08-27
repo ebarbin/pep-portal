@@ -20,7 +20,7 @@ export class WorkspaceGuard implements CanActivate {
       if (workspace) {
         return true;
       } else {
-        this.toastrService.warning('Debe anotarse al menos a un curso para poder ingresar al area de trabajo. ', 'Atención');
+        this.toastrService.warning('Debe seleccionar un curso desde el menu.', 'Atención');
         return false;
       }
     }));
