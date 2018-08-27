@@ -32,7 +32,7 @@ export class TeacherConsultationsComponent implements OnInit {
         }
       })
       .catch(() => {
-        if (!consultation) {
+        if (!consultation.wasReaded) {
           this.consultationService.markAsReadConsultation(consultation).subscribe(() => {
             consultation.wasReaded = true;
           });
@@ -43,6 +43,9 @@ export class TeacherConsultationsComponent implements OnInit {
   sendResponse(consultation: Consultation) {
     this.dialogService.sendResponse(consultation, 'lg')
     .then(() => {
+      this.consultations = this.consultations.filter((c: Consultation) => {
+        return c.id !== consultation.id;
+      });
       this.toastrService.success('Ya se ha enviado la respuesta al alumno.', 'Operación exitosa');
     })
     .catch(() => {});

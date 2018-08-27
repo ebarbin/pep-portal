@@ -1,3 +1,4 @@
+import { WorkspaceProblem } from './../../workspace/models/workspace-problem.model';
 import { TeacherResponse } from './../../consultation/models/teacher-response.model';
 import { SendResponseDialogComponent } from './send-response-dialog/send-response-dialog.component';
 import { SeeConsultationDialogComponent } from './see-consultation-dialog/see-consultation-dialog.component';
@@ -14,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Problem } from '../../problem/problem.model';
 import { ConsultationDialogComponent } from './consultation-dialog/consultation-dialog.component';
 import { Consultation } from '../../consultation/models/consultation.model';
+import { Workspace } from '../../workspace/models/workspace.model';
 
 @Injectable({
   providedIn: 'root'
@@ -55,10 +57,10 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public consultation(student: Student, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+  public consultation(workspace: Workspace, workspaceProblem: WorkspaceProblem, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(ConsultationDialogComponent, { size: dialogSize });
-    modalRef.componentInstance.student = student;
-
+    modalRef.componentInstance.workspace = workspace;
+    modalRef.componentInstance.workspaceProblem = workspaceProblem;
     return modalRef.result;
   }
 

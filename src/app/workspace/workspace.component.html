@@ -1,26 +1,18 @@
 <div class="container">
   <br>
-
-  <app-course-description
-    *ngIf="student && student.selectedCourse"
-    [course]="student.selectedCourse">
-  </app-course-description>
-
+  <app-course-description *ngIf="workspace" [course]="workspace.course"></app-course-description>
   <br>
 
-  <app-course-navigator></app-course-navigator>
+  <app-course-navigator *ngIf="workspace" [workspace]="workspace" (problemSelected)="onProblemSelection($event)"></app-course-navigator>
 
-  <app-problem-explanation
-    *ngIf="student && student.selectedProblem"
-    [problem]="student.selectedProblem">
-  </app-problem-explanation>
+  <app-problem-explanation *ngIf="workspace && activeProblem" [workspaceProblem]="activeProblem"></app-problem-explanation>
 
   <div class="row" style="margin-top:-15px;">
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <app-consultation-btn [student]="student"></app-consultation-btn>
-        <ngx-monaco-editor (keyup)="update()"
+        <app-buttons-menu [workspace]="workspace" [workspaceProblem]="activeProblem"></app-buttons-menu>
+        <ngx-monaco-editor (keyup)="updateSolution()" *ngIf="activeProblem"
           [options]="editorOptions"
-          [(ngModel)]="solution">
+          [(ngModel)]="activeProblem.solution">
         </ngx-monaco-editor>
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">

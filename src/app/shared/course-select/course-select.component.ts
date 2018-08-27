@@ -1,6 +1,8 @@
-import { StudentService } from '../services/student.service';
-import { Student } from '../../shared/models/student.model';
-import { UserService } from './../../user/user.service';
+import { Router } from '@angular/router';
+import { Workspace } from '../../workspace/models/workspace.model';
+import { WorkspaceService } from './../../workspace/workspace.service';
+import { Inscription } from './../../course/inscription.model';
+import { InscriptionService } from './../../course/inscription.service';
 import { Course } from './../../course/course.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -13,18 +15,39 @@ import { Subscription } from 'rxjs';
 export class CourseSelectComponent implements OnInit, OnDestroy {
 
   courseSelected: Course = null;
-  subs: Subscription;
-  student: Student;
+  emptyCourseSelection = {id: null};
 
-  constructor(private userService: UserService, private studentService: StudentService) { }
+  inscriptions = [];
+
+  subsAdd: Subscription;
+  subsRem: Subscription;
+
+  constructor(private router: Router, private workspaceService: WorkspaceService, private inscriptionService: InscriptionService) { }
 
   ngOnInit() {
-    this.studentService.getStoredStudent().subscribe((student: Student) => {
-      this.student = student;
+    this.workspaceService.getActiveWorkspace().subscribe((workspace: Workspace) => {
+      this.courseSelected = workspace ? workspace.course : <Course> this.emptyCourseSelection;
     });
 
-    this.subs = this.studentService.studentChanged.subscribe((student: Student) => {
-      this.student = student;
+    this.inscriptionService.getInscriptions().subscribe((inscriptions: [Inscription]) => {
+      this.inscriptions = inscriptions;
+    });
+
+    this.subsAdd = this.inscriptionService.inscriptionAdded.subscribe((i: Inscription) => {
+      this.inscriptions.push(i);
+    });
+
+    if (this.inscriptions.length === 0) {
+      this.courseSelected = <Course> this.emptyCourseSelection;
+    }
+
+    this.subsRem = this.inscriptionService.inscriptionRemoved.subscribe((inscriptionId: String) => {
+      this.inscriptions = this.inscriptions.filter((i: Inscription) => {
+        return i.id !== inscriptionId;
+      });
+      if (this.inscriptions.length === 0) {
+        this.courseSelected = <Course> this.emptyCourseSelection;
+      }
     });
   }
 
@@ -33,10 +56,15 @@ export class CourseSelectComponent implements OnInit, OnDestroy {
   }
 
   onCourseSelection() {
-    this.studentService.updateSelectedCourse(this.student.selectedCourse).subscribe((student: Student) => {});
+    this.workspaceService.activeWorkspaceByCourse(this.courseSelected).subscribe(() => {
+      if (this.courseSelected.id) {
+        this.router.navigate(['/home/workspace']);
+      }
+    });
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.subsAdd.unsubscribe();
+    this.subsRem.unsubscribe();
   }
 }

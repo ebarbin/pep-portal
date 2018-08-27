@@ -1,3 +1,5 @@
+import { Workspace } from './models/workspace.model';
+import { WorkspaceService } from './workspace.service';
 import { ToastrService } from 'ngx-toastr';
 import { Student } from '../shared/models/student.model';
 import { StudentService } from '../shared/services/student.service';
@@ -11,11 +13,11 @@ import { map } from 'rxjs/operators';
 })
 export class WorkspaceGuard implements CanActivate {
 
-  constructor(private studentService: StudentService, private toastrService: ToastrService) {}
+  constructor(private workspaceService: WorkspaceService, private studentService: StudentService, private toastrService: ToastrService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.studentService.getStudent().pipe(map((student: Student) => {
-      if (student.selectedCourse) {
+    return this.workspaceService.getActiveWorkspace().pipe(map((workspace: Workspace) => {
+      if (workspace) {
         return true;
       } else {
         this.toastrService.warning('Debe anotarse al menos a un curso para poder ingresar al area de trabajo. ', 'Atención');

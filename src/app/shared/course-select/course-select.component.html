@@ -1,8 +1,8 @@
-<div class="form-inline" *ngIf="student && student.courses.length > 0">
-    <span style="color: white;">Curso Seleccionado <fa name="arrow-right"></fa></span>
-    <select [(ngModel)]="student.selectedCourse" class="custom-select" [compareWith]="compareFn"
+<div class="form-inline">
+    <select [(ngModel)]="courseSelected" class="custom-select" [compareWith]="compareFn"
        (change)="onCourseSelection();">
-        <option [ngValue]="course" *ngFor="let course of student.courses">{{course.name}}</option>
+        <option [ngValue]="emptyCourseSelection">Seleccione un curso...</option>
+        <option [ngValue]="inscription.course" *ngFor="let inscription of inscriptions">{{inscription.course.name}}</option>
     </select>
 </div>
 

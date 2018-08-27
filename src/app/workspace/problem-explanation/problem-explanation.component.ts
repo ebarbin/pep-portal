@@ -1,4 +1,4 @@
-import { Problem } from './../../problem/problem.model';
+import { WorkspaceProblem } from './../models/workspace-problem.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ export class ProblemExplanationComponent implements OnInit {
   constructor() { }
 
   showProblemExplanation = true;
-  @Input() problem: Problem;
+  @Input() workspaceProblem: WorkspaceProblem;
 
   ngOnInit() {
   }

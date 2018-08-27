@@ -14,7 +14,7 @@ import {  of, Subject } from 'rxjs';
 })
 export class CourseService {
 
-  constructor(private userService: UserService, private studentService: StudentService, private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   createCourse(course: Course) {
     return this.httpClient.post('pep-api/course', course)
@@ -43,8 +43,7 @@ export class CourseService {
       );
   }
 
-  findAll() {
-    const user: User = this.userService.getStoredUser();
+  findAll(user: User) {
 
     if (user.role === 'ROLE_STUDENT') {
       return this.httpClient.get('pep-api/course/forStudent')
@@ -73,27 +72,4 @@ export class CourseService {
       })
     );
   }
-
-  enroll(courseId: string) {
-    return this.httpClient.get('pep-api/course/' + courseId + '/enroll')
-    .pipe(
-      map((response: CustomResponse) => {
-        this.studentService.storeStudent(<Student> response.body.student);
-        this.studentService.studentChanged.next(<Student> response.body.student);
-        return <[Course]> response.body.courses;
-      })
-    );
-  }
-
-  removeEnroll(courseId: string) {
-    return this.httpClient.get('pep-api/course/' + courseId + '/remove-enroll')
-    .pipe(
-      map((response: CustomResponse) => {
-        this.studentService.storeStudent(<Student> response.body.student);
-        this.studentService.studentChanged.next(<Student> response.body.student);
-        return <[Course]> response.body.courses;
-      })
-    );
-  }
-
 }

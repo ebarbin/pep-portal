@@ -1,18 +1,15 @@
 import { Problem } from '../../problem/problem.model';
-import { Course } from '../../course/course.model';
 import { Student } from '../models/student.model';
 import { CustomResponse } from '../custom-response.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
-import {  Subject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-
-  studentChanged = new Subject();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -39,29 +36,5 @@ export class StudentService {
           return <Student> response.body;
         })
       );
-  }
-
-  updateSelectedProblem(problem: Problem){
-    return this.httpClient.put('pep-api/student/selected-problem', problem)
-    .pipe(
-      map((response: CustomResponse) => {
-        const student: Student = <Student> response.body;
-        this.storeStudent(student);
-        this.studentChanged.next(student);
-        return student;
-      })
-    );
-  }
-
-  updateSelectedCourse(course: Course) {
-    return this.httpClient.put('pep-api/student/selected-course', course)
-    .pipe(
-      map((response: CustomResponse) => {
-        const student: Student = <Student> response.body;
-        this.storeStudent(student);
-        this.studentChanged.next(student);
-        return student;
-      })
-    );
   }
 }

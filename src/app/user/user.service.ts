@@ -9,8 +9,6 @@ import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
 import { Subject } from '../../../node_modules/rxjs';
 
-import {  Observable, of } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
