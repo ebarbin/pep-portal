@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { DialogService } from '../../dialog/dialog.service';
 import { Consultation } from './../models/consultation.model';
@@ -14,7 +15,7 @@ export class StudentConsultationsComponent implements OnInit {
 
   consultations = [];
 
-  constructor(private toastService: ToastrService, private dialogService: DialogService,
+  constructor(private router: Router, private toastService: ToastrService, private dialogService: DialogService,
     private consultationService: ConsultationService) { }
 
   ngOnInit() {
@@ -39,6 +40,12 @@ export class StudentConsultationsComponent implements OnInit {
           this.consultations = this.consultations.filter((c: Consultation) => {
             return c.id !== consultation.id;
           });
+
+          if (this.consultations.length === 0) {
+            this.toastService.warning('No hay consultas.', 'Atención');
+            this.router.navigate(['home/start']);
+          }
+
         });
       }
     }).catch(() => {});

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DialogService } from '../../dialog/dialog.service';
 import { Primitive } from './../primitive.model';
 import { PrimitiveService } from './../primitive.service';
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MyPrimitivesComponent implements OnInit {
 
-  constructor(private dialogService: DialogService, private primitiveService: PrimitiveService, private toastService: ToastrService) { }
+  constructor(private router: Router, private dialogService: DialogService,
+    private primitiveService: PrimitiveService, private toastService: ToastrService) { }
 
   primitives = [];
 
@@ -32,10 +34,17 @@ export class MyPrimitivesComponent implements OnInit {
     .then((result: boolean) => {
       if (result) {
         this.primitiveService.deleteById(primitive.id).subscribe(() => {
+
           this.toastService.success('Primitiva eliminada.', 'Operación exitosa');
           this.primitives = this.primitives.filter((p: Primitive) => {
             return p.id !== primitive.id;
           });
+
+          if (this.primitives.length === 0) {
+            this.toastService.warning('No hay primitivas.', 'Atención');
+            this.router.navigate(['home/start']);
+          }
+
         });
       }
     });

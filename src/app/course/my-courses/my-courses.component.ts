@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Inscription } from './../inscription.model';
 import { DialogService } from '../../dialog/dialog.service';
 import { User } from './../../user/user.model';
@@ -17,7 +18,8 @@ export class MyCoursesComponent implements OnInit {
 
   user: User;
 
-  constructor(private dialogService: DialogService,
+  constructor(private router: Router,
+    private dialogService: DialogService,
     private toastService: ToastrService,
     private userService: UserService,
     private courseService: CourseService,
@@ -48,6 +50,12 @@ export class MyCoursesComponent implements OnInit {
           this.courses = this.courses.filter((c: Course) => {
             return c.id !== course.id;
           });
+
+          if (this.courses.length === 0) {
+            this.toastService.warning('No hay cursos.', 'Atención');
+            this.router.navigate(['home/start']);
+          }
+
         });
       }
     });

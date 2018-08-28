@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DialogService } from '../../dialog/dialog.service';
 import { Problem } from './../problem.model';
 import { ProblemService } from './../problem.service';
@@ -13,7 +14,7 @@ export class MyProblemsComponent implements OnInit {
 
   problems = [];
 
-  constructor(private problemService: ProblemService, private toastService: ToastrService,
+  constructor(private router: Router, private problemService: ProblemService, private toastService: ToastrService,
     private dialogService: DialogService) { }
 
   ngOnInit() {
@@ -28,9 +29,15 @@ export class MyProblemsComponent implements OnInit {
       if (result) {
         this.problemService.deleteById(problem.id).subscribe(() => {
           this.toastService.success('Ejercicio eliminado.', 'Operación exitosa');
+
           this.problems = this.problems.filter((p: Problem) => {
             return p.id !== problem.id;
           });
+
+          if (this.problems.length === 0) {
+            this.toastService.warning('No hay ejercicios.', 'Atención');
+            this.router.navigate(['home/start']);
+          }
 
         });
       }

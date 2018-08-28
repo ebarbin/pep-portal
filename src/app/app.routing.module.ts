@@ -1,3 +1,7 @@
+import { MyCoursesGuard } from './course/my-courses/my-courses.guard';
+import { MyProblemsGuard } from './problem/my-problems/my-problems.guard';
+import { MyPrimitivesGuard } from './primitive/my-primitives/my-primitives.guard';
+import { MyConsultationsGuard } from './consultation/my-consultations.guard';
 import { CreatePrimitiveComponent } from './primitive/create-primitive/create-primitive.component';
 import { MyPrimitivesComponent } from './primitive/my-primitives/my-primitives.component';
 import { TeacherConsultationsComponent } from './consultation/teacher-consultations/teacher-consultations.component';
@@ -31,15 +35,15 @@ const appRoutes: Routes = [
     { path: 'change-password', component: ChangePasswordComponent},
     { path: 'profile-image', component: ProfileImageComponent},
     { path: 'workspace', component: WorkspaceComponent, canActivate: [WorkspaceGuard]},
-    { path: 'course/list', component: MyCoursesComponent },
+    { path: 'course/list', component: MyCoursesComponent, canActivate: [MyCoursesGuard] },
     { path: 'edit-course/:courseId', component: CreateCourseComponent },
     { path: 'new-course', component: CreateCourseComponent },
-    { path: 'problem/list', component: MyProblemsComponent },
+    { path: 'problem/list', component: MyProblemsComponent, canActivate: [MyProblemsGuard]},
     { path: 'new-problem', component: CreateProblemComponent },
     { path: 'edit-problem/:problemId', component: CreateProblemComponent },
-    { path: 'student-consultations', component: StudentConsultationsComponent },
-    { path: 'teacher-consultations', component: TeacherConsultationsComponent },
-    { path: 'primitive/list', component: MyPrimitivesComponent},
+    { path: 'student-consultations', component: StudentConsultationsComponent, canActivate: [MyConsultationsGuard] },
+    { path: 'teacher-consultations', component: TeacherConsultationsComponent, canActivate: [MyConsultationsGuard] },
+    { path: 'primitive/list', component: MyPrimitivesComponent, canActivate: [MyPrimitivesGuard] },
     { path: 'new-primitive', component: CreatePrimitiveComponent },
     { path: 'edit-primitive/:primitiveId', component: CreatePrimitiveComponent },
   ]},
