@@ -24,11 +24,13 @@ export class CreateProblemComponent implements OnInit {
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
-    height: '12rem',
+    height: '5rem',
     minHeight: '4rem',
     placeholder: 'Ingrese una Explicación',
     translate: 'no',
   };
+
+  editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};
 
   constructor(private toastService: ToastrService, private router: Router,
     private problemService: ProblemService, private primitiveService: PrimitiveService, private route: ActivatedRoute) { }
