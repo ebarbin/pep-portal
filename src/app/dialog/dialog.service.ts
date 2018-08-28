@@ -1,24 +1,23 @@
 import { SeePrimitivesComponent } from './see-primitives/see-primitives.component';
 import { PrimitiveInfoComponent } from './primitive-info/primitive-info.component';
-import { Primitive } from './../../primitive/primitive.model';
-import { WorkspaceProblem } from './../../workspace/models/workspace-problem.model';
-import { TeacherResponse } from './../../consultation/models/teacher-response.model';
+import { Primitive } from '../primitive/primitive.model';
+import { WorkspaceProblem } from '../workspace/models/workspace-problem.model';
+import { TeacherResponse } from '../consultation/models/teacher-response.model';
 import { SendResponseDialogComponent } from './send-response-dialog/send-response-dialog.component';
 import { SeeConsultationDialogComponent } from './see-consultation-dialog/see-consultation-dialog.component';
 import { SeeResponseDialogComponent } from './see-response-dialog/see-response-dialog.component';
-import { Student } from './../models/student.model';
 import { ProblemInfoDialogComponent } from './problem-info-dialog/problem-info-dialog.component';
 import { CourseInfoDialogComponent } from './course-info-dialog/course-info-dialog.component';
 import { CourseCodeValidationComponent } from './course-code-validation/course-code-validation.component';
-import { Course } from '../../course/course.model';
+import { Course } from '../course/course.model';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Problem } from '../../problem/problem.model';
+import { Problem } from '../problem/problem.model';
 import { ConsultationDialogComponent } from './consultation-dialog/consultation-dialog.component';
-import { Consultation } from '../../consultation/models/consultation.model';
-import { Workspace } from '../../workspace/models/workspace.model';
+import { Consultation } from '../consultation/models/consultation.model';
+import { Workspace } from '../workspace/models/workspace.model';
 
 @Injectable({
   providedIn: 'root'

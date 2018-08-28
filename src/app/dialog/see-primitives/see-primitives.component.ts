@@ -1,4 +1,4 @@
-import { WorkspaceProblem } from './../../../workspace/models/workspace-problem.model';
+import { WorkspaceProblem } from './../../workspace/models/workspace-problem.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 

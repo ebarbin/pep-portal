@@ -1,5 +1,5 @@
 import { Inscription } from './../inscription.model';
-import { DialogService } from './../../shared/dialog/dialog.service';
+import { DialogService } from '../../dialog/dialog.service';
 import { User } from './../../user/user.model';
 import { UserService } from './../../user/user.service';
 import { Course } from './../course.model';

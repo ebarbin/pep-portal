@@ -1,6 +1,6 @@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
-import { Primitive } from '../../../primitive/primitive.model';
+import { Primitive } from '../../primitive/primitive.model';
 
 @Component({
   selector: 'app-primitive-info',

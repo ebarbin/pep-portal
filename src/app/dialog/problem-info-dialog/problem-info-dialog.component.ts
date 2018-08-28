@@ -1,6 +1,6 @@
+import { Problem } from './../../problem/problem.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
-import { Problem } from '../../../problem/problem.model';
 
 @Component({
   selector: 'app-problem-info-dialog',

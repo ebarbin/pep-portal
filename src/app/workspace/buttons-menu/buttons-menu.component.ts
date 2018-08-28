@@ -1,6 +1,6 @@
 import { WorkspaceProblem } from '../models/workspace-problem.model';
 import { ToastrService } from 'ngx-toastr';
-import { DialogService } from '../../shared/dialog/dialog.service';
+import { DialogService } from '../../dialog/dialog.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Workspace } from '../models/workspace.model';
 

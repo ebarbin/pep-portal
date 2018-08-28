@@ -1,5 +1,5 @@
+import { Course } from './../../course/course.model';
 import { NgForm } from '@angular/forms';
-import { Course } from './../../../course/course.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 

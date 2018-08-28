@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { Consultation } from './../models/consultation.model';
 import { ConsultationService } from './../consultation.service';
-import { DialogService } from './../../shared/dialog/dialog.service';
+import { DialogService } from '../../dialog/dialog.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

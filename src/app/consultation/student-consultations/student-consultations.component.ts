@@ -1,5 +1,5 @@
 import { finalize } from 'rxjs/operators';
-import { DialogService } from './../../shared/dialog/dialog.service';
+import { DialogService } from '../../dialog/dialog.service';
 import { Consultation } from './../models/consultation.model';
 import { ConsultationService } from './../consultation.service';
 import { Component, OnInit } from '@angular/core';

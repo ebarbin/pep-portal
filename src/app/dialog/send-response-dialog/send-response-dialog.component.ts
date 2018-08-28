@@ -1,8 +1,8 @@
+import { Consultation } from './../../consultation/models/consultation.model';
+import { ConsultationService } from './../../consultation/consultation.service';
 import { NgForm } from '@angular/forms';
-import { ConsultationService } from './../../../consultation/consultation.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
-import { Consultation } from '../../../consultation/models/consultation.model';
 
 @Component({
   selector: 'app-send-response-dialog',

@@ -1,3 +1,4 @@
+import { DialogModule } from './../dialog/dialog.module';
 import { HttpHeaderInterceptor } from './http-header.interceptor';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
@@ -9,10 +10,6 @@ import { HeaderComponent } from './header/header.component';
 import { RolePipe } from './pipes/role.pipe';
 import { ProfileImagePipe } from './pipes/profile-image.pipe';
 import { FormsModule } from '@angular/forms';
-import { ProblemInfoDialogComponent } from './dialog/problem-info-dialog/problem-info-dialog.component';
-import { CourseInfoDialogComponent } from './dialog/course-info-dialog/course-info-dialog.component';
-import { CourseCodeValidationComponent } from './dialog/course-code-validation/course-code-validation.component';
-import { ConfirmationDialogComponent } from './dialog/confirmation-dialog/confirmation-dialog.component';
 import { TagInputModule } from 'ngx-chips';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
@@ -24,12 +21,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StartComponent } from './start/start.component';
-import { ConsultationDialogComponent } from './dialog/consultation-dialog/consultation-dialog.component';
-import { SeeResponseDialogComponent } from './dialog/see-response-dialog/see-response-dialog.component';
-import { SeeConsultationDialogComponent } from './dialog/see-consultation-dialog/see-consultation-dialog.component';
-import { SendResponseDialogComponent } from './dialog/send-response-dialog/send-response-dialog.component';
-import { PrimitiveInfoComponent } from './dialog/primitive-info/primitive-info.component';
-import { SeePrimitivesComponent } from './dialog/see-primitives/see-primitives.component';
 
 @NgModule({
   imports: [
@@ -62,10 +53,6 @@ import { SeePrimitivesComponent } from './dialog/see-primitives/see-primitives.c
     HeaderComponent,
     HomeComponent,
     CourseSelectComponent,
-    ConfirmationDialogComponent,
-    CourseCodeValidationComponent,
-    CourseInfoDialogComponent,
-    ProblemInfoDialogComponent,
     ProfileImagePipe,
     RolePipe
   ],
@@ -74,29 +61,8 @@ import { SeePrimitivesComponent } from './dialog/see-primitives/see-primitives.c
     HomeComponent,
     StartComponent,
     CourseSelectComponent,
-    ConfirmationDialogComponent,
-    CourseCodeValidationComponent,
-    CourseInfoDialogComponent,
-    ProblemInfoDialogComponent,
     ProfileImagePipe,
-    RolePipe,
-    ConsultationDialogComponent,
-    SeeConsultationDialogComponent,
-    SendResponseDialogComponent,
-    PrimitiveInfoComponent,
-    SeePrimitivesComponent,
-  ],
-  entryComponents: [
-    ConfirmationDialogComponent,
-    CourseCodeValidationComponent,
-    CourseInfoDialogComponent,
-    ProblemInfoDialogComponent,
-    ConsultationDialogComponent,
-    SeeResponseDialogComponent,
-    SeeConsultationDialogComponent,
-    SendResponseDialogComponent,
-    PrimitiveInfoComponent,
-    SeePrimitivesComponent
+    RolePipe
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

@@ -1,11 +1,11 @@
-import { WorkspaceProblem } from './../../../workspace/models/workspace-problem.model';
-import { Consultation } from '../../../consultation/models/consultation.model';
-import { ConsultationService } from './../../../consultation/consultation.service';
-import { Student } from '../../models/student.model';
+import { Consultation } from './../../consultation/models/consultation.model';
+import { ConsultationService } from './../../consultation/consultation.service';
+import { WorkspaceProblem } from './../../workspace/models/workspace-problem.model';
+import { Workspace } from './../../workspace/models/workspace.model';
+
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
-import { Workspace } from '../../../workspace/models/workspace.model';
 
 @Component({
   selector: 'app-consultation-dialog',

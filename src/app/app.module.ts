@@ -1,3 +1,4 @@
+import { DialogModule } from './dialog/dialog.module';
 import { PrimitiveModule } from './primitive/primitive.module';
 import { ConsultationModule } from './consultation/consultation.module';
 import { WorkspaceModule } from './workspace/workspace.module';
@@ -25,7 +26,8 @@ import { CourseModule } from './course/course.module';
     ProblemModule,
     WorkspaceModule,
     ConsultationModule,
-    PrimitiveModule
+    PrimitiveModule,
+    DialogModule
   ],
   bootstrap: [AppComponent]
 })

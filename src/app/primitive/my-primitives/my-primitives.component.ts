@@ -1,4 +1,4 @@
-import { DialogService } from './../../shared/dialog/dialog.service';
+import { DialogService } from '../../dialog/dialog.service';
 import { Primitive } from './../primitive.model';
 import { PrimitiveService } from './../primitive.service';
 import { Component, OnInit } from '@angular/core';
