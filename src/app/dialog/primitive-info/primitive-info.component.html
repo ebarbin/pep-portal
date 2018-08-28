@@ -5,11 +5,21 @@
   </button>
 </div>
 <div class="modal-body">
-  <div [innerHTML]="primitive.description"></div>
-  <ngx-monaco-editor
-    [options]="editorOptions"
-    [(ngModel)]="primitive.code">
-  </ngx-monaco-editor>
+  <div class="card">
+    <div class="card-header">Descripción</div>
+    <div class="card-body" [innerHTML]="primitive.description">
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-header">Código</div>
+    <div class="card-body">
+        <ngx-monaco-editor
+        [options]="editorOptions"
+        [(ngModel)]="primitive.code">
+      </ngx-monaco-editor>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
   <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>

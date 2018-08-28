@@ -11,6 +11,8 @@ export class ProblemInfoDialogComponent implements OnInit {
 
   @Input() problem: Problem;
 
+  editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false, readOnly: true};
+
   constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit() {}

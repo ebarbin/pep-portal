@@ -1,12 +1,41 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{ problem.name }}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+  <h4 class="modal-title">{{ problem.name }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card">
+    <div class="card-header">Explicación</div>
+    <div class="card-body" [innerHTML]="problem.explanation">
     </div>
-    <div class="modal-body">
-      <div [innerHTML]="problem.explanation"></div>
+  </div>
+  <div *ngIf="problem.primitives && problem.primitives.length > 0">
+    <br>
+    <div class="card">
+      <div class="card-header">Primitivas</div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let primitive of problem.primitives">
+            {{primitive.name}}
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>
+  </div>
+  <div *ngIf="problem.context && problem.context !==''">
+    <br>
+    <div class="card" >
+      <div class="card-header">Contexto</div>
+      <div class="card-body">
+          <ngx-monaco-editor
+          [options]="editorOptions"
+          [(ngModel)]="problem.context">
+        </ngx-monaco-editor>
+      </div>
     </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>
+</div>

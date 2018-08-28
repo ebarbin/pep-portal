@@ -5,7 +5,22 @@
     </button>
   </div>
   <div class="modal-body">
-    <div [innerHTML]="course.description"></div>
+    <div class="card">
+      <div class="card-header">Descripción</div>
+      <div class="card-body" [innerHTML]="course.description">
+      </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-header">Ejercicios</div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let problem of course.problems">
+              {{problem.name}}
+            </li>
+          </ul>
+        </div>
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>

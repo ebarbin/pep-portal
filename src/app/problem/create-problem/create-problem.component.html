@@ -24,11 +24,16 @@
         </div>
         <div class="row">
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <ngx-monaco-editor
-              [options]="editorOptions"
-              name="context"
-              ngModel>
-            </ngx-monaco-editor>
+            <div class="card">
+                <div class="card-header">Contexto</div>
+                <div class="">
+                  <ngx-monaco-editor
+                    [options]="editorOptions"
+                    name="context"
+                    ngModel>
+                  </ngx-monaco-editor>
+                </div>
+              </div>
           </div>
         </div>
         <button
