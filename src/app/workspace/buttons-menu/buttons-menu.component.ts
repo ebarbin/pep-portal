@@ -19,6 +19,7 @@ export class ButtonsMenuComponent implements OnInit {
   @Input() workspaceProblem: WorkspaceProblem;
 
   @Output() logChange = new EventEmitter<string>();
+  @Output() logClear = new EventEmitter<string>();
 
   ngOnInit() {}
 
@@ -51,8 +52,15 @@ export class ButtonsMenuComponent implements OnInit {
   }
 
   onClearButtonClick() {
-    this.logChange.emit('');
-    this.workspaceProblem.solution = null;
-    this.workspaceService.updateSolution(this.workspace, this.workspaceProblem).subscribe();
+    this.dialogService.confirm('Atención', '¿Estas seguro?').then((result: Boolean) => {
+      if (result) {
+        this.workspaceProblem.solution = null;
+        this.workspaceService.updateSolution(this.workspace, this.workspaceProblem).subscribe();
+      }
+    }).catch(() => {});
+  }
+
+  onClearLogButtonClick() {
+    this.logClear.emit();
   }
 }

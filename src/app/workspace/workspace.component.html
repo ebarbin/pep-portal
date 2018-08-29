@@ -9,7 +9,11 @@
 
   <div class="row" style="margin-top:-15px;">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <app-buttons-menu (logChange)="onLogChanged($event)" [workspace]="workspace" [workspaceProblem]="activeProblem"></app-buttons-menu>
+        <app-buttons-menu
+          (logChange)="onLogChanged($event)"
+          (logClear)="onLogCleared($event)"
+          [workspace]="workspace"
+          [workspaceProblem]="activeProblem"></app-buttons-menu>
         <ngx-monaco-editor (keyup)="updateSolution()" *ngIf="activeProblem"
           [options]="editorOptions"
           [(ngModel)]="activeProblem.solution">
@@ -22,7 +26,12 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="card">
-        <textarea style="width: 100%;" [value]="log" readonly="true"></textarea>
+        <textarea
+          style="background-color: black; color:white; width: 100%; font-size:11px;"
+          rows="4"
+          [value]="log"
+          readonly="true">
+        </textarea>
       </div>
     </div>
   </div>

@@ -44,8 +44,16 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
     });
   }
 
+  onLogCleared() {
+    this.log = '';
+  }
+
   onLogChanged(value: string) {
-    this.log = value;
+    if (!this.log) {
+      this.log = value;
+    } else {
+      this.log = this.log + '\n' + value;
+    }
   }
 
   ngOnDestroy() {

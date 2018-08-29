@@ -14,6 +14,11 @@
 </button>
 <button style="position: relative; top: 155px; left: -181px; width: 45px;"
   class="btn btn-danger" *ngIf="workspaceProblem"
-  placement="top" ngbTooltip="Limpiar" (click)="onClearButtonClick()">
+  placement="top" ngbTooltip="Borrar area de trabajo" (click)="onClearButtonClick()">
   <fa name="eraser"></fa>
+</button>
+<button style="position: relative; top: 241px; left: -225px; width: 45px;"
+  class="btn btn-dark" *ngIf="workspaceProblem"
+  placement="top" ngbTooltip="Borrar log" (click)="onClearLogButtonClick()">
+  <fa name="trash"></fa>
 </button>
