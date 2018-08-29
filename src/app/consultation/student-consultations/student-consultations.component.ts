@@ -35,14 +35,14 @@ export class StudentConsultationsComponent implements OnInit {
     .then((result: boolean) => {
       if (result) {
         this.consultationService.removeById(consultation.id).subscribe(() => {
-          this.toastService.success('Consulta eliminada.', 'Operación exitosa');
 
           this.consultations = this.consultations.filter((c: Consultation) => {
             return c.id !== consultation.id;
           });
 
+          this.toastService.success('Consulta eliminada.', 'Operación exitosa');
+
           if (this.consultations.length === 0) {
-            this.toastService.warning('No hay consultas.', 'Atención');
             this.router.navigate(['home/start']);
           }
 

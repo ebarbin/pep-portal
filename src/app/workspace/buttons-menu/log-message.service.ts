@@ -20,7 +20,7 @@ export class LogMessageService {
     }
 
     message = rawMessage.split('is not defined')
-      .join('no esta definido');
+      .join('no está definido');
 
     if (message !== rawMessage) {
       return message;
@@ -34,12 +34,19 @@ export class LogMessageService {
     }
 
     message = rawMessage.split('Unexpected token')
-    .join('Carácter inesperado');
+      .join('Carácter inesperado');
 
     if (message !== rawMessage) {
       return message;
     }
 
+    message = rawMessage.split('Unexpected identifier')
+    .join('Identificador inesperado');
+
+
+    if (message !== rawMessage) {
+      return message;
+    }
     console.log(rawMessage);
 
     return rawMessage;

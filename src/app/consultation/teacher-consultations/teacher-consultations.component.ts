@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Consultation } from './../models/consultation.model';
 import { ConsultationService } from './../consultation.service';
@@ -13,7 +14,8 @@ export class TeacherConsultationsComponent implements OnInit {
 
   consultations = [];
 
-  constructor(private dialogService: DialogService, private consultationService: ConsultationService,
+  constructor(private router: Router, private dialogService: DialogService,
+    private consultationService: ConsultationService,
     private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -46,7 +48,13 @@ export class TeacherConsultationsComponent implements OnInit {
       this.consultations = this.consultations.filter((c: Consultation) => {
         return c.id !== consultation.id;
       });
+
       this.toastrService.success('Ya se ha enviado la respuesta al alumno.', 'Operación exitosa');
+
+      if (this.consultations.length === 0) {
+        this.router.navigate(['home/start']);
+      }
+
     })
     .catch(() => {});
   }
