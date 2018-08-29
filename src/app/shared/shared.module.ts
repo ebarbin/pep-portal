@@ -1,4 +1,3 @@
-import { DialogModule } from './../dialog/dialog.module';
 import { HttpHeaderInterceptor } from './http-header.interceptor';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';

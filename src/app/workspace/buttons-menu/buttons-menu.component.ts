@@ -1,3 +1,4 @@
+import { LogMessageService } from './log-message.service';
 import { WorkspaceService } from './../workspace.service';
 import { WorkspaceProblem } from '../models/workspace-problem.model';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +14,9 @@ import { Workspace } from '../models/workspace.model';
 export class ButtonsMenuComponent implements OnInit {
 
   constructor(private workspaceService: WorkspaceService,
-    private dialogService: DialogService, private toastrService: ToastrService) { }
+    private dialogService: DialogService,
+    private toastrService: ToastrService,
+    private logMessageService: LogMessageService) { }
 
   @Input() workspace: Workspace;
   @Input() workspaceProblem: WorkspaceProblem;
@@ -26,9 +29,10 @@ export class ButtonsMenuComponent implements OnInit {
   onExecuteButtonClick() {
     try {
       eval(this.workspaceProblem.solution);
-      this.logChange.emit('');
+      this.logClear.emit();
     } catch (e) {
-      this.logChange.emit(e);
+      const errorMessage = this.logMessageService.getFixedMessage(e.message);
+      this.logChange.emit(errorMessage);
     }
   }
 
