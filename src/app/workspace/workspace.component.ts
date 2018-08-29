@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { WorkspaceProblem } from './models/workspace-problem.model';
 import { WorkspaceService } from './workspace.service';
 import { Subscription } from 'rxjs';
-import { Student } from '../shared/models/student.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Workspace } from './models/workspace.model';
 
@@ -20,6 +19,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
 
   workspace;
   activeProblem: WorkspaceProblem;
+  log = '';
 
   constructor(private router: Router, private toastrService: ToastrService, private workspaceService: WorkspaceService) { }
 
@@ -42,6 +42,10 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  onLogChanged(value: string) {
+    this.log = value;
   }
 
   ngOnDestroy() {

@@ -1,9 +1,19 @@
-<button style="position: relative; top: 38px; left: -43px;" class="btn btn-success"
-  placement="top" ngbTooltip="Enviar Consulta" (click)="onChatButtonClick()">
-    <fa name="paper-plane"></fa>
+<button style="position: relative; top: 38px; left: -46px; width: 45px;"
+  class="btn btn-success" placement="top" ngbTooltip="Ejecutar" (click)="onExecuteButtonClick()">
+    <fa name="play"></fa>
 </button>
-<button style="position: relative; top: 78px; left: -85px;" class="btn btn-primary" *ngIf="workspaceProblem"
-  placement="top" ngbTooltip="Ver Primitivas"
-  (click)="onPrimitivesButtonClick()" [disabled]="!workspaceProblem.problem.primitives || workspaceProblem.problem.primitives.length === 0">
+<button style="position: relative; top: 77px; left: -91px; width: 45px;"
+  class="btn btn-primary" *ngIf="workspaceProblem" placement="top" ngbTooltip="Ver Primitivas"
+  (click)="onSeePrimitivesButtonClick()">
   <fa name="codepen"></fa>
+</button>
+<button style="position: relative; top: 116px; left: -136px; width: 45px;"
+  class="btn btn-secondary" *ngIf="workspaceProblem"
+  placement="top" ngbTooltip="Enviar Consulta" (click)="onConsultationButtonClick()">
+  <fa name="paper-plane"></fa>
+</button>
+<button style="position: relative; top: 155px; left: -181px; width: 45px;"
+  class="btn btn-danger" *ngIf="workspaceProblem"
+  placement="top" ngbTooltip="Limpiar" (click)="onClearButtonClick()">
+  <fa name="eraser"></fa>
 </button>

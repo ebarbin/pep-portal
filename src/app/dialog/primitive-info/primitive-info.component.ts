@@ -9,7 +9,7 @@ import { Primitive } from '../../primitive/primitive.model';
 })
 export class PrimitiveInfoComponent implements OnInit {
 
-  editorOptions = {theme: 'vs-dark', language: 'javascript', readOnly: true};
+  editorOptions = {theme: 'vs-dark', language: 'javascript', readOnly: true, contextmenu: false};
 
   @Input() primitive: Primitive;
 

@@ -8,8 +8,8 @@
   <app-problem-explanation *ngIf="workspace && activeProblem" [workspaceProblem]="activeProblem"></app-problem-explanation>
 
   <div class="row" style="margin-top:-15px;">
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <app-buttons-menu [workspace]="workspace" [workspaceProblem]="activeProblem"></app-buttons-menu>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <app-buttons-menu (logChange)="onLogChanged($event)" [workspace]="workspace" [workspaceProblem]="activeProblem"></app-buttons-menu>
         <ngx-monaco-editor (keyup)="updateSolution()" *ngIf="activeProblem"
           [options]="editorOptions"
           [(ngModel)]="activeProblem.solution">
@@ -19,12 +19,10 @@
     </div>
   </div>
 
-  <br>
-
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="card">
-        <div class="card-body">RESULTADOS</div>
+        <textarea style="width: 100%;" [value]="log" readonly="true"></textarea>
       </div>
     </div>
   </div>
