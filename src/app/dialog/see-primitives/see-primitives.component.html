@@ -5,14 +5,13 @@
     </button>
   </div>
   <div class="modal-body">
-
-      <ngb-accordion [closeOthers]="true" activeIds="static-1">
-          <ngb-panel [title]="primitive.name" *ngFor="let primitive of workspaceProblem.problem.primitives">
-            <ng-template ngbPanelContent>
-                <div [innerHTML]="primitive.description"></div>
-            </ng-template>
-          </ngb-panel>
-        </ngb-accordion>
+    <ngb-accordion [closeOthers]="true" activeIds="static-1">
+        <ngb-panel [title]="primitive.name" *ngFor="let primitive of workspaceProblem.problem.primitives">
+          <ng-template ngbPanelContent>
+              <div [innerHTML]="primitive.description"></div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
   </div>
   <div class="modal-footer">
     <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>
