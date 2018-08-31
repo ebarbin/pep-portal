@@ -20,7 +20,8 @@ export class LogMessageService {
     }
 
     message = rawMessage.split('is not defined')
-      .join('no está definido');
+      .join(' ---> El elemento no esta definido. Para definir una variable use \"var <nombre variable>\". ' +
+      'Para definir una función use \"function <nombre función>(<parametros>) {<cuerpo del programa>}\".');
 
     if (message !== rawMessage) {
       return message;
@@ -47,6 +48,14 @@ export class LogMessageService {
     if (message !== rawMessage) {
       return message;
     }
+
+    message = rawMessage.split('Illegal return statement')
+    .join('Retorno inválido');
+
+    if (message !== rawMessage) {
+      return message;
+    }
+
     console.log(rawMessage);
 
     return rawMessage;

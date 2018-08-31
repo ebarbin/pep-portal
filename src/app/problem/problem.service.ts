@@ -78,4 +78,8 @@ export class ProblemService {
         })
       );
   }
+
+  getDefaultPosExecution() {
+    return '//Recuerde que debe devolver un objeto json {state: <boolean>, message: <string>}';
+  }
 }

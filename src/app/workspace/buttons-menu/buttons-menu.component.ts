@@ -28,9 +28,28 @@ export class ButtonsMenuComponent implements OnInit {
 
   onExecuteButtonClick() {
     try {
-      eval(this.workspaceProblem.solution);
-      this.logClear.emit();
+
+      let executionContext = '';
+      executionContext = this.workspaceProblem.problem.preExecution + ';\n';
+      executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+      executionContext = executionContext + this.workspaceProblem.problem.posExecution;
+
+      console.log(executionContext);
+
+      const result = new Function(executionContext)();
+
+      console.log(result);
+
+      if (!result.state) {
+        this.toastrService.error(result.message);
+        this.logChange.emit(result.message);
+      } else {
+        this.toastrService.success(result.message);
+      }
+
+      // this.logClear.emit();
     } catch (e) {
+      console.log(e);
       const errorMessage = this.logMessageService.getFixedMessage(e.message);
       this.logChange.emit(errorMessage);
     }

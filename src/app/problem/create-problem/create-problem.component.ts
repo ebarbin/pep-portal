@@ -33,13 +33,19 @@ export class CreateProblemComponent implements OnInit {
   editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};
 
   constructor(private toastService: ToastrService, private router: Router,
-    private problemService: ProblemService, private primitiveService: PrimitiveService, private route: ActivatedRoute) { }
+    private problemService: ProblemService, private primitiveService: PrimitiveService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.problemId = this.route.snapshot.params['problemId'];
 
     if (!this.problemId) {
       this.title = 'Crear Ejercicio';
+
+      setTimeout(() => {
+        this.editForm.form.patchValue({ posExecution: this.problemService.getDefaultPosExecution()});
+      });
+
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
         this.editForm.form.patchValue(problem);
@@ -59,12 +65,12 @@ export class CreateProblemComponent implements OnInit {
     if (this.editMode) {
       problem.id = this.problemId;
       this.problemService.editeProblem(problem).subscribe(() => {
-        this.toastService.success('Curso editado.', 'Operación exitosa');
+        this.toastService.success('Problema editado.', 'Operación exitosa');
         this.router.navigate(['/home/problem/list']);
       });
     } else {
       this.problemService.createProblem(problem).subscribe(() => {
-        this.toastService.success('Curso creado.', 'Operación exitosa');
+        this.toastService.success('Problema creado.', 'Operación exitosa');
         this.router.navigate(['/home/start']);
       });
     }
