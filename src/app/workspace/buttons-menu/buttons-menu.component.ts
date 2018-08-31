@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { LogMessageService } from './log-message.service';
 import { WorkspaceService } from './../workspace.service';
 import { WorkspaceProblem } from '../models/workspace-problem.model';
@@ -14,6 +13,8 @@ import { Workspace } from '../models/workspace.model';
 })
 export class ButtonsMenuComponent implements OnInit {
 
+  modeDebug = false;
+
   constructor(private workspaceService: WorkspaceService,
     private dialogService: DialogService,
     private toastrService: ToastrService,
@@ -27,26 +28,50 @@ export class ButtonsMenuComponent implements OnInit {
 
   ngOnInit() {}
 
+  onChangeMode() {
+    this.modeDebug = !this.modeDebug;
+    if (this.modeDebug) {
+      this.toastrService.info('Modo debug activado.', 'Atención');
+    } else {
+      this.toastrService.info('Modo debug desactivado.', 'Atención');
+    }
+  }
+
   onProblemValidButtonClick() {
     try {
 
-      let executionContext = '';
-      executionContext = this.workspaceProblem.problem.preExecution + ';\n';
-      executionContext = executionContext + this.workspaceProblem.solution + ';\n';
-      executionContext = executionContext + this.workspaceProblem.problem.posExecution;
+      if (!this.modeDebug) {
+        let executionContext = '';
+        executionContext = this.workspaceProblem.problem.preExecution + ';\n';
+        executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+        executionContext = executionContext + this.workspaceProblem.problem.posExecution;
 
-      console.log(executionContext);
+        console.log(executionContext);
 
-      const result = new Function(executionContext)();
+        const result = new Function(executionContext)();
 
-      console.log(result);
+        console.log(result);
 
-      if (!result.state) {
-        this.toastrService.error(result.message);
-        this.logChange.emit(result.message);
+        if (!result.state) {
+          this.toastrService.error(result.message);
+          this.logChange.emit(result.message);
+        } else {
+          this.toastrService.success(result.message);
+          this.logClear.emit();
+        }
+
       } else {
-        this.toastrService.success(result.message);
-        this.logClear.emit();
+        let executionContext = '';
+        executionContext = 'var console = {data: []}; console.log = function(value) { console.data.push(value.toString());}\n';
+        executionContext = executionContext + this.workspaceProblem.problem.preExecution + ';\n';
+        executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+        executionContext = executionContext + 'return console.data;';
+
+        const logs = new Function(executionContext)();
+
+        logs.forEach( (log) => {
+          this.logChange.emit(log);
+        });
       }
 
     } catch (e) {
@@ -67,7 +92,7 @@ export class ButtonsMenuComponent implements OnInit {
     const wp = this.workspaceProblem;
 
     if (!wp.problem.primitives || wp.problem.primitives.length <= 0) {
-      this.toastrService.warning('Este ejercicio no tiene primitivas asignadas.', 'Atención');
+      this.toastrService.info('Este ejercicio no tiene primitivas asignadas.', 'Atención');
     } else {
       this.dialogService.seePrimitives(wp, 'lg')
       .then(() => {})

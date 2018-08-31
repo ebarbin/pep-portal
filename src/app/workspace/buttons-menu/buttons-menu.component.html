@@ -1,30 +1,33 @@
-<button style="position: relative; top: 38px; left: -46px; width: 45px;"
-  class="btn btn-success"
-  placement="top" ngbTooltip="Validar Ejercicio" (click)="onProblemValidButtonClick()">
-  <fa name="play"></fa>
-</button>
-<button style="position: relative; top: 77px; left: -91px; width: 45px;"
-  class="btn btn-warning"
-  placement="top" ngbTooltip="Ejecutar Local" (click)="onLocalEjecutionButtonClick()">
-  <fa name="bug"></fa>
-</button>
-<button style="position: relative; top: 116px; left: -136px; width: 45px;"
-  class="btn btn-secondary"
-  placement="top" ngbTooltip="Enviar Consulta" (click)="onConsultationButtonClick()">
-  <fa name="paper-plane"></fa>
-</button>
-<button style="position: relative; top: 155px; left: -181px; width: 45px;"
-  class="btn btn-primary" placement="top" ngbTooltip="Ver Primitivas"
-  (click)="onSeePrimitivesButtonClick()">
-  <fa name="codepen"></fa>
-</button>
-<button style="position: relative; top: 194px; left: -226px; width: 45px;"
-  class="btn btn-danger"
-  placement="top" ngbTooltip="Borrar area de trabajo" (click)="onClearButtonClick()">
-  <fa name="eraser"></fa>
-</button>
-<button style="position: relative; top: 241px; left: -270px; width: 45px;"
-  class="btn btn-dark"
-  placement="top" ngbTooltip="Borrar log" (click)="onClearLogButtonClick()">
-  <fa name="trash"></fa>
-</button>
+<div>
+  <div style="position: relative; top: -1px;" class="btn-group btn-group-toggle pull-right"
+    ngbRadioGroup name="radioBasic" [(ngModel)]="modeDebug">
+    <label ngbButtonLabel class="btn-warning" ngbTooltip="Modo debug">
+      <input ngbButton type="radio" [value]="true" (click)="onChangeMode()"><fa name="bug"></fa>
+    </label>
+  </div>
+  <button style="position: relative; top: 38px; left: -46px; width: 45px;"
+    class="btn btn-success"
+    placement="top" ngbTooltip="Ejecutar" (click)="onProblemValidButtonClick()">
+    <fa name="play"></fa>
+  </button>
+  <button style="position: relative; top: 77px; left: -91px; width: 45px;"
+    class="btn btn-secondary"
+    placement="top" ngbTooltip="Enviar Consulta" (click)="onConsultationButtonClick()">
+    <fa name="paper-plane"></fa>
+  </button>
+  <button style="position: relative; top: 116px; left: -136px; width: 45px;"
+    class="btn btn-primary" placement="top" ngbTooltip="Ver Primitivas"
+    (click)="onSeePrimitivesButtonClick()">
+    <fa name="codepen"></fa>
+  </button>
+  <button style="position: relative; top: 155px; left: -181px; width: 45px;"
+    class="btn btn-danger"
+    placement="top" ngbTooltip="Borrar area de trabajo" (click)="onClearButtonClick()">
+    <fa name="trash"></fa>
+  </button>
+  <button style="position: relative; top: 241px; left: -225px; width: 45px;"
+    class="btn btn-dark"
+    placement="top" ngbTooltip="Borrar log" (click)="onClearLogButtonClick()">
+    <fa name="trash"></fa>
+  </button>
+</div>

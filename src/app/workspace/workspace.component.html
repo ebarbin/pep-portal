@@ -1,4 +1,4 @@
-<div class="container" (keyup)="onKeyUp($event)">
+<div class="container">
   <br>
   <app-course-description *ngIf="workspace" [course]="workspace.course"></app-course-description>
   <br>
@@ -7,13 +7,14 @@
 
   <app-problem-explanation *ngIf="workspace && activeProblem" [workspaceProblem]="activeProblem"></app-problem-explanation>
 
-  <div class="row" style="margin-top:-15px;">
+  <div class="row" style="margin-top: 15px;">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <app-buttons-menu
           (logChange)="onLogChanged($event)"
           (logClear)="onLogCleared($event)"
           [workspace]="workspace"
-          [workspaceProblem]="activeProblem"></app-buttons-menu>
+          [workspaceProblem]="activeProblem">
+        </app-buttons-menu>
         <ngx-monaco-editor (keyup)="onKeyUp($event)" *ngIf="activeProblem"
           [options]="editorOptions"
           [(ngModel)]="activeProblem.solution">
