@@ -59,6 +59,8 @@ export class CourseSelectComponent implements OnInit, OnDestroy {
     this.workspaceService.activeWorkspaceByCourse(this.courseSelected).subscribe(() => {
       if (this.courseSelected.id) {
         this.router.navigate(['/home/workspace']);
+      } else {
+        this.router.navigate(['/home/start']);
       }
     });
   }

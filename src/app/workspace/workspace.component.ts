@@ -21,7 +21,8 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   activeProblem: WorkspaceProblem;
   log = '';
 
-  constructor(private router: Router, private toastrService: ToastrService, private workspaceService: WorkspaceService) { }
+  constructor(private router: Router, private toastrService: ToastrService,
+    private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
     this.workspaceService.getActiveWorkspace().subscribe((workspace: Workspace) => {
@@ -64,8 +65,8 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
     this.activeProblem = worskpaceProblem;
   }
 
-  updateSolution() {
-      this.workspaceService.updateSolution(this.workspace, this.activeProblem).subscribe();
+  onKeyUp(event: KeyboardEvent) {
+    this.workspaceService.updateSolution(this.workspace, this.activeProblem).subscribe();
   }
 
 }

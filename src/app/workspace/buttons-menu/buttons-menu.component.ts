@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LogMessageService } from './log-message.service';
 import { WorkspaceService } from './../workspace.service';
 import { WorkspaceProblem } from '../models/workspace-problem.model';
@@ -26,7 +27,7 @@ export class ButtonsMenuComponent implements OnInit {
 
   ngOnInit() {}
 
-  onExecuteButtonClick() {
+  onProblemValidButtonClick() {
     try {
 
       let executionContext = '';
@@ -45,9 +46,9 @@ export class ButtonsMenuComponent implements OnInit {
         this.logChange.emit(result.message);
       } else {
         this.toastrService.success(result.message);
+        this.logClear.emit();
       }
 
-      // this.logClear.emit();
     } catch (e) {
       console.log(e);
       const errorMessage = this.logMessageService.getFixedMessage(e.message);
@@ -85,5 +86,26 @@ export class ButtonsMenuComponent implements OnInit {
 
   onClearLogButtonClick() {
     this.logClear.emit();
+  }
+
+  onLocalEjecutionButtonClick() {
+    try {
+      let executionContext = '';
+
+      executionContext = 'var console = {data: []}; console.log = function(value) { console.data.push(value.toString());}\n';
+      executionContext = executionContext + this.workspaceProblem.problem.preExecution + ';\n';
+      executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+      executionContext = executionContext + 'return console.data;';
+
+      const logs = new Function(executionContext)();
+
+      logs.forEach( (log) => {
+        this.logChange.emit(log);
+      });
+
+    } catch (e) {
+      const errorMessage = this.logMessageService.getFixedMessage(e.message);
+      this.logChange.emit(errorMessage);
+    }
   }
 }
