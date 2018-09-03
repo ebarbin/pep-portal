@@ -83,8 +83,8 @@ export class MyCoursesComponent implements OnInit {
   }
 
   removeEnroll(course: Course) {
-
-    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm(
+      'Atención', 'Si acepta perderá el avance que haya realizado en el curso. ¿Está seguro de continuar?', 'Si', 'No')
     .then((result: boolean) => {
       if (result) {
 

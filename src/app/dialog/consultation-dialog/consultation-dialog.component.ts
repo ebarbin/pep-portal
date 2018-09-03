@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Consultation } from './../../consultation/models/consultation.model';
 import { ConsultationService } from './../../consultation/consultation.service';
 import { WorkspaceProblem } from './../../workspace/models/workspace-problem.model';
@@ -18,7 +19,8 @@ export class ConsultationDialogComponent implements OnInit {
   @Input() workspaceProblem: WorkspaceProblem;
 
   codeWasAttached = false;
-  constructor(private consultationService: ConsultationService, private activeModal: NgbActiveModal) { }
+  constructor(private toastrService: ToastrService,
+    private consultationService: ConsultationService, private activeModal: NgbActiveModal) { }
 
   ngOnInit() {}
 
@@ -41,7 +43,11 @@ export class ConsultationDialogComponent implements OnInit {
   }
 
   attachCode() {
-    this.codeWasAttached = !this.codeWasAttached;
+    if(!this.workspaceProblem.solution || this.workspaceProblem.solution === '') {
+      this.toastrService.error('No hay código para adjuntar.', 'Error');
+    } else {
+      this.codeWasAttached = !this.codeWasAttached;
+    }
   }
 
   public dismiss() {

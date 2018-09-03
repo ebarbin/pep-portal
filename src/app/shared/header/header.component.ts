@@ -14,8 +14,7 @@ import { Subscription } from '../../../../node_modules/rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor(private consultationService: ConsultationService, private userService: UserService, private router: Router,
-    private toastService: ToastrService) { }
+  constructor(private consultationService: ConsultationService, private userService: UserService, private router: Router) { }
 
   isCollapsed: boolean;
   user: User;
@@ -76,7 +75,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     this.userService.logout().subscribe( () => {
-      this.toastService.success('Has deslogueado.', 'Operación exitosa');
       this.router.navigate(['/user/login']);
     });
   }

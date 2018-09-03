@@ -42,7 +42,7 @@ export class LogMessageService {
     }
 
     message = rawMessage.split('Unexpected identifier')
-    .join('Identificador inesperado');
+      .join('Identificador inesperado');
 
 
     if (message !== rawMessage) {
@@ -50,13 +50,18 @@ export class LogMessageService {
     }
 
     message = rawMessage.split('Illegal return statement')
-    .join('Retorno inválido');
+      .join('Retorno inválido');
 
     if (message !== rawMessage) {
       return message;
     }
 
-    console.log(rawMessage);
+    message = rawMessage.split('Invalid or unexpected token')
+      .join('Carácter inválido o inesperado');
+
+    if (message !== rawMessage) {
+      return message;
+    }
 
     return rawMessage;
   }

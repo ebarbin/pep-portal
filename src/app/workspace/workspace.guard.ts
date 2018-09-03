@@ -20,7 +20,7 @@ export class WorkspaceGuard implements CanActivate {
       if (workspace) {
         return true;
       } else {
-        this.toastrService.warning('Debe seleccionar un curso desde el menu.', 'Atención');
+        this.toastrService.warning('No hay curso seleccionado.', 'Atención');
         return false;
       }
     }));

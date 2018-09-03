@@ -34,7 +34,6 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
 
     this.subs = this.workspaceService.workspaceSelectionChanged.subscribe((workspace: Workspace) => {
       if (!workspace) {
-        this.toastrService.warning('Debe anotarse al menos a un curso para poder ingresar al area de trabajo. ', 'Atención');
         this.router.navigate(['home/start']);
       } else {
         this.workspace = workspace;

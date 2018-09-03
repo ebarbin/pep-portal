@@ -38,47 +38,71 @@ export class ButtonsMenuComponent implements OnInit {
   }
 
   onProblemValidButtonClick() {
-    try {
 
       if (!this.modeDebug) {
-        let executionContext = '';
-        executionContext = this.workspaceProblem.problem.preExecution + ';\n';
-        executionContext = executionContext + this.workspaceProblem.solution + ';\n';
-        executionContext = executionContext + this.workspaceProblem.problem.posExecution;
 
-        console.log(executionContext);
+        try {
+          if (this.workspaceProblem.solution) {
+            new Function(this.workspaceProblem.solution)();
+          }
 
-        const result = new Function(executionContext)();
+          let executionContext = '';
+          if (this.workspaceProblem.problem.preExecution) {
+            executionContext = this.workspaceProblem.problem.preExecution + ';\n';
+          }
+          if (this.workspaceProblem.solution) {
+            executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+          }
+          if (this.workspaceProblem.problem.posExecution) {
+            executionContext = executionContext + this.workspaceProblem.problem.posExecution;
+          }
 
-        console.log(result);
+          const result = new Function(executionContext)();
 
-        if (!result.state) {
-          this.toastrService.error(result.message);
-          this.logChange.emit(result.message);
-        } else {
-          this.toastrService.success(result.message);
-          this.logClear.emit();
+          console.log(result);
+
+          if (!result.state) {
+            this.toastrService.error(result.message);
+            this.logChange.emit(result.message);
+          } else {
+            this.toastrService.success(result.message);
+            this.logClear.emit();
+          }
+        } catch (e) {
+          console.log(e);
+          const errorMessage = this.logMessageService.getFixedMessage(e.message);
+          this.toastrService.error('Ha ocurrido un error. Verifique el código ingresado' + '.', 'Error');
+          this.logChange.emit(errorMessage);
         }
 
       } else {
-        let executionContext = '';
-        executionContext = 'var console = {data: []}; console.log = function(value) { console.data.push(value.toString());}\n';
-        executionContext = executionContext + this.workspaceProblem.problem.preExecution + ';\n';
-        executionContext = executionContext + this.workspaceProblem.solution + ';\n';
-        executionContext = executionContext + 'return console.data;';
 
-        const logs = new Function(executionContext)();
+        try {
+          let executionContext = '';
+          executionContext = 'var console = {data: []};\n';
+          executionContext = executionContext + 'console.log = function(value) { console.data.push(value ? value.toString() : "null");}\n';
 
-        logs.forEach( (log) => {
-          this.logChange.emit(log);
-        });
+          if (this.workspaceProblem.problem.preExecution) {
+            executionContext = this.workspaceProblem.problem.preExecution + ';\n';
+          }
+          if (this.workspaceProblem.solution) {
+            executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+          }
+          executionContext = executionContext + 'return console.data;';
+
+          const logs = new Function(executionContext)();
+          this.logClear.emit();
+
+          logs.forEach( (log) => {
+            this.logChange.emit(log);
+          });
+
+        } catch (e) {
+          console.log(e);
+          const errorMessage = this.logMessageService.getFixedMessage(e.message);
+          this.logChange.emit(errorMessage);
+        }
       }
-
-    } catch (e) {
-      console.log(e);
-      const errorMessage = this.logMessageService.getFixedMessage(e.message);
-      this.logChange.emit(errorMessage);
-    }
   }
 
   onConsultationButtonClick() {
@@ -113,24 +137,4 @@ export class ButtonsMenuComponent implements OnInit {
     this.logClear.emit();
   }
 
-  onLocalEjecutionButtonClick() {
-    try {
-      let executionContext = '';
-
-      executionContext = 'var console = {data: []}; console.log = function(value) { console.data.push(value.toString());}\n';
-      executionContext = executionContext + this.workspaceProblem.problem.preExecution + ';\n';
-      executionContext = executionContext + this.workspaceProblem.solution + ';\n';
-      executionContext = executionContext + 'return console.data;';
-
-      const logs = new Function(executionContext)();
-
-      logs.forEach( (log) => {
-        this.logChange.emit(log);
-      });
-
-    } catch (e) {
-      const errorMessage = this.logMessageService.getFixedMessage(e.message);
-      this.logChange.emit(errorMessage);
-    }
-  }
 }

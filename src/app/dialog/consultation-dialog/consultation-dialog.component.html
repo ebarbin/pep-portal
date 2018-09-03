@@ -10,10 +10,10 @@
         required placeholder="Escriba una consulta"></textarea>
         <button type="button"
           style="width: 100%; border-radius: 0px 0px 5px 5px;"
-          class="btn btn-default"
-          (click)="attachCode()">
-          <span *ngIf="!codeWasAttached">Adjuntar Código</span>
-          <span *ngIf="codeWasAttached">Quitar Código</span>
+          class="btn btn-primary"
+          (click)="attachCode()" [ngClass]="{'clicked': codeWasAttached}">
+          <span *ngIf="!codeWasAttached"><fa name="paperclip"></fa> Adjuntar Código</span>
+          <span *ngIf="codeWasAttached"><fa name="archive"></fa> Quitar Código</span>
         </button>
     </div>
     <div class="modal-footer">
