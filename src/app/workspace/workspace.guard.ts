@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 })
 export class WorkspaceGuard implements CanActivate {
 
-  constructor(private workspaceService: WorkspaceService, private studentService: StudentService, private toastrService: ToastrService) {}
+  constructor(private workspaceService: WorkspaceService, private toastrService: ToastrService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this.workspaceService.getActiveWorkspace().pipe(map((workspace: Workspace) => {

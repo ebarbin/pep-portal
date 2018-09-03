@@ -44,7 +44,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
     });
   }
 
-  onClearLogButtonClick() {
+  onLogCleared() {
     this.log = '';
   }
 

@@ -48,10 +48,10 @@ export class ButtonsMenuComponent implements OnInit {
 
           let executionContext = '';
           if (this.workspaceProblem.problem.preExecution) {
-            executionContext = this.workspaceProblem.problem.preExecution + ';\n';
+            executionContext = this.workspaceProblem.problem.preExecution + '\n';
           }
           if (this.workspaceProblem.solution) {
-            executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+            executionContext = executionContext + this.workspaceProblem.solution + '\n';
           }
           if (this.workspaceProblem.problem.posExecution) {
             executionContext = executionContext + this.workspaceProblem.problem.posExecution;
@@ -79,16 +79,22 @@ export class ButtonsMenuComponent implements OnInit {
 
         try {
           let executionContext = '';
-          executionContext = 'var console = {data: []};\n';
-          executionContext = executionContext + 'console.log = function(value) { console.data.push(value ? value.toString() : "null");}\n';
+         // executionContext = 'var console = {data: []};\n';
+         // executionContext = executionContext + 'console.log = function(value) { console.data.push(value ? value.toString() : "null")}\n';
+
+          this.workspaceProblem.problem.primitives.forEach( (primitive) => {
+            executionContext = executionContext + primitive.code + '\n';
+          });
 
           if (this.workspaceProblem.problem.preExecution) {
-            executionContext = this.workspaceProblem.problem.preExecution + ';\n';
+            executionContext = executionContext + this.workspaceProblem.problem.preExecution + '\n';
           }
           if (this.workspaceProblem.solution) {
-            executionContext = executionContext + this.workspaceProblem.solution + ';\n';
+            executionContext = executionContext + this.workspaceProblem.solution + '\n';
           }
-          executionContext = executionContext + 'return console.data;';
+          executionContext = executionContext + 'return _logs;';
+
+          // executionContext = executionContext + 'return console.data;';
 
           const logs = new Function(executionContext)();
           this.logClear.emit();

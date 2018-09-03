@@ -1,9 +1,9 @@
+import { DialogService } from './../../dialog/dialog.service';
 import { interval } from 'rxjs';
 import { ConsultationService } from './../../consultation/consultation.service';
 import { UserService } from './../../user/user.service';
-import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, RouterState } from '@angular/router';
 import { User } from '../../user/user.model';
 import { Subscription } from '../../../../node_modules/rxjs';
 
@@ -14,7 +14,8 @@ import { Subscription } from '../../../../node_modules/rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor(private consultationService: ConsultationService, private userService: UserService, private router: Router) { }
+  constructor(private dialogService: DialogService, private consultationService: ConsultationService,
+     private userService: UserService, private router: Router) { }
 
   isCollapsed: boolean;
   user: User;
@@ -77,6 +78,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userService.logout().subscribe( () => {
       this.router.navigate(['/user/login']);
     });
+  }
+
+  onShowHelp() {
+
+    this.dialogService.showHelp(this.router.routerState.snapshot.url);
   }
 
 }

@@ -79,7 +79,13 @@ export class ProblemService {
       );
   }
 
+
+
   getDefaultPosExecution() {
-    return '//Recuerde que debe devolver un objeto json {state: <boolean>, message: <string>}';
+    return '//Validar el ejercicio state\nreturn result;';
+  }
+
+  getDefaultPreExecution() {
+    return 'var result = {state: false, message: \'Mensaje de error.\'};';
   }
 }

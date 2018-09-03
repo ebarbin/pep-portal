@@ -43,7 +43,10 @@ export class CreateProblemComponent implements OnInit {
       this.title = 'Crear Ejercicio';
 
       setTimeout(() => {
-        this.editForm.form.patchValue({ posExecution: this.problemService.getDefaultPosExecution()});
+        this.editForm.form.patchValue({
+          preExecution: this.problemService.getDefaultPreExecution(),
+          posExecution: this.problemService.getDefaultPosExecution()
+        });
       });
 
     } else {

@@ -1,3 +1,4 @@
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SeePrimitivesComponent } from './see-primitives/see-primitives.component';
 import { PrimitiveInfoComponent } from './primitive-info/primitive-info.component';
 import { Primitive } from '../primitive/primitive.model';
@@ -99,4 +100,13 @@ export class DialogService {
 
     return modalRef.result;
   }
+
+  public showHelp(url: string): Promise<boolean> {
+
+    const modalRef = this.modalService.open(HelpDialogComponent, { size: 'lg' });
+    modalRef.componentInstance.url = url;
+
+    return modalRef.result;
+  }
+
 }

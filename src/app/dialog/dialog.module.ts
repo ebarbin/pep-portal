@@ -1,3 +1,4 @@
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SharedModule } from './../shared/shared.module';
 import { SeeResponseDialogComponent } from './../dialog/see-response-dialog/see-response-dialog.component';
 import { SeePrimitivesComponent } from './../dialog/see-primitives/see-primitives.component';
@@ -18,16 +19,6 @@ import { CommonModule } from '@angular/common';
     SharedModule
   ],
   exports: [
-    ConfirmationDialogComponent,
-    CourseCodeValidationComponent,
-    CourseInfoDialogComponent,
-    ProblemInfoDialogComponent,
-    ConsultationDialogComponent,
-    SeeResponseDialogComponent,
-    SeeConsultationDialogComponent,
-    SendResponseDialogComponent,
-    PrimitiveInfoComponent,
-    SeePrimitivesComponent
   ],
   declarations: [
     ConfirmationDialogComponent,
@@ -39,7 +30,8 @@ import { CommonModule } from '@angular/common';
     SendResponseDialogComponent,
     PrimitiveInfoComponent,
     SeePrimitivesComponent,
-    SeeResponseDialogComponent
+    SeeResponseDialogComponent,
+    HelpDialogComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -51,7 +43,8 @@ import { CommonModule } from '@angular/common';
     SeeConsultationDialogComponent,
     SendResponseDialogComponent,
     PrimitiveInfoComponent,
-    SeePrimitivesComponent
+    SeePrimitivesComponent,
+    HelpDialogComponent
   ],
 })
 export class DialogModule { }
