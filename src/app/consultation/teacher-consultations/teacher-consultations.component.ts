@@ -25,18 +25,18 @@ export class TeacherConsultationsComponent implements OnInit {
   }
 
   seeConsultation(consultation: Consultation) {
-    this.dialogService.seeConsultation(consultation.consultation, 'lg')
+    this.dialogService.seeConsultation(consultation, 'lg')
       .then(() => {
-        if (!consultation.wasReaded) {
+        if (!consultation.wasReadedByTeacher) {
           this.consultationService.markAsReadConsultation(consultation).subscribe(() => {
-            consultation.wasReaded = true;
+            consultation.wasReadedByTeacher = true;
           });
         }
       })
       .catch(() => {
-        if (!consultation.wasReaded) {
+        if (!consultation.wasReadedByTeacher) {
           this.consultationService.markAsReadConsultation(consultation).subscribe(() => {
-            consultation.wasReaded = true;
+            consultation.wasReadedByTeacher = true;
           });
         }
       });

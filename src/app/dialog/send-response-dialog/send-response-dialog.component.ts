@@ -23,7 +23,8 @@ export class SendResponseDialogComponent implements OnInit {
 
   public onSubmit(form: NgForm) {
     const response = <string> form.value.response;
-    this.consultation.teacherResponse = {wasReaded: false, response: response};
+    this.consultation.teacherResponse = response;
+    this.consultation.wasReadedByStudent = false;
 
     this.consultationService.sendResponse(this.consultation).subscribe(() => {
       this.activeModal.close(true);

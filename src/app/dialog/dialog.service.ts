@@ -2,7 +2,6 @@ import { SeePrimitivesComponent } from './see-primitives/see-primitives.componen
 import { PrimitiveInfoComponent } from './primitive-info/primitive-info.component';
 import { Primitive } from '../primitive/primitive.model';
 import { WorkspaceProblem } from '../workspace/models/workspace-problem.model';
-import { TeacherResponse } from '../consultation/models/teacher-response.model';
 import { SendResponseDialogComponent } from './send-response-dialog/send-response-dialog.component';
 import { SeeConsultationDialogComponent } from './see-consultation-dialog/see-consultation-dialog.component';
 import { SeeResponseDialogComponent } from './see-response-dialog/see-response-dialog.component';
@@ -66,17 +65,17 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public seeResponse(teacherResponse: TeacherResponse, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+  public seeResponse(teacherResponse: string, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(SeeResponseDialogComponent, { size: dialogSize });
-    modalRef.componentInstance.response = teacherResponse.response;
+    modalRef.componentInstance.response = teacherResponse;
 
     return modalRef.result;
   }
 
-  public seeConsultation(consultation: String, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+  public seeConsultation(consultation: Consultation, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(SeeConsultationDialogComponent, { size: dialogSize });
-    modalRef.componentInstance.consultation = consultation;
-
+    modalRef.componentInstance.consultation = consultation.consultation;
+    modalRef.componentInstance.code = consultation.code;
     return modalRef.result;
   }
 

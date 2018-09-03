@@ -9,6 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SeeConsultationDialogComponent implements OnInit {
 
   @Input() consultation: string;
+  @Input() code: string;
+  editorOptions = {theme: 'vs-dark', language: 'javascript', readOnly: true, contextmenu: false};
 
   constructor(private activeModal: NgbActiveModal) { }
 

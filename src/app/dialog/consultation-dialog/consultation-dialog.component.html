@@ -6,8 +6,15 @@
       </button>
     </div>
     <div class="modal-body">
-        <textarea class="form-control" ngModel name="consultation" style="width:100%;" rows="4" required placeholder="Escriba una consulta">
-        </textarea>
+        <textarea class="form-control" ngModel name="consultation" style="width:100%;" rows="4"
+        required placeholder="Escriba una consulta"></textarea>
+        <button type="button"
+          style="width: 100%; border-radius: 0px 0px 5px 5px;"
+          class="btn btn-default"
+          (click)="attachCode()">
+          <span *ngIf="!codeWasAttached">Adjuntar Código</span>
+          <span *ngIf="codeWasAttached">Quitar Código</span>
+        </button>
     </div>
     <div class="modal-footer">
       <button type="submit" style="width: 100%;" class="btn btn-success" [disabled]="!f.valid">Enviar</button>

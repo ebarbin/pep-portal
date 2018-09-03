@@ -5,7 +5,8 @@
     </button>
   </div>
   <div class="modal-body">
-      {{consultation}}
+    {{consultation}}
+    <ngx-monaco-editor *ngIf="code" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
   </div>
   <div class="modal-footer">
     <button type="button" style="width: 100%;" class="btn btn-success" (click)="accept()">Aceptar</button>

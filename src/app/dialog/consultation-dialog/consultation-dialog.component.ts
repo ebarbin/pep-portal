@@ -17,6 +17,7 @@ export class ConsultationDialogComponent implements OnInit {
   @Input() workspace: Workspace;
   @Input() workspaceProblem: WorkspaceProblem;
 
+  codeWasAttached = false;
   constructor(private consultationService: ConsultationService, private activeModal: NgbActiveModal) { }
 
   ngOnInit() {}
@@ -32,10 +33,15 @@ export class ConsultationDialogComponent implements OnInit {
     consultation.course = this.workspace.course;
     consultation.teacher = this.workspace.course.teacher;
     consultation.problem = this.workspaceProblem.problem;
+    consultation.code = this.codeWasAttached ? this.workspaceProblem.solution : null;
 
     this.consultationService.sendConsultation(consultation).subscribe(() => {
       this.activeModal.close(true);
     });
+  }
+
+  attachCode() {
+    this.codeWasAttached = !this.codeWasAttached;
   }
 
   public dismiss() {

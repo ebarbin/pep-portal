@@ -23,7 +23,7 @@
                     Consulta
                   </button>
                   <button type="button" class="btn center-button btn-danger" (click)="removeConsultation(consultation)"
-                    [disabled]="!consultation.teacherResponse || !consultation.teacherResponse.wasReaded">
+                    [disabled]="!consultation.wasReadedByStudent">
                     Eliminar
                     </button>
                   <button type="button" class="btn right-button btn-success" (click)="seeResponse(consultation)"
@@ -31,7 +31,7 @@
                     Respuesta
                   </button>
                   <fa style="margin-left: 5px; color: red;"
-                    *ngIf="consultation.teacherResponse && !consultation.teacherResponse.wasReaded"
+                    *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
                     name="exclamation-circle"></fa>
                 </td>
               </tr>

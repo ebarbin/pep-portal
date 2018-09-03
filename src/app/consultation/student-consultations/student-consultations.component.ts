@@ -25,7 +25,7 @@ export class StudentConsultationsComponent implements OnInit {
   }
 
   seeConsultation(consultation: Consultation) {
-    this.dialogService.seeConsultation(consultation.consultation, 'lg')
+    this.dialogService.seeConsultation(consultation, 'lg')
       .then(() => {})
       .catch(() => {});
   }
@@ -54,16 +54,16 @@ export class StudentConsultationsComponent implements OnInit {
   seeResponse(consultation: Consultation) {
       this.dialogService.seeResponse(consultation.teacherResponse, 'lg')
       .then(() => {
-        if (!consultation.teacherResponse.wasReaded) {
+        if (!consultation.wasReadedByStudent) {
           this.consultationService.markAsReadStudentResponse(consultation).subscribe(() => {
-            consultation.teacherResponse.wasReaded = true;
+            consultation.wasReadedByStudent = true;
           });
         }
       })
       .catch(() => {
-        if (!consultation.teacherResponse.wasReaded) {
+        if (!consultation.wasReadedByStudent) {
           this.consultationService.markAsReadStudentResponse(consultation).subscribe(() => {
-            consultation.teacherResponse.wasReaded = true;
+            consultation.wasReadedByStudent = true;
           });
         }
       });
