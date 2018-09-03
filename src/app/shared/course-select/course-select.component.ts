@@ -34,6 +34,7 @@ export class CourseSelectComponent implements OnInit, OnDestroy {
     });
 
     this.subsAdd = this.inscriptionService.inscriptionAdded.subscribe((i: Inscription) => {
+      this.courseSelected = <Course> this.emptyCourseSelection;
       this.inscriptions.push(i);
     });
 
