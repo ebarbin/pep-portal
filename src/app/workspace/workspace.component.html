@@ -26,14 +26,16 @@
 
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="card">
-        <textarea
+        <textarea class="pull-right formControl"
           style="background-color: black; color:white; width: 100%; font-size:11px;"
           rows="4"
           [value]="log"
           readonly="true">
         </textarea>
-      </div>
+        <button style="width: 100%; border-radius: 0px 0px 5px 5px;" (click)="onClearLogButtonClick()"
+          class="btn btn-dark" placement="bottom" ngbTooltip="Borrar Log">
+            <fa name="trash"></fa>
+        </button>
     </div>
   </div>
 

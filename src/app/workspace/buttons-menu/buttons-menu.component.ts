@@ -133,8 +133,4 @@ export class ButtonsMenuComponent implements OnInit {
     }).catch(() => {});
   }
 
-  onClearLogButtonClick() {
-    this.logClear.emit();
-  }
-
 }
