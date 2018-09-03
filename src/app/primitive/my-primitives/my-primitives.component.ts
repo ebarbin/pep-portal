@@ -30,7 +30,7 @@ export class MyPrimitivesComponent implements OnInit {
   }
 
   removePrimitive(primitive: Primitive) {
-    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm('Atención', '¿Está seguro?', 'Si', 'No')
     .then((result: boolean) => {
       if (result) {
         this.primitiveService.deleteById(primitive.id).subscribe(() => {

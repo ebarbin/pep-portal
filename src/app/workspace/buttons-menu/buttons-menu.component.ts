@@ -125,7 +125,7 @@ export class ButtonsMenuComponent implements OnInit {
   }
 
   onClearButtonClick() {
-    this.dialogService.confirm('Atención', '¿Estas seguro?').then((result: Boolean) => {
+    this.dialogService.confirm('Atención', '¿Estas seguro?', 'Si', 'No').then((result: Boolean) => {
       if (result) {
         this.workspaceProblem.solution = null;
         this.workspaceService.updateSolution(this.workspace, this.workspaceProblem).subscribe();

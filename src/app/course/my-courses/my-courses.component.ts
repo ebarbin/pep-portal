@@ -42,7 +42,7 @@ export class MyCoursesComponent implements OnInit {
   }
 
   removeCourse(course: Course) {
-    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm('Atención', '¿Está seguro?', 'Si', 'No')
     .then((result: boolean) => {
       if (result) {
         this.courseService.deleteById(course.id).subscribe(() => {

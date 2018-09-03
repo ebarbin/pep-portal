@@ -24,7 +24,7 @@ export class MyProblemsComponent implements OnInit {
   }
 
   removeProblem(problem: Problem) {
-    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm('Atención', '¿Está seguro?', 'Si', 'No')
     .then((result: boolean) => {
       if (result) {
         this.problemService.deleteById(problem.id).subscribe(() => {

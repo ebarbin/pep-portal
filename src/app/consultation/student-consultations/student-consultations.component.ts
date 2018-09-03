@@ -31,7 +31,7 @@ export class StudentConsultationsComponent implements OnInit {
   }
 
   removeConsultation(consultation: Consultation) {
-    this.dialogService.confirm('Atención', '¿Está seguro?', 'Aceptar', 'Cancelar')
+    this.dialogService.confirm('Atención', '¿Está seguro?', 'Si', 'No')
     .then((result: boolean) => {
       if (result) {
         this.consultationService.removeById(consultation.id).subscribe(() => {
