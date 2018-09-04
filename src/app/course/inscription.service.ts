@@ -1,4 +1,3 @@
-import { Student } from './../shared/models/student.model';
 import { Course } from './course.model';
 import { Inscription } from './inscription.model';
 import { CustomResponse } from './../shared/custom-response.model';

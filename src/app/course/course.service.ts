@@ -1,13 +1,10 @@
-import { StudentService } from '../shared/services/student.service';
-import { Student } from '../shared/models/student.model';
-import { UserService } from './../user/user.service';
 import { User } from './../user/user.model';
 import { Course } from './course.model';
 import { CustomResponse } from '../shared/custom-response.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  map } from 'rxjs/operators';
-import {  of, Subject } from 'rxjs';
+import {  of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
