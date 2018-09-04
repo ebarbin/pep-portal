@@ -17,5 +17,20 @@
   background-color: #5cb85c;
 }
 
+.progress-list-flex .success {
+  background-color: #5cb85c;
+}
+
+.ok {
+  color: green;
+}
+
+.nook {
+  color: red;
+}
+
+.nofocus {
+  color: #ecf0f1
+}
 
 

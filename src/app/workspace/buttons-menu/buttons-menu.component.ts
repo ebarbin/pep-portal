@@ -42,74 +42,40 @@ export class ButtonsMenuComponent implements OnInit {
       if (!this.modeDebug) {
 
         try {
+
           if (this.workspaceProblem.solution) {
             new Function(this.workspaceProblem.solution)();
           }
 
-          let executionContext = '';
-          if (this.workspaceProblem.problem.preExecution) {
-            executionContext = this.workspaceProblem.problem.preExecution + '\n';
-          }
-          if (this.workspaceProblem.solution) {
-            executionContext = executionContext + this.workspaceProblem.solution + '\n';
-          }
-          if (this.workspaceProblem.problem.posExecution) {
-            executionContext = executionContext + this.workspaceProblem.problem.posExecution;
-          }
+          const executionContext = this.getExecutionContext(false);
 
           const result = new Function(executionContext)();
-
-          console.log(result);
 
           if (!result.state) {
             this.toastrService.error(result.message);
             this.logChange.emit(result.message);
 
-            this.workspaceService.markProblemAsNoOk(this.workspace, this.workspaceProblem).subscribe(() => {
-              this.workspaceProblem.state = 'NOOK';
-            });
+            this.markProblemAsNoOK();
 
           } else {
             this.toastrService.success(result.message);
             this.logClear.emit();
 
-            this.workspaceService.markProblemAsOk(this.workspace, this.workspaceProblem).subscribe(() => {
-              this.workspaceProblem.state = 'OK';
-            });
-
+            this.markProblemAsOK();
           }
         } catch (e) {
           console.log(e);
-          const errorMessage = this.logMessageService.getFixedMessage(e.message);
-          this.toastrService.error('Ha ocurrido un error. Verifique el código ingresado' + '.', 'Error');
-          this.logChange.emit(errorMessage);
 
-          this.workspaceService.markProblemAsNoOk(this.workspace, this.workspaceProblem).subscribe(() => {
-            this.workspaceProblem.state = 'NOOK';
-          });
+          this.toastrService.error('Ha ocurrido un error. Verifique el código ingresado' + '.', 'Error');
+          this.logChange.emit(this.logMessageService.getFixedMessage(e.message));
+
+          this.markProblemAsNoOK();
         }
 
       } else {
 
         try {
-          let executionContext = '';
-         // executionContext = 'var console = {data: []};\n';
-         // executionContext = executionContext + 'console.log = function(value) { console.data.push(value ? value.toString() : "null")}\n';
-
-          this.workspaceProblem.problem.primitives.forEach( (primitive) => {
-            executionContext = executionContext + primitive.code + '\n';
-          });
-
-          if (this.workspaceProblem.problem.preExecution) {
-            executionContext = executionContext + this.workspaceProblem.problem.preExecution + '\n';
-          }
-          if (this.workspaceProblem.solution) {
-            executionContext = executionContext + this.workspaceProblem.solution + '\n';
-          }
-          executionContext = executionContext + 'return _logs;';
-
-          // executionContext = executionContext + 'return console.data;';
-
+          const executionContext = this.getExecutionContext(true);
           const logs = new Function(executionContext)();
           this.logClear.emit();
 
@@ -119,10 +85,46 @@ export class ButtonsMenuComponent implements OnInit {
 
         } catch (e) {
           console.log(e);
-          const errorMessage = this.logMessageService.getFixedMessage(e.message);
-          this.logChange.emit(errorMessage);
+          this.logChange.emit(this.logMessageService.getFixedMessage(e.message));
         }
       }
+  }
+
+  private markProblemAsOK() {
+    this.workspaceService.markProblemAsOk(this.workspace, this.workspaceProblem).subscribe(() => {
+      this.workspaceProblem.state = 'OK';
+    });
+  }
+
+  private markProblemAsNoOK() {
+    this.workspaceService.markProblemAsNoOk(this.workspace, this.workspaceProblem).subscribe(() => {
+      this.workspaceProblem.state = 'NOOK';
+    });
+  }
+
+  private getExecutionContext(debug) {
+    let executionContext = '';
+
+    this.workspaceProblem.problem.primitives.forEach( (primitive) => {
+      executionContext = executionContext + primitive.code + '\n';
+    });
+
+    if (this.workspaceProblem.problem.preExecution) {
+      executionContext = this.workspaceProblem.problem.preExecution + '\n';
+    }
+    if (this.workspaceProblem.solution) {
+      executionContext = executionContext + this.workspaceProblem.solution + '\n';
+    }
+
+    if (debug) {
+      executionContext = executionContext + 'return _logs;';
+    } else {
+      if (this.workspaceProblem.problem.posExecution) {
+        executionContext = executionContext + this.workspaceProblem.problem.posExecution;
+      }
+    }
+
+    return executionContext;
   }
 
   onConsultationButtonClick() {
