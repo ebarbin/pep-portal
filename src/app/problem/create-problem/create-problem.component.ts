@@ -1,3 +1,4 @@
+import { DialogService } from './../../dialog/dialog.service';
 import { PrimitiveService } from './../../primitive/primitive.service';
 import { Primitive } from './../../primitive/primitive.model';
 import { Observable } from 'rxjs';
@@ -32,7 +33,10 @@ export class CreateProblemComponent implements OnInit {
 
   editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};
 
-  constructor(private toastService: ToastrService, private router: Router,
+  showPreExecution = true;
+  showPosExecution = true;
+
+  constructor(private dialogService: DialogService, private toastService: ToastrService, private router: Router,
     private problemService: ProblemService, private primitiveService: PrimitiveService,
     private route: ActivatedRoute) { }
 
@@ -41,14 +45,6 @@ export class CreateProblemComponent implements OnInit {
 
     if (!this.problemId) {
       this.title = 'Crear Ejercicio';
-
-      setTimeout(() => {
-        this.editForm.form.patchValue({
-          preExecution: this.problemService.getDefaultPreExecution(),
-          posExecution: this.problemService.getDefaultPosExecution()
-        });
-      });
-
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
         this.editForm.form.patchValue(problem);
@@ -56,6 +52,15 @@ export class CreateProblemComponent implements OnInit {
       this.editMode = true;
       this.title = 'Editar Ejercicio';
     }
+  }
+
+  seeContext() {
+    const p = <Problem> this.editForm.form.value;
+    this.dialogService.seeContext(p, 'lg').then(() => {
+
+    }).catch(() => {
+
+    });
   }
 
   onSubmit(form: NgForm) {

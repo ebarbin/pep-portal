@@ -79,13 +79,12 @@ export class ProblemService {
       );
   }
 
-
-
-  getDefaultPosExecution() {
-    return '//Validar el ejercicio state\nreturn result;';
+  getStaticPreExecution() {
+    const context = 'var __result = {logs: [], state: false, message: ""};\n';
+    return context + 'var log = function(value) {__result.logs.push(value);}\n';
   }
 
-  getDefaultPreExecution() {
-    return 'var result = {state: false, message: \'Mensaje de error.\'};';
+  getStaticPosExecution() {
+    return '\nreturn __result;';
   }
 }

@@ -23,31 +23,53 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-              <div class="card-header">Pre Ejecución</div>
+              <div class="card-header cursor-pointer" (click)="showPreExecution = !showPreExecution">
+                <div class="pull-left">
+                    Pre Ejecución
+                </div>
+                <div class="pull-right">
+                    <fa [name]="showPreExecution ? 'minus-square' : 'plus-square'" ></fa>
+                </div>
+              </div>
+              <div [ngStyle]="{'display': showPreExecution ? 'block' : 'none' }">
                 <ngx-monaco-editor
                   [options]="editorOptions"
                   name="preExecution"
                   ngModel>
                 </ngx-monaco-editor>
+              </div>
             </div>
           </div>
-          <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="card">
-                <div class="card-header">Pos Ejecución</div>
+                <div class="card-header cursor-pointer" (click)="showPosExecution = !showPosExecution">
+                  <div class="pull-left">
+                      Pos Ejecución
+                  </div>
+                  <div class="pull-right">
+                      <fa [name]="showPosExecution ? 'minus-square' : 'plus-square'" ></fa>
+                  </div>
+                </div>
+                <div [ngStyle]="{'display': showPosExecution ? 'block' : 'none' }">
                   <ngx-monaco-editor
                     [options]="editorOptions"
                     name="posExecution"
                     ngModel>
                   </ngx-monaco-editor>
+                </div>
               </div>
             </div>
         </div>
         <button
-          class="two-buttons left-button btn btn-success btn-lg"
+          class="three-buttons left-button btn btn-success btn-lg"
           type="submit" [disabled]="!f.valid">Aceptar</button>
-        <button class="two-buttons right-button btn btn-danger btn-lg"
+        <button class="three-buttons center-button btn btn-info btn-lg"
+          type="button" (click)="seeContext()">Ver Contexto</button>
+        <button class="three-buttons right-button btn btn-danger btn-lg"
           type="button" (click)="cancel()">Cancelar</button>
       </form>
     </div>

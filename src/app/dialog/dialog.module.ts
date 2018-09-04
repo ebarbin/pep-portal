@@ -12,6 +12,7 @@ import { CourseCodeValidationComponent } from './../dialog/course-code-validatio
 import { ConfirmationDialogComponent } from './../dialog/confirmation-dialog/confirmation-dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SeeContextDialogComponent } from './see-context-dialog/see-context-dialog.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { CommonModule } from '@angular/common';
     PrimitiveInfoComponent,
     SeePrimitivesComponent,
     SeeResponseDialogComponent,
-    HelpDialogComponent
+    HelpDialogComponent,
+    SeeContextDialogComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -44,7 +46,8 @@ import { CommonModule } from '@angular/common';
     SendResponseDialogComponent,
     PrimitiveInfoComponent,
     SeePrimitivesComponent,
-    HelpDialogComponent
+    HelpDialogComponent,
+    SeeContextDialogComponent
   ],
 })
 export class DialogModule { }

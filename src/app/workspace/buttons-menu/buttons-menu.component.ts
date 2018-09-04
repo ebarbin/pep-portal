@@ -1,3 +1,4 @@
+import { ProblemService } from './../../problem/problem.service';
 import { LogMessageService } from './log-message.service';
 import { WorkspaceService } from './../workspace.service';
 import { WorkspaceProblem } from '../models/workspace-problem.model';
@@ -15,7 +16,8 @@ export class ButtonsMenuComponent implements OnInit {
 
   modeDebug = false;
 
-  constructor(private workspaceService: WorkspaceService,
+  constructor(private problemService: ProblemService,
+    private workspaceService: WorkspaceService,
     private dialogService: DialogService,
     private toastrService: ToastrService,
     private logMessageService: LogMessageService) { }
@@ -43,10 +45,6 @@ export class ButtonsMenuComponent implements OnInit {
 
         try {
 
-          if (this.workspaceProblem.solution) {
-            new Function(this.workspaceProblem.solution)();
-          }
-
           const executionContext = this.getExecutionContext(false);
 
           const result = new Function(executionContext)();
@@ -63,6 +61,11 @@ export class ButtonsMenuComponent implements OnInit {
 
             this.markProblemAsOK();
           }
+
+          result.logs.forEach( (log) => {
+            this.logChange.emit(log);
+          });
+
         } catch (e) {
           console.log(e);
 
@@ -76,10 +79,10 @@ export class ButtonsMenuComponent implements OnInit {
 
         try {
           const executionContext = this.getExecutionContext(true);
-          const logs = new Function(executionContext)();
+          const result = new Function(executionContext)();
           this.logClear.emit();
 
-          logs.forEach( (log) => {
+          result.logs.forEach( (log) => {
             this.logChange.emit(log);
           });
 
@@ -103,26 +106,29 @@ export class ButtonsMenuComponent implements OnInit {
   }
 
   private getExecutionContext(debug) {
-    let executionContext = '';
+
+    let executionContext = this.problemService.getStaticPreExecution();
 
     this.workspaceProblem.problem.primitives.forEach( (primitive) => {
       executionContext = executionContext + primitive.code + '\n';
     });
 
     if (this.workspaceProblem.problem.preExecution) {
-      executionContext = this.workspaceProblem.problem.preExecution + '\n';
+      executionContext = executionContext + this.workspaceProblem.problem.preExecution + '\n';
     }
     if (this.workspaceProblem.solution) {
       executionContext = executionContext + this.workspaceProblem.solution + '\n';
     }
 
-    if (debug) {
-      executionContext = executionContext + 'return _logs;';
-    } else {
+    if (!debug) {
       if (this.workspaceProblem.problem.posExecution) {
         executionContext = executionContext + this.workspaceProblem.problem.posExecution;
       }
     }
+
+    executionContext = executionContext + this.problemService.getStaticPosExecution();
+
+    console.log(executionContext);
 
     return executionContext;
   }

@@ -1,3 +1,4 @@
+import { SeeContextDialogComponent } from './see-context-dialog/see-context-dialog.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SeePrimitivesComponent } from './see-primitives/see-primitives.component';
 import { PrimitiveInfoComponent } from './primitive-info/primitive-info.component';
@@ -105,6 +106,13 @@ export class DialogService {
 
     const modalRef = this.modalService.open(HelpDialogComponent, { size: 'lg' });
     modalRef.componentInstance.url = url;
+
+    return modalRef.result;
+  }
+
+  public seeContext(problem: Problem, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+    const modalRef = this.modalService.open(SeeContextDialogComponent, { size: dialogSize });
+    modalRef.componentInstance.problem = problem;
 
     return modalRef.result;
   }
