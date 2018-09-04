@@ -1,3 +1,4 @@
+import { ChartComponent } from './shared/chart/chart.component';
 import { MyCoursesGuard } from './course/my-courses/my-courses.guard';
 import { MyProblemsGuard } from './problem/my-problems/my-problems.guard';
 import { MyPrimitivesGuard } from './primitive/my-primitives/my-primitives.guard';
@@ -46,6 +47,8 @@ const appRoutes: Routes = [
     { path: 'primitive/list', component: MyPrimitivesComponent, canActivate: [MyPrimitivesGuard] },
     { path: 'new-primitive', component: CreatePrimitiveComponent },
     { path: 'edit-primitive/:primitiveId', component: CreatePrimitiveComponent },
+    { path: 'chart', component: ChartComponent },
+
   ]},
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },

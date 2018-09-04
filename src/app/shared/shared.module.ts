@@ -20,6 +20,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StartComponent } from './start/start.component';
+import { ChartsModule } from 'ng2-charts';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   imports: [
@@ -37,7 +39,8 @@ import { StartComponent } from './start/start.component';
     MonacoEditorModule.forRoot(),
     AngularEditorModule,
     TagInputModule,
-    PopoverModule
+    PopoverModule,
+    ChartsModule
   ],
   exports: [
     HttpClientModule,
@@ -49,6 +52,7 @@ import { StartComponent } from './start/start.component';
     TagInputModule,
     MonacoEditorModule,
     FormsModule,
+    ChartsModule,
     HeaderComponent,
     HomeComponent,
     CourseSelectComponent,
@@ -61,7 +65,8 @@ import { StartComponent } from './start/start.component';
     StartComponent,
     CourseSelectComponent,
     ProfileImagePipe,
-    RolePipe
+    RolePipe,
+    ChartComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

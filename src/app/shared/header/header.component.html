@@ -57,6 +57,11 @@
               <span *ngIf="unreadValue || unreadValue > 0"
                 class="badge badge-danger">{{unreadValue}}</span></a>
         </li>
+        <li class="nav-item" *ngIf="user.role === 'ROLE_TEACHER'">
+            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/chart">
+              Dashboard
+            </a>
+        </li>
       </ul>
       <app-course-select *ngIf="user.role === 'ROLE_STUDENT'"></app-course-select>
       <ul class="navbar-nav">
@@ -77,7 +82,7 @@
       <ul class="navbar-nav">
           <li class="nav-item">
               <a class="nav-link  cursor-pointer" role="button" (click)="onShowHelp()">
-                <fa name="question-circle" size="2x"></fa>
+                <fa name="question-circle"></fa>
               </a>
           </li>
       </ul>
