@@ -54,4 +54,25 @@ export class WorkspaceService {
       })
     );
   }
+
+  markProblemAsOk(workspace: Workspace, workspaceProblem: WorkspaceProblem) {
+    return this.httpClient.put('pep-api/workspace/mark-problem-ok/' + workspace.id,
+    {problem: {id: workspaceProblem.problem.id}, solution: workspaceProblem.solution})
+    .pipe(
+      map((response: CustomResponse) => {
+        return response.body;
+      })
+    );
+  }
+
+  markProblemAsNoOk(workspace: Workspace, workspaceProblem: WorkspaceProblem) {
+    return this.httpClient.put('pep-api/workspace/mark-problem-nook/' + workspace.id,
+    {problem: {id: workspaceProblem.problem.id}, solution: workspaceProblem.solution})
+    .pipe(
+      map((response: CustomResponse) => {
+        return response.body;
+      })
+    );
+  }
+
 }

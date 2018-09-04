@@ -64,15 +64,29 @@ export class ButtonsMenuComponent implements OnInit {
           if (!result.state) {
             this.toastrService.error(result.message);
             this.logChange.emit(result.message);
+
+            this.workspaceService.markProblemAsNoOk(this.workspace, this.workspaceProblem).subscribe(() => {
+              this.workspaceProblem.state = 'NOOK';
+            });
+
           } else {
             this.toastrService.success(result.message);
             this.logClear.emit();
+
+            this.workspaceService.markProblemAsOk(this.workspace, this.workspaceProblem).subscribe(() => {
+              this.workspaceProblem.state = 'OK';
+            });
+
           }
         } catch (e) {
           console.log(e);
           const errorMessage = this.logMessageService.getFixedMessage(e.message);
           this.toastrService.error('Ha ocurrido un error. Verifique el código ingresado' + '.', 'Error');
           this.logChange.emit(errorMessage);
+
+          this.workspaceService.markProblemAsNoOk(this.workspace, this.workspaceProblem).subscribe(() => {
+            this.workspaceProblem.state = 'NOOK';
+          });
         }
 
       } else {

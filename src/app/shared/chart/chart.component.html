@@ -1,9 +1,47 @@
-<div style="display: block">
-  <canvas baseChart
-    [data]="pieChartData"
-    [labels]="pieChartLabels"
-    [chartType]="pieChartType"
-    (chartHover)="chartHovered($event)"
-    (chartClick)="chartClicked($event)">
-  </canvas>
-</div>
+<div class="container">
+    <h1 class="h3 mb-3 font-weight-normal text-center">Panel de Gráficos</h1>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <h1 class="h4 mb-3 font-weight-normal text-center">Inscriptos por Curso</h1>
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          chartType="pie"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <h1 class="h4 mb-3 font-weight-normal text-center">Consultas por Ejercicio</h1>
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          chartType="pie"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <h1 class="h4 mb-3 font-weight-normal text-center">Estado de Ejercicio por Curso</h1>
+          <canvas baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            chartType="bar"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <h1 class="h4 mb-3 font-weight-normal text-center">Estado de Ejercicio por Alumno</h1>
+          <canvas baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            chartType="pie"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+      </div>
+  </div>

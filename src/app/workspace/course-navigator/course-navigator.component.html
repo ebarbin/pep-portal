@@ -2,5 +2,10 @@
     <a *ngFor="let wp of workspace.problems"
       class="progress-list-item text-center cursor-pointer active"
       (click)="selectProblem(wp)"
-      [ngClass]="{'success': wp.active}" placement="top" [ngbTooltip]="wp.problem.name"></a>
+      [ngClass]="{'success': wp.active}" placement="top" [ngbTooltip]="wp.problem.name">
+      <fa name="check" *ngIf="wp.state === 'OK'"
+        style="position:relative; top: -8px; color:green;"></fa>
+      <fa name="times" *ngIf="wp.state === 'NOOK'"
+        style="position:relative; top: -8px; color:red;"></fa>
+    </a>
 </div>

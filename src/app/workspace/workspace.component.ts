@@ -65,7 +65,9 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   }
 
   onKeyUp(event: KeyboardEvent) {
-    this.workspaceService.updateSolution(this.workspace, this.activeProblem).subscribe();
+    this.workspaceService.updateSolution(this.workspace, this.activeProblem).subscribe(() => {
+      this.activeProblem.state = null;
+    });
   }
 
 }
