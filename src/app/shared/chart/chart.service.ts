@@ -18,4 +18,13 @@ export class ChartService {
         })
       );
   }
+
+  getProgressStudentsForCourse(courseId: string) {
+    return this.httpClient.get('pep-api/chart/progress-student-for-course/' + courseId)
+    .pipe(
+      map((response: CustomResponse) => {
+        return <[any]> response.body;
+      })
+    );
+  }
 }
