@@ -11,7 +11,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <app-buttons-menu
           (logChange)="onLogChanged($event)"
-          (logClear)="onLogCleared($event)"
+          (logClear)="onLogCleared()"
           [workspace]="workspace"
           [workspaceProblem]="activeProblem">
         </app-buttons-menu>

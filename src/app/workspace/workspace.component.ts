@@ -1,4 +1,3 @@
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { WorkspaceProblem } from './models/workspace-problem.model';
 import { WorkspaceService } from './workspace.service';
@@ -21,8 +20,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   activeProblem: WorkspaceProblem;
   log = '';
 
-  constructor(private router: Router, private toastrService: ToastrService,
-    private workspaceService: WorkspaceService) { }
+  constructor(private router: Router, private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
     this.workspaceService.getActiveWorkspace().subscribe((workspace: Workspace) => {

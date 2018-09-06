@@ -23,18 +23,6 @@
       </div>
     </div>
   </div>
-  <div *ngIf="problem.context && problem.context !==''">
-    <br>
-    <div class="card" >
-      <div class="card-header">Contexto</div>
-      <div class="card-body">
-          <ngx-monaco-editor
-          [options]="editorOptions"
-          [(ngModel)]="problem.context">
-        </ngx-monaco-editor>
-      </div>
-    </div>
-  </div>
 </div>
 <div class="modal-footer">
   <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>
