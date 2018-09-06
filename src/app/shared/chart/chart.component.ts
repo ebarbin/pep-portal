@@ -53,14 +53,14 @@ export class ChartComponent implements OnInit {
         return p.name;
       });
 
-      this.chartService.getProgressStudentsForCourse(this.courseSelected.id).subscribe((data: [any]) => {
+      this.chartService.getProgressStudentsPerCourse(this.courseSelected.id).subscribe((data: [any]) => {
         this.stateStudentByProblemAndCourse.data = data;
         this.stateStudentByProblemAndCourse.load = true;
       });
 
     });
 
-    this.chartService.getStudentsForCourse().subscribe((data: [any]) => {
+    this.chartService.getStudentsPerCourse().subscribe((data: [any]) => {
       this.studentsForCourse.labels = data.map((d: any) => {
         return d.courseName;
       });
@@ -76,7 +76,7 @@ export class ChartComponent implements OnInit {
   onCourseSelection() {
     this.stateStudentByProblemAndCourse.load = false;
 
-    this.chartService.getProgressStudentsForCourse(this.courseSelected.id).subscribe((data: [any]) => {
+    this.chartService.getProgressStudentsPerCourse(this.courseSelected.id).subscribe((data: [any]) => {
 
       while (this.stateStudentByProblemAndCourse.labels.length) { this.stateStudentByProblemAndCourse.labels.pop(); }
       while (this.stateStudentByProblemAndCourse.data.length) { this.stateStudentByProblemAndCourse.data.pop(); }

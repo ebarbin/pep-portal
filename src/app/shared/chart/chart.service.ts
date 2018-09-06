@@ -10,8 +10,8 @@ export class ChartService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getStudentsForCourse() {
-    return this.httpClient.get('pep-api/chart/students-for-course')
+  getStudentsPerCourse() {
+    return this.httpClient.get('pep-api/chart/students-per-course')
       .pipe(
         map((response: CustomResponse) => {
           return <[any]> response.body;
@@ -19,8 +19,8 @@ export class ChartService {
       );
   }
 
-  getProgressStudentsForCourse(courseId: string) {
-    return this.httpClient.get('pep-api/chart/progress-student-for-course/' + courseId)
+  getProgressStudentsPerCourse(courseId: string) {
+    return this.httpClient.get('pep-api/chart/progress-student-per-course/' + courseId)
     .pipe(
       map((response: CustomResponse) => {
         return <[any]> response.body;

@@ -22,6 +22,8 @@ export class HelpDialogComponent implements OnInit {
       this.title = 'Mis Cursos';
     } else if (this.url.includes('/home/student-consultations')) {
       this.title = 'Mis Consultas';
+    } else if (this.url.includes('/home/teacher-consultations')) {
+      this.title = 'Mis Consultas';
     } else if (this.url.includes('/home/account')) {
       this.title = 'Cuenta';
     } else if (this.url.includes('/home/change-password')) {
@@ -40,6 +42,8 @@ export class HelpDialogComponent implements OnInit {
       this.title = 'Crear Primitiva';
     } else if (this.url.includes('/home/edit-primitive')) {
       this.title = 'Editar Primitiva';
+    } else if (this.url.includes('/home/chart')) {
+      this.title = 'Panel de Gráficos';
     }
   }
 
