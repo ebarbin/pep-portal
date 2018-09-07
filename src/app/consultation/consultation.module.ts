@@ -3,8 +3,6 @@ import { SharedModule } from './../shared/shared.module';
 import { StudentConsultationsComponent } from './student-consultations/student-consultations.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConsultationPipe } from './student-consultations/consultation.pipe';
-import { ComunicationPipe } from './student-consultations/comunication.pipe';
 
 @NgModule({
   imports: [
@@ -13,9 +11,7 @@ import { ComunicationPipe } from './student-consultations/comunication.pipe';
   ],
   declarations: [
     TeacherConsultationsComponent,
-    StudentConsultationsComponent,
-    ConsultationPipe,
-    ComunicationPipe
+    StudentConsultationsComponent
   ]
 })
 export class ConsultationModule { }
