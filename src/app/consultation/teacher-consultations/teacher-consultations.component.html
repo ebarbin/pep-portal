@@ -19,14 +19,15 @@
                 <td> {{ consultation.course.name}}</td>
                 <td> {{ consultation.problem.name}}</td>
                 <td>
-                  <button type="button" style="width:44%;" class="btn left-button btn-info" (click)="seeConsultation(consultation)">
+                  <button type="button" class="btn two-buttons left-button btn-info" (click)="seeConsultation(consultation)">
                     Ver Consulta
                   </button>
-                  <button type="button" style="width:44%;" class="btn right-button btn-success"
+                  <button type="button" class="btn two-buttons right-button btn-success"
                     (click)="sendResponse(consultation)" [disabled]="!consultation.wasReadedByTeacher">
                     Responder
                   </button>
-                  <fa style="margin-left: 5px; color: red;" *ngIf="!consultation.wasReadedByTeacher" name="exclamation-circle"></fa>
+                  <fa style="color: red; position: absolute; margin-left: 20px; margin-top: 5px;"
+                  *ngIf="!consultation.wasReadedByTeacher" name="exclamation-circle"></fa>
                 </td>
               </tr>
             </tbody>

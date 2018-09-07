@@ -67,9 +67,9 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public seeResponse(teacherResponse: string, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
+  public seeResponse(consultation: Consultation, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(SeeResponseDialogComponent, { size: dialogSize });
-    modalRef.componentInstance.response = teacherResponse;
+    modalRef.componentInstance.consultation = consultation;
 
     return modalRef.result;
   }

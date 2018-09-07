@@ -22,18 +22,18 @@
                     <span *ngIf="consultation.problem">{{ consultation.problem.name }}</span>
                   </td>
                   <td>
-                    <button [disabled]="!consultation.problem" type="button" class="btn left-button btn-info" (click)="seeConsultation(consultation)">
+                    <button [disabled]="!consultation.problem" type="button" class="btn three-buttons left-button btn-info" (click)="seeConsultation(consultation)">
                       Ver Consulta
                     </button>
-                    <button type="button" class="btn center-button btn-danger" (click)="removeConsultation(consultation)"
-                      [disabled]="!consultation.wasReadedByStudent">
-                      Eliminar
-                      </button>
-                    <button type="button" class="btn right-button btn-success" (click)="seeResponse(consultation)"
+                    <button type="button" class="btn three-buttons center-button btn-secondary" (click)="seeResponse(consultation)"
                       [disabled]="!consultation.teacherResponse">
                       Ver Respuesta
                     </button>
-                    <fa style="margin-left: 5px; color: red;"
+                    <button type="button" class="btn three-buttons right-button btn-danger" (click)="removeConsultation(consultation)"
+                    [disabled]="!consultation.wasReadedByStudent">
+                    Eliminar
+                    </button>
+                    <fa style="color: red; position: absolute; margin-left: 20px; margin-top: 5px;"
                       *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
                       name="exclamation-circle"></fa>
                   </td>
@@ -63,21 +63,18 @@
                   <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
                   <td> {{ consultation.course.name}}</td>
                   <td>
-
-                    <fa style="margin-left: 5px; color: red;"
-                    *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
-                    name="exclamation-circle"></fa>
-
-                    <button *ngIf="!consultation.problem" type="button" class="btn left-button btn-secondary"
+                    <button *ngIf="!consultation.problem" type="button" class="btn two-buttons left-button btn-secondary"
                       (click)="seeResponse(consultation)"
                       [disabled]="!consultation.teacherResponse">
                       Ver Comunicado
                     </button>
-                    <button type="button" class="btn right-button btn-danger" (click)="removeConsultation(consultation)"
+                    <button type="button" class="btn two-buttons right-button btn-danger" (click)="removeConsultation(consultation)"
                       [disabled]="!consultation.wasReadedByStudent">
                       Eliminar
                     </button>
-
+                    <fa style="color: red; position: absolute; margin-left: 20px; margin-top: 5px;"
+                    *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
+                    name="exclamation-circle"></fa>
                   </td>
                 </tr>
               </tbody>

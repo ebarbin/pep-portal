@@ -56,7 +56,7 @@ export class StudentConsultationsComponent implements OnInit {
   }
 
   seeResponse(consultation: Consultation) {
-      this.dialogService.seeResponse(consultation.teacherResponse, 'lg')
+      this.dialogService.seeResponse(consultation, 'lg')
       .then(() => {
         if (!consultation.wasReadedByStudent) {
           this.consultationService.markAsReadStudentResponse(consultation).subscribe(() => {
@@ -73,7 +73,7 @@ export class StudentConsultationsComponent implements OnInit {
       });
   }
 
-  getConsultations(consultations: [Consultation]) {
+  getConsultations(consultations: any[]) {
     return consultations.filter((con: Consultation) => {
       if (con.problem == null) {
         return false;
@@ -83,7 +83,7 @@ export class StudentConsultationsComponent implements OnInit {
     });
   }
 
-  getComunications(consultations: [Consultation]) {
+  getComunications(consultations: any[]) {
     return consultations.filter((con: Consultation) => {
       if (con.problem == null) {
         return true;

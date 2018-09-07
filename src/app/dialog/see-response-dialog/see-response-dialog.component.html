@@ -1,11 +1,11 @@
 <div class="modal-header">
-    <h4 class="modal-title"> Respuesta </h4>
+    <h4 class="modal-title"> {{ title }} </h4>
     <button type="button" class="close" aria-label="Close" (click)="dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-      {{response}}
+      {{ consultation.teacherResponse }}
   </div>
   <div class="modal-footer">
     <button type="button" style="width: 100%;" class="btn btn-success" (click)="accept()">Aceptar</button>

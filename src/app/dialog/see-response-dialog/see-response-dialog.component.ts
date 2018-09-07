@@ -1,3 +1,4 @@
+import { Consultation } from './../../consultation/models/consultation.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -8,11 +9,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SeeResponseDialogComponent implements OnInit {
 
-  @Input() response: string;
+  @Input() consultation: Consultation;
+  title = 'Respuesta';
 
   constructor(private activeModal: NgbActiveModal) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.consultation.problem) {
+      this.title = 'Comunicado';
+    }
+  }
 
   public decline() {
     this.activeModal.dismiss();
