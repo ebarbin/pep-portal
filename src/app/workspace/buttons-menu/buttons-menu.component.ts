@@ -106,31 +106,8 @@ export class ButtonsMenuComponent implements OnInit {
   }
 
   private getExecutionContext(debug) {
-
-    let executionContext = this.problemService.getStaticPreExecution();
-
-    this.workspaceProblem.problem.primitives.forEach( (primitive) => {
-      executionContext = executionContext + primitive.code + '\n';
-    });
-
-    if (this.workspaceProblem.problem.preExecution) {
-      executionContext = executionContext + this.workspaceProblem.problem.preExecution + '\n';
-    }
-    if (this.workspaceProblem.solution) {
-      executionContext = executionContext + this.workspaceProblem.solution + '\n';
-    }
-
-    if (!debug) {
-      if (this.workspaceProblem.problem.posExecution) {
-        executionContext = executionContext + this.workspaceProblem.problem.posExecution;
-      }
-    }
-
-    executionContext = executionContext + this.problemService.getStaticPosExecution();
-
-    console.log(executionContext);
-
-    return executionContext;
+    const context = this.problemService.getExecutionContext(debug, this.workspaceProblem);
+    return context;
   }
 
   onConsultationButtonClick() {

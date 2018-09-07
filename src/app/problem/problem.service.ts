@@ -1,3 +1,4 @@
+import { WorkspaceProblem } from './../workspace/models/workspace-problem.model';
 import { Student } from '../shared/models/student.model';
 import { StudentService } from '../shared/services/student.service';
 import { CustomResponse } from '../shared/custom-response.model';
@@ -86,5 +87,28 @@ export class ProblemService {
 
   getStaticPosExecution() {
     return '\nreturn __result;';
+  }
+
+  getExecutionContext(debug: boolean, workspaceProblem: WorkspaceProblem) {
+    let executionContext = this.getStaticPreExecution();
+
+    workspaceProblem.problem.primitives.forEach( (primitive) => {
+      executionContext = executionContext + primitive.code + '\n';
+    });
+
+    if (workspaceProblem.problem.preExecution) {
+      executionContext = executionContext + workspaceProblem.problem.preExecution + '\n';
+    }
+    if (workspaceProblem.solution) {
+      executionContext = executionContext + workspaceProblem.solution + '\n';
+    }
+
+    if (!debug) {
+      if (workspaceProblem.problem.posExecution) {
+        executionContext = executionContext + workspaceProblem.problem.posExecution;
+      }
+    }
+
+    return executionContext + this.getStaticPosExecution();
   }
 }
