@@ -8,6 +8,7 @@ import { CourseService } from './../course.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { InscriptionService } from '../inscription.service';
+import { Consultation } from '../../consultation/models/consultation.model';
 
 @Component({
   selector: 'app-my-courses',
@@ -80,6 +81,13 @@ export class MyCoursesComponent implements OnInit {
         this.toastService.warning('El código ingresado no corresponde con el curso.', 'Atención');
       }
     }).catch(() => {});
+  }
+
+  sendComunication(course: Course) {
+    const consultation = new Consultation(null, null, null, course, null, true, false, course.teacher, null, null, new Date());
+    this.dialogService.sendResponse(consultation, 'lg').then(() => {
+      this.toastService.success('Ya se ha enviado el comunicado al curso.', 'Operación exitosa');
+    }).catch();
   }
 
   removeEnroll(course: Course) {

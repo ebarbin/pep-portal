@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="h3 mb-3 font-weight-normal text-center">Mis Cursos</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center">Cursos</h1>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <table class="table table-striped">
@@ -15,15 +15,19 @@
                   <td> {{ course.name }}</td>
                   <td> {{ course.teacher.user.name  + ' ' + course.teacher.user.surename}} </td>
                   <td *ngIf="user.role === 'ROLE_TEACHER'">
-                    <button type="button" class="three-buttons left-button btn btn-primary"
+                    <button type="button" class="four-buttons left-button btn btn-primary"
                       (click)="see(course)">
                       Ver
                     </button>
-                    <button type="button" class="three-buttons center-button btn btn-success"
+                    <button type="button" class="four-buttons center-button btn btn-secondary"
+                    (click)="sendComunication(course)">
+                     Enviar Com.
+                    </button>
+                    <button type="button" class="four-buttons center-button btn btn-success"
                      [routerLink]="'/home/edit-course/' + course.id">
                         Editar
                     </button>
-                    <button type="button" class="three-buttons right-button btn btn-danger"
+                    <button type="button" class="four-buttons right-button btn btn-danger"
                       (click)="removeCourse(course)">
                         Eliminar
                     </button>

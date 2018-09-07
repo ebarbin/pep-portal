@@ -1,28 +1,36 @@
 <div class="container">
-    <h1 class="h3 mb-3 font-weight-normal text-center">Panel de Gráficos</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center">Tablero de Estados</h1>
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <h1 class="h4 mb-3 font-weight-normal text-center">Inscriptos por Curso</h1>
-        <canvas baseChart *ngIf="studentsForCourse.load"
-          [data]="studentsForCourse.data"
-          [labels]="studentsForCourse.labels"
-          chartType="pie">
-        </canvas>
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <h1 class="h4 mb-3 font-weight-normal text-center">Avance de Alumnos y Curso</h1>
+          <h1 class="h4 mb-3 font-weight-normal text-center">Estado ejercicios por Curso</h1>
           <div class="form-group">
               <select [(ngModel)]="courseSelected" class="custom-select" [compareWith]="compareFn"
-                 (change)="onCourseSelection();">
+                  (change)="onCourseSelection();">
                   <option [ngValue]="course" *ngFor="let course of courses">{{course.name}}</option>
               </select>
           </div>
-          <canvas baseChart *ngIf="stateStudentByProblemAndCourse.load"
-            [options]="stateStudentByProblemAndCourse.options"
-            [datasets]="stateStudentByProblemAndCourse.data"
-            [labels]="stateStudentByProblemAndCourse.labels"
-            chartType="line">
+          <canvas baseChart *ngIf="stateProblemsPerCourse.load"
+            [options]="stateProblemsPerCourse.options"
+            [colors]="stateProblemsPerCourse.colors"
+            [datasets]="stateProblemsPerCourse.data"
+            [labels]="stateProblemsPerCourse.labels"
+            (chartClick)="chartClicked($event)"
+            chartType="bar">
           </canvas>
-        </div>
+          <span class="" *ngIf="!stateProblemsPerCourse.load">
+            No hay datos.
+          </span>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <h1 class="h4 mb-3 font-weight-normal text-center">Inscriptos por Curso</h1>
+        <canvas baseChart *ngIf="studentsPerCourse.load"
+          [data]="studentsPerCourse.data"
+          [labels]="studentsPerCourse.labels"
+          chartType="pie">
+        </canvas>
+        <span class="" *ngIf="!studentsPerCourse.load">
+          No hay datos.
+        </span>
+      </div>
     </div>
   </div>

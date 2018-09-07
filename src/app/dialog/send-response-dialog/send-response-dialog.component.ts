@@ -15,7 +15,15 @@ export class SendResponseDialogComponent implements OnInit {
 
   constructor(private consultationService: ConsultationService, private activeModal: NgbActiveModal) { }
 
-  ngOnInit() {}
+  placeholder = 'Escriba una respuesta';
+  title = 'Respuesta al alumno';
+
+  ngOnInit() {
+    if (!this.consultation.student) {
+      this.placeholder = 'Escriba el comunicado';
+      this.title = 'Comunicado al Curso';
+    }
+  }
 
   public decline() {
     this.activeModal.dismiss();

@@ -11,7 +11,7 @@
           <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/workspace">Area de Trabajo</a>
         </li>
         <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
-            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/course/list">Mis Cursos</a>
+            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/course/list">Cursos</a>
         </li>
         <li class="nav-item dropdown" ngbDropdown *ngIf="user.role === 'ROLE_TEACHER'">
             <a class="nav-link dropdown-toggle cursor-pointer" ngbDropdownToggle role="button">Cursos</a>
@@ -22,7 +22,9 @@
                 routerLink="/home/new-course">
                 Crear Curso
               </a>
-              <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/course/list">Mis Cursos</a>
+              <a class="dropdown-item cursor-pointer" routerLinkActive="active" routerLink="/home/course/list">
+                Ver Cursos
+              </a>
             </div>
         </li>
         <li class="nav-item dropdown" ngbDropdown *ngIf="user.role === 'ROLE_TEACHER'">
@@ -48,18 +50,18 @@
           </div>
       </li>
         <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
-            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/student-consultations">Mis Consultas
+            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/student-consultations">Consultas / Comunicados
               <span *ngIf="unreadValue || unreadValue > 0"
                 class="badge badge-danger">{{unreadValue}}</span></a>
         </li>
         <li class="nav-item" *ngIf="user.role === 'ROLE_TEACHER'">
-            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/teacher-consultations">Mis Consultas
+            <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/teacher-consultations">Consultas
               <span *ngIf="unreadValue || unreadValue > 0"
                 class="badge badge-danger">{{unreadValue}}</span></a>
         </li>
         <li class="nav-item" *ngIf="user.role === 'ROLE_TEACHER'">
             <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/chart">
-              Panel de Gráficos
+              Tablero de Estados
             </a>
         </li>
       </ul>

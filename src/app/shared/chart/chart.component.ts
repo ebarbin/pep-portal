@@ -15,26 +15,82 @@ export class ChartComponent implements OnInit {
   courseSelected: Course;
   courses = [];
 
-  studentsForCourse = {load: false, labels: [], data: []};
-  stateStudentByProblemAndCourse = {load: false, labels: [], data: [],
+  studentsPerCourse = {
+    load: false, labels: [], data: [],
+    hide: function() {
+      this.load = false;
+    },
+    update: function(data: [any]) {
+      //Limpio los datos
+      while (this.labels.length) { this.labels.pop(); }
+      while (this.data.length) { this.data.pop(); }
+
+      this.labels = data.map((d: any) => {
+        return d.courseName;
+      });
+
+      if (data.length > 0) {
+        this.data = data.map((d: any) => {
+          return d.quantity;
+        });
+        this.load = true;
+      }
+    }
+  };
+
+  stateProblemsPerCourse = {load: false, labels: [], data: [],
     options: {
       scales: {
         xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: '1=Correcto    |    -1=Incorrecto    |    0=Sin Resolver'
-          },
+            labelString: 'Ejercicios'
+          }
         }],
         yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Cantidad de Alumnos'
+          },
           display: true,
           ticks: {
-              beginAtZero: false,
+              beginAtZero: true,
               steps: 1,
               stepSize: 1,
-              max: 1,
-              min: -1
+              max: 5
           }
         }]
+      }
+    },
+    colors: [{ backgroundColor: 'rgba(6,255,0,1)'}, {backgroundColor: 'rgba(255,254,0,1)'}, {backgroundColor: 'rgba(255,0,0,1)'}],
+    hide: function() {
+      this.load = false;
+    },
+    update: function(course: Course, data: [any]) {
+      this.load = false;
+
+      //Limpio los datos
+      while (this.labels.length) { this.labels.pop(); }
+      while (this.data.length) { this.data.pop(); }
+
+      //Agrego los ejercicios al eje x
+      course.problems.forEach((p: Problem) => {
+        this.labels.push(p.name);
+      });
+
+      if (data.length > 0) {
+        data.forEach((d: any) => {
+          this.data.push(d);
+        });
+
+        //Actualizo el maximo del eje y
+        let count = 0;
+        this.data.forEach(element => {
+          count = count + element.data[0];
+        });
+        this.options.scales.yAxes[0].ticks.max = count;
+
+        this.load = true;
       }
     }
   };
@@ -46,55 +102,34 @@ export class ChartComponent implements OnInit {
     const user = this.userService.getStoredUser();
 
     this.courseService.findAll(user).subscribe((courses: [Course]) => {
+
       this.courses = courses;
       this.courseSelected = courses[0];
 
-      this.stateStudentByProblemAndCourse.labels = this.courseSelected.problems.map((p: Problem) => {
-        return p.name;
-      });
-
       this.chartService.getProgressStudentsPerCourse(this.courseSelected.id).subscribe((data: [any]) => {
-        this.stateStudentByProblemAndCourse.data = data;
-        this.stateStudentByProblemAndCourse.load = true;
+        this.stateProblemsPerCourse.update(this.courseSelected, data);
       });
-
     });
 
+    this.studentsPerCourse.hide();
     this.chartService.getStudentsPerCourse().subscribe((data: [any]) => {
-      this.studentsForCourse.labels = data.map((d: any) => {
-        return d.courseName;
-      });
-
-      this.studentsForCourse.data = data.map((d: any) => {
-        return d.quantity;
-      });
-
-      this.studentsForCourse.load = true;
+      this.studentsPerCourse.update(data);
     });
   }
 
   onCourseSelection() {
-    this.stateStudentByProblemAndCourse.load = false;
-
+    this.stateProblemsPerCourse.hide();
     this.chartService.getProgressStudentsPerCourse(this.courseSelected.id).subscribe((data: [any]) => {
-
-      while (this.stateStudentByProblemAndCourse.labels.length) { this.stateStudentByProblemAndCourse.labels.pop(); }
-      while (this.stateStudentByProblemAndCourse.data.length) { this.stateStudentByProblemAndCourse.data.pop(); }
-
-      this.courseSelected.problems.forEach((p: Problem) => {
-        this.stateStudentByProblemAndCourse.labels.push(p.name);
-      });
-
-      if (data.length > 0) {
-        data.forEach((d: any) => {
-          this.stateStudentByProblemAndCourse.data.push(d);
-        });
-        this.stateStudentByProblemAndCourse.load = true;
-      }
+      this.stateProblemsPerCourse.update(this.courseSelected, data);
     });
   }
 
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+   // events
+   public chartClicked(e: any): void {
+    console.log(e.active[0]._model);
   }
 }

@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
 import { DialogService } from '../../dialog/dialog.service';
 import { Consultation } from './../models/consultation.model';
 import { ConsultationService } from './../consultation.service';
@@ -40,7 +39,12 @@ export class StudentConsultationsComponent implements OnInit {
             return c.id !== consultation.id;
           });
 
-          this.toastService.success('Consulta eliminada.', 'Operación exitosa');
+          if (consultation.problem) {
+            this.toastService.success('Consulta eliminada.', 'Operación exitosa');
+          } else {
+            this.toastService.success('Comunicado eliminado.', 'Operación exitosa');
+          }
+
 
           if (this.consultations.length === 0) {
             this.router.navigate(['home/start']);
@@ -67,5 +71,25 @@ export class StudentConsultationsComponent implements OnInit {
           });
         }
       });
+  }
+
+  getConsultations(consultations: [Consultation]) {
+    return consultations.filter((con: Consultation) => {
+      if (con.problem == null) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }
+
+  getComunications(consultations: [Consultation]) {
+    return consultations.filter((con: Consultation) => {
+      if (con.problem == null) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

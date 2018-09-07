@@ -81,7 +81,7 @@ export class ProblemService {
 
   getStaticPreExecution() {
     const context = 'var __result = {logs: [], state: false, message: ""};\n';
-    return context + 'var log = function(value) {__result.logs.push(value);}\n';
+    return context + 'var log = function(value) {__result.logs.push(JSON.stringify(value));}\n';
   }
 
   getStaticPosExecution() {

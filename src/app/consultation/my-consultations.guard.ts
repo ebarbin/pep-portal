@@ -35,7 +35,7 @@ export class MyConsultationsGuard implements CanActivate {
           .pipe(map((consultations: [Consultation]) => {
             const result = consultations.length > 0;
             if (!result) {
-              this.toastrService.warning('No hay consultas.', 'Atención');
+              this.toastrService.warning('No hay consultas ni comunicados.', 'Atención');
             }
             return result;
           }));
