@@ -23,6 +23,9 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
   problemId: string;
   editMode = false;
 
+  originalPreExecutionValue = '';
+  originalPosExecutionValue = '';
+
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
@@ -49,6 +52,8 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
       this.title = 'Crear Ejercicio';
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
+        this.originalPreExecutionValue = problem.preExecution;
+        this.originalPosExecutionValue = problem.posExecution;
         this.editForm.form.patchValue(problem);
       });
       this.editMode = true;
@@ -102,10 +107,22 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
     return this.primitiveService.findByNameLike(text);
   }
 
-  canDeactivate(): Observable<boolean> | boolean {
-    if (!this.editForm.dirty) {
-      return true;
+  private checkDirtyForm(form: NgForm) {
+    if (!form.dirty) {
+      return false;
     } else {
+      if (this.originalPreExecutionValue === this.editForm.controls.preExecution.value &&
+        this.originalPosExecutionValue === this.editForm.controls.posExecution.value) {
+        return false;
+      } else {
+        console.log(form.controls);
+        return true;
+      }
+    }
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.checkDirtyForm(this.editForm)) {
       return from(this.dialogService.confirm(
         'Atención', 'Hay cambios sin guardar. ¿Está seguro de continuar?', 'Si', 'No')
       .then((result: boolean) => {
@@ -115,6 +132,8 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
       }).catch(() => {
         return false;
       }));
+    } else {
+      return true;
     }
   }
 }

@@ -18,8 +18,9 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
 
   title: string;
   primitiveId: string;
-  code: string;
   editMode = false;
+
+  originalCodeValue = '';
 
   editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};
 
@@ -46,9 +47,9 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
       this.title = 'Crear Primitiva';
     } else {
       this.primitiveService.findById(this.primitiveId).subscribe((primitive: Primitive) => {
+        this.originalCodeValue = primitive.code;
         this.editForm.form.patchValue(primitive);
       });
-
       this.editMode = true;
       this.title = 'Editar Primitiva';
     }
@@ -90,10 +91,21 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
     }
   }
 
-  canDeactivate(): Observable<boolean> | boolean {
-    if (!this.editForm.dirty) {
-      return true;
+  private checkDirtyForm(form: NgForm) {
+    if (!form.dirty) {
+      return false;
     } else {
+      if (this.originalCodeValue === this.editForm.controls.code.value) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+
+    if (this.checkDirtyForm(this.editForm)) {
       return from(this.dialogService.confirm(
         'Atención', 'Hay cambios sin guardar. ¿Está seguro de continuar?', 'Si', 'No')
       .then((result: boolean) => {
@@ -103,6 +115,8 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
       }).catch(() => {
         return false;
       }));
+    } else {
+      return true;
     }
   }
 }
