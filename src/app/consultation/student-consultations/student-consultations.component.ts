@@ -73,8 +73,8 @@ export class StudentConsultationsComponent implements OnInit {
       });
   }
 
-  getConsultations(consultations: any[]) {
-    return consultations.filter((con: Consultation) => {
+  getConsultations() {
+    return this.consultations.filter((con: Consultation) => {
       if (con.problem == null) {
         return false;
       } else {
@@ -83,8 +83,8 @@ export class StudentConsultationsComponent implements OnInit {
     });
   }
 
-  getComunications(consultations: any[]) {
-    return consultations.filter((con: Consultation) => {
+  getComunications() {
+    return this.consultations.filter((con: Consultation) => {
       if (con.problem == null) {
         return true;
       } else {

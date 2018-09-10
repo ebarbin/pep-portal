@@ -67,7 +67,6 @@ export class ButtonsMenuComponent implements OnInit {
           });
 
         } catch (e) {
-          console.log(e);
 
           this.toastrService.error('Ha ocurrido un error. Verifique el código ingresado' + '.', 'Error');
           this.logChange.emit(this.logMessageService.getFixedMessage(e.message));
@@ -80,14 +79,12 @@ export class ButtonsMenuComponent implements OnInit {
         try {
           const executionContext = this.getExecutionContext(true);
           const result = new Function(executionContext)();
-          this.logClear.emit();
 
           result.logs.forEach( (log) => {
             this.logChange.emit(log);
           });
 
         } catch (e) {
-          console.log(e);
           this.logChange.emit(this.logMessageService.getFixedMessage(e.message));
         }
       }
