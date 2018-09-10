@@ -6,26 +6,24 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { UserService } from './../user.service';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })
-export class ChangePasswordComponent implements OnInit, CanComponentDeactivate {
+export class ChangePasswordComponent implements CanComponentDeactivate {
 
   @ViewChild('f') form: NgForm;
 
   constructor(private dialogService: DialogService, private userService: UserService,
     private router: Router, private toastService: ToastrService) { }
 
-  ngOnInit() {
-  }
-
   onSubmit(form: NgForm) {
     const changePassword: ChangePassword = form.value;
     this.userService.changePassword(changePassword).subscribe( () => {
+      this.form.reset();
       this.toastService.success('Contraseña Actualizada.', 'Operación exitosa');
       this.router.navigate(['/home/start']);
     });

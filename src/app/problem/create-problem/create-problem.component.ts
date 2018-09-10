@@ -75,11 +75,13 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
     if (this.editMode) {
       problem.id = this.problemId;
       this.problemService.editeProblem(problem).subscribe(() => {
+        this.editForm.reset();
         this.toastService.success('Problema editado.', 'Operación exitosa');
         this.router.navigate(['/home/problem/list']);
       });
     } else {
       this.problemService.createProblem(problem).subscribe(() => {
+        this.editForm.reset();
         this.toastService.success('Problema creado.', 'Operación exitosa');
         this.router.navigate(['/home/start']);
       });

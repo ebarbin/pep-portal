@@ -63,11 +63,13 @@ export class CreateCourseComponent implements OnInit, CanComponentDeactivate {
     if (this.editMode) {
       course.id = this.courseId;
       this.courseService.updateCourse(course).subscribe(() => {
+        this.editForm.reset();
         this.toastService.success('Curso actualizado.', 'Operación exitosa');
         this.router.navigate(['/home/course/list']);
       });
     } else {
       this.courseService.createCourse(course).subscribe(() => {
+        this.editForm.reset();
         this.toastService.success('Curso creado.', 'Operación exitosa');
         this.router.navigate(['/home/start']);
       });

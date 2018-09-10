@@ -38,6 +38,7 @@ export class AccountComponent implements OnInit, CanComponentDeactivate {
   onSubmit(form: NgForm) {
     const user: User = form.value;
     this.userService.update(user).subscribe( () => {
+      this.accountForm.reset();
       this.toastService.success('Cuenta Actualizada.', 'Operación exitosa');
       this.router.navigate(['/home/start']);
     });

@@ -57,14 +57,23 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
   onSubmit(form: NgForm) {
     const primitive = <Primitive> form.value;
 
+    try {
+      new Function(primitive.code)();
+    } catch (e) {
+      this.toastService.error('El código de la primitiva es inválido.', 'Error');
+      return;
+    }
+
     if (this.editMode) {
       primitive.id = this.primitiveId;
       this.primitiveService.updatePrimitive(primitive).subscribe(() => {
+        this.editForm.reset();
         this.toastService.success('Primitiva actualizada.', 'Operación exitosa');
         this.router.navigate(['/home/primitive/list']);
       });
     } else {
       this.primitiveService.createPrimitive(primitive).subscribe(() => {
+        this.editForm.reset();
         this.toastService.success('Primitiva creada.', 'Operación exitosa');
         this.router.navigate(['/home/start']);
       });
