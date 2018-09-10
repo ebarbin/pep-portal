@@ -1,3 +1,4 @@
+import { CanDeactivateGuard } from './shared/can-deactivate.guard';
 import { ChartComponent } from './shared/chart/chart.component';
 import { MyCoursesGuard } from './course/my-courses/my-courses.guard';
 import { MyProblemsGuard } from './problem/my-problems/my-problems.guard';
@@ -37,16 +38,16 @@ const appRoutes: Routes = [
     { path: 'profile-image', component: ProfileImageComponent},
     { path: 'workspace', component: WorkspaceComponent, canActivate: [WorkspaceGuard]},
     { path: 'course/list', component: MyCoursesComponent, canActivate: [MyCoursesGuard] },
-    { path: 'edit-course/:courseId', component: CreateCourseComponent },
-    { path: 'new-course', component: CreateCourseComponent },
+    { path: 'edit-course/:courseId', component: CreateCourseComponent, canDeactivate: [CanDeactivateGuard] },
+    { path: 'new-course', component: CreateCourseComponent, canDeactivate: [CanDeactivateGuard] },
     { path: 'problem/list', component: MyProblemsComponent, canActivate: [MyProblemsGuard]},
-    { path: 'new-problem', component: CreateProblemComponent },
-    { path: 'edit-problem/:problemId', component: CreateProblemComponent },
+    { path: 'new-problem', component: CreateProblemComponent, canDeactivate: [CanDeactivateGuard] },
+    { path: 'edit-problem/:problemId', component: CreateProblemComponent, canDeactivate: [CanDeactivateGuard] },
     { path: 'student-consultations', component: StudentConsultationsComponent, canActivate: [MyConsultationsGuard] },
     { path: 'teacher-consultations', component: TeacherConsultationsComponent, canActivate: [MyConsultationsGuard] },
     { path: 'primitive/list', component: MyPrimitivesComponent, canActivate: [MyPrimitivesGuard] },
-    { path: 'new-primitive', component: CreatePrimitiveComponent },
-    { path: 'edit-primitive/:primitiveId', component: CreatePrimitiveComponent },
+    { path: 'new-primitive', component: CreatePrimitiveComponent, canDeactivate: [CanDeactivateGuard] },
+    { path: 'edit-primitive/:primitiveId', component: CreatePrimitiveComponent, canDeactivate: [CanDeactivateGuard] },
     { path: 'chart', component: ChartComponent },
 
   ]},

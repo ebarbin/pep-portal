@@ -1,3 +1,6 @@
+import { DialogService } from './../../dialog/dialog.service';
+import { Observable, from } from 'rxjs';
+import { CanComponentDeactivate } from './../../shared/can-deactivate.guard';
 import { ToastrService } from 'ngx-toastr';
 import { Primitive } from './../primitive.model';
 import { PrimitiveService } from './../primitive.service';
@@ -11,7 +14,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   templateUrl: './create-primitive.component.html',
   styleUrls: ['./create-primitive.component.css']
 })
-export class CreatePrimitiveComponent implements OnInit {
+export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate {
 
   title: string;
   primitiveId: string;
@@ -32,7 +35,8 @@ export class CreatePrimitiveComponent implements OnInit {
 
   @ViewChild('f') editForm: NgForm;
 
-  constructor(private primitiveService: PrimitiveService, private toastService: ToastrService,
+  constructor(private dialogService: DialogService, private primitiveService: PrimitiveService,
+    private toastService: ToastrService,
     private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -68,10 +72,28 @@ export class CreatePrimitiveComponent implements OnInit {
   }
 
   cancel() {
+    this.editForm.reset();
+
     if (this.editMode) {
       this.router.navigate(['/home/primitive/list']);
     } else {
       this.router.navigate(['/home/start']);
+    }
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (!this.editForm.dirty) {
+      return true;
+    } else {
+      return from(this.dialogService.confirm(
+        'Atención', 'Hay cambios sin guardar. ¿Está seguro de continuar?', 'Si', 'No')
+      .then((result: boolean) => {
+        if (result) {
+          return true;
+        }
+      }).catch(() => {
+        return false;
+      }));
     }
   }
 }

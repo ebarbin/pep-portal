@@ -1,7 +1,8 @@
+import { CanComponentDeactivate } from './../../shared/can-deactivate.guard';
 import { DialogService } from './../../dialog/dialog.service';
 import { PrimitiveService } from './../../primitive/primitive.service';
 import { Primitive } from './../../primitive/primitive.model';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ProblemService } from './../problem.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './create-problem.component.html',
   styleUrls: ['./create-problem.component.css']
 })
-export class CreateProblemComponent implements OnInit {
+export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
 
   @ViewChild('f') editForm: NgForm;
   title: string;
@@ -86,6 +87,8 @@ export class CreateProblemComponent implements OnInit {
   }
 
   cancel() {
+    this.editForm.reset();
+
     if (this.editMode) {
       this.router.navigate(['/home/problem/list']);
     } else {
@@ -95,5 +98,21 @@ export class CreateProblemComponent implements OnInit {
 
   public requestAutocompleteItems = (text: string): Observable<[Primitive]> => {
     return this.primitiveService.findByNameLike(text);
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (!this.editForm.dirty) {
+      return true;
+    } else {
+      return from(this.dialogService.confirm(
+        'Atención', 'Hay cambios sin guardar. ¿Está seguro de continuar?', 'Si', 'No')
+      .then((result: boolean) => {
+        if (result) {
+          return true;
+        }
+      }).catch(() => {
+        return false;
+      }));
+    }
   }
 }
