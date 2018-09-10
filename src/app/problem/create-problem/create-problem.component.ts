@@ -29,6 +29,7 @@ export class CreateProblemComponent implements OnInit {
     minHeight: '4rem',
     placeholder: 'Ingrese una Explicación',
     translate: 'no',
+    customClasses: []
   };
 
   editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};

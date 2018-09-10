@@ -27,6 +27,7 @@ export class CreatePrimitiveComponent implements OnInit {
     minHeight: '4rem',
     placeholder: 'Ingrese una Descripción',
     translate: 'no',
+    customClasses: []
   };
 
   @ViewChild('f') editForm: NgForm;

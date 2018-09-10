@@ -23,6 +23,7 @@ export class CreateCourseComponent implements OnInit {
     minHeight: '4rem',
     placeholder: 'Ingrese una Descripción',
     translate: 'no',
+    customClasses: []
   };
 
   @ViewChild('f') editForm: NgForm;
@@ -54,6 +55,7 @@ export class CreateCourseComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    console.log(form);
     const course: Course = <Course> form.value;
     if (this.editMode) {
       course.id = this.courseId;
