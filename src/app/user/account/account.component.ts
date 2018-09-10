@@ -1,3 +1,6 @@
+import { DialogService } from './../../dialog/dialog.service';
+import { Observable, from } from 'rxjs';
+import { CanComponentDeactivate } from './../../shared/can-deactivate.guard';
 import { User } from './../user.model';
 import { UserService } from './../user.service';
 import { NgForm } from '@angular/forms';
@@ -10,9 +13,10 @@ import { ToastrService } from '../../../../node_modules/ngx-toastr';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, CanComponentDeactivate {
 
-  constructor(private toastService: ToastrService, private userService: UserService, private router: Router) { }
+  constructor(private dialogService: DialogService, private toastService: ToastrService,
+    private userService: UserService, private router: Router) { }
 
   @ViewChild('f') accountForm: NgForm;
 
@@ -36,7 +40,22 @@ export class AccountComponent implements OnInit {
     this.userService.update(user).subscribe( () => {
       this.toastService.success('Cuenta Actualizada.', 'Operación exitosa');
       this.router.navigate(['/home/start']);
-  });
+    });
+  }
 
+  canDeactivate(): Observable<boolean> | boolean {
+    if (!this.accountForm.dirty) {
+      return true;
+    } else {
+      return from(this.dialogService.confirm(
+        'Atención', 'Hay cambios sin guardar. ¿Está seguro de continuar?', 'Si', 'No')
+      .then((result: boolean) => {
+        if (result) {
+          return true;
+        }
+      }).catch(() => {
+        return false;
+      }));
+    }
   }
 }

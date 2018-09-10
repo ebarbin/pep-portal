@@ -33,8 +33,8 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'home/start', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
     { path: 'start', component: StartComponent},
-    { path: 'account', component: AccountComponent},
-    { path: 'change-password', component: ChangePasswordComponent},
+    { path: 'account', component: AccountComponent, canDeactivate: [CanDeactivateGuard]},
+    { path: 'change-password', component: ChangePasswordComponent, canDeactivate: [CanDeactivateGuard]},
     { path: 'profile-image', component: ProfileImageComponent},
     { path: 'workspace', component: WorkspaceComponent, canActivate: [WorkspaceGuard]},
     { path: 'course/list', component: MyCoursesComponent, canActivate: [MyCoursesGuard] },
