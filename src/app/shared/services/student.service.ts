@@ -1,4 +1,3 @@
-import { Problem } from '../../problem/problem.model';
 import { Student } from '../models/student.model';
 import { CustomResponse } from '../custom-response.model';
 import { Injectable } from '@angular/core';
@@ -34,6 +33,15 @@ export class StudentService {
       .pipe(
         map((response: CustomResponse) => {
           return <Student> response.body;
+        })
+      );
+  }
+
+  getStudentsByCourseId(courseId: string) {
+    return this.httpClient.get('pep-api/student/byCourseId/' + courseId)
+      .pipe(
+        map((response: CustomResponse) => {
+          return <[Student]> response.body;
         })
       );
   }

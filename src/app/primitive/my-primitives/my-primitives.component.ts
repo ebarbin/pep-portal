@@ -16,6 +16,7 @@ export class MyPrimitivesComponent implements OnInit {
     private primitiveService: PrimitiveService, private toastService: ToastrService) { }
 
   primitives = [];
+  filteredPrimitives = [];
 
   ngOnInit() {
     this.primitiveService.getPrimitives().subscribe((primitives: [Primitive]) => {
@@ -50,4 +51,9 @@ export class MyPrimitivesComponent implements OnInit {
     });
   }
 
+  onPageChanged(data: [any]) {
+    setTimeout(() => {
+      this.filteredPrimitives = data;
+    }, 100);
+  }
 }

@@ -27,4 +27,13 @@ export class ChartService {
       })
     );
   }
+
+  getTotalProgressStudentsPerCourse(courseId: string) {
+    return this.httpClient.get('pep-api/chart/total-progress-student-per-course/' + courseId)
+    .pipe(
+      map((response: CustomResponse) => {
+        return <[any]> response.body;
+      })
+    );
+  }
 }

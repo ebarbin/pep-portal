@@ -1,3 +1,5 @@
+import { Student } from './../models/student.model';
+import { StudentService } from './../services/student.service';
 import { Problem } from './../../problem/problem.model';
 import { UserService } from './../../user/user.service';
 import { CourseService } from './../../course/course.service';
@@ -12,7 +14,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartComponent implements OnInit {
 
-  courseSelected: Course;
   courses = [];
 
   studentsPerCourse = {
@@ -21,7 +22,7 @@ export class ChartComponent implements OnInit {
       this.load = false;
     },
     update: function(data: [any]) {
-      //Limpio los datos
+
       while (this.labels.length) { this.labels.pop(); }
       while (this.data.length) { this.data.pop(); }
 
@@ -39,6 +40,7 @@ export class ChartComponent implements OnInit {
   };
 
   stateProblemsPerCourse = {load: false, labels: [], data: [],
+    courseSelected: null,
     options: {
       scales: {
         xAxes: [{
@@ -66,15 +68,13 @@ export class ChartComponent implements OnInit {
     hide: function() {
       this.load = false;
     },
-    update: function(course: Course, data: [any]) {
+    update: function(data: [any]) {
       this.load = false;
 
-      //Limpio los datos
       while (this.labels.length) { this.labels.pop(); }
       while (this.data.length) { this.data.pop(); }
 
-      //Agrego los ejercicios al eje x
-      course.problems.forEach((p: Problem) => {
+      this.courseSelected.problems.forEach((p: Problem) => {
         this.labels.push(p.name);
       });
 
@@ -83,19 +83,68 @@ export class ChartComponent implements OnInit {
           this.data.push(d);
         });
 
-        //Actualizo el maximo del eje y
         let count = 0;
         this.data.forEach(element => {
           count = count + element.data[0];
         });
         this.options.scales.yAxes[0].ticks.max = count;
-
         this.load = true;
       }
     }
   };
 
-  constructor(private userService: UserService, private courseService: CourseService, private chartService: ChartService) { }
+  stateStudentsPerCourse = {load: false, labels: [], data: [],
+    courseSelected: null,
+    options: {
+      scales: {
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Alumnos'
+          }
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Cantidad de Ejercicios'
+          },
+          display: true,
+          ticks: {
+              beginAtZero: true,
+              steps: 1,
+              stepSize: 1,
+              max: 5
+          }
+        }]
+      }
+    },
+    colors: [{ backgroundColor: 'rgba(6,255,0,1)'}, {backgroundColor: 'rgba(255,254,0,1)'}, {backgroundColor: 'rgba(255,0,0,1)'}],
+    hide: function() {
+      this.load = false;
+    },
+    update: function(students: [Student], data: [any]) {
+      this.load = false;
+
+      while (this.labels.length) { this.labels.pop(); }
+      while (this.data.length) { this.data.pop(); }
+
+      students.forEach((student: Student) => {
+        this.labels.push(student.user.name + ' ' + student.user.surename);
+      });
+
+      if (data.length > 0) {
+        data.forEach((d: any) => {
+          this.data.push(d);
+        });
+
+        this.options.scales.yAxes[0].ticks.max = this.courseSelected.problems.length;
+        this.load = true;
+      }
+    }
+  };
+
+  constructor(private studentService: StudentService, private userService: UserService,
+    private courseService: CourseService, private chartService: ChartService) { }
 
   ngOnInit() {
 
@@ -104,10 +153,17 @@ export class ChartComponent implements OnInit {
     this.courseService.findAll(user).subscribe((courses: [Course]) => {
 
       this.courses = courses;
-      this.courseSelected = courses[0];
 
-      this.chartService.getProgressStudentsPerCourse(this.courseSelected.id).subscribe((data: [any]) => {
-        this.stateProblemsPerCourse.update(this.courseSelected, data);
+      this.stateProblemsPerCourse.courseSelected = courses[0];
+      this.chartService.getProgressStudentsPerCourse(courses[0].id).subscribe((data: [any]) => {
+        this.stateProblemsPerCourse.update(data);
+      });
+
+      this.stateStudentsPerCourse.courseSelected = courses[0];
+      this.studentService.getStudentsByCourseId(courses[0].id).subscribe((students: [Student]) => {
+        this.chartService.getTotalProgressStudentsPerCourse(courses[0].id).subscribe((data: [any]) => {
+          this.stateStudentsPerCourse.update(students, data);
+        });
       });
     });
 
@@ -117,10 +173,19 @@ export class ChartComponent implements OnInit {
     });
   }
 
-  onCourseSelection() {
+  onCourseSelection1() {
     this.stateProblemsPerCourse.hide();
-    this.chartService.getProgressStudentsPerCourse(this.courseSelected.id).subscribe((data: [any]) => {
-      this.stateProblemsPerCourse.update(this.courseSelected, data);
+    this.chartService.getProgressStudentsPerCourse(this.stateProblemsPerCourse.courseSelected.id).subscribe((data: [any]) => {
+      this.stateProblemsPerCourse.update(data);
+    });
+  }
+
+  onCourseSelection2() {
+    this.stateStudentsPerCourse.hide();
+    this.studentService.getStudentsByCourseId(this.stateStudentsPerCourse.courseSelected.id).subscribe((students: [Student]) => {
+      this.chartService.getTotalProgressStudentsPerCourse(this.stateStudentsPerCourse.courseSelected.id).subscribe((data: [any]) => {
+        this.stateStudentsPerCourse.update(students, data);
+      });
     });
   }
 

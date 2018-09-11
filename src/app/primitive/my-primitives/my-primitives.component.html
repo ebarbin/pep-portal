@@ -10,7 +10,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let primitive of primitives">
+                <tr *ngFor="let primitive of filteredPrimitives">
                   <td> {{ primitive.name }}</td>
                   <td>
                     <button type="button" class="three-buttons left-button btn btn-primary" (click)="seePrimitive(primitive)">
@@ -29,4 +29,6 @@
             </table>
       </div>
     </div>
+    <app-paginator *ngIf="primitives.length > 0" [rawData]="primitives"
+        (pageChanged)="onPageChanged($event)"></app-paginator>
   </div>

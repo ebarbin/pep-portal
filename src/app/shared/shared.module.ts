@@ -1,3 +1,4 @@
+import { PaginatorComponent } from './paginator/paginator.component';
 import { HttpHeaderInterceptor } from './http-header.interceptor';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { HttpSpinnerInterceptor } from './http-spinner.interceptor';
@@ -57,7 +58,8 @@ import { ChartComponent } from './chart/chart.component';
     HomeComponent,
     CourseSelectComponent,
     ProfileImagePipe,
-    RolePipe
+    RolePipe,
+    PaginatorComponent
   ],
   declarations: [
     HeaderComponent,
@@ -66,7 +68,8 @@ import { ChartComponent } from './chart/chart.component';
     CourseSelectComponent,
     ProfileImagePipe,
     RolePipe,
-    ChartComponent
+    ChartComponent,
+    PaginatorComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpSpinnerInterceptor, multi: true},

@@ -1,0 +1,26 @@
+<nav aria-label="Page navigation example">
+  <ul class="row pagination justify-content-center" >
+    <li class="page-item">
+      <button
+        [disabled]="pageSelected === 0"
+        class="page-link"
+        (click)="previous()">Atrás
+      </button>
+    </li>
+    <li class="page-item">
+      <button
+        [disabled]="pageSelected === page"
+        class="page-link"
+        *ngFor="let page of pages"
+        (click)="selectPage(page)">{{page + 1}}
+      </button>
+    </li>
+    <li class="page-item">
+      <button
+        [disabled]="pageSelected === pages.length - 1"
+        class="page-link"
+        (click)="next()">Adelante
+      </button>
+    </li>
+  </ul>
+</nav>

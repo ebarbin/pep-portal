@@ -1,7 +1,7 @@
 import { WorkspaceService } from './../workspace.service';
 import { Workspace } from './../models/workspace.model';
 import { StudentService } from '../../shared/services/student.service';
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { WorkspaceProblem } from '../models/workspace-problem.model';
 
 @Component({

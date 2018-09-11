@@ -2,10 +2,10 @@
     <h1 class="h3 mb-3 font-weight-normal text-center">Gráficos</h1>
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <h1 class="h4 mb-3 font-weight-normal text-center">Estado ejercicios por Curso</h1>
+          <h1 class="h4 mb-3 font-weight-normal text-center">Ejercicios por Curso</h1>
           <div class="form-group">
-              <select [(ngModel)]="courseSelected" class="custom-select" [compareWith]="compareFn"
-                  (change)="onCourseSelection();">
+              <select [(ngModel)]="stateProblemsPerCourse.courseSelected" class="custom-select" [compareWith]="compareFn"
+                  (change)="onCourseSelection1();">
                   <option [ngValue]="course" *ngFor="let course of courses">{{course.name}}</option>
               </select>
           </div>
@@ -14,7 +14,6 @@
             [colors]="stateProblemsPerCourse.colors"
             [datasets]="stateProblemsPerCourse.data"
             [labels]="stateProblemsPerCourse.labels"
-            (chartClick)="chartClicked($event)"
             chartType="bar">
           </canvas>
           <span class="" *ngIf="!stateProblemsPerCourse.load">
@@ -22,15 +21,37 @@
           </span>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <h1 class="h4 mb-3 font-weight-normal text-center">Inscriptos por Curso</h1>
-        <canvas baseChart *ngIf="studentsPerCourse.load"
-          [data]="studentsPerCourse.data"
-          [labels]="studentsPerCourse.labels"
-          chartType="pie">
-        </canvas>
-        <span class="" *ngIf="!studentsPerCourse.load">
-          No hay datos.
-        </span>
+          <h1 class="h4 mb-3 font-weight-normal text-center">Alumnos por Curso</h1>
+          <div class="form-group">
+              <select [(ngModel)]="stateStudentsPerCourse.courseSelected" class="custom-select" [compareWith]="compareFn"
+                  (change)="onCourseSelection2();">
+                  <option [ngValue]="course" *ngFor="let course of courses">{{course.name}}</option>
+              </select>
+          </div>
+          <canvas baseChart *ngIf="stateStudentsPerCourse.load"
+            [options]="stateStudentsPerCourse.options"
+            [colors]="stateStudentsPerCourse.colors"
+            [datasets]="stateStudentsPerCourse.data"
+            [labels]="stateStudentsPerCourse.labels"
+            (chartClick)="chartClicked($event)"
+            chartType="bar">
+          </canvas>
+          <span class="" *ngIf="!stateStudentsPerCourse.load">
+            No hay datos.
+          </span>
       </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h1 class="h4 mb-3 font-weight-normal text-center">Inscriptos por Curso</h1>
+            <canvas baseChart *ngIf="studentsPerCourse.load"
+              [data]="studentsPerCourse.data"
+              [labels]="studentsPerCourse.labels"
+              chartType="pie">
+            </canvas>
+            <span class="" *ngIf="!studentsPerCourse.load">
+              No hay datos.
+            </span>
+          </div>
     </div>
   </div>
