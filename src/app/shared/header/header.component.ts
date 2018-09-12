@@ -23,8 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   unreadValue: number;
 
   subsImageUpdated: Subscription;
-  subsUnreadedStudent: Subscription;
-  subsUnreadedTeacher: Subscription;
+  subsUnreaded: Subscription;
   subsInterval: Subscription;
 
   ngOnInit() {
@@ -32,25 +31,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     if (this.user.role === 'ROLE_STUDENT') {
       this.subsInterval = interval(20000).subscribe(x => {
-        this.consultationService.getStudentUnreadResponses().subscribe((value: number) => {
-          this.unreadValue = value;
-        });
+        this.getStudentUnreadResponses();
       });
-      this.consultationService.getStudentUnreadResponses().subscribe((value: number) => {
-        this.unreadValue = value;
-      });
+      this.getStudentUnreadResponses();
     } else {
       this.subsInterval = interval(20000).subscribe(x => {
-        this.consultationService.getTeacherUnreadConsultations().subscribe((value: number) => {
-          this.unreadValue = value;
-        });
+        this.getTeacherUnreadConsultations();
       });
-      this.consultationService.getTeacherUnreadConsultations().subscribe((value: number) => {
-        this.unreadValue = value;
-      });
+      this.getTeacherUnreadConsultations();
     }
 
-    this.subsUnreadedStudent = this.consultationService.consultationsChanges.subscribe((value: number) => {
+    this.subsUnreaded = this.consultationService.consultationsChanges.subscribe((value: number) => {
       this.unreadValue = value;
     });
 
@@ -59,19 +50,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  private getTeacherUnreadConsultations() {
+    this.consultationService.getTeacherUnreadConsultations().subscribe((value: number) => {
+      this.unreadValue = value;
+    });
+  }
+
+  private getStudentUnreadResponses() {
+    this.consultationService.getStudentUnreadResponses().subscribe((value: number) => {
+      this.unreadValue = value;
+    });
+  }
+
   ngOnDestroy() {
     this.subsImageUpdated.unsubscribe();
-
-    if (this.subsUnreadedStudent) {
-      this.subsUnreadedStudent.unsubscribe();
-    }
-
-    if (this.subsUnreadedTeacher) {
-      this.subsUnreadedTeacher.unsubscribe();
-    }
-    if (this.subsInterval) {
-      this.subsInterval.unsubscribe();
-    }
+    this.subsUnreaded.unsubscribe();
+    this.subsInterval.unsubscribe();
   }
 
   logout() {

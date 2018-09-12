@@ -85,7 +85,7 @@ export class StudentConsultationsComponent implements OnInit {
           } else {
             this.toastService.success('Comunicado eliminado.', 'Operación exitosa');
 
-            if (this.comunications.length === 0) {
+            if (this.consultations.length === 0 && this.comunications.length === 0) {
               this.toastService.warning('No hay comunicados.', 'Atención');
               this.router.navigate(['home/start']);
             } else if (this.filteredComunications.length === 0) {
