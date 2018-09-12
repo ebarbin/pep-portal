@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class PaginatorService {
 
-  previosPage = new Subject();
+  previosPage = new Subject<string>();
 
   constructor() { }
 }

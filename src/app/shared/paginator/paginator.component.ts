@@ -11,6 +11,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   @Input() rawData: any[];
   @Input() pageSize: number;
+  @Input() id: string;
+
   @Output() pageChanged = new EventEmitter<any[]>();
 
   pages = [];
@@ -28,13 +30,15 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     }
     this.filterdata();
 
-    this.subs = this.paginatorService.previosPage.subscribe(() => {
-      this.pageQuantity = Math.ceil((this.rawData.length - 1) / this.pageSize);
-      this.pages = [];
-      for (let i = 0; i < this.pageQuantity; i++) {
-        this.pages.push(i);
+    this.subs = this.paginatorService.previosPage.subscribe((id: string) => {
+      if (this.id === id) {
+        this.pageQuantity = Math.ceil((this.rawData.length - 1) / this.pageSize);
+        this.pages = [];
+        for (let i = 0; i < this.pageQuantity; i++) {
+          this.pages.push(i);
+        }
+        this.previous();
       }
-      this.previous();
     });
   }
 

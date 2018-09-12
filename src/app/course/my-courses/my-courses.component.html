@@ -51,6 +51,6 @@
             </table>
       </div>
     </div>
-    <app-paginator *ngIf="courses.length > 0" [rawData]="courses" [pageSize]="6"
+    <app-paginator *ngIf="courses.length > 0" [rawData]="courses" [id]="courses" [pageSize]="6"
       (pageChanged)="onPageChanged($event)"></app-paginator>
   </div>

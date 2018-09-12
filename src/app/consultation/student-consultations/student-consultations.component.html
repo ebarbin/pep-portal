@@ -1,88 +1,98 @@
 <div class="container">
-    <div *ngIf="consultations.length > 0">
-      <h1 class="h3 mb-3 font-weight-normal text-center">Consultas</h1>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <table class="table table-striped">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Fecha Consulta</th>
-                  <th scope="col">Docente</th>
-                  <th scope="col">Curso</th>
-                  <th scope="col">Ejercicio</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let consultation of filteredConsultations">
-                  <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-                  <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
-                  <td> {{ consultation.course.name}}</td>
-                  <td>
-                    <span *ngIf="consultation.problem">{{ consultation.problem.name }}</span>
-                  </td>
-                  <td>
-                    <button [disabled]="!consultation.problem" type="button" class="btn three-buttons left-button btn-info" (click)="seeConsultation(consultation)">
-                      Ver Consulta
-                    </button>
-                    <button type="button" class="btn three-buttons center-button btn-secondary" (click)="seeResponse(consultation)"
-                      [disabled]="!consultation.teacherResponse">
-                      Ver Respuesta
-                    </button>
-                    <button type="button" class="btn three-buttons right-button btn-danger" (click)="removeConsultation(consultation)"
-                    [disabled]="!consultation.wasReadedByStudent">
-                    Eliminar
-                    </button>
-                    <fa style="color: red; position: absolute; margin-left: 20px; margin-top: 5px;"
-                      *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
-                      name="exclamation-circle"></fa>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-      </div>
-      <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" [pageSize]="6"
-        (pageChanged)="onConsultationPageChanged($event)"></app-paginator>
-    </div>
-    <div *ngIf="comunications.length > 0">
-      <h1 class="h3 mb-3 font-weight-normal text-center">Comunicados</h1>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <table class="table table-striped">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Fecha Comunicado</th>
-                  <th scope="col">Docente</th>
-                  <th scope="col">Curso</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let consultation of filteredComunications">
-                  <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-                  <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
-                  <td> {{ consultation.course.name}}</td>
-                  <td>
-                    <button *ngIf="!consultation.problem" type="button" class="btn two-buttons left-button btn-secondary"
-                      (click)="seeResponse(consultation)"
-                      [disabled]="!consultation.teacherResponse">
-                      Ver Comunicado
-                    </button>
-                    <button type="button" class="btn two-buttons right-button btn-danger" (click)="removeConsultation(consultation)"
-                      [disabled]="!consultation.wasReadedByStudent">
-                      Eliminar
-                    </button>
-                    <fa style="color: red; position: absolute; margin-left: 20px; margin-top: 5px;"
-                    *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
-                    name="exclamation-circle"></fa>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-      </div>
-      <app-paginator *ngIf="comunications.length > 0" [rawData]="comunications" [pageSize]="6"
-        (pageChanged)="onComunicationPageChanged($event)"></app-paginator>
-    </div>
-  </div>
+
+    <ngb-tabset>
+        <ngb-tab title="Consultas" *ngIf="consultations.length > 0">
+          <ng-template ngbTabContent>
+
+
+
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <table class="table table-striped">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Fecha Consulta</th>
+                              <th scope="col">Docente</th>
+                              <th scope="col">Curso</th>
+                              <th scope="col">Ejercicio</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let consultation of filteredConsultations">
+                              <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                              <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
+                              <td> {{ consultation.course.name}}</td>
+                              <td>
+                                <span *ngIf="consultation.problem">{{ consultation.problem.name }}</span>
+                              </td>
+                              <td>
+                                <button [disabled]="!consultation.problem" type="button" class="btn three-buttons left-button btn-info" (click)="seeConsultation(consultation)">
+                                  Ver Consulta
+                                </button>
+                                <button type="button" class="btn three-buttons center-button btn-secondary" (click)="seeResponse(consultation)"
+                                  [disabled]="!consultation.teacherResponse">
+                                  Ver Respuesta
+                                </button>
+                                <button type="button" class="btn three-buttons right-button btn-danger" (click)="removeConsultation(consultation)"
+                                [disabled]="!consultation.wasReadedByStudent">
+                                Eliminar
+                                </button>
+                                <fa style="color: red; position: absolute; margin-left: 20px; margin-top: 5px;"
+                                  *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
+                                  name="exclamation-circle"></fa>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" [id]="consultations" [pageSize]="6"
+                    (pageChanged)="onConsultationPageChanged($event)"></app-paginator>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Comunicados" *ngIf="comunications.length > 0">
+          <ng-template ngbTabContent>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <table class="table table-striped">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Fecha Comunicado</th>
+                              <th scope="col">Docente</th>
+                              <th scope="col">Curso</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let consultation of filteredComunications">
+                              <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                              <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
+                              <td> {{ consultation.course.name}}</td>
+                              <td>
+                                <button *ngIf="!consultation.problem" type="button" class="btn two-buttons left-button btn-secondary"
+                                  (click)="seeResponse(consultation)"
+                                  [disabled]="!consultation.teacherResponse">
+                                  Ver Comunicado
+                                </button>
+                                <button type="button" class="btn two-buttons right-button btn-danger" (click)="removeConsultation(consultation)"
+                                  [disabled]="!consultation.wasReadedByStudent">
+                                  Eliminar
+                                </button>
+                                <fa style="color: red; position: absolute; margin-left: 20px; margin-top: 5px;"
+                                *ngIf="consultation.teacherResponse && !consultation.wasReadedByStudent"
+                                name="exclamation-circle"></fa>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+                  <app-paginator *ngIf="comunications.length > 0" [rawData]="comunications" [id]="comunications" [pageSize]="6"
+                    (pageChanged)="onComunicationPageChanged($event)"></app-paginator>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+
+
+</div>

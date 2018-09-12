@@ -75,11 +75,11 @@ export class StudentConsultationsComponent implements OnInit {
           if (consultation.problem) {
             this.toastService.success('Consulta eliminada.', 'Operación exitosa');
 
-            if (this.consultations.length === 0) {
+            if (this.consultations.length === 0 && this.comunications.length === 0) {
               this.toastService.warning('No hay consultas.', 'Atención');
               this.router.navigate(['home/start']);
             } else if (this.filteredConsultations.length === 0) {
-              this.paginatorService.previosPage.next();
+              this.paginatorService.previosPage.next('consultations');
             }
 
           } else {
@@ -89,7 +89,7 @@ export class StudentConsultationsComponent implements OnInit {
               this.toastService.warning('No hay comunicados.', 'Atención');
               this.router.navigate(['home/start']);
             } else if (this.filteredComunications.length === 0) {
-              this.paginatorService.previosPage.next();
+              this.paginatorService.previosPage.next('comunications');
             }
           }
 

@@ -29,6 +29,6 @@
             </table>
       </div>
     </div>
-    <app-paginator *ngIf="primitives.length > 0" [rawData]="primitives" [pageSize]="6"
+    <app-paginator *ngIf="primitives.length > 0" [rawData]="primitives" [id]="primitives" [pageSize]="6"
         (pageChanged)="onPageChanged($event)"></app-paginator>
   </div>
