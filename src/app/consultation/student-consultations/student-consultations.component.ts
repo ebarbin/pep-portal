@@ -13,13 +13,33 @@ import { ToastrService } from 'ngx-toastr';
 export class StudentConsultationsComponent implements OnInit {
 
   consultations = [];
+  filteredConsultations = [];
+
+  comunications = [];
+  filteredComunications = [];
 
   constructor(private router: Router, private toastService: ToastrService, private dialogService: DialogService,
     private consultationService: ConsultationService) { }
 
   ngOnInit() {
     this.consultationService.getStudentConsultations().subscribe((consultations: [Consultation]) => {
-      this.consultations = consultations;
+      //this.consultations = consultations;
+
+      this.comunications = consultations.filter((con: Consultation) => {
+        if (con.problem == null) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      this.consultations = consultations.filter((con: Consultation) => {
+        if (con.problem == null) {
+          return false;
+        } else {
+          return true;
+        }
+      });
     });
   }
 
@@ -35,19 +55,24 @@ export class StudentConsultationsComponent implements OnInit {
       if (result) {
         this.consultationService.removeById(consultation.id).subscribe(() => {
 
-          this.consultations = this.consultations.filter((c: Consultation) => {
+          this.filteredConsultations = this.filteredConsultations.filter((c: Consultation) => {
+            return c.id !== consultation.id;
+          });
+
+          this.filteredComunications = this.filteredComunications.filter((c: Consultation) => {
             return c.id !== consultation.id;
           });
 
           if (consultation.problem) {
             this.toastService.success('Consulta eliminada.', 'Operación exitosa');
+            if (this.filteredConsultations.length === 0) {
+              this.router.navigate(['home/start']);
+            }
           } else {
             this.toastService.success('Comunicado eliminado.', 'Operación exitosa');
-          }
-
-
-          if (this.consultations.length === 0) {
-            this.router.navigate(['home/start']);
+            if (this.filteredComunications.length === 0) {
+              this.router.navigate(['home/start']);
+            }
           }
 
         });
@@ -92,4 +117,17 @@ export class StudentConsultationsComponent implements OnInit {
       }
     });
   }
+
+  onConsultationPageChanged(data: [Consultation]) {
+    setTimeout(() => {
+      this.filteredConsultations = data;
+    }, 100);
+  }
+
+  onComunicationPageChanged(data: [Consultation]) {
+    setTimeout(() => {
+      this.filteredComunications = data;
+    }, 100);
+  }
+
 }

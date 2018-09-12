@@ -13,7 +13,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let consultation of consultations">
+              <tr *ngFor="let consultation of filteredConsultations">
                 <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                 <td> {{ consultation.student.user.name + ' ' +consultation.student.user.surename}}</td>
                 <td> {{ consultation.course.name}}</td>
@@ -34,4 +34,6 @@
           </table>
       </div>
     </div>
+    <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" [pageSize]="6"
+      (pageChanged)="onPageChanged($event)"></app-paginator>
   </div>

@@ -27,6 +27,7 @@ export class MyCoursesComponent implements OnInit {
     private inscriptionService: InscriptionService) { }
 
   courses = [];
+  filteredCourses = [];
   inscriptions = [];
 
   ngOnInit() {
@@ -48,11 +49,11 @@ export class MyCoursesComponent implements OnInit {
       if (result) {
         this.courseService.deleteById(course.id).subscribe(() => {
           this.toastService.success('Curso eliminado.', 'Operación exitosa');
-          this.courses = this.courses.filter((c: Course) => {
+          this.filteredCourses = this.filteredCourses.filter((c: Course) => {
             return c.id !== course.id;
           });
 
-          if (this.courses.length === 0) {
+          if (this.filteredCourses.length === 0) {
             this.toastService.warning('No hay cursos.', 'Atención');
             this.router.navigate(['home/start']);
           }
@@ -112,5 +113,11 @@ export class MyCoursesComponent implements OnInit {
 
   see(course: Course) {
     this.dialogService.courseInfo(course, 'lg');
+  }
+
+  onPageChanged(data: [Course]) {
+    setTimeout(() => {
+      this.filteredCourses = data;
+    }, 100);
   }
 }

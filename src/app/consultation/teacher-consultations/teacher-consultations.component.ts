@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class TeacherConsultationsComponent implements OnInit {
 
   consultations = [];
+  filteredConsultations = [];
 
   constructor(private router: Router, private dialogService: DialogService,
     private consultationService: ConsultationService,
@@ -45,17 +46,23 @@ export class TeacherConsultationsComponent implements OnInit {
   sendResponse(consultation: Consultation) {
     this.dialogService.sendResponse(consultation, 'lg')
     .then(() => {
-      this.consultations = this.consultations.filter((c: Consultation) => {
+      this.filteredConsultations = this.filteredConsultations.filter((c: Consultation) => {
         return c.id !== consultation.id;
       });
 
       this.toastrService.success('Ya se ha enviado la respuesta al alumno.', 'Operación exitosa');
 
-      if (this.consultations.length === 0) {
+      if (this.filteredConsultations.length === 0) {
         this.router.navigate(['home/start']);
       }
 
     })
     .catch(() => {});
+  }
+
+  onPageChanged(data: [Consultation]) {
+    setTimeout(() => {
+      this.filteredConsultations = data;
+    }, 100);
   }
 }

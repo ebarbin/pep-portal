@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class MyProblemsComponent implements OnInit {
 
   problems = [];
+  filteredProblems = [];
 
   constructor(private router: Router, private problemService: ProblemService, private toastService: ToastrService,
     private dialogService: DialogService) { }
@@ -30,11 +31,11 @@ export class MyProblemsComponent implements OnInit {
         this.problemService.deleteById(problem.id).subscribe(() => {
           this.toastService.success('Ejercicio eliminado.', 'Operación exitosa');
 
-          this.problems = this.problems.filter((p: Problem) => {
+          this.filteredProblems = this.filteredProblems.filter((p: Problem) => {
             return p.id !== problem.id;
           });
 
-          if (this.problems.length === 0) {
+          if (this.filteredProblems.length === 0) {
             this.toastService.warning('No hay ejercicios.', 'Atención');
             this.router.navigate(['home/start']);
           }
@@ -46,5 +47,11 @@ export class MyProblemsComponent implements OnInit {
 
   see(problem: Problem) {
     this.dialogService.problemInfo(problem, 'lg');
+  }
+
+  onPageChanged(data: [Problem]) {
+    setTimeout(() => {
+      this.filteredProblems = data;
+    }, 100);
   }
 }

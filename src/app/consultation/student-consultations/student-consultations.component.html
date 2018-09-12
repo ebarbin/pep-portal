@@ -1,5 +1,5 @@
 <div class="container">
-    <div *ngIf="getConsultations().length > 0">
+    <div *ngIf="consultations.length > 0">
       <h1 class="h3 mb-3 font-weight-normal text-center">Consultas</h1>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -14,7 +14,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let consultation of getConsultations()">
+                <tr *ngFor="let consultation of filteredConsultations">
                   <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                   <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
                   <td> {{ consultation.course.name}}</td>
@@ -42,8 +42,10 @@
             </table>
         </div>
       </div>
+      <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" [pageSize]="6"
+        (pageChanged)="onConsultationPageChanged($event)"></app-paginator>
     </div>
-    <div *ngIf="getComunications().length > 0">
+    <div *ngIf="comunications.length > 0">
       <h1 class="h3 mb-3 font-weight-normal text-center">Comunicados</h1>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -57,7 +59,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let consultation of getComunications(consultations)">
+                <tr *ngFor="let consultation of filteredComunications">
                   <td> {{ consultation.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                   <td> {{ consultation.teacher.user.name + ' ' +consultation.teacher.user.surename}}</td>
                   <td> {{ consultation.course.name}}</td>
@@ -80,5 +82,7 @@
             </table>
         </div>
       </div>
+      <app-paginator *ngIf="comunications.length > 0" [rawData]="comunications" [pageSize]="6"
+        (pageChanged)="onComunicationPageChanged($event)"></app-paginator>
     </div>
   </div>
