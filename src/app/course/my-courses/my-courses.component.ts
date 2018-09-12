@@ -1,3 +1,4 @@
+import { PaginatorService } from './../../shared/paginator/paginator.service';
 import { Router } from '@angular/router';
 import { Inscription } from './../inscription.model';
 import { DialogService } from '../../dialog/dialog.service';
@@ -19,7 +20,8 @@ export class MyCoursesComponent implements OnInit {
 
   user: User;
 
-  constructor(private router: Router,
+  constructor(private paginatorService: PaginatorService,
+    private router: Router,
     private dialogService: DialogService,
     private toastService: ToastrService,
     private userService: UserService,
@@ -49,13 +51,20 @@ export class MyCoursesComponent implements OnInit {
       if (result) {
         this.courseService.deleteById(course.id).subscribe(() => {
           this.toastService.success('Curso eliminado.', 'Operación exitosa');
+
+          this.courses = this.courses.filter((c: Course) => {
+            return c.id !== course.id;
+          });
+
           this.filteredCourses = this.filteredCourses.filter((c: Course) => {
             return c.id !== course.id;
           });
 
-          if (this.filteredCourses.length === 0) {
+          if (this.courses.length === 0) {
             this.toastService.warning('No hay cursos.', 'Atención');
             this.router.navigate(['home/start']);
+          } else if (this.filteredCourses.length === 0) {
+            this.paginatorService.previosPage.next();
           }
 
         });

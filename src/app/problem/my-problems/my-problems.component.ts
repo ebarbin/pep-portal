@@ -1,3 +1,4 @@
+import { PaginatorService } from './../../shared/paginator/paginator.service';
 import { Router } from '@angular/router';
 import { DialogService } from '../../dialog/dialog.service';
 import { Problem } from './../problem.model';
@@ -15,7 +16,8 @@ export class MyProblemsComponent implements OnInit {
   problems = [];
   filteredProblems = [];
 
-  constructor(private router: Router, private problemService: ProblemService, private toastService: ToastrService,
+  constructor(private paginatorService: PaginatorService, private router: Router,
+    private problemService: ProblemService, private toastService: ToastrService,
     private dialogService: DialogService) { }
 
   ngOnInit() {
@@ -31,13 +33,19 @@ export class MyProblemsComponent implements OnInit {
         this.problemService.deleteById(problem.id).subscribe(() => {
           this.toastService.success('Ejercicio eliminado.', 'Operación exitosa');
 
+          this.problems = this.problems.filter((p: Problem) => {
+            return p.id !== problem.id;
+          });
+
           this.filteredProblems = this.filteredProblems.filter((p: Problem) => {
             return p.id !== problem.id;
           });
 
-          if (this.filteredProblems.length === 0) {
+          if (this.problems.length === 0) {
             this.toastService.warning('No hay ejercicios.', 'Atención');
             this.router.navigate(['home/start']);
+          } else if (this.filteredProblems.length === 0) {
+            this.paginatorService.previosPage.next();
           }
 
         });

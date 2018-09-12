@@ -1,3 +1,4 @@
+import { PaginatorService } from './../../shared/paginator/paginator.service';
 import { Router } from '@angular/router';
 import { DialogService } from '../../dialog/dialog.service';
 import { Consultation } from './../models/consultation.model';
@@ -18,12 +19,12 @@ export class StudentConsultationsComponent implements OnInit {
   comunications = [];
   filteredComunications = [];
 
-  constructor(private router: Router, private toastService: ToastrService, private dialogService: DialogService,
+  constructor(private paginatorService: PaginatorService, private router: Router, private toastService: ToastrService,
+    private dialogService: DialogService,
     private consultationService: ConsultationService) { }
 
   ngOnInit() {
     this.consultationService.getStudentConsultations().subscribe((consultations: [Consultation]) => {
-      //this.consultations = consultations;
 
       this.comunications = consultations.filter((con: Consultation) => {
         if (con.problem == null) {
@@ -55,7 +56,15 @@ export class StudentConsultationsComponent implements OnInit {
       if (result) {
         this.consultationService.removeById(consultation.id).subscribe(() => {
 
+          this.consultations = this.consultations.filter((c: Consultation) => {
+            return c.id !== consultation.id;
+          });
+
           this.filteredConsultations = this.filteredConsultations.filter((c: Consultation) => {
+            return c.id !== consultation.id;
+          });
+
+          this.comunications = this.comunications.filter((c: Consultation) => {
             return c.id !== consultation.id;
           });
 
@@ -65,13 +74,22 @@ export class StudentConsultationsComponent implements OnInit {
 
           if (consultation.problem) {
             this.toastService.success('Consulta eliminada.', 'Operación exitosa');
-            if (this.filteredConsultations.length === 0) {
+
+            if (this.consultations.length === 0) {
+              this.toastService.warning('No hay consultas.', 'Atención');
               this.router.navigate(['home/start']);
+            } else if (this.filteredConsultations.length === 0) {
+              this.paginatorService.previosPage.next();
             }
+
           } else {
             this.toastService.success('Comunicado eliminado.', 'Operación exitosa');
-            if (this.filteredComunications.length === 0) {
+
+            if (this.comunications.length === 0) {
+              this.toastService.warning('No hay comunicados.', 'Atención');
               this.router.navigate(['home/start']);
+            } else if (this.filteredComunications.length === 0) {
+              this.paginatorService.previosPage.next();
             }
           }
 

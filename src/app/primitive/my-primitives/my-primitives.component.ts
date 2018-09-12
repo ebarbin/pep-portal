@@ -1,3 +1,4 @@
+import { PaginatorService } from './../../shared/paginator/paginator.service';
 import { Router } from '@angular/router';
 import { DialogService } from '../../dialog/dialog.service';
 import { Primitive } from './../primitive.model';
@@ -12,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MyPrimitivesComponent implements OnInit {
 
-  constructor(private router: Router, private dialogService: DialogService,
+  constructor(private paginatorService: PaginatorService, private router: Router, private dialogService: DialogService,
     private primitiveService: PrimitiveService, private toastService: ToastrService) { }
 
   primitives = [];
@@ -37,13 +38,20 @@ export class MyPrimitivesComponent implements OnInit {
         this.primitiveService.deleteById(primitive.id).subscribe(() => {
 
           this.toastService.success('Primitiva eliminada.', 'Operación exitosa');
+
+          this.primitives = this.primitives.filter((p: Primitive) => {
+            return p.id !== primitive.id;
+          });
+
           this.filteredPrimitives = this.filteredPrimitives.filter((p: Primitive) => {
             return p.id !== primitive.id;
           });
 
-          if (this.filteredPrimitives.length === 0) {
+          if (this.primitives.length === 0) {
             this.toastService.warning('No hay primitivas.', 'Atención');
             this.router.navigate(['home/start']);
+          } else if (this.filteredPrimitives.length === 0) {
+            this.paginatorService.previosPage.next();
           }
 
         });

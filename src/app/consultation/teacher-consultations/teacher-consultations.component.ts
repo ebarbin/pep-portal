@@ -1,3 +1,4 @@
+import { PaginatorService } from './../../shared/paginator/paginator.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Consultation } from './../models/consultation.model';
@@ -15,7 +16,8 @@ export class TeacherConsultationsComponent implements OnInit {
   consultations = [];
   filteredConsultations = [];
 
-  constructor(private router: Router, private dialogService: DialogService,
+  constructor(private paginatorService: PaginatorService, private router: Router,
+    private dialogService: DialogService,
     private consultationService: ConsultationService,
     private toastrService: ToastrService) { }
 
@@ -46,14 +48,22 @@ export class TeacherConsultationsComponent implements OnInit {
   sendResponse(consultation: Consultation) {
     this.dialogService.sendResponse(consultation, 'lg')
     .then(() => {
+
+      this.consultations = this.consultations.filter((c: Consultation) => {
+        return c.id !== consultation.id;
+      });
+
       this.filteredConsultations = this.filteredConsultations.filter((c: Consultation) => {
         return c.id !== consultation.id;
       });
 
       this.toastrService.success('Ya se ha enviado la respuesta al alumno.', 'Operación exitosa');
 
-      if (this.filteredConsultations.length === 0) {
+
+      if (this.consultations.length === 0) {
         this.router.navigate(['home/start']);
+      } else if (this.filteredConsultations.length === 0) {
+        this.paginatorService.previosPage.next();
       }
 
     })

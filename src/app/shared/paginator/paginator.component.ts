@@ -1,11 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PaginatorService } from './paginator.service';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.css']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnDestroy {
 
   @Input() rawData: any[];
   @Input() pageSize: number;
@@ -15,7 +17,9 @@ export class PaginatorComponent implements OnInit {
   pageQuantity;
   pageSelected = 0;
 
-  constructor() { }
+  subs: Subscription;
+
+  constructor(private paginatorService: PaginatorService) { }
 
   ngOnInit() {
     this.pageQuantity = Math.ceil(this.rawData.length / this.pageSize);
@@ -23,6 +27,19 @@ export class PaginatorComponent implements OnInit {
       this.pages.push(i);
     }
     this.filterdata();
+
+    this.subs = this.paginatorService.previosPage.subscribe(() => {
+      this.pageQuantity = Math.ceil((this.rawData.length - 1) / this.pageSize);
+      this.pages = [];
+      for (let i = 0; i < this.pageQuantity; i++) {
+        this.pages.push(i);
+      }
+      this.previous();
+    });
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 
   selectPage(page: number) {
