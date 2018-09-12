@@ -37,11 +37,11 @@ export class MyPrimitivesComponent implements OnInit {
         this.primitiveService.deleteById(primitive.id).subscribe(() => {
 
           this.toastService.success('Primitiva eliminada.', 'Operación exitosa');
-          this.primitives = this.primitives.filter((p: Primitive) => {
+          this.filteredPrimitives = this.filteredPrimitives.filter((p: Primitive) => {
             return p.id !== primitive.id;
           });
 
-          if (this.primitives.length === 0) {
+          if (this.filteredPrimitives.length === 0) {
             this.toastService.warning('No hay primitivas.', 'Atención');
             this.router.navigate(['home/start']);
           }
@@ -51,7 +51,7 @@ export class MyPrimitivesComponent implements OnInit {
     });
   }
 
-  onPageChanged(data: [any]) {
+  onPageChanged(data: [Primitive]) {
     setTimeout(() => {
       this.filteredPrimitives = data;
     }, 100);
