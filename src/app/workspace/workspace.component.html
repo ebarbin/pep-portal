@@ -16,7 +16,7 @@
           [workspace]="workspace"
           [workspaceProblem]="activeProblem">
         </app-buttons-menu>
-        <ngx-monaco-editor (keyup)="onKeyUp($event)" *ngIf="activeProblem"
+        <ngx-monaco-editor (keyup)="onKeyUp($event)" *ngIf="activeProblem && show"
           [options]="editorOptions"
           [(ngModel)]="activeProblem.solution">
         </ngx-monaco-editor>
