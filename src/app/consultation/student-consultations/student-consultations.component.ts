@@ -147,5 +147,4 @@ export class StudentConsultationsComponent implements OnInit {
       this.filteredComunications = data;
     }, 100);
   }
-
 }

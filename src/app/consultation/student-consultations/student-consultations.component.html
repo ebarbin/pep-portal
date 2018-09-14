@@ -1,10 +1,14 @@
 <div class="container">
-
+    <br>
     <ngb-tabset>
-        <ngb-tab title="Consultas" *ngIf="consultations.length > 0">
+        <ngb-tab *ngIf="consultations.length > 0">
+          <ng-template ngbTabTitle>
+            Consultas
+          </ng-template>
           <ng-template ngbTabContent>
+              <br>
                   <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 70vh;">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 67vh;">
                       <table class="table table-striped">
                           <thead class="thead-dark">
                             <tr>
@@ -48,10 +52,14 @@
                     (pageChanged)="onConsultationPageChanged($event)"></app-paginator>
           </ng-template>
         </ngb-tab>
-        <ngb-tab title="Comunicados" *ngIf="comunications.length > 0">
+        <ngb-tab *ngIf="comunications.length > 0">
+            <ng-template ngbTabTitle>
+              Comunicados
+            </ng-template>
           <ng-template ngbTabContent>
+              <br>
                   <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 70vh;">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 67vh;">
                       <table class="table table-striped">
                           <thead class="thead-dark">
                             <tr>
