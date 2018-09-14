@@ -12,6 +12,7 @@
         <app-buttons-menu
           (logChange)="onLogChanged($event)"
           (logClear)="onLogCleared()"
+          (blockWorkspace)="onBlockWorkspace()"
           [workspace]="workspace"
           [workspaceProblem]="activeProblem">
         </app-buttons-menu>
@@ -33,6 +34,7 @@
           readonly="true">
         </textarea>
         <button style="width: 100%; border-radius: 0px 0px 5px 5px;" (click)="onLogCleared()"
+          [disabled]="activeProblem.state === 'FEEDBACK'"
           class="btn btn-dark" placement="bottom" ngbTooltip="Borrar Log">
             <fa name="trash"></fa>
         </button>

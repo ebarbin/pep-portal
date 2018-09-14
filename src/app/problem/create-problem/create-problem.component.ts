@@ -74,7 +74,7 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
     const problem: Problem = <Problem> form.value;
 
     if (form.value.primitives === '') {
-      delete problem.primitives;
+      form.value.primitives = [];
     }
 
     if (this.editMode) {

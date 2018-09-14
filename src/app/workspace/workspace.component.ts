@@ -12,7 +12,7 @@ import { Workspace } from './models/workspace.model';
 })
 export class WorkspaceComponent implements OnInit, OnDestroy {
 
-  editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};
+  editorOptions = {theme: 'vs-dark', language: 'javascript', readOnly: false, contextmenu: false};
 
   subs: Subscription;
 
@@ -28,6 +28,11 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
       this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
         return p.active;
       });
+      if (this.activeProblem.state === 'FEEDBACK') {
+        this.editorOptions.readOnly = true;
+      } else {
+        this.editorOptions.readOnly = false;
+      }
     });
 
     this.subs = this.workspaceService.workspaceSelectionChanged.subscribe((workspace: Workspace) => {
@@ -38,8 +43,18 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
         this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
           return p.active;
         });
+        if (this.activeProblem.state === 'FEEDBACK') {
+          this.editorOptions.readOnly = true;
+        } else {
+          this.editorOptions.readOnly = false;
+        }
       }
     });
+  }
+
+  onBlockWorkspace() {
+    console.log('adadasdasdasda');
+    this.editorOptions.readOnly = true;
   }
 
   onLogCleared() {
@@ -60,12 +75,19 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
 
   onProblemSelection(worskpaceProblem: WorkspaceProblem) {
     this.activeProblem = worskpaceProblem;
+    if (this.activeProblem.state === 'FEEDBACK') {
+      this.editorOptions.readOnly = true;
+    } else {
+      this.editorOptions.readOnly = false;
+    }
   }
 
   onKeyUp(event: KeyboardEvent) {
-    this.workspaceService.updateSolution(this.workspace, this.activeProblem).subscribe(() => {
-      this.activeProblem.state = null;
-    });
+    if (!this.editorOptions.readOnly) {
+      this.workspaceService.updateSolution(this.workspace, this.activeProblem).subscribe(() => {
+        this.activeProblem.state = null;
+      });
+    }
   }
 
 }

@@ -27,6 +27,7 @@ export class ButtonsMenuComponent implements OnInit {
 
   @Output() logChange = new EventEmitter<string>();
   @Output() logClear = new EventEmitter<string>();
+  @Output() blockWorkspace = new EventEmitter();
 
   ngOnInit() {}
 
@@ -40,26 +41,29 @@ export class ButtonsMenuComponent implements OnInit {
   }
 
   onProblemValidButtonClick() {
-
       if (!this.modeDebug) {
-
         try {
-
           const executionContext = this.getExecutionContext(false);
-
           const result = new Function(executionContext)();
 
-          if (!result.state) {
+          console.log(result);
+
+          if (result.state === false) {
             this.toastrService.error(result.message);
             this.logChange.emit(result.message);
 
             this.markProblemAsNoOK();
 
-          } else {
+          } else if (result.state === true) {
             this.toastrService.success(result.message);
             this.logClear.emit();
 
             this.markProblemAsOK();
+          } else {
+
+            this.toastrService.info('La resolución de este ejercicio sera validada por el docente.', 'Información');
+            this.markProblemAsFeedback();
+            this.blockWorkspace.next();
           }
 
           result.logs.forEach( (log) => {
@@ -85,9 +89,16 @@ export class ButtonsMenuComponent implements OnInit {
           });
 
         } catch (e) {
+          console.log(e);
           this.logChange.emit(this.logMessageService.getFixedMessage(e.message));
         }
       }
+  }
+
+  private markProblemAsFeedback() {
+    this.workspaceService.markProblemAsFeedBack(this.workspace, this.workspaceProblem).subscribe(() => {
+      this.workspaceProblem.state = 'FEEDBACK';
+    });
   }
 
   private markProblemAsOK() {

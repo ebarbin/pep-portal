@@ -11,6 +11,9 @@
         *ngIf="wp.state === 'NOOK'"
         [ngClass]="{'nook': wp.active, 'nofocus': !wp.active}"
         style="position:relative; top: -20px;"></fa>
-        <div></div>
+      <fa name="question"
+        *ngIf="wp.state === 'FEEDBACK'"
+        [ngClass]="{'feedback': wp.active, 'nofocus': !wp.active}"
+        style="position:relative; top: -20px;"></fa>
     </a>
 </div>

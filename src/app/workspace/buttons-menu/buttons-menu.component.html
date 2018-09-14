@@ -1,25 +1,27 @@
 <button style="position: relative; top: 38px; left: -46px; width: 45px;"
-  class="btn btn-success"
+  class="btn btn-success" [disabled]="workspaceProblem && workspaceProblem.state === 'FEEDBACK'"
   placement="top" ngbTooltip="Ejecutar" (click)="onProblemValidButtonClick()">
   <fa name="play"></fa>
 </button>
 <button style="position: relative; top: 77px; left: -91px; width: 45px;"
   class="btn btn-warning" [ngClass]="{'clicked': modeDebug}"
+  [disabled]="workspaceProblem && workspaceProblem.state === 'FEEDBACK'"
   placement="top" ngbTooltip="Modo debug" (click)="onChangeMode()">
   <fa name="bug"></fa>
 </button>
 <button style="position: relative; top: 116px; left: -136px; width: 45px;"
-  class="btn btn-secondary"
+  class="btn btn-secondary" [disabled]="workspaceProblem && workspaceProblem.state === 'FEEDBACK'"
   placement="top" ngbTooltip="Enviar Consulta" (click)="onConsultationButtonClick()">
   <fa name="paper-plane"></fa>
 </button>
 <button style="position: relative; top: 155px; left: -181px; width: 45px;"
   class="btn btn-primary" placement="top" ngbTooltip="Ver Primitivas"
+  [disabled]="workspaceProblem && workspaceProblem.state === 'FEEDBACK'"
   (click)="onSeePrimitivesButtonClick()">
   <fa name="codepen"></fa>
 </button>
 <button style="position: relative; top: 194px; left: -226px; width: 45px;"
-  class="btn btn-danger"
+  class="btn btn-danger" [disabled]="workspaceProblem && workspaceProblem.state === 'FEEDBACK'"
   placement="top" ngbTooltip="Borrar area de trabajo" (click)="onClearButtonClick()">
   <fa name="trash"></fa>
 </button>
