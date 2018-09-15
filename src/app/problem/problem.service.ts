@@ -82,11 +82,40 @@ export class ProblemService {
 
   getStaticPreExecution() {
     const context = 'var __result = {logs: [], state: false, message: ""};\n';
+
     return context + 'var log = function(value) {__result.logs.push(JSON.stringify(value));}\n';
   }
 
   getStaticPosExecution() {
+
     return '\nreturn __result;';
+  }
+
+  getSuggestedPreExecution() {
+
+    return '// Ingrese cualquier elemento(variable, función, etc) que desea poner a disposición del alumno.';
+  }
+
+  getSuggestedExplanation() {
+    let description = '# Complete con el enunciado del ejercicio. <br>';
+    description = description + '# Temas que aborda el ejercicio. <br>';
+    description = description + '# Ayudas o tips para el alumno. <br>';
+
+    return description + '# Primitivas disponibles.';
+  }
+
+  getSuggestedPosExecution() {
+    let context = '// Ingrese la función que valide automaticamente el ejercicio o indique validación manual\n\n';
+    context = context + '// Para validación manual\n';
+    context = context + '__result.state = null;\n\n';
+    context = context + '// Para  salida incorrecta\n';
+    context = context + '// __result.state = false;\n';
+    context = context + '// __result.message = "<Aquí el mensaje de error que se quiera mostrar>";\n\n';
+    context = context + '// Para  salida correcta\n';
+    context = context + '// __result.state = true;\n';
+    context = context + '// __result.message = "<Aquí el mensaje de solución exitosa>";\n';
+
+    return context;
   }
 
   getExecutionContext(debug: boolean, workspaceProblem: WorkspaceProblem) {

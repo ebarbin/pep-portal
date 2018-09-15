@@ -50,6 +50,15 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
 
     if (!this.problemId) {
       this.title = 'Crear Ejercicio';
+
+      setTimeout(() => {
+        this.editForm.form.patchValue({
+          explanation: this.problemService.getSuggestedExplanation(),
+          preExecution: this.problemService.getSuggestedPreExecution(),
+          posExecution: this.problemService.getSuggestedPosExecution()
+        });
+      }, 100);
+
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
         this.originalPreExecutionValue = problem.preExecution;

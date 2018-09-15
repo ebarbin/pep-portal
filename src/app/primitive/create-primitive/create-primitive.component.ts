@@ -45,6 +45,11 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
 
     if (!this.primitiveId) {
       this.title = 'Crear Primitiva';
+      setTimeout(() => {
+        this.editForm.form.patchValue({
+          description: this.primitiveService.getSuggestedDescription();
+        });
+      }, 100);
     } else {
       this.primitiveService.findById(this.primitiveId).subscribe((primitive: Primitive) => {
         this.originalCodeValue = primitive.code;

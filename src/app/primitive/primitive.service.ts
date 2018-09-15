@@ -68,4 +68,10 @@ export class PrimitiveService {
       })
     );
   }
+
+  getSuggestedDescription() {
+    let description = '#Complete una breve explicación de la funcionalidad. <br>';
+    description = description + '#Indique y explique los parametros de entrada. (si es que aplica) <br>';
+    return description + '#Indique los parametros de salida. (si es que aplica)<br>';
+  }
 }

@@ -4,7 +4,6 @@ import { WorkspaceService } from './workspace.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Workspace } from './models/workspace.model';
-import { timeout } from 'q';
 
 @Component({
   selector: 'app-workspace',
