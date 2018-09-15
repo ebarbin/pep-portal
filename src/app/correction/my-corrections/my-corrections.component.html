@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="h3 mb-3 font-weight-normal text-center">Correcciones</h1>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 70vh;">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Alumno</th>
+                <th scope="col">Docente</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Ejercicio</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let correction of filteredCorrections">
+                <td> <img class="rounded-circle" height="30" [src]="correction.student.user.imageId | profileImage"/></td>
+                <td> {{ correction.student.user.name + ' ' + correction.student.user.surename}}</td>
+                <td> {{ correction.teacher.user.name  + ' ' + correction.teacher.user.surename}} </td>
+                <td> {{ correction.course.name }} </td>
+                <td> {{ correction.workspaceProblem.problem.name }} </td>
+                <td> ACA BOTONES </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+  <app-paginator *ngIf="corrections.length > 0" [rawData]="corrections" [id]="corrections" [pageSize]="6"
+    (pageChanged)="onPageChanged($event)"></app-paginator>
+</div>

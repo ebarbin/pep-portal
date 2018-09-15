@@ -1,3 +1,4 @@
+import { MyCorrectionsComponent } from './correction/my-corrections/my-corrections.component';
 import { CanDeactivateGuard } from './shared/can-deactivate.guard';
 import { ChartComponent } from './shared/chart/chart.component';
 import { MyCoursesGuard } from './course/my-courses/my-courses.guard';
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     { path: 'new-primitive', component: CreatePrimitiveComponent, canDeactivate: [CanDeactivateGuard] },
     { path: 'edit-primitive/:primitiveId', component: CreatePrimitiveComponent, canDeactivate: [CanDeactivateGuard] },
     { path: 'chart', component: ChartComponent },
+    { path: 'corrections', component: MyCorrectionsComponent}
 
   ]},
   { path: 'user/login', component: LoginComponent },

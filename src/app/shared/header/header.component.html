@@ -49,6 +49,11 @@
               routerLink="/home/primitive/list">Ver Primitivas</a>
           </div>
       </li>
+      <li class="nav-item" *ngIf="user.role === 'ROLE_TEACHER'">
+        <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/corrections">
+          Correcciones
+        </a>
+      </li>
         <li class="nav-item" *ngIf="user.role === 'ROLE_STUDENT'">
             <a class="nav-link cursor-pointer" routerLinkActive="active" routerLink="/home/student-consultations">Consultas / Comunicados
               <span *ngIf="unreadValue || unreadValue > 0"

@@ -1,3 +1,4 @@
+import { CorrectionModule } from './correction/correction.module';
 import { DialogModule } from './dialog/dialog.module';
 import { PrimitiveModule } from './primitive/primitive.module';
 import { ConsultationModule } from './consultation/consultation.module';
@@ -27,7 +28,8 @@ import { CourseModule } from './course/course.module';
     WorkspaceModule,
     ConsultationModule,
     PrimitiveModule,
-    DialogModule
+    DialogModule,
+    CorrectionModule
   ],
   bootstrap: [AppComponent]
 })
