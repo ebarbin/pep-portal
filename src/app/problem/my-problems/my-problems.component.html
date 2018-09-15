@@ -33,6 +33,6 @@
           </table>
       </div>
     </div>
-    <app-paginator *ngIf="problems.length > 0" [rawData]="problems" [id]="problems" [pageSize]="6"
+    <app-paginator *ngIf="problems.length > 0" [rawData]="problems" [pageSize]="6"
       (pageChanged)="onPageChanged($event)"></app-paginator>
   </div>

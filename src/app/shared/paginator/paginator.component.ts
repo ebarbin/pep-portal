@@ -31,7 +31,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.filterdata();
 
     this.subs = this.paginatorService.previosPage.subscribe((id: string) => {
-      if (this.id === id) {
+      if (!this.id || this.id === id) {
         this.pageQuantity = Math.ceil((this.rawData.length - 1) / this.pageSize);
         this.pages = [];
         for (let i = 0; i < this.pageQuantity; i++) {

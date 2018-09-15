@@ -26,6 +26,6 @@
           </table>
     </div>
   </div>
-  <app-paginator *ngIf="corrections.length > 0" [rawData]="corrections" [id]="corrections" [pageSize]="6"
+  <app-paginator *ngIf="corrections.length > 0" [rawData]="corrections" [pageSize]="6"
     (pageChanged)="onPageChanged($event)"></app-paginator>
 </div>

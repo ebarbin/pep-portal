@@ -48,7 +48,7 @@
                         </table>
                     </div>
                   </div>
-                  <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" [id]="consultations" [pageSize]="6"
+                  <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" id="cons" [pageSize]="6"
                     (pageChanged)="onConsultationPageChanged($event)"></app-paginator>
           </ng-template>
         </ngb-tab>
@@ -93,7 +93,7 @@
                         </table>
                     </div>
                   </div>
-                  <app-paginator *ngIf="comunications.length > 0" [rawData]="comunications" [id]="comunications" [pageSize]="6"
+                  <app-paginator *ngIf="comunications.length > 0" [rawData]="comunications" id="comu" [pageSize]="6"
                     (pageChanged)="onComunicationPageChanged($event)"></app-paginator>
           </ng-template>
         </ngb-tab>
