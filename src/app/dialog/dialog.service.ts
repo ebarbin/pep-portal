@@ -1,3 +1,4 @@
+import { Correction } from './../correction/correction.model';
 import { SeeContextDialogComponent } from './see-context-dialog/see-context-dialog.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SeePrimitivesComponent } from './see-primitives/see-primitives.component';
@@ -19,6 +20,7 @@ import { Problem } from '../problem/problem.model';
 import { ConsultationDialogComponent } from './consultation-dialog/consultation-dialog.component';
 import { Consultation } from '../consultation/models/consultation.model';
 import { Workspace } from '../workspace/models/workspace.model';
+import { CorrectionPanelDialogComponent } from './correction-panel-dialog/correction-panel-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +115,13 @@ export class DialogService {
   public seeContext(problem: Problem, dialogSize: 'sm'|'lg' = 'sm'): Promise<boolean> {
     const modalRef = this.modalService.open(SeeContextDialogComponent, { size: dialogSize });
     modalRef.componentInstance.problem = problem;
+
+    return modalRef.result;
+  }
+
+  public openCorrectionPanel(correction: Correction): Promise<boolean> {
+    const modalRef = this.modalService.open(CorrectionPanelDialogComponent, { size: 'lg' });
+    modalRef.componentInstance.correction = correction;
 
     return modalRef.result;
   }

@@ -1,3 +1,4 @@
+import { DialogService } from './../../dialog/dialog.service';
 import { CorrectionService } from './../correction.service';
 import { Correction } from './../correction.model';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ export class MyCorrectionsComponent implements OnInit {
   filteredCorrections: Correction[] = [];
   corrections: Correction[] = [];
 
-  constructor(private correctionService: CorrectionService) { }
+  constructor(private dialogService: DialogService, private correctionService: CorrectionService) { }
 
   ngOnInit() {
     this.correctionService.getCorrections().subscribe((corrections: [Correction]) => {
@@ -24,5 +25,11 @@ export class MyCorrectionsComponent implements OnInit {
     setTimeout(() => {
       this.filteredCorrections = data;
     }, 100);
+  }
+
+  openCorrectionPanel(correction: Correction) {
+    this.dialogService.openCorrectionPanel(correction).then(() => {
+
+    }).catch(() => {});
   }
 }

@@ -20,7 +20,12 @@
                 <td> {{ correction.teacher.user.name  + ' ' + correction.teacher.user.surename}} </td>
                 <td> {{ correction.course.name }} </td>
                 <td> {{ correction.workspaceProblem.problem.name }} </td>
-                <td> ACA BOTONES </td>
+                <td>
+                  <button type="button" style="width:100%" class=" btn btn-primary"
+                    (click)="openCorrectionPanel(correction)">
+                    Seleccionar
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

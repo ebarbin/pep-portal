@@ -13,6 +13,7 @@ import { ConfirmationDialogComponent } from './../dialog/confirmation-dialog/con
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SeeContextDialogComponent } from './see-context-dialog/see-context-dialog.component';
+import { CorrectionPanelDialogComponent } from './correction-panel-dialog/correction-panel-dialog.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { SeeContextDialogComponent } from './see-context-dialog/see-context-dial
     SeePrimitivesComponent,
     SeeResponseDialogComponent,
     HelpDialogComponent,
-    SeeContextDialogComponent
+    SeeContextDialogComponent,
+    CorrectionPanelDialogComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -47,7 +49,8 @@ import { SeeContextDialogComponent } from './see-context-dialog/see-context-dial
     PrimitiveInfoComponent,
     SeePrimitivesComponent,
     HelpDialogComponent,
-    SeeContextDialogComponent
+    SeeContextDialogComponent,
+    CorrectionPanelDialogComponent
   ],
 })
 export class DialogModule { }
