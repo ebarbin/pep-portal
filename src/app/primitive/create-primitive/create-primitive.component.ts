@@ -47,7 +47,7 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
       this.title = 'Crear Primitiva';
       setTimeout(() => {
         this.editForm.form.patchValue({
-          description: this.primitiveService.getSuggestedDescription();
+          description: this.primitiveService.getSuggestedDescription()
         });
       }, 100);
     } else {
@@ -81,7 +81,7 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
       this.primitiveService.createPrimitive(primitive).subscribe(() => {
         this.editForm.reset();
         this.toastService.success('Primitiva creada.', 'Operación exitosa');
-        this.router.navigate(['/home/start']);
+        this.router.navigate(['/home/primitive/list']);
       });
     }
   }
