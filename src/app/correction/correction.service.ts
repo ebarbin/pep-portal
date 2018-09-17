@@ -19,4 +19,14 @@ export class CorrectionService {
       })
     );
   }
+
+  sendCorrection(correction: Correction) {
+    return this.httpClient.post('pep-api/correction', correction)
+    .pipe(
+      map((response: CustomResponse) => {
+        return response.body;
+      })
+    );
+  }
+
 }

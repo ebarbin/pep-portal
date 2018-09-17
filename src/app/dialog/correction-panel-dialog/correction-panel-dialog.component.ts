@@ -1,6 +1,7 @@
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 import { Correction } from '../../correction/correction.model';
+import { CorrectionService } from '../../correction/correction.service';
 
 @Component({
   selector: 'app-correction-panel-dialog',
@@ -10,21 +11,24 @@ import { Correction } from '../../correction/correction.model';
 export class CorrectionPanelDialogComponent implements OnInit {
 
   @Input() correction: Correction;
+
   editorOptions = {theme: 'vs-dark', language: 'javascript', readOnly: false, contextmenu: false};
+  state;
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private correctionService: CorrectionService, private activeModal: NgbActiveModal) { }
 
-  ngOnInit() {}
-
-  public decline() {
-    this.activeModal.close();
+  ngOnInit() {
+    this.correction.workspaceProblem.state = 'FEEDBACK';
+    this.correction.workspaceProblem.feedback = null;
   }
 
-  public accept() {
-    this.activeModal.close();
-  }
-
-  public dismiss() {
+  public close() {
     this.activeModal.dismiss();
+  }
+
+  public send() {
+    this.correctionService.sendCorrection(this.correction).subscribe(() => {
+      this.activeModal.close();
+    });
   }
 }

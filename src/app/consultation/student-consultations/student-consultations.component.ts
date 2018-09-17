@@ -78,8 +78,8 @@ export class StudentConsultationsComponent implements OnInit {
             if (this.consultations.length === 0 && this.comunications.length === 0) {
               this.toastService.warning('No hay consultas.', 'Atención');
               this.router.navigate(['home/start']);
-            } else if (this.filteredConsultations.length === 0) {
-              this.paginatorService.previosPage.next('consultations');
+            } else {
+              this.paginatorService.refresh.next({id: 'cons', data: this.consultations});
             }
 
           } else {
@@ -88,8 +88,8 @@ export class StudentConsultationsComponent implements OnInit {
             if (this.consultations.length === 0 && this.comunications.length === 0) {
               this.toastService.warning('No hay comunicados.', 'Atención');
               this.router.navigate(['home/start']);
-            } else if (this.filteredComunications.length === 0) {
-              this.paginatorService.previosPage.next('comunications');
+            } else {
+              this.paginatorService.refresh.next({id:'comu', data: this.consultations});
             }
           }
 

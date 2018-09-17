@@ -1,18 +1,18 @@
 <div class="row justify-content-center">
   <button
-    [disabled]="pageSelected === 0"
-    class="page-link left-button" [ngClass]="{'disabled': pageSelected === 0}"
+    [disabled]="pageSelected === 1"
+    class="page-link left-button" [ngClass]="{'disabled': pageSelected === 1}"
     (click)="previous()"><fa name="arrow-circle-o-left" size="2x"></fa>
   </button>
     <button
       [disabled]="pageSelected === page"
       class="page-link" [ngClass]="{'disabled': pageSelected === page}"
       *ngFor="let page of pages"
-      (click)="selectPage(page)">{{page + 1}}
+      (click)="selectPage(page)">{{page}}
     </button>
   <button
-    [disabled]="pageSelected === pages.length - 1"
-    class="page-link right-button" [ngClass]="{'disabled': pageSelected === pages.length - 1}"
+    [disabled]="pageSelected === pages.length"
+    class="page-link right-button" [ngClass]="{'disabled': pageSelected === pages.length}"
     (click)="next()"><fa name="arrow-circle-o-right" size="2x"></fa>
   </button>
 </div>

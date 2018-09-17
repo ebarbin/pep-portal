@@ -17,7 +17,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   pages = [];
   pageQuantity;
-  pageSelected = 0;
+  pageSelected = 1;
 
   subs: Subscription;
 
@@ -25,19 +25,29 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.pageQuantity = Math.ceil(this.rawData.length / this.pageSize);
-    for (let i = 0; i < this.pageQuantity; i++) {
+    for (let i = 1; i <= this.pageQuantity; i++) {
       this.pages.push(i);
     }
     this.filterdata();
 
-    this.subs = this.paginatorService.previosPage.subscribe((id: string) => {
-      if (!this.id || this.id === id) {
-        this.pageQuantity = Math.ceil((this.rawData.length - 1) / this.pageSize);
+    this.subs = this.paginatorService.refresh.subscribe((info: {id, data}) => {
+      if (!this.id || this.id === info.id) {
+        this.rawData = info.data;
+        this.pageQuantity = Math.ceil((this.rawData.length) / this.pageSize);
         this.pages = [];
-        for (let i = 0; i < this.pageQuantity; i++) {
+        for (let i = 1; i <= this.pageQuantity; i++) {
           this.pages.push(i);
         }
-        this.previous();
+
+        const find = this.pages.find( (p: number) => {
+          return p === this.pageSelected;
+        });
+
+        if (find !== undefined) {
+          this.filterdata();
+        } else {
+          this.previous();
+        }
       }
     });
   }
@@ -63,10 +73,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   private filterdata() {
     let init = 0;
-    if (this.pageSelected !== 0) {
-      init = this.pageSelected * this.pageSize;
+    if (this.pageSelected > 1) {
+      init = ( this.pageSelected - 1) * this.pageSize;
     }
     this.pageChanged.emit(this.rawData.slice(init,
-      (this.pageSelected * this.pageSize) + this.pageSize));
+      ((this.pageSelected - 1) * this.pageSize) + this.pageSize));
   }
 }

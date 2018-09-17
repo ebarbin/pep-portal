@@ -59,11 +59,10 @@ export class TeacherConsultationsComponent implements OnInit {
 
       this.toastrService.success('Ya se ha enviado la respuesta al alumno.', 'Operación exitosa');
 
-
       if (this.consultations.length === 0) {
         this.router.navigate(['home/start']);
-      } else if (this.filteredConsultations.length === 0) {
-        this.paginatorService.previosPage.next();
+      } else {
+        this.paginatorService.refresh.next({id: null, data: this.consultations});
       }
 
     })

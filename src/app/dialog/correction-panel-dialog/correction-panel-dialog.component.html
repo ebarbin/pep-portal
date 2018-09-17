@@ -1,12 +1,31 @@
 <div class="modal-header">
-    <h4 class="modal-title"> Solución de alumno </h4>
-    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <h4 class="modal-title"> Corrección </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
+    <label>Solución del Alumno:</label>
     <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="correction.workspaceProblem.solution"></ngx-monaco-editor>
+    <label>Indique si es correcto o no el ejercicio:</label>
+    <div class="btn-group btn-group-toggle" style="width: 100%" ngbRadioGroup name="radioBasic" [(ngModel)]="correction.workspaceProblem.state">
+        <label style="width: 50%" ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" value="OK"> Correcto
+        </label>
+        <label style="width: 50%" ngbButtonLabel class="btn-secondary">
+          <input ngbButton type="radio" value="NOOK"> Incorrecto
+        </label>
+      </div>
+      <textarea *ngIf="correction.workspaceProblem.state === 'NOOK'" class="form-control"
+        [(ngModel)]="correction.workspaceProblem.feedback"
+        style="width:100%;" rows="4" placeholder="Escriba una devolución"></textarea>
   </div>
   <div class="modal-footer">
-    <button type="button" style="width: 100%;" class="btn btn-success" (click)="accept()">Aceptar</button>
+    <button type="button" style="width: 50%;"
+      [disabled]="(correction.workspaceProblem.state === 'FEEDBACK') ||
+        (correction.workspaceProblem.state === 'NOOK' && !correction.workspaceProblem.feedback)"
+        class="btn btn-success"
+      (click)="send()">Enviar</button>
+      <button type="button" style="width: 50%;" class="btn btn-danger"
+        (click)="close()">Cancelar</button>
   </div>

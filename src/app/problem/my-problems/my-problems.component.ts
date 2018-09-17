@@ -44,8 +44,8 @@ export class MyProblemsComponent implements OnInit {
           if (this.problems.length === 0) {
             this.toastService.warning('No hay ejercicios.', 'Atención');
             this.router.navigate(['home/start']);
-          } else if (this.filteredProblems.length === 0) {
-            this.paginatorService.previosPage.next();
+          } else {
+            this.paginatorService.refresh.next({id: null, data: this.problems});
           }
 
         });

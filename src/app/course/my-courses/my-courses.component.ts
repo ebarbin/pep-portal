@@ -63,8 +63,8 @@ export class MyCoursesComponent implements OnInit {
           if (this.courses.length === 0) {
             this.toastService.warning('No hay cursos.', 'Atención');
             this.router.navigate(['home/start']);
-          } else if (this.filteredCourses.length === 0) {
-            this.paginatorService.previosPage.next();
+          } else {
+            this.paginatorService.refresh.next({id: null, data: this.courses});
           }
 
         });
