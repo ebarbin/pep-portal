@@ -150,21 +150,22 @@ export class ChartComponent implements OnInit {
 
     const user = this.userService.getStoredUser();
 
-    this.courseService.findAll(user).subscribe((courses: [Course]) => {
+    this.courseService.findAll(user).subscribe((c: [Course]) => {
 
-      this.courses = courses;
-
-      this.stateProblemsPerCourse.courseSelected = courses[0];
-      this.chartService.getProgressStudentsPerCourse(courses[0].id).subscribe((data: [any]) => {
-        this.stateProblemsPerCourse.update(data);
-      });
-
-      this.stateStudentsPerCourse.courseSelected = courses[0];
-      this.studentService.getStudentsByCourseId(courses[0].id).subscribe((students: [Student]) => {
-        this.chartService.getTotalProgressStudentsPerCourse(courses[0].id).subscribe((data: [any]) => {
-          this.stateStudentsPerCourse.update(students, data);
+      this.courses = c;
+      if (this.courses.length > 0) {
+        this.stateProblemsPerCourse.courseSelected = this.courses[0] ? this.courses[0]: null;
+        this.chartService.getProgressStudentsPerCourse(this.courses[0].id).subscribe((data: [any]) => {
+          this.stateProblemsPerCourse.update(data);
         });
-      });
+  
+        this.stateStudentsPerCourse.courseSelected = this.courses[0];
+        this.studentService.getStudentsByCourseId(this.courses[0].id).subscribe((students: [Student]) => {
+          this.chartService.getTotalProgressStudentsPerCourse(this.courses[0].id).subscribe((data: [any]) => {
+            this.stateStudentsPerCourse.update(students, data);
+          });
+        });
+      }
     });
 
     this.studentsPerCourse.hide();
