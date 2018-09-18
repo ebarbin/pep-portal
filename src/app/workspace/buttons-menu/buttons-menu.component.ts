@@ -146,4 +146,9 @@ export class ButtonsMenuComponent implements OnInit {
     }).catch(() => {});
   }
 
+  onSeeFeedbackButtonClick(workspaceProblem: WorkspaceProblem) {
+    this.dialogService.info(workspaceProblem.feedback, 'Devolución del docente').then(() => {
+    }).catch(() => {});
+  }
+
 }

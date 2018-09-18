@@ -1,6 +1,5 @@
 import { WorkspaceService } from './../workspace.service';
 import { Workspace } from './../models/workspace.model';
-import { StudentService } from '../../shared/services/student.service';
 import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { WorkspaceProblem } from '../models/workspace-problem.model';
 
@@ -14,7 +13,7 @@ export class CourseNavigatorComponent {
   @Input() workspace: Workspace;
   @Output()problemSelected = new EventEmitter<WorkspaceProblem>();
 
-  constructor(private workspaceService: WorkspaceService, private studentService: StudentService) { }
+  constructor(private workspaceService: WorkspaceService) { }
 
   selectProblem(workspaceProblem: WorkspaceProblem) {
 

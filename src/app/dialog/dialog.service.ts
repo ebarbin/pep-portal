@@ -1,3 +1,4 @@
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { Correction } from './../correction/correction.model';
 import { SeeContextDialogComponent } from './see-context-dialog/see-context-dialog.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
@@ -122,6 +123,14 @@ export class DialogService {
   public openCorrectionPanel(correction: Correction): Promise<boolean> {
     const modalRef = this.modalService.open(CorrectionPanelDialogComponent, { size: 'lg' });
     modalRef.componentInstance.correction = correction;
+
+    return modalRef.result;
+  }
+
+  public info(message: string, title: string): Promise<boolean> {
+    const modalRef = this.modalService.open(InfoDialogComponent, { size: 'lg' });
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.title = title;
 
     return modalRef.result;
   }
