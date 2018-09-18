@@ -1,3 +1,4 @@
+import { UserService } from './../../user/user.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -10,10 +11,14 @@ export class HelpDialogComponent implements OnInit {
 
   @Input() url: string;
   title: string;
-
-  constructor(private activeModal: NgbActiveModal) { }
+  role: string;
+  constructor(private userService: UserService, private activeModal: NgbActiveModal) { }
 
   ngOnInit() {
+
+    const user = this.userService.getStoredUser();
+    this.role = user.role;
+
     if (this.url.includes('/home/start')) {
       this.title = 'Bienvenida';
     } else if (this.url.includes('/home/workspace')) {
