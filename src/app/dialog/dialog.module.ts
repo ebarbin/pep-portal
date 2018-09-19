@@ -16,6 +16,7 @@ import { SeeContextDialogComponent } from './see-context-dialog/see-context-dial
 import { CorrectionPanelDialogComponent } from './correction-panel-dialog/correction-panel-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { WelcomeHelpComponent } from './help-dialog/welcome-help/welcome-help.component';
+import { MyCoursesHelpComponent } from './help-dialog/my-courses-help/my-courses-help.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { WelcomeHelpComponent } from './help-dialog/welcome-help/welcome-help.co
     SeeContextDialogComponent,
     CorrectionPanelDialogComponent,
     InfoDialogComponent,
-    WelcomeHelpComponent
+    WelcomeHelpComponent,
+    MyCoursesHelpComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,

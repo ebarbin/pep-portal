@@ -12,18 +12,16 @@ export class HelpDialogComponent implements OnInit {
   @Input() url: string;
   title: string;
 
-  constructor(private userService: UserService, private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit() {
-
-    const user = this.userService.getStoredUser();
 
     if (this.url.includes('/home/start')) {
       this.title = 'Bienvenido/a';
     } else if (this.url.includes('/home/workspace')) {
       this.title = 'Area de Trabajo';
     } else if (this.url.includes('/home/course/list')) {
-      this.title = 'Mis Cursos';
+      this.title = 'Ver Cursos';
     } else if (this.url.includes('/home/student-consultations')) {
       this.title = 'Mis Consultas';
     } else if (this.url.includes('/home/teacher-consultations')) {
@@ -52,7 +50,7 @@ export class HelpDialogComponent implements OnInit {
   }
 
   public checkView(url: string) {
-    return url.includes('/home/start');
+    return this.url.includes(url);
   }
 
   public close() {

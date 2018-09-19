@@ -89,7 +89,7 @@ export class StudentConsultationsComponent implements OnInit {
               this.toastService.warning('No hay comunicados.', 'Atención');
               this.router.navigate(['home/start']);
             } else {
-              this.paginatorService.refresh.next({id:'comu', data: this.consultations});
+              this.paginatorService.refresh.next({id: 'comu', data: this.comunications});
             }
           }
 

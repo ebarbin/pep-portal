@@ -68,8 +68,46 @@
   <br>
   <div class="card">
       <div class="card-body">
-        <div class="card-title">{{user.username}} | <img class="rounded-circle" height="30" [src]="user.imageId | profileImage"/></div>
-        <p class="card-text">Desde esta opcion podras modificar datos de tu cuenta, cambiar la contraseña y actualizar tu imagen de perfil.</p>
+        <div class="card-title">{{user.username}} | <img class="rounded-circle" height="30" [src]="user.imageId | profileImage"/> <fa style="position:relative; top:-2px;" name="sort-down"></fa></div>
+        <p class="card-text">Desde esta opción podrás modificar datos de tu cuenta, cambiar la contraseña y actualizar tu imagen de perfil.</p>
+      </div>
+    </div>
+</div>
+<div *ngIf="user.role == 'ROLE_STUDENT'">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Area de Trabajo</div>
+      <p class="card-text">Opción donde podrás trabajar sobre los cursos inscriptos.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Cursos</div>
+      <p class="card-text">Aquí visualizaras los dintintos cursos del instituto y desde donde podrás inscribirte a ellos. Recuerda que debes pedirle la clave al docente para poder inscribirte.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Consultas / Comunicados</div>
+      <p class="card-text">Podrás ver las consultas que hayas hecho, las respuestas y los comunicados enviados por el docente.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">
+        <select style="width: 30%;" disabled class="custom-select"><option>Seleccione un curso...</option></select>
+      </div>
+      <p class="card-text">Aquí tendrás los cursos a los cuales te hayas inscripto. Para comenzar a trabajar, deberás seleccionar alguno de ellos.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+      <div class="card-body">
+        <div class="card-title">{{user.username}} | <img class="rounded-circle" height="30" [src]="user.imageId | profileImage"/> <fa style="position:relative; top:-2px;" name="sort-down"></fa></div>
+        <p class="card-text">Desde esta opción podrás modificar datos de tu cuenta, cambiar la contraseña y actualizar tu imagen de perfil.</p>
       </div>
     </div>
 </div>

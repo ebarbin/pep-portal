@@ -1,0 +1,72 @@
+<p class="card-text" *ngIf="user.role == 'ROLE_TEACHER'">
+  Aquí se listan todos los cursos que has creado. A continuación se describen las acciones de los botones que aparecen en pantalla:
+</p>
+<p class="card-text" *ngIf="user.role == 'ROLE_STUDENT'">
+    Aquí se listan todos los cursos que tiene disponible de la institución. A continuación se describen las acciones de los botones que aparecen en pantalla:
+  </p>
+<div *ngIf="user.role == 'ROLE_TEACHER'">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">
+        <button class="btn btn-primary">Ver</button>
+      </div>
+      <p class="card-text">Muestra un resumen del curso.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">
+        <button class="btn btn-secondary">Enviar Com.</button>
+      </div>
+      <p class="card-text">Permite enviar un mensaje a todos los alumnos inscriptos en el curso.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">
+        <button class="btn btn-success">Editar</button>
+      </div>
+      <p class="card-text">Permite editar el curso.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">
+        <button class="btn btn-danger">Eliminar</button>
+      </div>
+      <p class="card-text">Permite eliminar el curso. En el caso de tener alumnos inscriptos no podrás eliminarlo.</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="user.role == 'ROLE_STUDENT'">
+  <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <button class="btn btn-primary">Ver</button>
+        </div>
+        <p class="card-text">Muestra un resumen del curso.</p>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <button class="btn btn-success">Inscripción</button>
+        </div>
+        <p class="card-text">Debes conocer la clave del curso para inscribirte. El docente debe entregarsela a los alumnos.</p>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <button class="btn btn-danger">Quitar</button>
+        </div>
+        <p class="card-text">Para eliminar la inscripción al curso. Ten en cuenta que se perderá TODO el avance que hayas realizado.</p>
+      </div>
+    </div>
+    <br>
+</div>
