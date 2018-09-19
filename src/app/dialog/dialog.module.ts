@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { SeeContextDialogComponent } from './see-context-dialog/see-context-dialog.component';
 import { CorrectionPanelDialogComponent } from './correction-panel-dialog/correction-panel-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { WelcomeHelpComponent } from './help-dialog/welcome-help/welcome-help.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
     HelpDialogComponent,
     SeeContextDialogComponent,
     CorrectionPanelDialogComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    WelcomeHelpComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent,

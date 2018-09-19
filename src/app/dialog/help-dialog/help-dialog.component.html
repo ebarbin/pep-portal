@@ -1,65 +1,16 @@
 <div class="modal-header">
-    <h4 class="modal-title">Ayuda - {{ title }}</h4>
+    <h4 class="modal-title">Ayuda</h4>
       <button type="button" class="close" aria-label="Close" (click)="dismiss()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <div *ngIf="role == 'ROLE_TEACHER'">
-        <div class="row">
-          <div class="col-md-2">
-              <img class="img-responsive" src="assets/images/menu-courses.png"/>
-          </div>
-          <div class="col-md-10">
-            El menu curss
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ title }}</h5>
+            <app-welcome-help *ngIf="checkView('/home/start')"></app-welcome-help>
           </div>
         </div>
-        <br>
-        <div class="row">
-            <div class="col-md-2">
-                <img class="img-responsive" src="assets/images/menu-problems.png"/>
-            </div>
-            <div class="col-md-10">
-              acacacasckalsjdlaskd asdlkajsdlkjasd lkajsdklsa
-            </div>
-          </div>
-      </div>
-      <br>
-      <div class="row">
-          <div class="col-md-2">
-              <img class="img-responsive" src="assets/images/menu-primitives.png"/>
-          </div>
-          <div class="col-md-10">
-            acacacasckalsjdlaskd asdlkajsdlkjasd lkajsdklsa
-          </div>
-      </div>
-      <br>
-      <div class="row">
-          <div class="col-md-2">
-              <img class="img-responsive" src="assets/images/menu-corrections.png"/>
-          </div>
-          <div class="col-md-10">
-            acacacasckalsjdlaskd asdlkajsdlkjasd lkajsdklsa
-          </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-2">
-            <img class="img-responsive" src="assets/images/menu-consultations.png"/>
-        </div>
-        <div class="col-md-10">
-          acacacasckalsjdlaskd asdlkajsdlkjasd lkajsdklsa
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-3">
-            <img class="img-responsive" src="assets/images/menu-results-state.png"/>
-        </div>
-        <div class="col-md-9">
-          acacacasckalsjdlaskd asdlkajsdlkjasd lkajsdklsa
-        </div>
-      </div>
     </div>
     <div class="modal-footer">
       <button type="button" style="width: 100%;" class="btn btn-primary" (click)="close()">Cerrar</button>

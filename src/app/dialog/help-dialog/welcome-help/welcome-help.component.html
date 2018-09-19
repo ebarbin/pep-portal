@@ -1,0 +1,75 @@
+<p class="card-text">Esta es la pantalla de bienvenida de la Plataforma educativa de Programación. En el margen superior de la pantalla podrás ver el menu principal. A continuacion describiremos las distintas opciones:</p>
+<div *ngIf="user.role == 'ROLE_TEACHER'">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title"> Cursos <fa style="position:relative; top:-2px;" name="sort-down"></fa></div>
+      <p class="card-text">Gestión de cursos. Podrás crear un curso nuevo, modificar existentes o eliminar alguno de ellos.</p>
+      <strong>¿Que es un curso?</strong><br>
+      Representa una guía de ejercicios digital. Cada curso esta compuesto de:
+      <ul>
+        <li>Nombre</li>
+        <li>Descripción</li>
+        <li>Clave <fa name="arrow-right"></fa><span class="text-muted"> Solo los alumnos que sepan la clave podrán inscribirse al curso.</span></li>
+        <li>Ejercicios</li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title"> Ejercicios <fa style="position:relative; top:-2px;" name="sort-down"></fa></div>
+      <p class="card-text">Gestión de ejercicios. Podrás crear un ejercicio nuevo, modificar existentes o eliminar alguno de ellos.</p>
+      <strong>¿Que es un ejercicio?</strong><br>
+      Define una consigna, una practica, enunciado o un problema que debe ser resuelto por el alumno. Cada ejercicio esta compuesto de:
+      <ul>
+          <li>Nombre</li>
+          <li>Consigna</li>
+          <li>Primitivas <fa name="arrow-right"></fa><span class="text-muted"> Se pueden agregar primitivas para dejar disponibles al alumno.</span></li>
+          <li>Pre Ejecución <fa name="arrow-right"></fa><span class="text-muted"> Código javascript. Se pueden definir funciones, variables, datos, etc para dejar disponibles al alumno.</span></li>
+          <li>Pos Ejecución <fa name="arrow-right"></fa><span class="text-muted"> Código javascript. Se debe definir una función de validación. Si se valida automanticamente o si requiere corrección por parte del docente.</span></li>
+        </ul>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title"> Primitivas <fa style="position:relative; top:-2px;" name="sort-down"></fa></div>
+      <p class="card-text">Gestión de primitivas. Podrás crear una primitiva nueva, modificar existentes o eliminar alguna de ellas.</p>
+      <strong>¿Que es una primitiva?</strong><br>
+      Es una función javascript que debe ser sencilla y de utilidad para el alumno. Cada primitiva esta compuesta de:
+      <ul>
+          <li>Nombre</li>
+          <li>Descripción<fa name="arrow-right"></fa><span class="text-muted"> Debe describir el funcionamiento, sus parametros de entrada y su salida.</span></li>
+          <li>Función <fa name="arrow-right"></fa><span class="text-muted"> Código javascript.</span></li>
+        </ul>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Correcciones</div>
+      <p class="card-text">Gestión de correciones. Podrás realizar correcciones sobre las soluciones de tus alumnos.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Consultas</div>
+      <p class="card-text">Gestión de consultas. Podrás visualizar y responder las dudas de tus alumnos.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Estado de Resultados</div>
+      <p class="card-text">Podrás visualizar el estado de tus cursos y el de tus alumnos.</p>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+      <div class="card-body">
+        <div class="card-title">{{user.username}} | <img class="rounded-circle" height="30" [src]="user.imageId | profileImage"/></div>
+        <p class="card-text">Desde esta opcion podras modificar datos de tu cuenta, cambiar la contraseña y actualizar tu imagen de perfil.</p>
+      </div>
+    </div>
+</div>

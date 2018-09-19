@@ -11,16 +11,15 @@ export class HelpDialogComponent implements OnInit {
 
   @Input() url: string;
   title: string;
-  role: string;
+
   constructor(private userService: UserService, private activeModal: NgbActiveModal) { }
 
   ngOnInit() {
 
     const user = this.userService.getStoredUser();
-    this.role = user.role;
 
     if (this.url.includes('/home/start')) {
-      this.title = 'Bienvenida';
+      this.title = 'Bienvenido/a';
     } else if (this.url.includes('/home/workspace')) {
       this.title = 'Area de Trabajo';
     } else if (this.url.includes('/home/course/list')) {
@@ -50,6 +49,10 @@ export class HelpDialogComponent implements OnInit {
     } else if (this.url.includes('/home/chart')) {
       this.title = 'Panel de Gráficos';
     }
+  }
+
+  public checkView(url: string) {
+    return url.includes('/home/start');
   }
 
   public close() {
