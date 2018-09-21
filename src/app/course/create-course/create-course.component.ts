@@ -58,7 +58,6 @@ export class CreateCourseComponent implements OnInit, CanComponentDeactivate {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     const course: Course = <Course> form.value;
     if (this.editMode) {
       course.id = this.courseId;

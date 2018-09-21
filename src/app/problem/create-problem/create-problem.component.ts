@@ -25,6 +25,7 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
 
   originalPreExecutionValue = '';
   originalPosExecutionValue = '';
+  originalExplanation = '';
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -57,12 +58,18 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
           preExecution: this.problemService.getSuggestedPreExecution(),
           posExecution: this.problemService.getSuggestedPosExecution()
         });
+
+        this.originalPreExecutionValue = this.editForm.controls.preExecution.value;
+        this.originalPosExecutionValue = this.editForm.controls.posExecution.value;
+        this.originalExplanation = this.editForm.controls.explanation.value;
+
       }, 100);
 
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
         this.originalPreExecutionValue = problem.preExecution;
         this.originalPosExecutionValue = problem.posExecution;
+        this.originalExplanation = problem.explanation;
         this.editForm.form.patchValue(problem);
       });
       this.editMode = true;
@@ -72,11 +79,17 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
 
   seeContext() {
     const p = <Problem> this.editForm.form.value;
-    this.dialogService.seeContext(p, 'lg').then(() => {
+    this.dialogService.seeContext(p, 'lg').then(() => {}).catch(() => {});
+  }
 
-    }).catch(() => {
-
-    });
+  private codeIsValid(problem: Problem) {
+    try {
+      const res = new Function(problem.preExecution)();
+    } catch (e) {
+      this.toastService.error('Imposible guardar. Corregir Pre ejecución.', 'Error');
+      return false;
+    }
+    return true;
   }
 
   onSubmit(form: NgForm) {
@@ -86,19 +99,21 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
       form.value.primitives = [];
     }
 
-    if (this.editMode) {
-      problem.id = this.problemId;
-      this.problemService.editeProblem(problem).subscribe(() => {
-        this.editForm.reset();
-        this.toastService.success('Problema editado.', 'Operación exitosa');
-        this.router.navigate(['/home/problem/list']);
-      });
-    } else {
-      this.problemService.createProblem(problem).subscribe(() => {
-        this.editForm.reset();
-        this.toastService.success('Problema creado.', 'Operación exitosa');
-        this.router.navigate(['/home/problem/list']);
-      });
+    if (this.codeIsValid(problem)) {
+      if (this.editMode) {
+        problem.id = this.problemId;
+        this.problemService.editeProblem(problem).subscribe(() => {
+          this.editForm.reset();
+          this.toastService.success('Problema editado.', 'Operación exitosa');
+          this.router.navigate(['/home/problem/list']);
+        });
+      } else {
+        this.problemService.createProblem(problem).subscribe(() => {
+          this.editForm.reset();
+          this.toastService.success('Problema creado.', 'Operación exitosa');
+          this.router.navigate(['/home/problem/list']);
+        });
+      }
     }
   }
 
@@ -121,10 +136,10 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
       return false;
     } else {
       if (this.originalPreExecutionValue === this.editForm.controls.preExecution.value &&
-        this.originalPosExecutionValue === this.editForm.controls.posExecution.value) {
+        this.originalPosExecutionValue === this.editForm.controls.posExecution.value &&
+        this.originalExplanation === this.editForm.controls.explanation.value) {
         return false;
       } else {
-        console.log(form.controls);
         return true;
       }
     }

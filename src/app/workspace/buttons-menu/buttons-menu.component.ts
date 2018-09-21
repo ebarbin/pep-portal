@@ -89,7 +89,6 @@ export class ButtonsMenuComponent implements OnInit {
           });
 
         } catch (e) {
-          console.log(e);
           this.logChange.emit(this.logMessageService.getFixedMessage(e.message));
         }
       }
