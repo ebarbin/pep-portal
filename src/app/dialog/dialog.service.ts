@@ -1,3 +1,4 @@
+import { ConfirmWithMessageDialogComponent } from './confirm-with-message-dialog/confirm-with-message-dialog.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { Correction } from './../correction/correction.model';
 import { SeeContextDialogComponent } from './see-context-dialog/see-context-dialog.component';
@@ -39,6 +40,11 @@ export class DialogService {
     modalRef.componentInstance.btnOkText = btnOkText;
     modalRef.componentInstance.btnCancelText = btnCancelText;
 
+    return modalRef.result;
+  }
+
+  public confirmWithMessage(): Promise<string> {
+    const modalRef = this.modalService.open(ConfirmWithMessageDialogComponent, { size: 'lg' });
     return modalRef.result;
   }
 

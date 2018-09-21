@@ -1,0 +1,26 @@
+<div class="container">
+  <h1 class="h3 mb-3 font-weight-normal text-center">Corrección de ejercicio</h1>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="pull-left">
+              Enunciado Ejercicio: {{correction.workspaceProblem.problem.name}}
+          </div>
+        </div>
+        <div class="card-body">
+          <div [innerHTML]="correction.workspaceProblem.problem.explanation"></div>
+        </div>
+      </div>
+      Código del Alumno:
+      <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="correction.workspaceProblem.solution"></ngx-monaco-editor>
+        <button class="three-buttons left-button btn btn-success btn-lg" type="button" (click)="sendOK()">
+          Correcto
+        </button>
+        <button class="three-buttons center-button btn btn-secondary btn-lg" type="button" (click)="sendNOOK()">
+          Incorrecto
+        </button>
+        <button class="three-buttons right-button btn btn-danger btn-lg" type="button" (click)="cancel()">Cancelar</button>
+      </div>
+  </div>
+</div>

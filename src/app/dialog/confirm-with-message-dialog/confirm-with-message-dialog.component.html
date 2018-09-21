@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="modal-header">
+      <h4 class="modal-title">Confirme corrección</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <textarea class="form-control" ngModel name="feedback" style="width:100%;" rows="4" required
+          placeholder="Ingrese una devolución">
+        </textarea>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" style="width: 100%;" class="btn btn-success" [disabled]="!f.valid">Enviar</button>
+      <button type="submit" style="width: 100%;" class="btn btn-danger" (click)="dismiss()">Cancelar</button>
+    </div>
+  </form>

@@ -11,6 +11,8 @@ export class CorrectionService {
 
   constructor(private httpClient: HttpClient) { }
 
+  correction: Correction;
+
   getCorrections() {
     return this.httpClient.get('pep-api/correction')
     .pipe(
@@ -24,7 +26,7 @@ export class CorrectionService {
     return this.httpClient.post('pep-api/correction', correction)
     .pipe(
       map((response: CustomResponse) => {
-        return response.body;
+        return <[Correction]> response.body;
       })
     );
   }

@@ -32,7 +32,10 @@ export class MyCorrectionsComponent implements OnInit {
   }
 
   openCorrectionPanel(correction: Correction) {
-    this.dialogService.openCorrectionPanel(correction).then(() => {
+    this.correctionService.correction = correction;
+    this.router.navigate(['home/make-correction']);
+
+    /*this.dialogService.openCorrectionPanel(correction).then(() => {
 
       this.corrections = this.corrections.filter((c: Correction) => {
         return c.id !== correction.id;
@@ -51,6 +54,6 @@ export class MyCorrectionsComponent implements OnInit {
         this.paginatorService.refresh.next({id: null, data: this.corrections});
       }
 
-    }).catch(() => {});
+    }).catch(() => {});*/
   }
 }
