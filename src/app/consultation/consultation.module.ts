@@ -1,8 +1,10 @@
-import { TeacherConsultationsComponent } from './teacher-consultations/teacher-consultations.component';
-import { SharedModule } from './../shared/shared.module';
-import { StudentConsultationsComponent } from './student-consultations/student-consultations.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from './../shared/shared.module';
+
+import { TeacherConsultationsComponent } from './teacher-consultations/teacher-consultations.component';
+import { StudentConsultationsComponent } from './student-consultations/student-consultations.component';
+
 
 @NgModule({
   imports: [
