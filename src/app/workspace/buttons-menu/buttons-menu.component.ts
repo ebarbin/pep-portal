@@ -63,7 +63,7 @@ export class ButtonsMenuComponent implements OnInit {
 
             this.toastrService.info('La resolución de este ejercicio sera validada por el docente.', 'Información');
             this.markProblemAsFeedback();
-            this.blockWorkspace.next();
+
           }
 
           result.logs.forEach( (log) => {
@@ -98,6 +98,7 @@ export class ButtonsMenuComponent implements OnInit {
   private markProblemAsFeedback() {
     this.workspaceService.markProblemAsFeedBack(this.workspace, this.workspaceProblem).subscribe(() => {
       this.workspaceProblem.state = 'FEEDBACK';
+      this.blockWorkspace.next();
     });
   }
 
@@ -114,8 +115,7 @@ export class ButtonsMenuComponent implements OnInit {
   }
 
   private getExecutionContext(debug) {
-    const context = this.problemService.getExecutionContext(debug, this.workspaceProblem);
-    return context;
+    return this.problemService.getExecutionContext(debug, this.workspaceProblem);
   }
 
   onConsultationButtonClick() {
