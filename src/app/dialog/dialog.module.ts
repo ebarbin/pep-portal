@@ -17,6 +17,9 @@ import { CorrectionPanelDialogComponent } from './correction-panel-dialog/correc
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { WelcomeHelpComponent } from './help-dialog/welcome-help/welcome-help.component';
 import { MyCoursesHelpComponent } from './help-dialog/my-courses-help/my-courses-help.component';
+import { CreateCourseHelpComponent } from './help-dialog/create-course-help/create-course-help.component';
+import { CreateProblemHelpComponent } from './help-dialog/create-problem-help/create-problem-help.component';
+import { MyProblemsHelpComponent } from './help-dialog/my-problems-help/my-problems-help.component';
 
 @NgModule({
   imports: [
@@ -42,6 +45,9 @@ import { MyCoursesHelpComponent } from './help-dialog/my-courses-help/my-courses
     InfoDialogComponent,
     WelcomeHelpComponent,
     MyCoursesHelpComponent,
+    CreateCourseHelpComponent,
+    CreateProblemHelpComponent,
+    MyProblemsHelpComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,

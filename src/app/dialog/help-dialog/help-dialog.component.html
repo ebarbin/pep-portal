@@ -9,6 +9,11 @@
           <div class="card-body">
             <app-welcome-help *ngIf="checkView('/home/start')"></app-welcome-help>
             <app-my-courses-help *ngIf="checkView('/home/course/list')"></app-my-courses-help>
+            <app-create-course-help *ngIf="checkView('/home/new-course')"></app-create-course-help>
+            <app-create-course-help *ngIf="checkView('/home/edit-course')"></app-create-course-help>
+            <app-my-problems-help *ngIf="checkView('/home/problem/list')"></app-my-problems-help>
+            <app-create-problem-help *ngIf="checkView('/home/new-problem')"></app-create-problem-help>
+            <app-create-problem-help *ngIf="checkView('/home/edit-problem')"></app-create-problem-help>
           </div>
         </div>
     </div>

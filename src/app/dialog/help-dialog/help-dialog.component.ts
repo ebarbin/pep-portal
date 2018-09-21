@@ -1,4 +1,3 @@
-import { UserService } from './../../user/user.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 

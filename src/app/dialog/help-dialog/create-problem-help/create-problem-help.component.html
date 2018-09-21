@@ -1,0 +1,76 @@
+<h5 class="card-title">Crear/Editar Ejercicio</h5>
+<p class="card-text" >
+  Desde aquí podrás crear/editar los ejercicios. A continuacion una descripción de los campos:
+</p>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <strong>Título del ejercicio</strong>
+    </div>
+    <p class="card-text">Utilizado para identificar el ejercicio. Requerido.</p>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <strong>Primitivas</strong>
+    </div>
+    <p class="card-text">Permite buscar y seleccionar primitivas. Ten en cuenta que la busqueda se realiza por el nombre de la primitiva.</p>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <strong>Enunciado</strong>
+    </div>
+    <p class="card-text">Descripción del ejercicio a realizar. Ten en cuenta de agregar toda la información necesaria para resolverlo sobre todo en los casos donde agreges datos o funciones en la pre ejecución. Requerido</p>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <strong>Pre Ejecución</strong>
+    </div>
+    <p class="card-text">Aquí debes definir los datos y/o funciones que quieras dejar disponible a los alumnos y que son necesarias o no para la resolución del ejercicio.</p>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <strong>Pos Ejecución</strong>
+    </div>
+    <p class="card-text">
+      Aquí debes definir la función que valide el ejercicio. Una vez validado el ejercicio debes actualizar la propiedad <strong>state</strong> del objeto global <strong>__result</strong>:
+    </p>
+      <ul>
+        <li>true <fa name="arrow-right"></fa> <span class="text-muted"> Validación automática. Ejercicio resuelto correctamente. </span></li>
+        <li>false <fa name="arrow-right"></fa> <span class="text-muted"> Validación automática. Ejercicio resuelto incorrectamente.</span></li>
+        <li>null <fa name="arrow-right"></fa> <span class="text-muted"> Validación manual. En este caso el ejercicio debe ser corregido por el docente desde la sección de correcciones.</span></li>
+      </ul>
+      <p>
+        El objeto <strong>__result</strong> cuenta, además, con la propiedad message que sirve para informar al alumno del resultado de su solución.
+      </p>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+        <button class="btn btn-primary">Ver Contexto</button>
+    </div>
+    <p class="card-text">
+      Aquí se muestra el contexto de aplicación completo. Este contexto esta divido en los siguientes bloques:
+    </p>
+      <ul>
+        <li>Pre Ejecución Estática <fa name="arrow-right"></fa> <span class="text-muted"> Este bloque no se puede modificar, lo agrega el sistema y es siempre el mismo.</span></li>
+        <li>Pre Ejecución <fa name="arrow-right"></fa> <span class="text-muted"> Este bloque lo define el docente. Y como vimos, sirve para dejar información o funciones necesarias en el ejercicio.</span></li>
+        <li>Primitivas <fa name="arrow-right"></fa> <span class="text-muted"> Aqui se agregan las primitivas. Que no son más que funciones simples.</span></li>
+        <li>Pos Ejecución <fa name="arrow-right"></fa> <span class="text-muted"> Este bloque lo define el docente. Y como vimos, sirve para determinar el resultado del ejercicio.</span></li>
+        <li>Pos Ejecución Estática <fa name="arrow-right"></fa> <span class="text-muted"> Este bloque no se puede modificar, lo agrega el sistema y es siempre el mismo.</span></li>
+      </ul>
+  </div>
+</div>
