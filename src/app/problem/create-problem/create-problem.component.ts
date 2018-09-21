@@ -23,9 +23,7 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
   problemId: string;
   editMode = false;
 
-  originalPreExecutionValue = '';
-  originalPosExecutionValue = '';
-  originalExplanation = '';
+  originalProblem;
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -56,21 +54,16 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
         this.editForm.form.patchValue({
           explanation: this.problemService.getSuggestedExplanation(),
           preExecution: this.problemService.getSuggestedPreExecution(),
-          posExecution: this.problemService.getSuggestedPosExecution()
+          posExecution: this.problemService.getSuggestedPosExecution(),
+          primitives: []
         });
-
-        this.originalPreExecutionValue = this.editForm.controls.preExecution.value;
-        this.originalPosExecutionValue = this.editForm.controls.posExecution.value;
-        this.originalExplanation = this.editForm.controls.explanation.value;
-
+        this.originalProblem = this.editForm.form.value;
       }, 100);
 
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
-        this.originalPreExecutionValue = problem.preExecution;
-        this.originalPosExecutionValue = problem.posExecution;
-        this.originalExplanation = problem.explanation;
         this.editForm.form.patchValue(problem);
+        this.originalProblem = this.editForm.form.value;
       });
       this.editMode = true;
       this.title = 'Editar Ejercicio';
@@ -94,10 +87,6 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
 
   onSubmit(form: NgForm) {
     const problem: Problem = <Problem> form.value;
-
-    if (form.value.primitives === '') {
-      form.value.primitives = [];
-    }
 
     if (this.codeIsValid(problem)) {
       if (this.editMode) {
@@ -135,9 +124,7 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
     if (!form.dirty) {
       return false;
     } else {
-      if (this.originalPreExecutionValue === this.editForm.controls.preExecution.value &&
-        this.originalPosExecutionValue === this.editForm.controls.posExecution.value &&
-        this.originalExplanation === this.editForm.controls.explanation.value) {
+      if (JSON.stringify(this.originalProblem).toLowerCase() === JSON.stringify(form.value).toLowerCase()) {
         return false;
       } else {
         return true;

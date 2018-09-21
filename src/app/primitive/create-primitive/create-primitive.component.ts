@@ -20,7 +20,7 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
   primitiveId: string;
   editMode = false;
 
-  originalCodeValue = '';
+  originalPrimitive;
 
   editorOptions = {theme: 'vs-dark', language: 'javascript', contextmenu: false};
 
@@ -49,11 +49,12 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
         this.editForm.form.patchValue({
           description: this.primitiveService.getSuggestedDescription()
         });
+        this.originalPrimitive = this.editForm.form.value;
       }, 100);
     } else {
       this.primitiveService.findById(this.primitiveId).subscribe((primitive: Primitive) => {
-        this.originalCodeValue = primitive.code;
         this.editForm.form.patchValue(primitive);
+        this.originalPrimitive = this.editForm.form.value;
       });
       this.editMode = true;
       this.title = 'Editar Primitiva';
@@ -100,7 +101,7 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
     if (!form.dirty) {
       return false;
     } else {
-      if (this.originalCodeValue === this.editForm.controls.code.value) {
+      if (JSON.stringify(this.originalPrimitive).toLowerCase() === JSON.stringify(form.value).toLowerCase()) {
         return false;
       } else {
         return true;
