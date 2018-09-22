@@ -24,6 +24,10 @@ import { MyProblemsHelpComponent } from './help-dialog/my-problems-help/my-probl
 import { CreatePrimitiveHelpComponent } from './help-dialog/create-primitive-help/create-primitive-help.component';
 import { MyPrimitivesHelpComponent } from './help-dialog/my-primitives-help/my-primitives-help.component';
 import { ConfirmWithMessageDialogComponent } from './confirm-with-message-dialog/confirm-with-message-dialog.component';
+import { MakeCorrectionHelpComponent } from './help-dialog/make-correction-help/make-correction-help.component';
+import { CorrectionsHelpComponent } from './help-dialog/corrections-help/corrections-help.component';
+import { TeacherConsultationsHelpComponent } from './help-dialog/teacher-consultations-help/teacher-consultations-help.component';
+import { ChartHelpComponent } from './help-dialog/chart-help/chart-help.component';
 
 @NgModule({
   imports: [
@@ -55,6 +59,10 @@ import { ConfirmWithMessageDialogComponent } from './confirm-with-message-dialog
     CreatePrimitiveHelpComponent,
     MyPrimitivesHelpComponent,
     ConfirmWithMessageDialogComponent,
+    MakeCorrectionHelpComponent,
+    CorrectionsHelpComponent,
+    TeacherConsultationsHelpComponent,
+    ChartHelpComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,

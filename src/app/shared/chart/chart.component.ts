@@ -87,6 +87,7 @@ export class ChartComponent implements OnInit {
         this.data.forEach(element => {
           count = count + element.data[0];
         });
+
         this.options.scales.yAxes[0].ticks.max = count;
         this.load = true;
       }
@@ -158,7 +159,7 @@ export class ChartComponent implements OnInit {
         this.chartService.getProgressStudentsPerCourse(this.courses[0].id).subscribe((data: [any]) => {
           this.stateProblemsPerCourse.update(data);
         });
-  
+
         this.stateStudentsPerCourse.courseSelected = this.courses[0];
         this.studentService.getStudentsByCourseId(this.courses[0].id).subscribe((students: [Student]) => {
           this.chartService.getTotalProgressStudentsPerCourse(this.courses[0].id).subscribe((data: [any]) => {

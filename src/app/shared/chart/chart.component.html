@@ -2,7 +2,7 @@
     <h1 class="h3 mb-3 font-weight-normal text-center">Estado de Resultados</h1>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-          <h1 class="h4 mb-3 font-weight-normal text-center">Estado de Ejercicios por Curso</h1>
+          <h1 class="h4 mb-3 font-weight-normal text-center">Ejercicios por Curso</h1>
           <div class="form-group">
               <select [(ngModel)]="stateProblemsPerCourse.courseSelected" class="custom-select" [compareWith]="compareFn"
                   (change)="onCourseSelection1();">
@@ -21,7 +21,7 @@
           </span>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-          <h1 class="h4 mb-3 font-weight-normal text-center">Estado de Alumnos por Curso</h1>
+          <h1 class="h4 mb-3 font-weight-normal text-center">Alumnos por Curso</h1>
           <div class="form-group">
               <select [(ngModel)]="stateStudentsPerCourse.courseSelected" class="custom-select" [compareWith]="compareFn"
                   (change)="onCourseSelection2();">

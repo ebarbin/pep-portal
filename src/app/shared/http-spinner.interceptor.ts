@@ -14,7 +14,8 @@ export class HttpSpinnerInterceptor implements HttpInterceptor {
 
       if (!req.url.includes('update-solution') &&
         !req.url.includes('consultation/unreaded/student') &&
-        !req.url.includes('consultation/unreaded/teacher')) {
+        !req.url.includes('consultation/unreaded/teacher') &&
+        !req.url.includes('correction/quantity')) {
         this.spinnerService.show();
       }
 

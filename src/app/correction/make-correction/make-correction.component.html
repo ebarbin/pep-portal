@@ -12,7 +12,7 @@
           <div [innerHTML]="correction.workspaceProblem.problem.explanation"></div>
         </div>
       </div>
-      Código del Alumno:
+      Código del Alumno: {{correction.student.user.name + ' ' + correction.student.user.surename}}
       <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="correction.workspaceProblem.solution"></ngx-monaco-editor>
         <button class="three-buttons left-button btn btn-success btn-lg" type="button" (click)="sendOK()">
           Correcto
