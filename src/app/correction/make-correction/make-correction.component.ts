@@ -35,7 +35,7 @@ export class MakeCorrectionComponent implements OnInit {
   }
 
   public sendOK() {
-    this.dialogService.confirm('Atención', '¿Califica como correcto?', 'Si', 'No')
+    this.dialogService.confirm('Atención', '¿Confirma calificacion satisfactoria?', 'Si', 'No')
     .then((result: boolean) => {
       if (result) {
         this.correction.workspaceProblem.state = 'OK';
@@ -47,6 +47,8 @@ export class MakeCorrectionComponent implements OnInit {
             this.toastService.success('Corrección enviada. Ya no quedan correcciones por hacer.', 'Operación exitosa');
             this.router.navigate(['home/start']);
           }
+          this.correctionService.correction = null;
+          this.correctionService.correctionsChanges.next(corrections.length);
         });
       }
     }).catch(() => {});
@@ -65,20 +67,9 @@ export class MakeCorrectionComponent implements OnInit {
             this.toastService.success('Corrección enviada. Ya no quedan correcciones por hacer.', 'Operación exitosa');
             this.router.navigate(['home/start']);
           }
+          this.correctionService.correction = null;
+          this.correctionService.correctionsChanges.next(corrections.length);
         });
     }).catch(() => {});
   }
-
-  public send() {
-    this.correctionService.sendCorrection(this.correction).subscribe((corrections: [Correction]) => {
-      if (corrections.length > 0) {
-        this.toastService.success('Corrección enviada.', 'Operación exitosa');
-        this.router.navigate(['home/corrections']);
-      } else {
-        this.toastService.success('Corrección enviada. Ya no quedan correcciones por hacer.', 'Operación exitosa');
-        this.router.navigate(['home/start']);
-      }
-    });
-  }
-
 }

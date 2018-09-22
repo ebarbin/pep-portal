@@ -1,9 +1,10 @@
+import { CorrectionService } from './../../correction/correction.service';
 import { DialogService } from './../../dialog/dialog.service';
 import { interval } from 'rxjs';
 import { ConsultationService } from './../../consultation/consultation.service';
 import { UserService } from './../../user/user.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, RouterState } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from '../../user/user.model';
 import { Subscription } from '../../../../node_modules/rxjs';
 
@@ -14,13 +15,15 @@ import { Subscription } from '../../../../node_modules/rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor(private dialogService: DialogService, private consultationService: ConsultationService,
-     private userService: UserService, private router: Router) { }
+  constructor(private correctionService: CorrectionService, private dialogService: DialogService,
+    private consultationService: ConsultationService,
+    private userService: UserService, private router: Router) { }
 
   isCollapsed: boolean;
   user: User;
 
   unreadValue: number;
+  correctionsValue: number;
 
   subsImageUpdated: Subscription;
   subsUnreaded: Subscription;
@@ -37,8 +40,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     } else {
       this.subsInterval = interval(20000).subscribe(x => {
         this.getTeacherUnreadConsultations();
+        this.getCorrectionsAvailables();
       });
       this.getTeacherUnreadConsultations();
+      this.getCorrectionsAvailables();
     }
 
     this.subsUnreaded = this.consultationService.consultationsChanges.subscribe((value: number) => {
@@ -48,11 +53,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subsImageUpdated = this.userService.imageUpdated.subscribe((imageId: string) => {
       this.user.imageId = imageId;
     });
+
+    this.correctionService.correctionsChanges.subscribe((value: number) => {
+      this.correctionsValue = value;
+    });
   }
 
   private getTeacherUnreadConsultations() {
     this.consultationService.getTeacherUnreadConsultations().subscribe((value: number) => {
       this.unreadValue = value;
+    });
+  }
+
+  private getCorrectionsAvailables() {
+    this.correctionService.getCorrectionsQuantity().subscribe((value: number) => {
+      this.correctionsValue = value;
     });
   }
 
