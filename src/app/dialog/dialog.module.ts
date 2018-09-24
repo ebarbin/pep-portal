@@ -28,6 +28,10 @@ import { MakeCorrectionHelpComponent } from './help-dialog/make-correction-help/
 import { CorrectionsHelpComponent } from './help-dialog/corrections-help/corrections-help.component';
 import { TeacherConsultationsHelpComponent } from './help-dialog/teacher-consultations-help/teacher-consultations-help.component';
 import { ChartHelpComponent } from './help-dialog/chart-help/chart-help.component';
+import { ChangePasswordHelpComponent } from './help-dialog/change-password-help/change-password-help.component';
+import { ChangeProfileImageHelpComponent } from './help-dialog/change-profile-image-help/change-profile-image-help.component';
+import { StudentConsultationHelpComponent } from './help-dialog/student-consultation-help/student-consultation-help.component';
+import { WorkspaceHelpComponent } from './help-dialog/workspace-help/workspace-help.component';
 
 @NgModule({
   imports: [
@@ -63,6 +67,10 @@ import { ChartHelpComponent } from './help-dialog/chart-help/chart-help.componen
     CorrectionsHelpComponent,
     TeacherConsultationsHelpComponent,
     ChartHelpComponent,
+    ChangePasswordHelpComponent,
+    ChangeProfileImageHelpComponent,
+    StudentConsultationHelpComponent,
+    WorkspaceHelpComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,

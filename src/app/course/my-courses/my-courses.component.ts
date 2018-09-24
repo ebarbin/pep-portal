@@ -96,7 +96,7 @@ export class MyCoursesComponent implements OnInit {
   sendComunication(course: Course) {
     const consultation = new Consultation(null, null, null, course, null, true, false, course.teacher, null, null, new Date());
     this.dialogService.sendResponse(consultation, 'lg').then(() => {
-      this.toastService.success('Ya se ha enviado el comunicado al curso.', 'Operación exitosa');
+      this.toastService.success('Comunicado enviado.', 'Operación exitosa');
     }).catch();
   }
 
