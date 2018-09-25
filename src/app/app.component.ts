@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
- // (<any>window).require.config({ 'vs/nls': { availableLanguages: { '*': 'zh-cn' } } });
-
 }
