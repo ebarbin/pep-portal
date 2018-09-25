@@ -8,7 +8,7 @@
           <ng-template ngbTabContent>
               <br>
                   <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 67vh;">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 63vh;">
                       <table class="table table-striped">
                           <thead class="thead-dark">
                             <tr>
@@ -48,7 +48,7 @@
                         </table>
                     </div>
                   </div>
-                  <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" id="cons" [pageSize]="6"
+                  <app-paginator *ngIf="consultations.length > 0" [rawData]="consultations" id="cons" [pageSize]="5"
                     (pageChanged)="onConsultationPageChanged($event)"></app-paginator>
           </ng-template>
         </ngb-tab>
@@ -59,7 +59,7 @@
           <ng-template ngbTabContent>
               <br>
                   <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 67vh;">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 63vh;">
                       <table class="table table-striped">
                           <thead class="thead-dark">
                             <tr>
@@ -93,7 +93,7 @@
                         </table>
                     </div>
                   </div>
-                  <app-paginator *ngIf="comunications.length > 0" [rawData]="comunications" id="comu" [pageSize]="6"
+                  <app-paginator *ngIf="comunications.length > 0" [rawData]="comunications" id="comu" [pageSize]="5"
                     (pageChanged)="onComunicationPageChanged($event)"></app-paginator>
           </ng-template>
         </ngb-tab>

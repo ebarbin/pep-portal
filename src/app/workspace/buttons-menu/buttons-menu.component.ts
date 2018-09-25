@@ -120,7 +120,7 @@ export class ButtonsMenuComponent implements OnInit {
   onConsultationButtonClick() {
     this.dialogService.consultation(this.workspace, this.workspaceProblem, 'lg')
     .then((result: boolean) => {
-      this.toastrService.success('Ya se ha enviado la consulta al docente.', 'Operación exitosa');
+      this.toastrService.success('Consulta enviada.', 'Operación exitosa');
     }).catch(() => {});
   }
 
