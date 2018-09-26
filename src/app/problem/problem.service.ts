@@ -140,4 +140,25 @@ export class ProblemService {
 
     return executionContext + this.getStaticPosExecution();
   }
+
+  getTeacherExecutionContext(problem: Problem) {
+    let executionContext = this.getStaticPreExecution();
+
+    problem.primitives.forEach( (primitive) => {
+      executionContext = executionContext + primitive.code + '\n';
+    });
+
+    if (problem.preExecution) {
+      executionContext = executionContext + problem.preExecution + '\n';
+    }
+    if (problem.teacherSolucion) {
+      executionContext = executionContext +problem.teacherSolucion + '\n';
+    }
+
+    if (problem.posExecution) {
+      executionContext = executionContext + problem.posExecution;
+    }
+
+    return executionContext + this.getStaticPosExecution();
+  }
 }

@@ -33,7 +33,15 @@ export class SeeContextDialogComponent implements OnInit {
       this.executionContext = this.executionContext + this.problem.preExecution + '\n';
     }
     this.executionContext = this.executionContext + '\n/**** Fin Pre Ejecución ****/\n\n';
-    this.executionContext = this.executionContext + '/***** Aquí se inserta el código del alumno *****/\n\n';
+
+    if (this.problem.teacherSolucion) {
+      this.executionContext = this.executionContext + '/**** Inicio Solución ****/\n';
+      this.executionContext = this.executionContext + this.problem.teacherSolucion;
+      this.executionContext = this.executionContext + '\n/**** Fin Solución ****/\n\n';
+    } else {
+      this.executionContext = this.executionContext + '/***** Aquí se inserta el código del alumno *****/\n\n';
+    }
+
     this.executionContext = this.executionContext + '/**** Inicio Pos Ejecución ****/\n';
     if (this.problem.posExecution) {
       this.executionContext = this.executionContext + this.problem.posExecution;

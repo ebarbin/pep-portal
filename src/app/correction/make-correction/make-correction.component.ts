@@ -1,3 +1,5 @@
+import { LogMessageService } from './../../shared/services/log-message.service';
+import { ProblemService } from './../../problem/problem.service';
 import { DialogService } from './../../dialog/dialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -16,22 +18,37 @@ export class MakeCorrectionComponent implements OnInit {
   editorOptions = {theme: 'vs-dark', language: 'javascript', readOnly: false, contextmenu: false};
   state;
 
-  constructor(private dialogService: DialogService,
+  constructor(
+    private problemService: ProblemService,
+    private dialogService: DialogService,
     private toastService: ToastrService,
     private router: Router,
+    private logMessageService: LogMessageService,
     private correctionService: CorrectionService) { }
 
   ngOnInit() {
     if (!this.correctionService.correction) {
       this.router.navigate(['home/corrections']);
+    } else {
+      this.correction = this.correctionService.correction;
+      this.correction.workspaceProblem.state = 'FEEDBACK';
+      this.correction.workspaceProblem.feedback = null;
     }
-    this.correction = this.correctionService.correction;
-    this.correction.workspaceProblem.state = 'FEEDBACK';
-    this.correction.workspaceProblem.feedback = null;
   }
 
   public cancel() {
     this.router.navigate(['home/corrections']);
+  }
+
+  public testCode() {
+    const executionContext = this.problemService.getExecutionContext(false, this.correction.workspaceProblem);
+    try {
+      const result = new Function(executionContext)();
+      this.toastService.info('Resultado del estado de ejecución: ' + result.state, 'Atención');
+      console.log(result);
+    } catch (e) {
+      this.toastService.error(this.logMessageService.getFixedMessage(e.message) + '.', 'Error');
+    }
   }
 
   public sendOK() {

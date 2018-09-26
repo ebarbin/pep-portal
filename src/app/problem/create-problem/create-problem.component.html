@@ -45,6 +45,27 @@
         </div>
         <div class="row">
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header cursor-pointer" (click)="showSolution = !showSolution">
+                <div class="pull-left">
+                    Solución
+                </div>
+                <div class="pull-right">
+                    <fa [name]="showSolution ? 'minus-square' : 'plus-square'" ></fa>
+                </div>
+              </div>
+              <div [ngStyle]="{'display': showSolution ? 'block' : 'none' }">
+                <ngx-monaco-editor
+                  [options]="editorOptions"
+                  name="teacherSolucion"
+                  ngModel>
+                </ngx-monaco-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="card">
                 <div class="card-header cursor-pointer" (click)="showPosExecution = !showPosExecution">
                   <div class="pull-left">
@@ -65,11 +86,13 @@
             </div>
         </div>
         <button
-          class="three-buttons left-button btn btn-success btn-lg"
-          type="submit" [disabled]="!f.valid">Aceptar</button>
-        <button class="three-buttons center-button btn btn-info btn-lg"
+          class="four-buttons left-button btn btn-success btn-lg"
+          type="submit" [disabled]="!f.valid">Guardar</button>
+        <button class="four-buttons center-button btn btn-primary btn-lg"
+          type="button" (click)="testProblem()"><fa name="play"></fa> Probar</button>
+        <button class="four-buttons center-button btn btn-info btn-lg"
           type="button" (click)="seeContext()">Ver Contexto</button>
-        <button class="three-buttons right-button btn btn-danger btn-lg"
+        <button class="four-buttons right-button btn btn-danger btn-lg"
           type="button" (click)="cancel()">Cancelar</button>
       </form>
     </div>

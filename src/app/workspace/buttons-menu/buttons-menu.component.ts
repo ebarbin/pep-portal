@@ -1,5 +1,5 @@
 import { ProblemService } from './../../problem/problem.service';
-import { LogMessageService } from './log-message.service';
+import { LogMessageService } from '../../shared/services/log-message.service';
 import { WorkspaceService } from './../workspace.service';
 import { WorkspaceProblem } from '../models/workspace-problem.model';
 import { ToastrService } from 'ngx-toastr';

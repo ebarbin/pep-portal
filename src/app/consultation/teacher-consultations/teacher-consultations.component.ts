@@ -57,7 +57,7 @@ export class TeacherConsultationsComponent implements OnInit {
         return c.id !== consultation.id;
       });
 
-      this.toastrService.success('Ya se ha enviado la respuesta al alumno.', 'Operación exitosa');
+      this.toastrService.success('Respuesta enviada.', 'Operación exitosa');
 
       if (this.consultations.length === 0) {
         this.router.navigate(['home/start']);

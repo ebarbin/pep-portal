@@ -1,3 +1,4 @@
+import { LogMessageService } from './../../shared/services/log-message.service';
 import { CanComponentDeactivate } from './../../shared/can-deactivate.guard';
 import { DialogService } from './../../dialog/dialog.service';
 import { PrimitiveService } from './../../primitive/primitive.service';
@@ -39,9 +40,12 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
 
   showPreExecution = true;
   showPosExecution = true;
+  showSolution = true;
 
-  constructor(private dialogService: DialogService, private toastService: ToastrService, private router: Router,
-    private problemService: ProblemService, private primitiveService: PrimitiveService,
+  constructor(private logMessageService: LogMessageService,
+    private dialogService: DialogService, private toastService: ToastrService,
+    private router: Router, private problemService: ProblemService,
+    private primitiveService: PrimitiveService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -58,13 +62,23 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
           primitives: []
         });
         this.originalProblem = this.editForm.form.value;
+
+        this.showPreExecution = false;
+        this.showPosExecution = false;
+        this.showSolution = false;
+
       }, 100);
 
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
         this.editForm.form.patchValue(problem);
         this.originalProblem = this.editForm.form.value;
+
+        this.showPreExecution = false;
+        this.showPosExecution = false;
+        this.showSolution = false;
       });
+
       this.editMode = true;
       this.title = 'Editar Ejercicio';
     }
@@ -83,6 +97,24 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
       return false;
     }
     return true;
+  }
+
+  testProblem() {
+    const problem: Problem = <Problem> this.editForm.value;
+    const executionContext = this.problemService.getTeacherExecutionContext(problem);
+
+    try {
+      const result = new Function(executionContext)();
+      if (result.state ===  true) {
+        this.toastService.success('Resultado del estado de ejecución es correcto. \n' + result.message, 'Operación Exitosa');
+      } else if (result.state ===  false) {
+        this.toastService.error('Resultado del estado de ejecución es incorrecto. \n' + result.message, 'Error');
+      } else {
+        this.toastService.info('Requiere validación con el docente. \n' + result.message, 'Atención');
+      }
+    } catch (e) {
+      this.toastService.error(this.logMessageService.getFixedMessage(e.message) + '.', 'Error');
+    }
   }
 
   onSubmit(form: NgForm) {
@@ -124,9 +156,14 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
     if (!form.dirty) {
       return false;
     } else {
+
       if (JSON.stringify(this.originalProblem).toLowerCase() === JSON.stringify(form.value).toLowerCase()) {
         return false;
       } else {
+
+        console.log(JSON.stringify(this.originalProblem).toLowerCase());
+        console.log(JSON.stringify(form.value).toLowerCase());
+
         return true;
       }
     }
