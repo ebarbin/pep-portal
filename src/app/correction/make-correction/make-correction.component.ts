@@ -18,6 +18,10 @@ export class MakeCorrectionComponent implements OnInit {
   editorOptions = {theme: 'vs-dark', language: 'javascript', readOnly: false, contextmenu: false};
   state;
 
+  showPreExecution = true;
+  showPosExecution = true;
+  showSolution = true;
+
   constructor(
     private problemService: ProblemService,
     private dialogService: DialogService,
@@ -44,8 +48,13 @@ export class MakeCorrectionComponent implements OnInit {
     const executionContext = this.problemService.getExecutionContext(false, this.correction.workspaceProblem);
     try {
       const result = new Function(executionContext)();
-      this.toastService.info('Resultado del estado de ejecución: ' + result.state, 'Atención');
-      console.log(result);
+      if (result.state ===  true) {
+        this.toastService.success(result.message, 'Resultado de la Prueba');
+      } else if (result.state ===  false) {
+        this.toastService.error(result.message, 'Resultado de la Prueba');
+      } else {
+        this.toastService.info('Requiere validación con el docente. \n' + result.message, 'Resultado de la Prueba');
+      }
     } catch (e) {
       this.toastService.error(this.logMessageService.getFixedMessage(e.message) + '.', 'Error');
     }

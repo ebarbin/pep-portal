@@ -2,26 +2,71 @@
   <h1 class="h3 mb-3 font-weight-normal text-center">Corrección de ejercicio</h1>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="correction">
-      <div class="card">
-        <div class="card-header">
-          <div class="pull-left">
-              Enunciado Ejercicio: {{correction.workspaceProblem.problem.name}}
+
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="pull-left">
+                  Enunciado Ejercicio: {{correction.workspaceProblem.problem.name}}
+              </div>
+            </div>
+            <div class="card-body">
+              <div [innerHTML]="correction.workspaceProblem.problem.explanation"></div>
+            </div>
           </div>
         </div>
-        <div class="card-body">
-          <div [innerHTML]="correction.workspaceProblem.problem.explanation"></div>
-        </div>
       </div>
-      <ngx-monaco-editor
-        [options]="editorOptions"
-        [(ngModel)]="correction.workspaceProblem.solution">
-      </ngx-monaco-editor>
-      <button
-        class="btn btn-primary btn-lg"
-        style="width: 100%; position: relative; top: -4px; border-radius: 0px 0px 5px 5px;"
-        type="button" (click)="testCode()">
-        <fa name="play"></fa> Probar
-      </button>
+
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header cursor-pointer" (click)="showSolution = !showSolution">
+                <div class="pull-left">
+                    Solución del alumno: {{correction.student.user.name}} {{correction.student.user.surename}}
+                </div>
+                <div class="pull-right">
+                  <fa [name]="showSolution ? 'minus-square' : 'plus-square'" ></fa>
+                </div>
+              </div>
+              <div [ngStyle]="{'display': showSolution ? 'block' : 'none' }">
+                <ngx-monaco-editor
+                  [options]="editorOptions"
+                  [(ngModel)]="correction.workspaceProblem.solution">
+                </ngx-monaco-editor>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header cursor-pointer" (click)="showPosExecution = !showPosExecution">
+                <div class="pull-left">
+                    Pos Ejecución
+                </div>
+                <div class="pull-right">
+                  <fa [name]="showPosExecution ? 'minus-square' : 'plus-square'" ></fa>
+                </div>
+              </div>
+              <div [ngStyle]="{'display': showPosExecution ? 'block' : 'none' }">
+                <ngx-monaco-editor
+                  [options]="editorOptions"
+                  [(ngModel)]="correction.workspaceProblem.problem.posExecution">
+                </ngx-monaco-editor>
+              </div>
+            </div>
+            <br>
+            <button
+              class="btn btn-primary btn-lg"
+              style="width: 100%; position: relative; border-radius: 0px 0px 5px 5px;"
+              type="button" (click)="testCode()">
+              <fa name="play"></fa> Probar
+            </button>
+          </div>
+      </div>
+
         <button class="three-buttons left-button btn btn-success btn-lg" type="button" (click)="sendOK()">
           Correcto
         </button>

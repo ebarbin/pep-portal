@@ -58,25 +58,17 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
         this.editForm.form.patchValue({
           explanation: this.problemService.getSuggestedExplanation(),
           preExecution: this.problemService.getSuggestedPreExecution(),
+          solucion: null,
           posExecution: this.problemService.getSuggestedPosExecution(),
           primitives: []
         });
         this.originalProblem = this.editForm.form.value;
-
-        this.showPreExecution = false;
-        this.showPosExecution = false;
-        this.showSolution = false;
-
       }, 100);
 
     } else {
       this.problemService.findById(this.problemId).subscribe((problem: Problem) => {
         this.editForm.form.patchValue(problem);
         this.originalProblem = this.editForm.form.value;
-
-        this.showPreExecution = false;
-        this.showPosExecution = false;
-        this.showSolution = false;
       });
 
       this.editMode = true;
@@ -106,11 +98,11 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
     try {
       const result = new Function(executionContext)();
       if (result.state ===  true) {
-        this.toastService.success('Resultado del estado de ejecución es correcto. \n' + result.message, 'Operación Exitosa');
+        this.toastService.success(result.message, 'Resultado de la Prueba');
       } else if (result.state ===  false) {
-        this.toastService.error('Resultado del estado de ejecución es incorrecto. \n' + result.message, 'Error');
+        this.toastService.error(result.message, 'Resultado de la Prueba');
       } else {
-        this.toastService.info('Requiere validación con el docente. \n' + result.message, 'Atención');
+        this.toastService.info('Requiere validación con el docente. \n' + result.message, 'Resultado de la Prueba');
       }
     } catch (e) {
       this.toastService.error(this.logMessageService.getFixedMessage(e.message) + '.', 'Error');
@@ -125,13 +117,13 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
         problem.id = this.problemId;
         this.problemService.editeProblem(problem).subscribe(() => {
           this.editForm.reset();
-          this.toastService.success('Problema editado.', 'Operación exitosa');
+          this.toastService.success('Ejercicio editado.', 'Operación exitosa');
           this.router.navigate(['/home/problem/list']);
         });
       } else {
         this.problemService.createProblem(problem).subscribe(() => {
           this.editForm.reset();
-          this.toastService.success('Problema creado.', 'Operación exitosa');
+          this.toastService.success('Ejercicio creado.', 'Operación exitosa');
           this.router.navigate(['/home/problem/list']);
         });
       }
