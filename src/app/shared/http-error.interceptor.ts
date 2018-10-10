@@ -26,7 +26,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               this.router.navigate(['/user/login']);
             } else if (err.status === 403) {
               this.toastService.error('Operación no autorizada.', 'Error');
-              this.router.navigate(['/user/login']);
+              // this.router.navigate(['/user/login']);
             } else {
               console.log(err);
               this.toastService.error(err.message, 'Error');
