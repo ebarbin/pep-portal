@@ -31,7 +31,7 @@ export class CreateProblemComponent implements OnInit, CanComponentDeactivate {
     spellcheck: false,
     height: '5rem',
     minHeight: '4rem',
-    placeholder: 'Ingrese una Explicación',
+    placeholder: 'Ingrese una Consigna',
     translate: 'no',
     customClasses: []
   };
