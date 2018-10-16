@@ -1,13 +1,13 @@
 <div class="container">
     <h1 class="h3 mb-3 font-weight-normal text-center">Cursos</h1>
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 70vh;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="height: 65vh;">
           <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">Nombre</th>
                   <th scope="col">Docente</th>
-                  <th scope="col"></th>
+                  <th scope="col"><input type="text" class="form-control" [(ngModel)]="searchValue" placeholder="Buscar..." (keyup)="onSearch($event)"></th>
                 </tr>
               </thead>
               <tbody>
@@ -32,16 +32,16 @@
                         Eliminar
                     </button>
                   </td>
-                  <td class="pull-right" *ngIf="user.role === 'ROLE_STUDENT'">
-                    <button type="button" style="width:25%" class="three-buttons left-button btn btn-primary"
+                  <td *ngIf="user.role === 'ROLE_STUDENT'">
+                    <button type="button" class="three-buttons left-button btn btn-primary"
                       (click)="see(course)">
                       Ver
                     </button>
-                    <button type="button" style="width:45%" class="three-buttons center-button btn btn-success"
+                    <button type="button" class="three-buttons center-button btn btn-success"
                       [disabled]="isStudentEnrolled(course)" (click)="enroll(course)">
                         Inscripción
                     </button>
-                    <button type="button" style="width:30%" class="three-buttons right-button btn btn-danger"
+                    <button type="button" class="three-buttons right-button btn btn-danger"
                       [disabled]="!isStudentEnrolled(course)" (click)="removeEnroll(course)">
                         Quitar
                     </button>
@@ -51,6 +51,6 @@
             </table>
       </div>
     </div>
-    <app-paginator *ngIf="courses.length > 0" [rawData]="courses" [pageSize]="6"
+    <app-paginator *ngIf="courses.length > 0" [rawData]="courses" [pageSize]="5"
       (pageChanged)="onPageChanged($event)"></app-paginator>
   </div>

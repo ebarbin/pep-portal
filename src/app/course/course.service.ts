@@ -69,4 +69,22 @@ export class CourseService {
       })
     );
   }
+
+  findByNameLike(user: User, text: string) {
+    if (user.role === 'ROLE_STUDENT') {
+      return this.httpClient.get('pep-api/course/forStudent/like?nameSearch=' + text)
+      .pipe(
+        map((response: CustomResponse) => {
+          return <[Course]> response.body;
+        })
+      );
+    } else {
+      return this.httpClient.get('pep-api/course/forTeacher/like?nameSearch=' + text)
+      .pipe(
+        map((response: CustomResponse) => {
+          return <[Course]> response.body;
+        })
+      );
+    }
+  }
 }

@@ -31,6 +31,7 @@ export class MyCoursesComponent implements OnInit {
   courses = [];
   filteredCourses = [];
   inscriptions = [];
+  searchValue: string;
 
   ngOnInit() {
 
@@ -122,6 +123,13 @@ export class MyCoursesComponent implements OnInit {
 
   see(course: Course) {
     this.dialogService.courseInfo(course, 'lg');
+  }
+
+  onSearch() {
+    this.courseService.findByNameLike(this.user, this.searchValue).subscribe((courses: [Course]) => {
+      this.courses = courses;
+      this.paginatorService.refresh.next({id: null, data: this.courses});
+    });
   }
 
   onPageChanged(data: [Course]) {
