@@ -15,6 +15,7 @@ export class MyProblemsComponent implements OnInit {
 
   problems = [];
   filteredProblems = [];
+  searchValue: string;
 
   constructor(private paginatorService: PaginatorService, private router: Router,
     private problemService: ProblemService, private toastService: ToastrService,
@@ -50,6 +51,13 @@ export class MyProblemsComponent implements OnInit {
 
         });
       }
+    });
+  }
+
+  onSearch() {
+    this.problemService.findByNameLike(this.searchValue).subscribe((problems: [Problem]) => {
+      this.problems = problems;
+      this.paginatorService.refresh.next({id: null, data: this.problems});
     });
   }
 

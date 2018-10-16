@@ -18,6 +18,7 @@ export class MyPrimitivesComponent implements OnInit {
 
   primitives = [];
   filteredPrimitives = [];
+  searchValue: string;
 
   ngOnInit() {
     this.primitiveService.getPrimitives().subscribe((primitives: [Primitive]) => {
@@ -56,6 +57,13 @@ export class MyPrimitivesComponent implements OnInit {
 
         });
       }
+    });
+  }
+
+  onSearch() {
+    this.primitiveService.findByNameLike(this.searchValue).subscribe((primitives: [Primitive]) => {
+      this.primitives = primitives;
+      this.paginatorService.refresh.next({id: null, data: this.primitives});
     });
   }
 
