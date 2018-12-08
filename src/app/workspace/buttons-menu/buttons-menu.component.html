@@ -25,6 +25,7 @@
     class="btn btn-dark" [disabled]="(workspaceProblem && workspaceProblem.state === 'FEEDBACK') || (workspaceProblem && !workspaceProblem.feedback)"
     placement="top" ngbTooltip="Devolución del docente" (click)="onSeeFeedbackButtonClick(workspaceProblem)">
     <fa name="comment"></fa>
+     <span class="badge badge-danger" *ngIf="workspaceProblem.feedback">!</span>
   </button>
   <button style="position: relative; top: 233px; left: -266px; width: 44px;"
     class="btn btn-danger" [disabled]="workspaceProblem && workspaceProblem.state === 'FEEDBACK'"

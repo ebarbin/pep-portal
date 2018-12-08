@@ -49,19 +49,19 @@ export class ButtonsMenuComponent implements OnInit {
           console.log(result);
 
           if (result.state === false) {
-            this.toastrService.error(result.message);
+            this.toastrService.error(result.message, 'Error');
             this.logChange.emit(result.message);
 
             this.markProblemAsNoOK();
 
           } else if (result.state === true) {
-            this.toastrService.success(result.message);
+            this.toastrService.success(result.message, 'Éxito');
             this.logClear.emit();
 
             this.markProblemAsOK();
           } else {
 
-            this.toastrService.info('La resolución de este ejercicio sera validada por el docente.', 'Información');
+            this.toastrService.info('La resolución de este ejercicio será validada por el docente.', 'Información');
             this.markProblemAsFeedback();
 
           }

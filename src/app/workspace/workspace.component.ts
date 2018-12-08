@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { WorkspaceProblem } from './models/workspace-problem.model';
 import { WorkspaceService } from './workspace.service';
@@ -21,7 +22,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
   activeProblem: WorkspaceProblem;
   log = '';
 
-  constructor(private router: Router, private workspaceService: WorkspaceService) { }
+  constructor(private router: Router, private workspaceService: WorkspaceService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.workspaceService.getActiveWorkspace().subscribe((workspace: Workspace) => {
@@ -29,6 +30,9 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
       this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
         return p.active;
       });
+      if (this.activeProblem.state === 'FEEDBACK') {
+        this.toastrService.info('La resolución de este ejercicio será validada por el docente.', 'Información');
+      }
       this.refreshCodeComponent();
     });
 
@@ -40,6 +44,9 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
         this.activeProblem = workspace.problems.find((p: WorkspaceProblem) => {
           return p.active;
         });
+        if (this.activeProblem.state === 'FEEDBACK') {
+          this.toastrService.info('La resolución de este ejercicio será validada por el docente.', 'Información');
+        }
         this.refreshCodeComponent();
       }
     });
