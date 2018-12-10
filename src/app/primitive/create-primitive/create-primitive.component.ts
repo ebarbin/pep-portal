@@ -61,6 +61,16 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
     }
   }
 
+  private getPrimitiveNameFromCode(code) {
+    try {
+      let aux = code.split(' ')[1];
+      aux = aux.split('(')[0];
+      return aux;
+    } catch (e) {
+      return null;
+    }
+  }
+
   onSubmit(form: NgForm) {
     const primitive = <Primitive> form.value;
 
@@ -68,6 +78,11 @@ export class CreatePrimitiveComponent implements OnInit, CanComponentDeactivate 
       new Function(primitive.code)();
     } catch (e) {
       this.toastService.error('El código de la primitiva es inválido.', 'Error');
+      return;
+    }
+
+    if (primitive.name !== this.getPrimitiveNameFromCode(primitive.code)) {
+      this.toastService.error('El nombre de la primitiva debe coincidir con el nombre de la función en el código.', 'Error');
       return;
     }
 
