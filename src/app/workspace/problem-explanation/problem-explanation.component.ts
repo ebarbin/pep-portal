@@ -10,7 +10,7 @@ export class ProblemExplanationComponent implements OnInit {
 
   constructor() { }
 
-  showProblemExplanation = true;
+  showProblemExplanation = false;
   @Input() workspaceProblem: WorkspaceProblem;
 
   ngOnInit() {

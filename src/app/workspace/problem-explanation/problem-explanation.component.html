@@ -3,7 +3,7 @@
       <div class="card">
         <div class="card-header cursor-pointer" (click)="showProblemExplanation = !showProblemExplanation">
           <div class="pull-left">
-              Enunciado Ejercicio: {{workspaceProblem.problem.name}}
+              <b>Enunciado Ejercicio: {{workspaceProblem.problem.name}}</b>
           </div>
           <div class="pull-right">
             <fa [name]="showProblemExplanation ? 'minus-square' : 'plus-square'" ></fa>

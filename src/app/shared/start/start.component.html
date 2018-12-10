@@ -3,13 +3,13 @@
   <h1>Hola {{user.name}}, ¡Bienvenido/a a PEP!</h1>
   <br>
   <div *ngIf="user.role === 'ROLE_TEACHER'">
-    <p>Como docente podrás gestionar cursos y ejercicios. Crear nuevos o utilizar los propuestos por la plataforma.</p>
-    <p>Podrás realizar un seguimiento de tus alumnos a través de la sección de reportes.</p>
-    <p>Tendrás contacto con tus alumnos a través de consultas que ellos te hagan.</p>
+    <p>Podrás generar contenidos para tus clases: Cursos, ejercicios y primitivas.</p>
+    <p>A  través de la sección de Estado de Resultados, podrás realizar el seguimiento de tus alumnos.</p>
+    <p>Gracias al envío de comunicados y a las consultas, podrás interatuar dinámicamente con tus alumnos.</p>
   </div>
   <div *ngIf="user.role === 'ROLE_STUDENT'">
-    <p>Como alumno/a podrás inscribirte a todos los cursos que veas disponibles.</p>
-    <p>Podrás navegar por los distintos ejercicios y resolver cada uno de ellos.</p>
+    <p>Podrás inscribirte a todos los cursos que veas disponibles. y trabajar con los ejercicios que estos cursos incluyan.</p>
+    <p>Tu objetivo es resolver los ejercicios implementando algoritmos en el lenguaje de programación JavaScript.</p>
     <p>Podrás consultarle al profesor si no comprendes alguna consigna o si te has bloqueado con alguna de ellas.</p>
   </div>
   <fa name="code" size="4x"></fa>

@@ -21,6 +21,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           } else {
             if (err.status === 504 || err.status === 404) {
               this.toastService.error('Imposible conectar con el servidor. Intente más tarde.', 'Error');
+              this.router.navigate(['/user/login']);
             } else if (err.status === 401) {
               this.toastService.error('La sesión ha expirado.', 'Error');
               this.router.navigate(['/user/login']);

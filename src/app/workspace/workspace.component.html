@@ -2,8 +2,10 @@
   <br>
   <app-course-description *ngIf="workspace" [course]="workspace.course"></app-course-description>
   <br>
-  <app-course-navigator *ngIf="workspace" [workspace]="workspace" (problemSelected)="onProblemSelection($event)"></app-course-navigator>
-  <app-problem-explanation *ngIf="workspace && activeProblem" [workspaceProblem]="activeProblem"></app-problem-explanation>
+  <app-course-navigator *ngIf="workspace" [workspace]="workspace" (problemSelected)="onProblemSelection($event)">
+  </app-course-navigator>
+  <app-problem-explanation *ngIf="workspace && activeProblem" [workspaceProblem]="activeProblem">
+  </app-problem-explanation>
   <div class="row" style="margin-top: -15px;">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <app-buttons-menu
